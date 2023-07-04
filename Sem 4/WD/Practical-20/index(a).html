@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100vh;
+      height: 100vh;
+    "
+  >
+    <input id="num1" />
+    <input id="num2" />
+    <input id="num3" />
+    <button>Hello</button>
+    <div id="result"></div>
+    <script>
+      $(document).ready(function () {
+        $('button').click(function () {
+          var num1 = parseFloat($('#num1').val());
+          var num2 = parseFloat($('#num2').val());
+          var num3 = parseFloat($('#num3').val());
+          var max = Math.max(num1, num2, num3);
+          $('#result').html('The maximum number is: ' + max);
+        });
+      });
+    </script>
+  </body>
+</html>

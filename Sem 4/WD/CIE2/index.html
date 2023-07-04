@@ -1,0 +1,258 @@
+<!-- design a webpage using inline and internal css -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://thumbs.dreamstime.com/b/jod-letter-logo-design-black-background-jod-creative-initials-letter-logo-concept-jod-letter-design-jod-letter-logo-design-243695785.jpg"
+      type="image/x-icon"
+    />
+    <title>JOD Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      margin: 0;
+      background-color: blanchedalmond;
+      font-family: "Poppins", sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .nav {
+      display: flex;
+      position: relative;
+      position: sticky;
+      top: 0;
+      align-items: center;
+      background-color: cadetblue;
+      justify-content: space-between;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    img {
+      height: 10rem;
+      width: 10rem;
+    }
+    .card {
+      margin: 0.5rem;
+      background-color: white;
+      width: 15rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 2px 5px 5px 2px #00000093;
+      border-radius: 2rem;
+      padding: 0.5rem;
+    }
+    .card:hover {
+      margin: 0.5rem;
+      background-color: white;
+      transform: scale(1.03);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 2px 5px 5px 2px #00000093;
+      border-radius: 2rem;
+      padding: 0.5rem;
+    }
+    .card-title {
+      display: flex;
+      margin: 0.5rem;
+      justify-content: center;
+      font-size: medium;
+    }
+    .card-des {
+      margin: 0.5rem;
+      width: 100%;
+      display: flex;
+      justify-content: start;
+      font-size: small;
+    }
+    .add-to-cart {
+      background-color: yellow;
+      /* border: 3px; */
+      /* border-color: black; */
+      padding: 0.5rem;
+      border-radius: 2rem;
+    }
+    .add-to-cart:hover {
+      background-color: orange;
+    }
+    .buy-now:hover {
+      background-color: orange;
+    }
+    .buy-now {
+      background-color: yellow;
+      /* border: 3px; */
+      /* border-color: black; */
+      padding: 0.5rem;
+      border-radius: 2rem;
+    }
+    .products-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      width: 100%;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .nav-btn {
+      background-color: darkcyan;
+      color: white;
+      border: 3px;
+      /* border-color: black; */
+      padding: 0.5rem;
+      border-radius: 2rem;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    .nav-btn:hover {
+      background-color: cyan;
+      color: black;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <h1>
+          J
+          <sup class="tagline" style="font-size: small">Jack</sup>
+          O
+          <sup class="tagline" style="font-size: small"> of </sup>
+          D
+          <sup class="tagline" style="font-size: small"> Diamonds</sup>
+          Store
+          <sub class="tagline" style="font-size: small"
+            >Quality Products Only
+          </sub>
+        </h1>
+        <div class="sign-log-container">
+          <button class="nav-btn">Sign Up</button>
+          <button class="nav-btn">Login</button>
+        </div>
+      </div>
+      <div class="products-container">
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://rentals.imastudent.com/wp-content/uploads/2020/11/0017411_gopro-hero-8-black-sports-action-4k-camera_500-2.jpeg"
+              alt="Go-Pro-Image"
+            />
+          </div>
+          <h6 class="card-title">GoPro Hero 8 Action Camera</h6>
+          <p class="card-des">Price: 250$</p>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://m.media-amazon.com/images/I/51GyT8KanJL._SX679_.jpg"
+              alt="TP-Link RE650"
+            />
+          </div>
+          <h6 class="card-title">
+            TP-Link RE650 AC2600 Universal Dual Band Range Extender
+          </h6>
+          <div class="card-des">
+            Price: 85
+            <sub> .56 </sub>
+            $
+          </div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+            src="https://m.media-amazon.com/images/I/61HIqJZKPkS._SX450_.jpg""
+            alt="HP Laptop" />
+          </div>
+          <h6 class="card-title">HP 14(2021) 10th Gen Intel Core i5 Laptop</h6>
+          <div class="card-des">Price: 670$</div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://m.media-amazon.com/images/I/51DY+QrEpOL._SY355_.jpg"
+              alt="Zebronics Keyboard and Mouse"
+            />
+          </div>
+          <h6 class="card-title">
+            Zebronics Zeb-Transformer Gaming Keyboard and Mouse Combo
+          </h6>
+          <div class="card-des">Price: 20$</div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://m.media-amazon.com/images/I/51DY+QrEpOL._SY355_.jpg"
+              alt="Zebronics Keyboard and Mouse"
+            />
+          </div>
+          <h6 class="card-title">
+            Zebronics Zeb-Transformer Gaming Keyboard and Mouse Combo
+          </h6>
+          <div class="card-des">Price: 50$</div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://m.media-amazon.com/images/I/71edjA10hZL._SY355_.jpg"
+              alt="Zebronics Keyboard and Mouse"
+            />
+          </div>
+          <h6 class="card-title">Mi Step Out 12 L Mini Backpack</h6>
+          <div class="card-des">Price: 8$</div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img
+              src="https://m.media-amazon.com/images/I/71hrx6vNjPL._SX425_.jpg"
+              alt="Lenovo Casual Laptop Briefcase T210 (Toploader) 39.62 cm (15.6-inch) Water Repellent Black"
+            />
+          </div>
+          <h6 class="card-title">Lenovo Casual Laptop Briefcase</h6>
+          <div class="card-des">Price: 10$</div>
+          <div class="btn-container">
+            <button class="add-to-cart">Add To Card</button>
+            <button class="buy-now">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
