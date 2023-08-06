@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText searchString;
-    Button searchBtn;
+    EditText searchString, phoneNumber;
+    Button searchBtn, callBtn;
 
-    public String search;
+    public String search,phoneNumberr;
 
 
     public void search(String search){
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Username & password are Required",Toast.LENGTH_SHORT).show();
         }else {
             defaultBrowser(search);
+            noapps(search);
         }
     }
     private void defaultBrowser(String s){
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         searchString = findViewById(R.id.searchText);
         searchBtn = findViewById(R.id.searchSubmit);
+        phoneNumber = findViewById(R.id.phoneNumber);
+        callBtn = findViewById(R.id.makeCall);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,20 @@ public class MainActivity extends AppCompatActivity {
                 search = searchString.getText().toString();
                 search(search);
 
+            }
+        });
+
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberr = phoneNumber.getText().toString();
+                if(phoneNumberr.length() > 10 || phoneNumberr.length() < 10){
+                    Toast.makeText(MainActivity.this, "Enter A Valid Phone Number", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent makeCall = new Intent(Intent.ACTION_CALL);
+                    makeCall.setData(Uri.parse("tel:" + phoneNumberr));
+                    startActivity(makeCall);
+                }
             }
         });
 
