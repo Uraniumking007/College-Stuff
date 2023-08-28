@@ -9,11 +9,6 @@
     android:orientation="vertical"
     tools:context=".LoginPage"
     >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 <LinearLayout
     android:layout_marginTop="250dp"
     android:layout_width="match_parent"
@@ -71,17 +66,5 @@
 
     </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/enrollment_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="202102100410046"
-            android:textColor="@color/white"
-
-            android:textSize="15sp"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
