@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MADPR6</string>
+    <string-array name="vehicles">
+        <item>BMW M5</item>
+        <item>BMW M3</item>
+        <item>Porsche Carerra RSR</item>
+    </string-array>
+</resources>
