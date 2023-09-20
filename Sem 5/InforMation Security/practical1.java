@@ -1,6 +1,6 @@
 // ceaser cipher
 
-public class pr1 {
+class pr1 {
     public static String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
     public static String encrypt(String plainText, int enkey) {
@@ -35,7 +35,7 @@ public class pr1 {
     public static void main(String[] args) {
         String PlainText = "information";
         String jod = encrypt(PlainText, 3);
-        // String jodDec = decrypt("lqirupdwlrq", 3);
+//         String jodDec = decrypt("lqirupdwlrq", 3);
         String jodDec = decrypt(encrypt(PlainText, 3), 3);
         System.out.println(jod);
         System.out.println(jodDec);
