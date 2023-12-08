@@ -12,12 +12,12 @@
         android:id="@+id/spinner"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:entries="@array/vehicles"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="228dp"
         android:layout_margin="5dp"
-        android:layout_marginTop="30dp"
-        tools:ignore="MissingConstraints" />
+        android:entries="@array/vehicles"
+        android:minHeight="48dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="228dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/bmw_m3"
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="ContentDescription,MissingConstraints,VisualLintBounds" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
