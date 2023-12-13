@@ -1,122 +1,76 @@
-import java.util.Arrays;
+import java.util.*;
 
-/**
- * playfaircypher
- */
-public class pr2 {
-    static String ALPHABETS = "abcdefghijklmnopqrstuvwxyz";
+public class practical2 {
+    private char[][] matrix = new char[5][5];
 
-    public static void main(String[] args) {
-
-        String plainText = "MANHATTAN";
-        int plainTextLen = plainText.length();
-
-        pr2 p = new pr2();
-        String jod = p.removeDuplicate(plainText);
-        p.Matrix(jod);
-
-        System.out.println(jod);
-
-        // adding x at end if plaintext is odd
-        // if (plainTextLen % 2 != 0) {
-        // plainText = plainText + 'x';
-        // System.out.println(plainText);
-        // }
-        // int k = 0;
-        // int j = 0;
-
-        // // Display pairs of 2 in plaintext
-        // for (int i = 0; i < plainTextLen - 1; i++) {
-        // if (j < plainTextLen) {
-
-        // System.out.println(plainText.substring(j, j + 2));
-        // j += 2;
-        // }
-        // }
-        // for (int i = 0; i < plainTextLen - 1; i++) {
-        // if(j<plainTextLen){
-
-        // plainStringMatrix[i] = plainText.substring(j, j + 2);
-        // j = j+2;
-        // }
-        // }
+    public practical2(String key) {
+        initializeMatrix(key);
     }
 
-    String removeDuplicate(String str) {
-        int j, index = 0;
-        char[] c = str.toCharArray();
-        for (int i = 0; i < str.length(); i++) {
-            for (j = 0; j < str.length(); j++) {
-                if (c[i] == c[j]) {
-                    break;
+    private void initializeMatrix(String key) {
+        Set<Character> usedChars = new HashSet<>();
+        int row = 0, col = 0;
+        for (char c : (key + "ABCDEFGHIKLMNOPQRSTUVWXYZ").toCharArray()) {
+            c = (c == 'J') ? 'I' : c;
+            if (!usedChars.contains(c)) {
+                matrix[row][col] = c;
+                usedChars.add(c);
+                col = (col + 1) % 5;
+                if (col == 0) {
+                    row = (row + 1) % 5;
                 }
             }
-            if (i == j) {
-                c[index++] = c[j];
+        }
+    }
+
+    private String preprocessText(String text) {
+        text = text.replaceAll("[^A-Z]", "").replaceAll("J", "I");
+        text = text.replaceAll("(.)\\1", "$1X$1");
+        return (text.length() % 2 == 1) ? text + "X" : text;
+    }
+
+    private int[] findPosition(char c) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (matrix[i][j] == c) {
+                    return new int[]{i, j};
+                }
             }
         }
-        String l = new String(Arrays.copyOf(c, index));
-        return l;
+        return null;
     }
 
-    String removeSpace(String str) {
-
+    public String encrypt(String plaintext) {
+        plaintext = preprocessText(plaintext);
+        StringBuilder ciphertext = new StringBuilder();
+        for (int i = 0; i < plaintext.length(); i += 2) {
+            char c1 = plaintext.charAt(i);
+            char c2 = plaintext.charAt(i + 1);
+            int[] pos1 = findPosition(c1);
+            int[] pos2 = findPosition(c2);
+            int row1 = pos1[0], col1 = pos1[1];
+            int row2 = pos2[0], col2 = pos2[1];
+            if (row1 == row2) {
+                ciphertext.append(matrix[row1][(col1 + 1) % 5]);
+                ciphertext.append(matrix[row2][(col2 + 1) % 5]);
+            } else if (col1 == col2) {
+                ciphertext.append(matrix[(row1 + 1) % 5][col1]);
+                ciphertext.append(matrix[(row2 + 1) % 5][col2]);
+            } else {
+                ciphertext.append(matrix[row1][col2]);
+                ciphertext.append(matrix[row2][col1]);
+            }
+        }
+        return ciphertext.toString();
     }
 
-    void Matrix(String str) {
-        int charVal = 0, k = str.length();
-        String plainStringMatrix[] = new String[20];
-        Character matrix[][] = new Character[5][5];
-        char[] martixArray = new char[70];
-        str = str.toLowerCase();
-
-        for (int i = 0; i < str.length(); i++) {
-            martixArray[i] = str.charAt(i);
-        }
-
-        for (int i = 0; i < martixArray.length; i++) {
-            String c = str.charAt(i);
-            ALPHABETS.replaceAll(c, " ");
-        }
-        String abc = ALPHABETS;
-        abc = abc.replaceAll(" ", "");
-        System.out.println(abc);
-
-        // for (int i = 0; i < matrix.length; i++) {
-        // for (int j = 0; j < str.length(); j++) {
-
-        // if (ALPHABETS.charAt(i) == martixArray[j]) {
-        // break;
-        // } else {
-        // }
-        // }
-        // martixArray[k] = ALPHABETS.charAt(i);
-        // k++;
-        // }
-        // for (int i = 0; i < martixArray.length; i++) {
-        // System.out.println(martixArray[i]);
-        // }
-
-        // for (int i = 0; i < 5; i++) {
-        // for (int j = 0; j < 5; j++) {
-        // if (matrixArray.charAt(charVal) == 'j') {
-        // matrix[i][j - 1] = (char) ('i');
-        // charVal++;
-        // matrix[i][j] = matrixArray.charAt(charVal);
-        // charVal++;
-        // } else {
-        // matrix[i][j] = matrixArray.charAt(charVal);
-        // charVal++;
-        // }
-        // }
-        // }
-        // for (int i = 0; i < 5; i++) {
-        // for (int j = 0; j < 5; j++) {
-        // // matrix[i][j] = ALPHABETS.charAt(charVal);
-        // System.out.print(matrix[i][j]);
-        // }
-        // System.out.println(' ');
-        // }
-        // return matrix;
+    public static void main(String[] args) {
+        String key = "KEYWORD";
+        String plaintext = "JODHUNME";
+        practical2 cipher = new practical2(key);
+        String encryptedText = cipher.encrypt(plaintext);
+        System.out.println("Key: " + key);
+        System.out.println("PlainText: " + plaintext);
+        System.out.println("Encrypted Text: " + encryptedText);
     }
 }
