@@ -1,61 +1,48 @@
-def is_safe(state, available, max_claim, allocated):
-    def is_less_or_equal(a, b):
-        return all(x <= y for x, y in zip(a, b))
+def is_safe_state(allocated, max_demand, available):
+    def check_resources(need, available):
+        return all(need[i] <= available[i] for i in range(len(need)))
 
-    def add_resources(a, b):
-        return [x + y for x, y in zip(a, b)]
+    def allocate_resources(need, allocated, available):
+        return [allocated[i] + need[i] for i in range(len(need))], [
+            available[i] - need[i] for i in range(len(need))
+        ]
 
-    def subtract_resources(a, b):
-        return [x - y for x, y in zip(a, b)]
-
-    def can_finish(process_id):
-        return is_less_or_equal(need[process_id], available_resources)
-
-    num_processes = len(state)
+    num_processes = len(allocated)
     num_resources = len(available)
 
-    need = [subtract_resources(max_claim[i], allocated[i]) for i in range(num_processes)]
-    work = available.copy()
+    work = available[:]
     finish = [False] * num_processes
 
-    while True:
+    # Calculate the need matrix
+    need = [
+        [max_demand[i][j] - allocated[i][j] for j in range(num_resources)]
+        for i in range(num_processes)
+    ]
+
+    # Iterate through processes
+    for _ in range(num_processes):
+        found = False
         for i in range(num_processes):
-            if not finish[i] and can_finish(i):
-                work = add_resources(work, state[i])
+            if not finish[i] and check_resources(need[i], work):
                 finish[i] = True
-
-                if all(finish):
-                    return True
-
+                work, available = allocate_resources(allocated[i], work, available)
+                found = True
                 break
-        else:
+        if not found:
             return False
+    return True
 
-state = [
-    [0, 1, 0],
-    [2, 0, 0],
-    [3, 0, 2],
-    [2, 1, 1],
-    [0, 0, 2]
-]
 
-available_resources = [3, 3, 2]
-max_claim = [
-    [7, 5, 3],
-    [3, 2, 2],
-    [9, 0, 2],
-    [2, 2, 2],
-    [4, 3, 3]
-]
-allocated = [
-    [0, 1, 0],
-    [2, 0, 0],
-    [3, 0, 2],
-    [2, 1, 1],
-    [0, 0, 2]
-]
+def main():
+    allocated = [[0, 1, 0], [2, 0, 0], [3, 0, 2], [2, 1, 1], [0, 0, 2]]
+    max_demand = [[7, 5, 3], [3, 2, 2], [9, 0, 2], [2, 2, 2], [4, 3, 3]]
+    available = [3, 3, 2]
 
-if is_safe(state, available_resources, max_claim, allocated):
-    print("System is in safe state.")
-else:
-    print("System is in unsafe state.")
+    if is_safe_state(allocated, max_demand, available):
+        print("Safe state: No deadlock")
+    else:
+        print("Unsafe state: Deadlock may occur")
+
+
+if __name__ == "__main__":
+    main()
