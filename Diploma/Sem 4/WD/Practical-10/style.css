@@ -1,0 +1,45 @@
+body {
+    color: white;
+    background-color: #0077b6;
+    align-items: center;
+  }
+  legend {
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-size: 25px;
+  }
+  img {
+    width: 350px;
+    height: 350px;
+    border-radius: 25px;
+  }
+  fieldset {
+    display: flex;
+    justify-content: center;
+    background-color: #00b4d8;
+  }
+  td {
+    background-color: #90e0ef;
+    align-items: center;
+    text-align: center;
+    width: 400px;
+    height: 500px;
+    color: black;
+    border: 2px solid;
+  }
+  .title {
+    font-weight: 700;
+  }
+  .description {
+    font-weight: 500;
+    /* border: 2px solid; */
+  }
+  .price {
+    /* border: 2px solid; */
+    margin-top: 2px;
+    padding-left: 25px;
+    text-align: left;
+    font-weight: 700;
+  }
