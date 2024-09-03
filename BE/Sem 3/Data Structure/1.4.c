@@ -19,7 +19,7 @@ void inputEmployee(struct Employee *emp)
 {
     printf("Enter Employee ID: ");
     scanf("%d", &emp->emp_id);
-    getchar(); // Consume newline
+    getchar();
 
     printf("Enter Employee Name: ");
     fgets(emp->emp_name, MAX_NAME_LENGTH, stdin);
@@ -31,7 +31,7 @@ void inputEmployee(struct Employee *emp)
 
     printf("Enter Employee Salary: ");
     scanf("%f", &emp->emp_salary);
-    getchar(); // Consume newline
+    getchar();
 
     printf("Enter Employee Department: ");
     fgets(emp->emp_department, MAX_DEPARTMENT_LENGTH, stdin);
