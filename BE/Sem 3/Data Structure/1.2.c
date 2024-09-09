@@ -103,7 +103,7 @@ int main()
         printf("0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        getchar(); // Consume newline
+        getchar();
 
         switch (choice)
         {
