@@ -1,146 +1,179 @@
 #include <stdio.h>
-
-#define MAX_ROWS 10
-#define MAX_COLS 10
-
-// Function to input a matrix
-void inputMatrix(int matrix[MAX_ROWS][MAX_COLS], int rows, int cols)
+#define MAX_LENGTH 100
+int stringLength(const char str[])
 {
-    printf("Enter the elements of the matrix (%dx%d):\n", rows, cols);
-    for (int i = 0; i < rows; i++)
+    int length = 0;
+    while (str[length] != '\0')
     {
-        for (int j = 0; j < cols; j++)
-        {
-            scanf("%d", &matrix[i][j]);
-        }
+        length++;
+    }
+    return length;
+}
+void stringCopy(char dest[], const char src[])
+{
+    int i = 0;
+    while (src[i] != '\0')
+    {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+}
+void reverseString(char str[])
+{
+    int length = stringLength(str);
+    for (int i = 0; i < length / 2; i++)
+    {
+        char temp = str[i];
+        str[i] = str[length - 1 - i];
+        str[length - 1 - i] = temp;
     }
 }
-
-// Function to display a matrix
-void displayMatrix(int matrix[MAX_ROWS][MAX_COLS], int rows, int cols)
+void stringConcat(char dest[], const char src[])
 {
-    for (int i = 0; i < rows; i++)
+    int dest_len = stringLength(dest);
+    int i = 0;
+    while (src[i] != '\0')
     {
-        for (int j = 0; j < cols; j++)
-        {
-            printf("%d\t", matrix[i][j]);
-        }
-        printf("\n");
+        dest[dest_len + i] = src[i];
+        i++;
     }
+    dest[dest_len + i] = '\0';
 }
-
-// Function to add two matrices
-void addMatrices(int matrix1[MAX_ROWS][MAX_COLS], int matrix2[MAX_ROWS][MAX_COLS],
-                 int result[MAX_ROWS][MAX_COLS], int rows, int cols)
+int findSubstring(const char str[], const char substr[])
 {
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            result[i][j] = matrix1[i][j] + matrix2[i][j];
-        }
-    }
-}
+    int str_len = stringLength(str);
+    int substr_len = stringLength(substr);
 
-// Function to subtract two matrices
-void subtractMatrices(int matrix1[MAX_ROWS][MAX_COLS], int matrix2[MAX_ROWS][MAX_COLS],
-                      int result[MAX_ROWS][MAX_COLS], int rows, int cols)
-{
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i <= str_len - substr_len; i++)
     {
-        for (int j = 0; j < cols; j++)
+        int j;
+        for (j = 0; j < substr_len; j++)
         {
-            result[i][j] = matrix1[i][j] - matrix2[i][j];
-        }
-    }
-}
-
-// Function to multiply two matrices
-void multiplyMatrices(int matrix1[MAX_ROWS][MAX_COLS], int matrix2[MAX_ROWS][MAX_COLS],
-                      int result[MAX_ROWS][MAX_COLS], int rows1, int cols1, int cols2)
-{
-    for (int i = 0; i < rows1; i++)
-    {
-        for (int j = 0; j < cols2; j++)
-        {
-            result[i][j] = 0;
-            for (int k = 0; k < cols1; k++)
+            if (str[i + j] != substr[j])
             {
-                result[i][j] += matrix1[i][k] * matrix2[k][j];
+                break;
             }
         }
+        if (j == substr_len)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+int compareStrings(const char str1[], const char str2[])
+{
+    int i = 0;
+    while (str1[i] != '\0' && str2[i] != '\0')
+    {
+        if (str1[i] < str2[i])
+        {
+            return -1;
+        }
+        else if (str1[i] > str2[i])
+        {
+            return 1;
+        }
+        i++;
+    }
+    if (str1[i] == '\0' && str2[i] == '\0')
+    {
+        return 0;
+    }
+    else
+    {
+        return -1;
     }
 }
-
 int main()
 {
-    int matrix1[MAX_ROWS][MAX_COLS], matrix2[MAX_ROWS][MAX_COLS], result[MAX_ROWS][MAX_COLS];
-    int rows1, cols1, rows2, cols2;
+    char str1[MAX_LENGTH], str2[MAX_LENGTH];
     int choice;
 
     do
     {
-        printf("\nMatrix Operations Menu:\n");
-        printf("1. Addition\n");
-        printf("2. Subtraction\n");
-        printf("3. Multiplication\n");
+        printf("\nString Operations Menu:\n");
+        printf("1. Calculate string length\n");
+        printf("2. Copy string\n");
+        printf("3. Reverse string\n");
+        printf("4. Concatenate strings\n");
+        printf("5. Find substring\n");
+        printf("6. Compare strings\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar(); // Consume newline
 
         switch (choice)
         {
-        case 1: // Addition
-        case 2: // Subtraction
-            printf("Enter dimensions of matrices (rows columns): ");
-            scanf("%d %d", &rows1, &cols1);
-            rows2 = rows1;
-            cols2 = cols1;
-
-            printf("For first matrix:\n");
-            inputMatrix(matrix1, rows1, cols1);
-            printf("For second matrix:\n");
-            inputMatrix(matrix2, rows2, cols2);
-
-            if (choice == 1)
+        case 1:
+            printf("Enter a string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            printf("Length of the string: %d\n", stringLength(str1));
+            break;
+        case 2:
+            printf("Enter a string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            stringCopy(str2, str1);
+            printf("Copied string: %s\n", str2);
+            break;
+        case 3:
+            printf("Enter a string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            reverseString(str1);
+            printf("Reversed string: %s\n", str1);
+            break;
+        case 4:
+            printf("Enter first string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            printf("Enter second string: ");
+            fgets(str2, MAX_LENGTH, stdin);
+            str2[stringLength(str2) - 1] = '\0';
+            stringConcat(str1, str2);
+            printf("Concatenated string: %s\n", str1);
+            break;
+        case 5:
+            printf("Enter main string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            printf("Enter substring to find: ");
+            fgets(str2, MAX_LENGTH, stdin);
+            str2[stringLength(str2) - 1] = '\0';
+            int index = findSubstring(str1, str2);
+            if (index != -1)
             {
-                addMatrices(matrix1, matrix2, result, rows1, cols1);
-                printf("Result of addition:\n");
+                printf("Substring found at index: %d\n", index);
             }
             else
             {
-                subtractMatrices(matrix1, matrix2, result, rows1, cols1);
-                printf("Result of subtraction:\n");
+                printf("Substring not found\n");
             }
-            displayMatrix(result, rows1, cols1);
             break;
-
-        case 3: // Multiplication
-            printf("Enter dimensions of first matrix (rows columns): ");
-            scanf("%d %d", &rows1, &cols1);
-            printf("Enter dimensions of second matrix (rows columns): ");
-            scanf("%d %d", &rows2, &cols2);
-
-            if (cols1 != rows2)
+        case 6:
+            printf("Enter first string: ");
+            fgets(str1, MAX_LENGTH, stdin);
+            str1[stringLength(str1) - 1] = '\0';
+            printf("Enter second string: ");
+            fgets(str2, MAX_LENGTH, stdin);
+            str2[stringLength(str2) - 1] = '\0';
+            int result = compareStrings(str1, str2);
+            if (result == 0)
             {
-                printf("Error: Number of columns in first matrix must equal number of rows in second matrix.\n");
-                break;
+                printf("Strings are equal\n");
             }
-
-            printf("For first matrix:\n");
-            inputMatrix(matrix1, rows1, cols1);
-            printf("For second matrix:\n");
-            inputMatrix(matrix2, rows2, cols2);
-
-            multiplyMatrices(matrix1, matrix2, result, rows1, cols1, cols2);
-            printf("Result of multiplication:\n");
-            displayMatrix(result, rows1, cols2);
+            else
+            {
+                printf("String are not equal\n");
+            }
             break;
-
         case 0:
             printf("Exiting program.\n");
             break;
-
         default:
             printf("Invalid choice. Please try again.\n");
         }
