@@ -19,7 +19,7 @@ void push(char X)
     }
 }
 
-int Pop()
+int pop()
 {
     if (top == -1)
     {
@@ -82,8 +82,8 @@ void postfixEval(char *strr)
         }
         else
         {
-            int b = Pop();
-            int a = Pop();
+            int b = pop();
+            int a = pop();
 
             switch (strr[i])
             {
