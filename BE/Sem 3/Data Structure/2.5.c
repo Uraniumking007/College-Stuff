@@ -37,7 +37,7 @@ void Display()
     }
 }
 
-int Pop()
+int pop()
 {
     if (top == -1)
     {
@@ -68,7 +68,6 @@ void change()
 
 void main()
 {
-    push();
     int ch, V, P, m = 1;
 
     while (m != 0)
@@ -86,13 +85,16 @@ void main()
             break;
 
         case 3:
-            V = Pop();
+            V = pop();
             printf("Poped Element is %d\n", V);
             break;
 
         case 4:
             P = peep();
             printf("Top most Element is %d\n", P);
+            break;
+        case 5:
+            change();
             break;
 
         default:
