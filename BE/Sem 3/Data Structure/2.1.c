@@ -1,57 +1,52 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
 
-int binary_search(int arr[], int searchTerm, int size)
+#define MAX 100
+
+int binarySearch(int arr[], int size, int target)
 {
-    int low = 0, high = size - 1, mid;
-    while (low <= high)
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right)
     {
-        mid = (low + high) / 2;
-        if (arr[mid] == searchTerm)
-        {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target)
             return mid;
-        }
-        else if (arr[mid] < searchTerm)
-        {
-            low = mid + 1;
-        }
+
+        if (arr[mid] < target)
+            left = mid + 1;
+
         else
-        {
-            high = mid - 1;
-        }
+            right = mid - 1;
     }
+
     return -1;
 }
 
 int main()
 {
-    int *arr;
-    int size;
-    int searchTerm;
-    bool exit = false;
+    int arr[MAX];
+    int size, target;
 
-    printf("Enter Size of Array: ");
+    printf("Enter the number of elements in the array: ");
     scanf("%d", &size);
 
-    arr = (int *)malloc(size * sizeof(int));
-
-    printf("\n\nEnter Array Elements: \n");
+    printf("Enter %d elements: ", size);
     for (int i = 0; i < size; i++)
     {
         scanf("%d", &arr[i]);
     }
 
-    while (!exit)
-    {
-        if (!exit)
-        {
-            printf("Enter Search Term\n");
-            scanf("%d", &searchTerm);
-            printf("Value %d is found at index %d ", searchTerm, binary_search(arr, searchTerm, size));
-        }
-    }
+    printf("Enter the element to be searched: ");
+    scanf("%d", &target);
 
-    free(arr);
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1)
+        printf("Element is present at index %d\n", result);
+    else
+        printf("Element is not present in array\n");
+
     return 0;
 }
