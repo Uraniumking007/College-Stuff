@@ -160,8 +160,8 @@ int main()
             break;
         case 5:
             displayList();
-
             break;
+
         case 6:
             exit(0);
         default:
