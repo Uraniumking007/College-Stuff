@@ -1,8 +1,2 @@
 *.exe
-*.vscode
-
-./*.exe
-./*.vscode
-
-/*.exe
-/.vscode/**
+.vscode/
