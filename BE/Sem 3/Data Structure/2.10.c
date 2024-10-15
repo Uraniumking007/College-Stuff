@@ -110,7 +110,7 @@ void postorderNonRecursive(struct Node *root)
     }
 }
 
-int main()
+void main()
 {
     struct Node *root = newNode(1);
     root->left = newNode(2);
@@ -143,6 +143,4 @@ int main()
     printf("Non-Recursive Postorder Traversal: ");
     postorderNonRecursive(root);
     printf("\n");
-
-    return 0;
 }
