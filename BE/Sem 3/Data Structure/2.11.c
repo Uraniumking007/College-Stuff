@@ -97,25 +97,51 @@ void printList(struct Node *node)
     printf("\n");
 }
 
-int main()
+void main()
 {
     struct Node *head = NULL;
+    int choice, data, position;
 
-    insertFront(&head, 10);
-    insertFront(&head, 20);
-    insertEnd(&head, 30);
-    insertEnd(&head, 40);
+    while (1)
+    {
+        printf("\nMenu:\n");
+        printf("1. Insert at front\n");
+        printf("2. Insert at end\n");
+        printf("3. Delete first node\n");
+        printf("4. Delete node before position\n");
+        printf("5. Print list\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    printf("Doubly linked list: ");
-    printList(head);
-
-    deleteFirst(&head);
-    printf("After deleting first node: ");
-    printList(head);
-
-    deleteBeforePosition(&head, 3);
-    printf("After deleting node before position 3: ");
-    printList(head);
-
-    return 0;
+        switch (choice)
+        {
+        case 1:
+            printf("Enter data to insert at front: ");
+            scanf("%d", &data);
+            insertFront(&head, data);
+            break;
+        case 2:
+            printf("Enter data to insert at end: ");
+            scanf("%d", &data);
+            insertEnd(&head, data);
+            break;
+        case 3:
+            deleteFirst(&head);
+            break;
+        case 4:
+            printf("Enter position before which to delete node: ");
+            scanf("%d", &position);
+            deleteBeforePosition(&head, position);
+            break;
+        case 5:
+            printf("Doubly linked list: ");
+            printList(head);
+            break;
+        case 6:
+            exit(0);
+        default:
+            printf("Invalid choice. Please try again.\n");
+        }
+    }
 }
