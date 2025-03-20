@@ -1,8 +1,20 @@
-LXI H,0009H
-MVI C,0AH
-add_numbers: MOV B,M
-ADD B
-DCX H
-DCR C
-JNZ add_numbers
-HLT
+mvi a,01h
+mvi b,02h
+add b
+sta 03h
+lxi h,04h
+mov d,m
+inx h
+mov e,m
+lxi h,05h
+mov b,m
+inx h
+mov c,m
+mov a,d
+add b
+mov l,a
+mov a,e
+ADC c
+mov h,a
+sta 06h
+hlt

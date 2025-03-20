@@ -1,4 +1,5 @@
-LXI H,0009H
-MVI B,00H
-MVI C,00H
-
+mvi a,02h
+mvi b,01h
+sub b
+sta 03h
+hlt

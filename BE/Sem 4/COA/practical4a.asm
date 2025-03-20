@@ -1,7 +1,5 @@
-MVI C,0AH
-MVI B,01H
-add_number: ADD C
-;INR B
-DCR C
-JNZ add_number
-HLT
+mvi a,04h
+mvi b,03h
+add b
+sta 05h
+hlt
