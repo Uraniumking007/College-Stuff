@@ -1,24 +1,50 @@
-/**
- * Rectangle class that provides functionality for rectangle operations
- */
 public class Rectangle {
-    // Fields
     private int length;
     private int width;
     
-    /**
-     * Default constructor that initializes length and width to 0
-     */
     public Rectangle() {
         this.length = 0;
         this.width = 0;
     }
     
-    /**
-     * Calculates and returns the area of rectangle
-     * @return area of rectangle (length × width)
-     */
+    public int getLength() {
+        return length;
+    }
+    
+    public void setLength(int length) {
+        this.length = length;
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+    
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    
     public int getArea() {
         return length * width;
+    }
+    
+    public static void main(String[] args) {
+        Rectangle rectangle = new Rectangle();
+        System.out.println("Default rectangle - Length: " + rectangle.getLength() + 
+                ", Width: " + rectangle.getWidth() + 
+                ", Area: " + rectangle.getArea());
+        
+        rectangle.setLength(5);
+        rectangle.setWidth(10);
+        
+        System.out.println("After setting dimensions - Length: " + rectangle.getLength() +
+                ", Width: " + rectangle.getWidth() + 
+                ", Area: " + rectangle.getArea());
+        
+        Rectangle rectangle2 = new Rectangle();
+        rectangle2.setLength(7);
+        rectangle2.setWidth(3);
+        System.out.println("Second rectangle - Length: " + rectangle2.getLength() + 
+                ", Width: " + rectangle2.getWidth() + 
+                ", Area: " + rectangle2.getArea());
     }
 }

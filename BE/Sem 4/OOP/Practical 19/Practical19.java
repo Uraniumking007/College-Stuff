@@ -1,15 +1,12 @@
 public class Practical19 {
     public static void main(String[] args) {
-        // Create an instance of IT_dept
-        IT_dept itDepartment = new IT_dept("XYZ University", "Mumbai", "Dr. Sharma", 250);
+        IT_dept itDepartment = new IT_dept("CKPCET", "Surat", "Dr. Ami Choksi", 71);
 
         System.out.println("IT DEPARTMENT DETAILS");
         System.out.println("=====================");
 
-        // Display department details
         itDepartment.display();
 
-        // Display subject list
         itDepartment.subject_list();
     }
 }
@@ -52,11 +49,10 @@ class IT_dept extends Department {
     @Override
     public void subject_list() {
         System.out.println("\nSubjects offered by IT Department:");
-        System.out.println("1. Data Structures and Algorithms");
+        System.out.println("1. Discrete Mathematics");
         System.out.println("2. Object-Oriented Programming");
-        System.out.println("3. Database Management Systems");
-        System.out.println("4. Computer Networks");
-        System.out.println("5. Web Development");
-        System.out.println("6. Artificial Intelligence");
+        System.out.println("3. Computer Architecture and Organization");
+        System.out.println("4. Operating Systems and Virtualization");
+        System.out.println("5. Principles of Economics");
     }
 }
