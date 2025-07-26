@@ -1,15 +1,33 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+#include <stdlib.h>
+
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void shuffle(int arr[], int n)
+{
+    for (int i = n - 1; i > 0; i--)
+    {
+        int j = rand() % (i + 1);
+        swap(&arr[i], &arr[j]);
+    }
+}
 
 int main()
 {
     int arr[10000];
     for (int i = 0; i < 10000; i++)
     {
-        arr[i] = 10000 - i;
+        arr[i] = i + 1;
     }
     int n = sizeof(arr) / sizeof(arr[0]);
+    shuffle(arr, n);
     bool flag = false;
 
     clock_t start = clock();

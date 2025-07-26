@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+#include <stdlib.h>
 
 int main()
 {
     int arr[10000];
     for (int i = 0; i < 10000; i++)
     {
-        arr[i] = 10000 - i;
+        arr[i] = i + 1;
     }
     int n = sizeof(arr) / sizeof(arr[0]);
     bool flag = false;
