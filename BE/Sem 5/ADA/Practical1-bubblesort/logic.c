@@ -3,17 +3,24 @@
 
 int main()
 {
-    int arr[] = {1, 2, 3, 4};
-    int n = sizeof(arr) / sizeof(arr[0]); // Calculate number of elements
+    int arr[] = {64, 34, 25, 12, 22, 11, 90}; // Changed to unsorted array
+    int n = sizeof(arr) / sizeof(arr[0]);
     bool flag = false;
+
+    printf("Original array: ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 
     // Bubble sort implementation
     for (int i = 0; i < n - 1; i++)
     {
-        flag = false;                       // Reset flag for each pass
-        for (int j = 0; j < n - i - 1; j++) // Fixed: increment j, correct condition
+        flag = false;
+        for (int j = 0; j < n - i - 1; j++)
         {
-            if (arr[j] > arr[j + 1]) // Compare adjacent elements
+            if (arr[j] > arr[j + 1])
             {
                 flag = true;
                 // Swap elements
@@ -22,7 +29,6 @@ int main()
                 arr[j + 1] = temp;
             }
         }
-        // If no swaps occurred, array is sorted
         if (!flag)
         {
             break;
@@ -30,6 +36,7 @@ int main()
     }
 
     // Print the sorted array
+    printf("Sorted array: ");
     for (int i = 0; i < n; i++)
     {
         printf("%d ", arr[i]);
