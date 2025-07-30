@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 int main()
@@ -7,18 +6,13 @@ int main()
     int n = 10000;
     int arr[10000];
 
-    // Seed random number generator
-    srand((unsigned int)time(NULL));
-
-    // Fill array with random values (average case for insertion sort)
     for (int i = 0; i < n; i++)
     {
-        arr[i] = rand();
+        arr[i] = i + 1;
     }
 
     clock_t start = clock();
 
-    // Insertion sort
     for (int i = 1; i < n; i++)
     {
         int key = arr[i];
@@ -34,7 +28,7 @@ int main()
     clock_t end = clock();
     double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-    printf("Insertion Sort (Average Case)\n");
+    printf("Insertion Sort (Best Case)\n");
     printf("Time taken: %f seconds\n", time_taken);
 
     return 0;
