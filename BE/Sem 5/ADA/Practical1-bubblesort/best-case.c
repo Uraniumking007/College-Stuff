@@ -6,6 +6,9 @@
 int main()
 {
     int arr[10000];
+    int innerloop = 1;
+    int outerloop = 1;
+
     for (int i = 0; i < 10000; i++)
     {
         arr[i] = i + 1;
@@ -18,9 +21,11 @@ int main()
     // Bubble sort implementation
     for (int i = 0; i < n - 1; i++)
     {
+        outerloop++;
         flag = false;
         for (int j = 0; j < n - i - 1; j++)
         {
+            innerloop++;
             if (arr[j] > arr[j + 1])
             {
                 flag = true;
@@ -37,7 +42,9 @@ int main()
 
     clock_t end = clock();
     double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Time taken: %f seconds\n", time_taken);
+    printf("Time taken: %f seconds \n", time_taken);
+    printf("Outer Loop Iterations: %d \n", outerloop);
+    printf("Inner Loop Iterations: %d \n", innerloop);
 
     return 0;
 }
