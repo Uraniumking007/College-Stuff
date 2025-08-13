@@ -7,6 +7,8 @@ int main()
 {
     int n = 10000;
     int arr[10000];
+    int inner_iterations = 0;
+    int outer_iterations = 0;
 
     srand((unsigned int)time(NULL));
 
@@ -20,9 +22,11 @@ int main()
     bool flag;
     for (int i = 0; i < n - 1; i++)
     {
+        outer_iterations++;
         flag = false;
         for (int j = 0; j < n - i - 1; j++)
         {
+            inner_iterations++;
             if (arr[j] > arr[j + 1])
             {
                 flag = true;
@@ -42,6 +46,8 @@ int main()
 
     printf("Bubble Sort (Average Case)\n");
     printf("Time taken: %f seconds\n", time_taken);
+    printf("Outer loop iterations: %d\n", outer_iterations);
+    printf("Inner loop iterations: %d\n", inner_iterations);
 
     return 0;
 }
