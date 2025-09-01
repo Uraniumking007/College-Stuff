@@ -1,47 +1,78 @@
 <?php
+require_once 'config.php';
 
-// Read the database connection parameters from environment variables
-$db_host = getenv('DB_HOST');
-$db_name = getenv('DB_NAME');
-$db_user = getenv('DB_USER');
-
-// Read the password file path from an environment variable
-$password_file_path = getenv('PASSWORD_FILE_PATH');
-
-// Read the password from the file
-$db_pass = trim(file_get_contents($password_file_path));
-
-// Create a new PDO instance
-$db_handle = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-
-// Create the "messages" table if it doesn't exist
-$db_handle->exec("
- CREATE TABLE IF NOT EXISTS messages (
-     id INT AUTO_INCREMENT PRIMARY KEY,
-     message VARCHAR(255) NOT NULL
- )
-");
-
-// Create message
-$stmt = $db_handle->query("SELECT COUNT(*) as count FROM messages");
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-$count = $row['count'];
-$db_handle->exec("
- INSERT INTO messages (message)
- SELECT CONCAT('message-', '$count')
- WHERE NOT EXISTS (
-  SELECT 1 FROM messages WHERE message = CONCAT('message-', '$count')
- )
-");
-
-// Retrieve all records from the "messages" table
-$stmt = $db_handle->query("SELECT * FROM messages");
-
-// Print all records
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
- echo $row['id'] . " " . $row['message'] . "<br>";
+/**
+ * Get database connection
+ * @return PDO
+ */
+function getDBConnection() {
+    try {
+        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4"; // Data Source Name
+        $pdo = new PDO($dsn, DB_USER, DB_PASS); // Create a new PDO instance
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set the error mode to exception
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Set the default fetch mode to associative array
+        return $pdo;
+    } catch (PDOException $e) {
+        die("Database connection failed: " . $e->getMessage());
+    }
 }
 
-// Close the database connection
-$db_handle = null;
+/**
+ * Initialize database tables
+ */
+function initDatabase() {
+    try {
+        $pdo = getDBConnection();
+        
+        // Create users table
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                last_login TIMESTAMP NULL,
+                login_attempts INT DEFAULT 0,
+                locked_until TIMESTAMP NULL,
+                is_active BOOLEAN DEFAULT TRUE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        
+        // Create sessions table for better session management
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_sessions (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                session_id VARCHAR(255) UNIQUE NOT NULL,
+                ip_address VARCHAR(45),
+                user_agent TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        
+        // Create password reset tokens table
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                token VARCHAR(255) UNIQUE NOT NULL,
+                expires_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        
+        echo "Database tables initialized successfully!<br>";
+        
+    } catch (PDOException $e) {
+        die("Database initialization failed: " . $e->getMessage());
+    }
+}
+
+// Initialize database when this file is included
+initDatabase();
 ?>
