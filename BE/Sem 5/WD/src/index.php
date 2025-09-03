@@ -114,6 +114,19 @@
         </div>
 
         <div class="practical-section">
+            <h2>Practical 11: PHP Programming Scripts</h2>
+            <div class="description">PHP scripts for various programming concepts and algorithms</div>
+            <div class="practical-links">
+                <a href="/practical11/index.php">Main Index</a>
+                <a href="/practical11/odd_even.php">Odd/Even Checker</a>
+                <a href="/practical11/fibonacci.php">Fibonacci Series</a>
+                <a href="/practical11/prime_numbers.php">Prime Numbers</a>
+                <a href="/practical11/student_marks.php">Student Marks</a>
+                <a href="/practical11/string_converter.php">String Converter</a>
+            </div>
+        </div>
+
+        <div class="practical-section">
             <h2>Practical 12: PHP Database Operations</h2>
             <div class="description">PHP CRUD operations with MySQL database</div>
             <div class="practical-links">

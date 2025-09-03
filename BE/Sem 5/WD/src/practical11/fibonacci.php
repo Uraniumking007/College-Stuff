@@ -95,11 +95,6 @@
     <div class="container">
         <h1>🌿 Fibonacci Series Generator</h1>
         
-        <div class="info">
-            <strong>What is Fibonacci Series?</strong><br>
-            A sequence where each number is the sum of the two preceding ones, usually starting with 0 and 1.
-            <br>Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
-        </div>
         
         <form method="POST">
             <div class="form-group">
@@ -145,27 +140,6 @@
             }
         }
         ?>
-
-        <div class="examples">
-            <h3>📚 Example Series:</h3>
-            
-            <?php
-            $exampleLimits = [10, 50, 100];
-            
-            foreach ($exampleLimits as $limit) {
-                $series = generateFibonacci($limit);
-                $count = count($series);
-                
-                echo "<div class='examples'>";
-                echo "<h4>Fibonacci Series up to $limit:</h4>";
-                echo "<div class='fibonacci-series'>";
-                echo implode(", ", $series);
-                echo "</div>";
-                echo "<p><strong>Count: $count numbers</strong></p>";
-                echo "</div>";
-            }
-            ?>
-        </div>
     </div>
 </body>
 </html>
