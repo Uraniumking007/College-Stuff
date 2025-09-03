@@ -2,33 +2,26 @@ services:
   server:
     build:
       context: .
+      target: development
     ports:
       - 9000:80
     depends_on:
       db:
         condition: service_healthy
-    secrets:
-      - db-password
     environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
       - DB_HOST=db
       - DB_NAME=example
       - DB_USER=root
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /var/www/html
+    volumes:
+      - ./src:/var/www/html
   db:
     image: mariadb
     restart: always
     user: root
-    secrets:
-      - db-password
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
       - MARIADB_DATABASE=example
     expose:
       - 3308
@@ -54,6 +47,3 @@ services:
       - PMA_HOST=db
 volumes:
   db-data:
-secrets:
-  db-password:
-    file: db/password.txt
