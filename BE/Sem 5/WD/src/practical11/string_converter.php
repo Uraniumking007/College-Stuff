@@ -222,53 +222,9 @@
         }
         ?>
 
-        <!-- Function Demonstrations -->
-        <div class="function-demo">
-            <h4>🧪 Function Demonstrations:</h4>
-            <?php
-            $demoStrings = [
-                "hello world",
-                "PHP PROGRAMMING",
-                "Web Development",
-                "123 Numbers and Symbols!",
-                "mixed CASE text"
-            ];
-            
-            foreach ($demoStrings as $demo) {
-                echo "<p><strong>Original:</strong> <code>" . htmlspecialchars($demo) . "</code></p>";
-                echo "<p><strong>UPPERCASE:</strong> <code>" . htmlspecialchars(toUpperCase($demo)) . "</code></p>";
-                echo "<p><strong>lowercase:</strong> <code>" . htmlspecialchars(toLowerCase($demo)) . "</code></p>";
-                echo "<p><strong>Title Case:</strong> <code>" . htmlspecialchars(toTitleCase($demo)) . "</code></p>";
-                echo "<hr>";
-            }
-            ?>
-        </div>
 
-        <!-- Examples Section -->
-        <div class="examples">
-            <h3>📚 More Examples:</h3>
-            
-            <?php
-            $examples = [
-                "the quick brown fox jumps over the lazy dog",
-                "PHP IS AWESOME FOR WEB DEVELOPMENT",
-                "JavaScript vs Python",
-                "HTML, CSS, and JavaScript",
-                "Database Management Systems"
-            ];
-            
-            foreach ($examples as $example) {
-                echo "<div class='examples'>";
-                echo "<h4>Original: " . htmlspecialchars($example) . "</h4>";
-                echo "<div class='converted-text'>";
-                echo "<strong>UPPERCASE:</strong> " . htmlspecialchars(toUpperCase($example)) . "\n";
-                echo "<strong>lowercase:</strong> " . htmlspecialchars(toLowerCase($example)) . "\n";
-                echo "<strong>Title Case:</strong> " . htmlspecialchars(toTitleCase($example));
-                echo "</div>";
-                echo "</div>";
-            }
-            ?>
-        </div>
+
+
     </div>
 
     <script>
