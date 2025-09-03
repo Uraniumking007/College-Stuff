@@ -106,20 +106,6 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-        .examples {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-        }
-        .examples h3 {
-            color: #495057;
-            margin-bottom: 15px;
-        }
-        .examples .converted-text {
-            margin: 10px 0;
-            background-color: white;
-        }
         .info {
             background-color: #d1ecf1;
             color: #0c5460;
@@ -127,23 +113,6 @@
             border-radius: 5px;
             margin-bottom: 20px;
             border-left: 4px solid #17a2b8;
-        }
-        .function-demo {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border-left: 4px solid #28a745;
-        }
-        .function-demo h4 {
-            color: #495057;
-            margin-top: 0;
-        }
-        .function-demo code {
-            background-color: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
         }
     </style>
 </head>
