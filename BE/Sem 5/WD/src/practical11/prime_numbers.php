@@ -107,12 +107,6 @@
     <div class="container">
         <h1>🔢 Prime Numbers Generator</h1>
         
-        <div class="info">
-            <strong>What are Prime Numbers?</strong><br>
-            A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
-            <br>First few prime numbers: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ...
-        </div>
-        
         <form method="POST">
             <div class="form-group">
                 <label for="count">Enter how many prime numbers you want:</label>
@@ -171,26 +165,6 @@
             }
         }
         ?>
-
-        <div class="examples">
-            <h3>📚 Example Prime Numbers:</h3>
-            
-            <?php
-            $exampleCounts = [5, 10, 20];
-            
-            foreach ($exampleCounts as $count) {
-                $primes = generatePrimes($count);
-                
-                echo "<div class='examples'>";
-                echo "<h4>First $count Prime Numbers:</h4>";
-                echo "<div class='prime-numbers'>";
-                echo implode(", ", $primes);
-                echo "</div>";
-                echo "<p><strong>Count: " . count($primes) . " numbers</strong></p>";
-                echo "</div>";
-            }
-            ?>
-        </div>
     </div>
 </body>
 </html>
