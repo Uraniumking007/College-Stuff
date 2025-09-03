@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bhavesh Patil — Resume</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #0f172a;
+        --muted: #475569;
+        --accent: #2563eb;
+        --card: #f8fafc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        color: var(--fg);
+        background: var(--bg);
+        line-height: 1.5;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px 20px 64px;
+      }
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      .title {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      h1 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      section {
+        margin-top: 28px;
+      }
+      .section-title {
+        font-size: 1.05rem;
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      @media (min-width: 700px) {
+        .grid-2 {
+          grid-template-columns: 1.2fr 1fr;
+        }
+        .grid-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      ul {
+        margin: 6px 0 0 1.1rem;
+      }
+      li {
+        margin: 4px 0;
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid #cbd5e1;
+        background: #f1f5f9;
+        color: #0f172a;
+        padding: 6px 10px;
+        border-radius: 9999px;
+        font-size: 0.9rem;
+        margin: 6px 6px 0 0;
+        white-space: nowrap;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px 12px;
+        align-items: baseline;
+      }
+      .item h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+      .item .meta {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .spaced p {
+        margin: 6px 0;
+      }
+      footer {
+        margin-top: 32px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .container {
+          padding: 0;
+        }
+        .card {
+          border: 1px solid #ddd;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    </style>
+    <meta
+      name="description"
+      content="Resume of Bhavesh Patil — Frontend developer skilled in JavaScript, TypeScript, React, Next.js, Node.js, and Serverless."
+    />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <div class="title">
+          <h1>Bhavesh Patil</h1>
+          <p class="subtitle">
+            Frontend Developer • JavaScript, TypeScript, React, Next.js
+          </p>
+        </div>
+      </header>
+
+      <section aria-labelledby="summary">
+        <h2 id="summary" class="section-title">Summary</h2>
+        <div class="card spaced">
+          <p>
+            Proficient in JavaScript, TypeScript, React, Next.js, Node.js, and
+            Serverless architecture, with a focus on frontend development and
+            efficient application deployment.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="experience">
+        <h2 id="experience" class="section-title">Experience</h2>
+        <div class="card grid">
+          <div class="item">
+            <h3>Web Development Intern — Sridix Technology</h3>
+            <span class="meta">2023</span>
+            <div class="muted">Internship focused on React development.</div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="education">
+        <h2 id="education" class="section-title">Education</h2>
+        <div class="card grid">
+          <div class="item">
+            <h3>B.E. in Information Technology</h3>
+            <span class="meta">2024–Ongoing</span>
+            <div class="muted">
+              C.K. Pithawala College of Engineering and Technology
+            </div>
+          </div>
+          <div class="item">
+            <h3>Diploma in Computer Engineering</h3>
+            <span class="meta">2021–2024</span>
+            <div class="muted">Uka Tarsadia University</div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills" class="section-title">Skills</h2>
+        <div class="card">
+          <div>
+            <span class="pill">JavaScript</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">React</span>
+            <span class="pill">Next.js</span>
+            <span class="pill">Node.js</span>
+            <span class="pill">Serverless</span>
+            <span class="pill">Frontend Development</span>
+            <span class="pill">Deployment</span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="projects">
+        <h2 id="projects" class="section-title">Projects</h2>
+        <div class="card grid">
+          <div>
+            <div class="item">
+              <h3>Snippy</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">This is a code-sharing platform.</p>
+            <p>
+              <a
+                href="https://snippy-bb.vercel.app/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/bug-busterss/snippy"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Todo App</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              This is a simple web application for managing your todo list. You
+              can add, edit, and delete tasks, and mark them as completed when
+              you're done.
+            </p>
+            <p>
+              <a
+                href="https://todo.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/todo-app-new"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Expense Manager</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              This is a simple web-based expense manager application that allows
+              you to add, edit, and delete your expenses. The data is stored
+              persistently on the client-side using the browser's local storage.
+            </p>
+            <p>
+              <a
+                href="https://expensemanager.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/Expense-Manager"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>SkipSquad — Attendance Tracker</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              This is a user-friendly tool designed to help students manage
+              their attendance, track their progress, and improve their
+              educational outcomes.
+            </p>
+            <p>
+              <a
+                href="https://skipsquad.vercel.app/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Once Human Assistant</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              Comprehensive resource for Once Human with guides, tools,
+              tutorials, and strategies.
+            </p>
+            <p>
+              <a href="https://ohassistant.com/" rel="noopener" target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/once_human_outpost"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Tasky</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">This is a task management app.</p>
+            <p>
+              <a
+                href="https://tasky.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/Tasky"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Metaverse Asia Roleplay</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              The application portal and Admin panel for the Metaverse Asia
+              Roleplay server.
+            </p>
+            <p>
+              <a
+                href="https://application.metaverseasiarp.xyz/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/MetaverseAsiaApplications"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Blogify</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              Blogging platform with a rich text editor. College Final Year
+              Project.
+            </p>
+            <p>
+              <a
+                href="http://blogify.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/blogify"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Image Hosting Site (Internship, Localhost)</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              Host as many images as your browser's local storage supports.
+            </p>
+            <p>
+              <a
+                href="https://local-image.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/LocalStorage-Image-Gallery"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Ecommerce Site (Internship, Localstorage)</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              Simple e-commerce website which stores data in browser local
+              storage.
+            </p>
+            <p>
+              <a
+                href="http://ecommerce-local.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/localstorage-shop"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Previous Portfolio</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">An older version of my portfolio.</p>
+            <p>
+              <a
+                href="https://obsolete.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/Website-Main"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Digital Clock</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">
+              A simple digital clock. Used to learn Date function.
+            </p>
+            <p>
+              <a
+                href="https://digitalclock.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/digital-clock"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Temperature Converter (Learning JS)</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">Converts units of temperature to other units.</p>
+            <p>
+              <a
+                href="https://tempconvert.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/Temperature-Converter"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="item">
+              <h3>Stopwatch</h3>
+              <span class="meta">Web Application</span>
+            </div>
+            <p class="muted">Simple stopwatch app built with JavaScript.</p>
+            <p>
+              <a
+                href="https://stopwatch.bhaveshp.dev/"
+                rel="noopener"
+                target="_blank"
+                >View Project</a
+              >
+              ·
+              <a
+                href="https://github.com/Uraniumking007/stopwatch"
+                rel="noopener"
+                target="_blank"
+                >View Code</a
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="achievements">
+        <h2 id="achievements" class="section-title">
+          Achievements & Activities
+        </h2>
+        <div class="card">
+          <ul>
+            <li>
+              <strong>Award:</strong> Best Solution Creating Impact on Academics
+              — Creato Hackathon 2023
+            </li>
+            <li>
+              <strong>Hackathons:</strong> Innov8'23, Pythakon2k22, and others
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <footer>
+        <p>Replace project "Link" URLs with actual links when available.</p>
+      </footer>
+    </main>
+  </body>
+</html>
