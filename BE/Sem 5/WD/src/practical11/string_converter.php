@@ -70,13 +70,7 @@
         .btn-lowercase:hover {
             background-color: #218838;
         }
-        .btn-titlecase {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        .btn-titlecase:hover {
-            background-color: #e0a800;
-        }
+
         .btn-clear {
             background-color: #6c757d;
             color: white;
@@ -123,8 +117,7 @@
         <div class="info">
             <strong>Available Functions:</strong><br>
             • <code>toUpperCase($string)</code> - Converts string to UPPERCASE<br>
-            • <code>toLowerCase($string)</code> - Converts string to lowercase<br>
-            • <code>toTitleCase($string)</code> - Converts string to Title Case
+            • <code>toLowerCase($string)</code> - Converts string to lowercase
         </div>
         
         <form method="POST">
@@ -136,7 +129,6 @@
             <div class="button-group">
                 <button type="submit" name="action" value="uppercase" class="btn-uppercase">🔠 UPPERCASE</button>
                 <button type="submit" name="action" value="lowercase" class="btn-lowercase">🔡 lowercase</button>
-                <button type="submit" name="action" value="titlecase" class="btn-titlecase">📝 Title Case</button>
                 <button type="submit" name="action" value="clear" class="btn-clear">🗑️ Clear</button>
             </div>
         </form>
@@ -151,9 +143,7 @@
             return strtolower($string);
         }
 
-        function toTitleCase($string) {
-            return ucwords(strtolower($string));
-        }
+
 
         // Handle form submission
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
@@ -174,10 +164,6 @@
                     case 'lowercase':
                         $result = toLowerCase($inputText);
                         $actionName = 'lowercase';
-                        break;
-                    case 'titlecase':
-                        $result = toTitleCase($inputText);
-                        $actionName = 'Title Case';
                         break;
                 }
                 
