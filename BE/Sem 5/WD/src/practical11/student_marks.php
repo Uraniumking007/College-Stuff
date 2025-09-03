@@ -140,54 +140,7 @@
             You can either use the pre-defined data or enter your own student data.
         </div>
 
-        <!-- Pre-defined Student Data -->
-        <div class="examples">
-            <h3>📊 Pre-defined Student Data (10 Students)</h3>
-            <?php
-            // Pre-defined student data
-            $students = [
-                ['name' => 'Alice Johnson', 'marks' => 85],
-                ['name' => 'Bob Smith', 'marks' => 92],
-                ['name' => 'Carol Davis', 'marks' => 78],
-                ['name' => 'David Wilson', 'marks' => 95],
-                ['name' => 'Emma Brown', 'marks' => 88],
-                ['name' => 'Frank Miller', 'marks' => 76],
-                ['name' => 'Grace Taylor', 'marks' => 91],
-                ['name' => 'Henry Anderson', 'marks' => 83],
-                ['name' => 'Ivy Martinez', 'marks' => 89],
-                ['name' => 'Jack Thompson', 'marks' => 87]
-            ];
 
-            // Find student with highest marks
-            $highestMarks = 0;
-            $topStudent = '';
-
-            foreach ($students as $student) {
-                if ($student['marks'] > $highestMarks) {
-                    $highestMarks = $student['marks'];
-                    $topStudent = $student['name'];
-                }
-            }
-
-            // Display student table
-            echo "<table class='student-table'>";
-            echo "<tr><th>Student Name</th><th>Marks</th></tr>";
-            
-            foreach ($students as $student) {
-                $rowClass = ($student['name'] === $topStudent) ? 'style="background-color: #d4edda; font-weight: bold;"' : '';
-                echo "<tr $rowClass>";
-                echo "<td>" . htmlspecialchars($student['name']) . "</td>";
-                echo "<td>" . $student['marks'] . "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-
-            // Display winner
-            echo "<div class='winner'>";
-            echo "🏆 <strong>$topStudent</strong> has the highest marks: <strong>$highestMarks</strong> 🏆";
-            echo "</div>";
-            ?>
-        </div>
 
         <!-- Custom Student Input Form -->
         <div class="form-container">
