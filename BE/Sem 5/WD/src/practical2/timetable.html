@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT 3rd Year (5th Sem) Timetable</title>
+    <style>
+      /* Base */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #222;
+        background: #fafafa;
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 24px auto;
+        padding: 16px;
+        background: #fff;
+        border: 1px solid #ddd;
+      }
+
+      /* Header */
+      .heading {
+        text-align: center;
+      }
+      .heading h1 {
+        margin: 4px 0 0 0;
+        font-size: 18px;
+      }
+      .heading h2 {
+        margin: 6px 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .subinfo {
+        font-size: 13px;
+        margin-top: 6px;
+      }
+
+      /* Timetable */
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table.timetable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      table.timetable th,
+      table.timetable td {
+        border: 1px solid #999;
+        padding: 6px 8px;
+        vertical-align: middle;
+        text-align: center;
+      }
+      table.timetable thead th {
+        background: #f2f2f2;
+      }
+      .left-col {
+        width: 110px;
+        font-weight: 700;
+        background: #f9f9f9;
+      }
+      .lunch {
+        background: #7d1a1a;
+        color: #fff;
+        font-weight: 700;
+      }
+      .muted {
+        color: #666;
+        font-weight: 400;
+      }
+      .soft {
+        background: #fff7ea;
+      }
+      .note {
+        font-size: 12px;
+      }
+
+      /* Footer/Legend */
+      .legend {
+        margin-top: 16px;
+      }
+      .legend table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .legend th,
+      .legend td {
+        border: 1px solid #ccc;
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+      .legend th {
+        background: #f5f5f5;
+        text-align: left;
+      }
+
+      /* Small screens */
+      @media (max-width: 800px) {
+        .heading h1 {
+          font-size: 16px;
+        }
+        .heading h2 {
+          font-size: 14px;
+        }
+        .left-col {
+          position: sticky;
+          left: 0;
+          background: #fff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="heading">
+        <div style="font-weight: 700; font-size: 18px">
+          Navayug Vidhyabhavan Trust
+        </div>
+        <h1>C. K. Pithawalla College of Engineering and Technology, Surat</h1>
+        <div class="subinfo">Academic Year: 2025-26 (ODD SEMESTER)</div>
+        <h2>Department: INFORMATION TECHNOLOGY • 3rd Year (5th Semester)</h2>
+        <div class="subinfo">Room Number: D2-105</div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="timetable" aria-label="Class Timetable">
+          <thead>
+            <tr>
+              <th class="left-col">Time & Day</th>
+              <th>0<br /><span class="note">8:30-9:30</span></th>
+              <th>1<br /><span class="note">9:30-10:30</span></th>
+              <th>2<br /><span class="note">10:30-11:30</span></th>
+              <th>3<br /><span class="note">11:30-12:30</span></th>
+              <th class="lunch">
+                Lunch<br /><span class="note">12:30-1:30</span>
+              </th>
+              <th>4<br /><span class="note">1:30-2:30</span></th>
+              <th>5<br /><span class="note">2:30-3:30</span></th>
+              <th>6<br /><span class="note">3:30-4:30</span></th>
+              <th>7<br /><span class="note">4:30-5:30</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left-col">MON</td>
+              <td>AIML<br />(KDP-D1-103)</td>
+              <td>ADA<br />(MP)</td>
+              <td>PE<br />(DC)</td>
+              <td>
+                <div>ADA (A1) (NRP) (D2-209-1)</div>
+                <div>CN (A2) (SJC) (D2-107-2)</div>
+                <div>WD (A3) (HPN) (D2-107-1)</div>
+                <div>CS (A4) (PTA) (D2-209-2)</div>
+              </td>
+              <td class="lunch" rowspan="6">BREAK</td>
+              <td>
+                <div>ADA (A1) (NRP) (D2-209-1)</div>
+                <div>CN (A2) (SJC) (D2-107-2)</div>
+                <div>WD (A3) (HPN) (D2-107-1)</div>
+                <div>CS (A4) (PTA) (D2-209-2)</div>
+              </td>
+              <td>ADA<br />(NRP)</td>
+              <td>IPDC-I<br />(DRB)</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="left-col">TUE</td>
+              <td>AIML<br />(KDP-D1-103)</td>
+              <td>CN<br />(SJC)</td>
+              <td>ADA<br />(MP)</td>
+              <td>DS (NRP) (D2-103)<br />CS (PTA) (D2-209-2)</td>
+              <td colspan="1">WD<br />(HPN)</td>
+              <td colspan="2"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="left-col">WED</td>
+              <td></td>
+              <td>WD<br />(SJC)</td>
+              <td>CN<br />(DNC)</td>
+              <td class="soft" colspan="1">
+                <div>CN (A1) (DNC) (D2-107-1)</div>
+                <div>CS (A2) (PTA) (D2-107-2)</div>
+                <div>ADA (A3) (MP) (D2-209-1)</div>
+                <div>ADA (A4) (NRP) (D2-209-2)</div>
+              </td>
+              <td class="soft" colspan="1">
+                <div>CN (A1) (DNC) (D2-107-1)</div>
+                <div>CS (A2) (PTA) (D2-107-2)</div>
+                <div>ADA (A3) (MP) (D2-209-1)</div>
+                <div>ADA (A4) (NRP) (D2-209-2)</div>
+              </td>
+              <td>PE<br />(DC)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="left-col">THU</td>
+              <td>AIML<br />(CVS-D1-103)</td>
+              <td class="soft" colspan="2">
+                <div>DS (A1) (NRP) (D2-209-1)</div>
+                <div>WD (A2) (HPN) (D2-107-1)</div>
+                <div>CS (A3) (PTA) (D2-209-2)</div>
+                <div>CN (A4) (DNC) (D2-107-2)</div>
+              </td>
+              <td>ADA<br />(NRP)</td>
+              <td>CN<br />(SJC)</td>
+              <td>PE<br />(DC)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="left-col">FRI</td>
+              <td></td>
+              <td>
+                DS (NRP) <br />
+                (D2-209-2) <br />
+                CS (PTA)
+              </td>
+              <td>CN<br />(DNC)</td>
+              <td>WD<br />(HPN)</td>
+              <td>IPDC-I<br />(BKP)</td>
+              <td colspan="2">
+                <div>WD (A1) (HPN) (D2-107-1)</div>
+                <div>ADA (A2) (MP) (D2-209-2)</div>
+                <div>CN (A3) (DNC) (D2-209-1)</div>
+                <div>WD (A4) (SJC) (D2-107-2)</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="left-col">SAT</td>
+              <td></td>
+              <td colspan="2">
+                <div>AIML (B1) (KDP) (D1, 104-1)</div>
+                <div>AIML (B2) (TPK) (D1, 104-2)</div>
+                <div>AIML (B3) (RMK) (D1, 107-1)</div>
+              </td>
+              <td colspan="1">
+                <div>AIML (B1) (KDP) (D1, 104-1)</div>
+                <div>AIML (B2) (TPK) (D1, 104-2)</div>
+                <div>AIML (B3) (RMK) (D1, 107-1)</div>
+              </td>
+              <td colspan="1">
+                <div>AIML (B1) (KDP) (D1, 104-1)</div>
+                <div>AIML (B2) (TPK) (D1, 104-2)</div>
+                <div>AIML (B3) (RMK) (D1, 107-1)</div>
+              </td>
+              <td colspan="2"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="legend">
+        <div
+          style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px"
+        >
+          <div style="flex: 1; min-width: 200px">
+            <strong>Time Table Committee:</strong><br />
+            Prof. Himani P. Nayak, Prof. Disha N. Chavda
+          </div>
+          <div style="flex: 1; min-width: 150px">
+            <strong>HOD:</strong><br />
+            Dr. Amit T. Choksi
+          </div>
+          <div style="flex: 1; min-width: 200px">
+            <strong>Dean of Academic Affairs:</strong><br />
+            Dr. Priti A. Patel
+          </div>
+          <div style="flex: 1; min-width: 150px">
+            <strong>Principal:</strong><br />
+            Dr. Chaitanya K. Desai
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
