@@ -1,23 +1,37 @@
 /* h2, hr, p, a */
-
 hr {
-  border-color: aqua;
+  border: none;
+  border-top: 2px solid #e0e0e0;
+  margin: 1.5rem 0;
 }
 
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  padding: 2rem 2.5rem;
+  margin: 2rem;
+  min-width: 320px;
+  max-width: 480px;
+  text-align: center;
+}
 h2 {
-  color: red;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-bottom: 1rem;
 }
-
 p {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: blue;
+  margin-bottom: 1.5rem;
 }
-
 a {
-    color: chartreuse;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  background: #e0f7fa;
+  color: #00796b;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
-a:hover{
-    color: coral;
+ a:hover {
+  background: #00796b;
+  color: #fff;
 }
