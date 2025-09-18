@@ -14,7 +14,9 @@
       body {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center;   
+        color: black;
+        text-decoration-color: black;
         width: 100vw;
         height: 100vh;
       }
@@ -23,10 +25,11 @@
   <body>
     <div class="container">
       <div class="card">
-        <h2>This is External Sheet</h2>
-        <p>This is Externally Styled P Tag.</p>
+        <h2 class="pill">This is External Sheet</h2>
+        <p class="pill">This is Externally Styled P Tag.</p>
         <hr />
         <p
+        class="pill"
           style="
             color: #d32f2f;
             font-size: 20px;
@@ -36,7 +39,7 @@
         >
           This is a paragraph with inline CSS.
         </p>
-        <a href="/index.php">Link to Home</a>
+        <a href="/index.php" class="pill">Link to Home</a>
       </div>
     </div>
   </body>

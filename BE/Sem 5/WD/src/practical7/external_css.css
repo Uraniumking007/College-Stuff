@@ -3,6 +3,7 @@ hr {
   border: none;
   border-top: 2px solid #e0e0e0;
   margin: 1.5rem 0;
+  color: black;
 }
 
 .card {
@@ -15,8 +16,16 @@ hr {
   max-width: 480px;
   text-align: center;
 }
+.pill{
+  background-color: aqua;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+}
 h2 {
   margin-bottom: 1rem;
+  font-style: italic;
 }
 p {
   margin-bottom: 1.5rem;
