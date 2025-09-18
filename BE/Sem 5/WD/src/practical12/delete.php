@@ -10,5 +10,3 @@ if ($id > 0) {
 }
 header('Location: /practical12/list.php');
 exit;
-
-
