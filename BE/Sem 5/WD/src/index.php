@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Development Practicals</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 2rem; 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
             background-color: #f5f5f5;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background-color: white;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             color: #2c3e50;
             text-align: center;
@@ -25,6 +28,7 @@
             border-bottom: 3px solid #3498db;
             padding-bottom: 1rem;
         }
+
         .practical-section {
             margin-bottom: 2rem;
             padding: 1.5rem;
@@ -32,18 +36,21 @@
             border-radius: 8px;
             background-color: #fafafa;
         }
+
         .practical-section h2 {
             color: #34495e;
             margin-top: 0;
             border-left: 4px solid #3498db;
             padding-left: 1rem;
         }
+
         .practical-links {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin-top: 1rem;
         }
+
         .practical-links a {
             display: inline-block;
             padding: 0.75rem 1.5rem;
@@ -54,10 +61,12 @@
             transition: background-color 0.3s, transform 0.2s;
             font-weight: 500;
         }
+
         .practical-links a:hover {
             background-color: #2980b9;
             transform: translateY(-2px);
         }
+
         .description {
             color: #666;
             margin-bottom: 1rem;
@@ -65,10 +74,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Web Development Practicals</h1>
-        
+
         <div class="practical-section">
             <h2>Practical 2: Timetable</h2>
             <div class="description">HTML table creation with timetable layout</div>
@@ -112,6 +122,13 @@
                 <a href="/practical6/floatingframes.html">Floating Frames</a>
             </div>
         </div>
+        <div class="practical-section">
+            <h2>Practical 7: Internal and External Stylesheets</h2>
+            <div class="description">Demonstration of internal and external CSS stylesheets</div>
+            <div class="practical-links">
+                <a href="/practical7/4Style_sheet.html">4Styles Sheet</a>
+            </div>
+        </div>
 
         <div class="practical-section">
             <h2>Practical 11: PHP Programming Scripts</h2>
@@ -139,4 +156,5 @@
         </div>
     </div>
 </body>
+
 </html>

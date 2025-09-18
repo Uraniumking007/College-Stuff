@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="external_css.css" />
+    <style>
+      .container {
+        display: flex;
+        width: 80%;
+        height: 80%;
+        background-color: lightblue;
+        justify-content: center;
+        /* internal CSS for body */
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p style="color: red; font-size: 20px">
+        This is a paragraph with inline CSS.
+      </p>
+      <hr />
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <h2>This is External Sheet</h2>
+        <p>This is Externally Styled P Tag.</p>
+        <a href="/src//practical7//4Style_sheet.html"
+          >Link to 4Style_sheet.html</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
