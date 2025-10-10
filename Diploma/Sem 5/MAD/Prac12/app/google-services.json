@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "474625235998",
+    "project_id": "madi-983e3",
+    "storage_bucket": "madi-983e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474625235998:android:09a29b5f25e1054076a20f",
+        "android_client_info": {
+          "package_name": "com.example.prac12"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEnI3M3rG9N78L1DYS6cgaeH9q6EImwJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

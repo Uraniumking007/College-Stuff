@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      form {
+        background-color: white;
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 650px;
+        margin: 0 auto;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #34495e;
+        font-size: 14px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e8e8e8;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+        background-color: #fafafa;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="tel"]:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        background-color: white;
+      }
+
+      .radio-group {
+        margin-top: 8px;
+        display: flex;
+        gap: 20px;
+      }
+
+      .radio-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #3498db;
+      }
+
+      .checkbox-item {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .file-upload {
+        border: 2px dashed #bdc3c7;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        text-align: center;
+        transition: border-color 0.3s ease;
+      }
+
+      .file-upload:hover {
+        border-color: #3498db;
+        background-color: #f0f8ff;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 14px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+        transition: transform 0.2s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .required {
+        color: #e74c3c;
+        margin-left: 4px;
+      }
+
+      .error {
+        color: #e74c3c;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+        font-weight: 500;
+      }
+
+      @media (max-width: 768px) {
+        form {
+          padding: 20px;
+          margin: 10px;
+        }
+
+        .radio-group {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Registration Form</h1>
+
+    <form id="registrationForm" onsubmit="handleSubmit(event)">
+      
+      <div class="form-group">
+        <label for="fullName">Full Name <span class="required">*</span></label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          required
+          placeholder="Enter your full name"
+        />
+        <div class="error" id="nameError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label>Gender <span class="required">*</span></label>
+        <div class="radio-group">
+          <div class="radio-item">
+            <input type="radio" id="male" name="gender" value="male" required />
+            <label for="male">Male</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="female" name="gender" value="female" />
+            <label for="female">Female</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="other" name="gender" value="other" />
+            <label for="other">Other</label>
+          </div>
+        </div>
+        <div class="error" id="genderError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="email">Email ID <span class="required">*</span></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="Enter your email address"
+        />
+        <div class="error" id="emailError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="mobile"
+          >Mobile Number <span class="required">*</span></label
+        >
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          required
+          placeholder="Enter your mobile number"
+        />
+        <div class="error" id="mobileError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="address">Address <span class="required">*</span></label>
+        <textarea
+          id="address"
+          name="address"
+          rows="3"
+          required
+          placeholder="Enter your complete address"
+        ></textarea>
+        <div class="error" id="addressError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="state">State <span class="required">*</span></label>
+        <select id="state" name="state" required>
+          <option value="">Select State</option>
+          <option value="maharashtra">Maharashtra</option>
+          <option value="delhi">Delhi</option>
+          <option value="karnataka">Karnataka</option>
+          <option value="tamil-nadu">Tamil Nadu</option>
+          <option value="gujarat">Gujarat</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="error" id="stateError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="education">Education <span class="required">*</span></label>
+        <select id="education" name="education" required>
+          <option value="">Select Education</option>
+          <option value="high-school">High School</option>
+          <option value="diploma">Diploma</option>
+          <option value="bachelor">Bachelor</option>
+          <option value="master">Master</option>
+          <option value="phd">PhD</option>
+        </select>
+        <div class="error" id="educationError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="profileImage"
+          >Profile Image <span class="required">*</span></label
+        >
+        <div class="file-upload">
+          <input
+            type="file"
+            id="profileImage"
+            name="profileImage"
+            accept="image/*"
+            required
+          />
+          <p style="margin-top: 10px; color: #7f8c8d; font-size: 13px">
+            📷 Click to upload or drag and drop an image
+          </p>
+        </div>
+        <div class="error" id="imageError"></div>
+      </div>
+
+      
+      <div class="form-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms"
+            >I agree to Terms and Conditions
+            <span class="required">*</span></label
+          >
+        </div>
+        <div class="error" id="termsError"></div>
+      </div>
+
+      
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        clearErrors();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData);
+
+        let isValid = true;
+
+        if (!data.fullName.trim()) {
+          showError("nameError", "Name is required");
+          isValid = false;
+        }
+
+        if (!data.gender) {
+          showError("genderError", "Please select your gender");
+          isValid = false;
+        }
+
+        if (!data.email.trim()) {
+          showError("emailError", "Email is required");
+          isValid = false;
+        }
+
+        if (!data.mobile.trim()) {
+          showError("mobileError", "Mobile number is required");
+          isValid = false;
+        }
+
+        if (!data.address.trim()) {
+          showError("addressError", "Address is required");
+          isValid = false;
+        }
+
+        if (!data.state) {
+          showError("stateError", "Please select your state");
+          isValid = false;
+        }
+
+        if (!data.education) {
+          showError("educationError", "Please select your education level");
+          isValid = false;
+        }
+
+        if (!data.profileImage.name) {
+          showError("imageError", "Please select a profile image");
+          isValid = false;
+        }
+
+        if (!data.terms) {
+          showError("termsError", "You must agree to the terms and conditions");
+          isValid = false;
+        }
+
+        if (isValid) {
+          alert("Registration successful! Form has been submitted.");
+          console.log("Form Data:", data);
+          event.target.reset();
+        }
+      }
+
+      function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = "block";
+      }
+
+      function clearErrors() {
+        const errorElements = document.querySelectorAll(".error");
+        errorElements.forEach((element) => {
+          element.style.display = "none";
+          element.textContent = "";
+        });
+      }
+    </script>
+  </body>
+</html>

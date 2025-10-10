@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MADP3</string>
+    <string name="form_tc">Agree with terms &amp; Conditions</string>
+    <string name="fullname">Fullname</string>
+    <string name="registration_form">Registration Form</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+</resources>

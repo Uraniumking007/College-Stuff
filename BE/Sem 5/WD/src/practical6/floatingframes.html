@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floating Frames</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .explanation {
+        background-color: #ecf0f1;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      .floating-frame {
+        text-align: center;
+        margin: 30px 0;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border: 2px dashed #dee2e6;
+      }
+      .floating-frame h3 {
+        color: #495057;
+        margin-bottom: 15px;
+      }
+      iframe {
+        border: 2px solid #007bff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .features {
+        background-color: #e8f5e8;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+      .features h4 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Floating Frames in HTML</h1>
+
+      <div class="explanation">
+        <h2>What are Floating Frames?</h2>
+        <p>
+          Floating frames, also known as inline frames or iframes, are HTML
+          elements that allow you to embed another HTML document within the
+          current page. Unlike traditional frames that divide the browser window
+          into sections, floating frames can be positioned anywhere within the
+          content flow and can be styled with CSS to appear as floating
+          elements.
+        </p>
+        <p>
+          Floating frames are particularly useful for displaying external
+          content, embedding videos, showing maps, or displaying other web pages
+          within your current page without requiring the user to navigate away.
+        </p>
+      </div>
+
+      <div class="floating-frame">
+        <h3>Example: Embedded Timetable</h3>
+        <p>
+          Below is a floating frame displaying the timetable from Practical 2:
+        </p>
+        <iframe src="../practical2/timetable.html" width="800" height="600">
+          <p>
+            Your browser does not support iframes.
+            <a href="../practical2/timetable.html" target="_blank"
+              >Click here to view the timetable</a
+            >
+          </p>
+        </iframe>
+      </div>
+
+      <div class="features">
+        <h4>Key Features of Floating Frames:</h4>
+        <ul>
+          <li>
+            <strong>Flexibility:</strong> Can be positioned anywhere in the
+            document flow
+          </li>
+          <li>
+            <strong>Styling:</strong> Can be styled with CSS for borders,
+            shadows, and positioning
+          </li>
+          <li>
+            <strong>Responsive:</strong> Can be made responsive with CSS media
+            queries
+          </li>
+          <li>
+            <strong>Content Isolation:</strong> Embedded content is isolated
+            from the parent page
+          </li>
+          <li>
+            <strong>Cross-Origin Support:</strong> Can display content from
+            different domains (with proper CORS settings)
+          </li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3>How Floating Frames Work</h3>
+        <p>
+          When you use an iframe, the browser creates a separate browsing
+          context within your page. This means the embedded content has its own
+          document object model (DOM) and JavaScript execution environment. The
+          iframe can load any HTML document, and you can control its appearance
+          and behavior through various attributes and CSS properties.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

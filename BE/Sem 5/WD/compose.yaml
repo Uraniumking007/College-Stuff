@@ -1,0 +1,50 @@
+services:
+  server:
+    build:
+      context: .
+      target: development
+    ports:
+      - 9000:80
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_NAME=example
+      - DB_USER=root
+    volumes:
+      - ./src:/var/www/html
+      - ./src:/var/www/html:ro
+  db:
+    image: mariadb
+    restart: always
+    user: root
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=example
+    expose:
+      - 3308
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
+volumes:
+  db-data:

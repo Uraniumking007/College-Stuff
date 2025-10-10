@@ -1,0 +1,20 @@
+mvi a,01h
+mvi b,02h
+add b
+sta 03h
+lxi h,04h
+mov d,m
+inx h
+mov e,m
+lxi h,05h
+mov b,m
+inx h
+mov c,m
+mov a,d
+add b
+mov l,a
+mov a,e
+ADC c
+mov h,a
+sta 06h
+hlt

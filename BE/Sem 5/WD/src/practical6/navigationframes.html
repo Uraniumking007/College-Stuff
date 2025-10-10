@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation Frames</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+      .left-column {
+        width: 40%;
+        background-color: #e8f4f8;
+        border-right: 2px solid #ccc;
+      }
+      .right-column {
+        width: 60%;
+        border: none;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <iframe src="../practical2/timetable.html">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+      <div class="right-column">
+        <iframe name="contentFrame" src="../practical2/timetable.html">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+    </div>
+  </body>
+</html>

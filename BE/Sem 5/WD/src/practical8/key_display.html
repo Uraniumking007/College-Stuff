@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Press Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .key-display {
+            background-color: #e3f2fd;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .current-key {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 10px 0;
+        }
+        .key-info {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .key-history {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .history-item {
+            padding: 8px;
+            margin: 5px 0;
+            background-color: white;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .history-item:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .clear-btn {
+            background-color: #f44336;
+        }
+        .clear-btn:hover {
+            background-color: #d32f2f;
+        }
+        .toggle-btn {
+            background-color: #FF9800;
+        }
+        .toggle-btn:hover {
+            background-color: #f57c00;
+        }
+        .toggle-btn.active {
+            background-color: #4CAF50;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #4CAF50;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .instructions {
+            background-color: #fff3e0;
+            border: 1px solid #FF9800;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #e65100;
+        }
+        .special-key {
+            background-color: #ffebee;
+            border-left-color: #f44336;
+        }
+        .modifier-key {
+            background-color: #f3e5f5;
+            border-left-color: #9c27b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Key Press Display</h2>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> Press any key on your keyboard to see its information displayed below. 
+            The display will show the key value, key code, and other details.
+        </div>
+        
+        <div class="key-display" id="keyDisplay">
+            <div class="current-key" id="currentKey">Press any key...</div>
+            <div class="key-info" id="keyCode">Key Code: -</div>
+            <div class="key-info" id="keyName">Key Name: -</div>
+            <div class="key-info" id="keyType">Key Type: -</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalKeys">0</div>
+                <div class="stat-label">Total Keys Pressed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="uniqueKeys">0</div>
+                <div class="stat-label">Unique Keys</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="specialKeys">0</div>
+                <div class="stat-label">Special Keys</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="modifierKeys">0</div>
+                <div class="stat-label">Modifier Keys</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="toggle-btn" id="toggleBtn" onclick="toggleKeyCapture()">Pause Key Capture</button>
+            <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+        </div>
+        
+        <div class="key-history">
+            <h3>Key Press History</h3>
+            <div id="keyHistory"></div>
+        </div>
+    </div>
+
+    <script>
+        let keyHistory = [];
+        let uniqueKeys = new Set();
+        let specialKeyCount = 0;
+        let modifierKeyCount = 0;
+        let isCapturing = true;
+        
+        
+        const specialKeys = [
+            'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',
+            'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home', 'ArrowLeft',
+            'ArrowUp', 'ArrowRight', 'ArrowDown', 'Insert', 'Delete', 'F1', 'F2',
+            'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'
+        ];
+        
+        
+        const modifierKeys = ['Shift', 'Control', 'Alt', 'Meta'];
+        
+        function displayKeyInfo(event) {
+            if (!isCapturing) return;
+            
+            const key = event.key;
+            const code = event.code;
+            const keyCode = event.keyCode;
+            const timestamp = new Date().toLocaleTimeString();
+            
+            
+            document.getElementById('currentKey').textContent = key === ' ' ? 'Space' : key;
+            document.getElementById('keyCode').textContent = `Key Code: ${keyCode}`;
+            document.getElementById('keyName').textContent = `Key Name: ${code}`;
+            
+            
+            let keyType = 'Regular Key';
+            if (specialKeys.includes(key)) {
+                keyType = 'Special Key';
+                specialKeyCount++;
+            } else if (modifierKeys.includes(key)) {
+                keyType = 'Modifier Key';
+                modifierKeyCount++;
+            }
+            
+            document.getElementById('keyType').textContent = `Key Type: ${keyType}`;
+            
+            
+            const historyItem = {
+                key: key,
+                code: code,
+                keyCode: keyCode,
+                type: keyType,
+                timestamp: timestamp
+            };
+            
+            keyHistory.unshift(historyItem);
+            uniqueKeys.add(key);
+            
+            
+            updateStats();
+            
+            
+            updateHistoryDisplay();
+            
+            
+            console.log('Key pressed:', {
+                key: key,
+                code: code,
+                keyCode: keyCode,
+                type: keyType,
+                timestamp: timestamp
+            });
+        }
+        
+        function updateStats() {
+            document.getElementById('totalKeys').textContent = keyHistory.length;
+            document.getElementById('uniqueKeys').textContent = uniqueKeys.size;
+            document.getElementById('specialKeys').textContent = specialKeyCount;
+            document.getElementById('modifierKeys').textContent = modifierKeyCount;
+        }
+        
+        function updateHistoryDisplay() {
+            const historyDiv = document.getElementById('keyHistory');
+            historyDiv.innerHTML = '';
+            
+            
+            const recentHistory = keyHistory.slice(0, 50);
+            
+            recentHistory.forEach((item, index) => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                
+                if (item.type === 'Special Key') {
+                    historyItem.classList.add('special-key');
+                } else if (item.type === 'Modifier Key') {
+                    historyItem.classList.add('modifier-key');
+                }
+                
+                historyItem.innerHTML = `
+                    <strong>${item.timestamp}</strong> - 
+                    Key: "${item.key === ' ' ? 'Space' : item.key}" | 
+                    Code: ${item.code} | 
+                    KeyCode: ${item.keyCode} | 
+                    Type: ${item.type}
+                `;
+                
+                historyDiv.appendChild(historyItem);
+            });
+        }
+        
+        function toggleKeyCapture() {
+            const btn = document.getElementById('toggleBtn');
+            isCapturing = !isCapturing;
+            
+            if (isCapturing) {
+                btn.textContent = 'Pause Key Capture';
+                btn.classList.remove('active');
+                document.getElementById('currentKey').textContent = 'Press any key...';
+            } else {
+                btn.textContent = 'Resume Key Capture';
+                btn.classList.add('active');
+                document.getElementById('currentKey').textContent = 'Key capture paused';
+            }
+        }
+        
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all key history?')) {
+                keyHistory = [];
+                uniqueKeys.clear();
+                specialKeyCount = 0;
+                modifierKeyCount = 0;
+                
+                updateStats();
+                updateHistoryDisplay();
+                
+                document.getElementById('currentKey').textContent = 'Press any key...';
+                document.getElementById('keyCode').textContent = 'Key Code: -';
+                document.getElementById('keyName').textContent = 'Key Name: -';
+                document.getElementById('keyType').textContent = 'Key Type: -';
+                
+                console.log('Key history cleared');
+            }
+        }
+        
+        
+        document.addEventListener('keydown', displayKeyInfo);
+        
+        
+        document.addEventListener('keydown', function(event) {
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.key)) {
+                event.preventDefault();
+            }
+        });
+        
+        
+        window.onload = function() {
+            console.log('Key Press Display loaded!');
+            console.log('Press any key to see its information displayed.');
+            updateStats();
+        };
+        
+        
+        window.addEventListener('focus', function() {
+            if (isCapturing) {
+                document.getElementById('currentKey').textContent = 'Press any key...';
+            }
+        });
+        
+        window.addEventListener('blur', function() {
+            document.getElementById('currentKey').textContent = 'Window not focused';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today's Date Display</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+      .date-display {
+        background-color: #e3f2fd;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 2px solid #2196f3;
+      }
+      .date-info {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #1976d2;
+      }
+      .refresh-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px;
+        transition: background-color 0.3s;
+      }
+      .refresh-btn:hover {
+        background-color: #45a049;
+      }
+      .auto-refresh {
+        background-color: #ff9800;
+      }
+      .auto-refresh:hover {
+        background-color: #f57c00;
+      }
+      .auto-refresh.active {
+        background-color: #f44336;
+      }
+      .auto-refresh.active:hover {
+        background-color: #d32f2f;
+      }
+      .format-buttons {
+        margin: 20px 0;
+      }
+      .format-btn {
+        background-color: #9c27b0;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 14px;
+      }
+      .format-btn:hover {
+        background-color: #7b1fa2;
+      }
+      .format-btn.active {
+        background-color: #4a148c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Today's Date Display</h2>
+
+      <div class="date-display">
+        <div class="date-info" id="currentDate">Loading...</div>
+        <div class="date-info" id="currentTime">Loading...</div>
+        <div class="date-info" id="dayOfWeek">Loading...</div>
+      </div>
+
+      <div class="format-buttons">
+        <button class="format-btn active" onclick="setDateFormat('full')">
+          Full Format
+        </button>
+        <button class="format-btn" onclick="setDateFormat('short')">
+          Short Format
+        </button>
+        <button class="format-btn" onclick="setDateFormat('iso')">
+          ISO Format
+        </button>
+        <button class="format-btn" onclick="setDateFormat('custom')">
+          Custom Format
+        </button>
+      </div>
+
+      <button class="refresh-btn" onclick="updateDateTime()">
+        Refresh Date & Time
+      </button>
+      <button
+        class="refresh-btn auto-refresh"
+        id="autoRefreshBtn"
+        onclick="toggleAutoRefresh()"
+      >
+        Start Auto Refresh
+      </button>
+    </div>
+
+    <script>
+      let autoRefreshInterval;
+      let currentFormat = "full";
+
+      function updateDateTime() {
+        const now = new Date();
+        const dateElement = document.getElementById("currentDate");
+        const timeElement = document.getElementById("currentTime");
+        const dayElement = document.getElementById("dayOfWeek");
+
+        
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const dayOfWeek = days[now.getDay()];
+
+        
+        let dateString;
+        switch (currentFormat) {
+          case "full":
+            dateString = now.toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            break;
+          case "short":
+            dateString = now.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
+            break;
+          case "iso":
+            dateString = now.toISOString().split("T")[0];
+            break;
+          case "custom":
+            dateString = `${now.getDate()}/${
+              now.getMonth() + 1
+            }/${now.getFullYear()}`;
+            break;
+          default:
+            dateString = now.toLocaleDateString();
+        }
+
+        
+        const timeString = now.toLocaleTimeString("en-US", {
+          hour12: true,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
+        
+        dateElement.textContent = `Date: ${dateString}`;
+        timeElement.textContent = `Time: ${timeString}`;
+        dayElement.textContent = `Day: ${dayOfWeek}`;
+      }
+
+      function setDateFormat(format) {
+        currentFormat = format;
+
+        
+        document.querySelectorAll(".format-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        
+        updateDateTime();
+      }
+
+      function toggleAutoRefresh() {
+        const btn = document.getElementById("autoRefreshBtn");
+
+        if (autoRefreshInterval) {
+          
+          clearInterval(autoRefreshInterval);
+          autoRefreshInterval = null;
+          btn.textContent = "Start Auto Refresh";
+          btn.classList.remove("active");
+        } else {
+          
+          autoRefreshInterval = setInterval(updateDateTime, 1000);
+          btn.textContent = "Stop Auto Refresh";
+          btn.classList.add("active");
+        }
+      }
+
+      
+      updateDateTime();
+
+      
+      setInterval(() => {
+        const now = new Date();
+        const timeElement = document.getElementById("currentTime");
+        const timeString = now.toLocaleTimeString("en-US", {
+          hour12: true,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+        timeElement.textContent = `Time: ${timeString}`;
+      }, 1000);
+
+      
+      window.onload = function () {
+        const now = new Date();
+        console.log("Current Date Object:", now);
+        console.log("Timestamp:", now.getTime());
+        console.log("Year:", now.getFullYear());
+        console.log("Month:", now.getMonth() + 1);
+        console.log("Date:", now.getDate());
+        console.log("Day of Week:", now.getDay());
+        console.log("Hours:", now.getHours());
+        console.log("Minutes:", now.getMinutes());
+        console.log("Seconds:", now.getSeconds());
+      };
+    </script>
+  </body>
+</html>

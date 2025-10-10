@@ -1,0 +1,8 @@
+mvi b,06h
+mvi c,05h
+mvi a,00h
+up: add b  
+dcr c
+jnz up
+mov h,a
+hlt

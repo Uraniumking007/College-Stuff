@@ -1,0 +1,384 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{quote}
+\textbf{GUJARAT TECHNOLOGICAL UNIVERSITY}
+\end{quote}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule()
+\multirow{2}{*}{\begin{minipage}[b]{\linewidth}\raggedright
+\includegraphics[width=0.84306in,height=0.98889in]{vertopal_030be44c1dfa465e8c35debd70e2c95b/media/image1.png}
+\end{minipage}} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Chandkheda, Ahmedabad
+\end{quote}
+\end{minipage} &
+\multirow{2}{*}{\begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+\includegraphics[width=1.10417in,height=1.10417in]{vertopal_030be44c1dfa465e8c35debd70e2c95b/media/image2.png}
+\end{quote}
+\end{minipage}} \\
+& \begin{minipage}[b]{\linewidth}\raggedright
+Affiliated
+\end{minipage} \\
+\midrule()
+\endhead
+\bottomrule()
+\end{longtable}
+
+\begin{quote}
+C. K. Pithawala College of Engineering and Technology, Surat\\
+A\\
+Project Report\\
+On
+\end{quote}
+
+\textbf{(TOPIC NAME)}
+
+\begin{quote}
+Prepared as a part of the requirements for the subject of \textbf{Design
+Thinking (BE01000071)}\\
+\textbf{B. E. I, Semester -- II}\\
+( Information Technology Engineering Department) Submitted by:
+\end{quote}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Sr. No.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Name of Student
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enrolment No
+\end{minipage} \\
+\midrule()
+\endhead
+& & \\
+& & \\
+& & \\
+& & \\
+\bottomrule()
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Prof.
+
+Faculty Guide
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Prof. Ami T. Chokshi\\
+HOD, IT
+\end{quote}\strut
+\end{minipage} \\
+\midrule()
+\endhead
+\bottomrule()
+\end{longtable}
+
+\textbf{Academic year {[}2024-2025{]}}
+
+Table of Contents
+
+\begin{quote}
+ACKNOWLEDGMENT II
+
+ABSTRACT III
+
+1. Introduction 1
+
+1.1 What is Design Thinking? 1
+
+1.2 Its importance, Socio-economic relevance 1
+
+1.3 Learning Tools and its importance 1
+
+1.4 Team building and Log book exercises and importance 1
+
+2. Canvases 2
+
+2.1 AEIOU Summary 2
+
+2.2 Mind Mapping 3
+
+2.3 Empathy Mapping 4
+
+2.4 Ideation Canvas 5
+
+2.5 Product Development Canvas 6
+
+3. Feedback Analysis 7
+
+4. Rough Prototype 8
+
+Conclusion and Future Work 10
+
+References 11
+\end{quote}
+
+1
+
+\textbf{ACKNOWLEDGMENT}
+
+2
+
+\textbf{ABSTRACT} 150words, Times new roman, italic and justified
+alignment.
+
+3
+
+\textbf{1. Introduction}
+
+Describe your project in detail including domain -- type, place, why and
+how team selected
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0833}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+this
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+domain
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+and
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+why
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+this
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+domain
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+is
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+important
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+in
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+relation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+to
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Design
+\end{quote}
+\end{minipage} \\
+\midrule()
+\endhead
+\bottomrule()
+\end{longtable}
+
+Thinking/Human-Centered process etc.
+
+\begin{quote}
+\textbf{150.1What is Design Thinking?}
+\end{quote}
+
+Describe above with reference to your project with understanding of
+points
+
+\begin{quote}
+\textbf{150.2Its importance, Socio-economic relevance}
+\end{quote}
+
+Describe above with reference to your project with understanding of
+points
+
+\begin{quote}
+\textbf{\emph{150.3}Learning Tools and its importance}
+\end{quote}
+
+Describe above with reference to your project with understanding of
+points
+
+\begin{quote}
+\textbf{150.4Team building and Log book exercises and importance}
+\end{quote}
+
+Describe above with reference to your project with understanding of
+points
+
+1
+
+\textbf{2. Canvases}
+
+Describe canvases in detail with snapshots of each canvas as a figure;
+below it write an
+
+explanation of each component of canvas. Put Figure caption below figure
+as example:
+
+Figure 1: AEIOU Canvas and so on. Figure must be center aligned.
+
+\begin{quote}
+\textbf{2.1 AEIOU Summary}
+
+Figure and Explanation
+\end{quote}
+
+1) Describes the domain/area of interest you have selected for the
+observation.
+
+2) Mention all observation data through AEIOU with the help of notes,
+photographs and
+
+videos.
+
+3) Describe mind mapping techniques and what broad groups and sub-groups
+you have
+
+selected to further categorize your observation data? (put your mind map
+snapshot)
+
+4) AEIOU summary (Snapshot of the same is required as whole or in part)
+
+5) Who was the Selected User in Empathy canvas? Who were the
+stakeholders?
+
+(snapshot of user and stakeholder section from the canvas)
+
+2
+
+\textbf{2.2 Mind Mapping}\\
+Figure and Explanation
+
+3
+
+\textbf{2.3 Empathy Mapping}\\
+Figure and Explanation
+
+4
+
+\textbf{2.4 Ideation Canvas}\\
+Figure and Explanation
+
+5
+
+\textbf{2.5 Product Development Canvas} Figure and Explanation
+
+6
+
+\textbf{3. Feedback Analysis} Detailed description of Customer
+revalidation part from PDC
+
+1.Conduct meetings with your actual customer and perform question answer
+sessions with
+
+them, which carry the feedback of your system.
+
+2.Describe (in your own words) all the changes (positive /negative)
+suggested by them.
+
+7
+
+\textbf{4. Rough Prototype}
+
+8
+
+\textbf{Conclusion and Future Work} Describe the conclusion of your
+system about the design thinking process. Describe\\
+your system\textquotesingle s future work concerning the design thinking
+process.
+
+9
+
+10
+
+\end{document}

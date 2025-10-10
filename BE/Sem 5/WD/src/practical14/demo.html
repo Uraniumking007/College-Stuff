@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery AJAX Demo - Practical 14</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .demo-section {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .code-block {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 10px 0;
+        overflow-x: auto;
+      }
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+      .highlight {
+        background-color: #fff3cd;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      .btn {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      .btn:hover {
+        background: #0056b3;
+      }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Practical 14: jQuery AJAX with HTTP POST</h1>
+
+    <div class="demo-section">
+      <h2>Key Features Implemented</h2>
+      <ul>
+        <li>
+          <strong>jQuery AJAX POST Request:</strong> Form data is submitted
+          using $.ajax() with POST method
+        </li>
+        <li>
+          <strong>Form Validation:</strong> Client-side validation before
+          submission
+        </li>
+        <li>
+          <strong>Loading States:</strong> Visual feedback during submission
+        </li>
+        <li>
+          <strong>Error Handling:</strong> Comprehensive error handling for
+          various scenarios
+        </li>
+        <li>
+          <strong>JSON Response:</strong> Server returns structured JSON
+          responses
+        </li>
+        <li>
+          <strong>Real-time Validation:</strong> Field validation on blur events
+        </li>
+      </ul>
+    </div>
+
+    <div class="demo-section">
+      <h2>jQuery AJAX Implementation</h2>
+      <p>The core AJAX functionality is implemented as follows:</p>
+
+      <div class="code-block">
+        <pre><code>// AJAX POST request
+$.ajax({
+    url: 'process_feedback.php',
+    type: 'POST',
+    data: formData,
+    dataType: 'json',
+    timeout: 10000, // 10 seconds timeout
+    success: function(response) {
+        showLoading(false);
+        if (response.success) {
+            showMessage('success', 'Thank you for your feedback!');
+            resetForm();
+        } else {
+            showMessage('error', 'Error: ' + response.message);
+        }
+    },
+    error: function(xhr, status, error) {
+        showLoading(false);
+        var errorMessage = 'An error occurred while submitting your feedback. ';
+        
+        if (status === 'timeout') {
+            errorMessage += 'Request timed out.';
+        } else if (xhr.status === 404) {
+            errorMessage += 'Server not found.';
+        } else if (xhr.status === 500) {
+            errorMessage += 'Server error.';
+        }
+        
+        showMessage('error', errorMessage);
+    }
+});</code></pre>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Form Data Structure</h2>
+      <p>The form collects the following data and sends it via AJAX POST:</p>
+      <div class="code-block">
+        <pre><code>var formData = {
+    name: $('#name').val(),
+    email: $('#email').val(),
+    subject: $('#subject').val(),
+    rating: $('input[name="rating"]:checked').val(),
+    message: $('#message').val()
+};</code></pre>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Server Response Format</h2>
+      <p>The PHP backend returns JSON responses in this format:</p>
+      <div class="code-block">
+        <pre><code>// Success Response
+{
+    "success": true,
+    "message": "Feedback submitted successfully!",
+    "data": {
+        "submission_id": "fb_64a1b2c3d4e5f",
+        "timestamp": "2024-01-15 14:30:25",
+        "logged_to_file": true,
+        "saved_to_database": true,
+        "email_sent": false
+    }
+}
+
+{
+    "success": false,
+    "message": "Please provide a valid email address."
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Test the AJAX Functionality</h2>
+      <p>Click the button below to test a simple AJAX POST request:</p>
+      <button class="btn" onclick="testAjax()">Test AJAX POST</button>
+      <div id="testResult" class="result" style="display: none"></div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Files Created</h2>
+      <ul>
+        <li>
+          <strong>feedback_form.html:</strong> Complete feedback form with
+          jQuery AJAX implementation
+        </li>
+        <li>
+          <strong>process_feedback.php:</strong> PHP backend to handle form
+          submissions
+        </li>
+        <li><strong>demo.html:</strong> This demonstration file</li>
+      </ul>
+    </div>
+
+    <div class="demo-section">
+      <h2>How to Use</h2>
+      <ol>
+        <li>Open <code>feedback_form.html</code> in a web browser</li>
+        <li>Fill out the feedback form</li>
+        <li>Click "Submit Feedback" to see the AJAX POST in action</li>
+        <li>Check the browser's Network tab to see the AJAX request</li>
+        <li>View the response in the browser console or on the page</li>
+      </ol>
+    </div>
+
+    <script>
+      function testAjax() {
+        var resultDiv = $("#testResult");
+        resultDiv.show().removeClass("success error");
+
+        var testData = {
+          name: "Test User",
+          email: "test@example.com",
+          subject: "general",
+          rating: "5",
+          message: "This is a test message for AJAX functionality.",
+        };
+
+        $.ajax({
+          url: "process_feedback.php",
+          type: "POST",
+          data: testData,
+          dataType: "json",
+          timeout: 5000,
+          success: function (response) {
+            resultDiv.addClass("success");
+            resultDiv.html(
+              "<strong>Success!</strong><br>" +
+                "Response: " +
+                JSON.stringify(response, null, 2)
+            );
+          },
+          error: function (xhr, status, error) {
+            resultDiv.addClass("error");
+            resultDiv.html(
+              "<strong>Error!</strong><br>" +
+                "Status: " +
+                status +
+                "<br>" +
+                "Error: " +
+                error +
+                "<br>" +
+                "Response: " +
+                xhr.responseText
+            );
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
