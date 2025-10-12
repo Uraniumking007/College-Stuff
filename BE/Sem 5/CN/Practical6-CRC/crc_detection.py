@@ -1,43 +1,92 @@
-"""
-CRC (Cyclic Redundancy Check) Error Detection Implementation
-==========================================================
+def xor(a, b):
+    result = []
+    for i in range(1, len(b)):
+        result.append(str(int(a[i]) ^ int(b[i])))
+    return ''.join(result)
 
-This module implements CRC error detection methods with support for various
-CRC polynomials commonly used in computer networks and data communication.
 
-Author: CN Assignment - Practical 6
-"""
+def mod2div(dividend, divisor):
+    pick = len(divisor)
+    tmp = dividend[0:pick]
 
+    while pick < len(dividend):
+        if tmp[0] == '1':
+            tmp = xor(divisor, tmp) + dividend[pick]
+        else:  # if leftmost bit is 0
+            tmp = xor('0'*pick, tmp) + dividend[pick]
+        pick += 1
+
+    # Last step of division
+    if tmp[0] == '1':
+        tmp = xor(divisor, tmp)
+    else:
+        tmp = xor('0'*pick, tmp)
+    
+    return tmp  # This is the CRC
+
+
+def encode_data(data, key):
+    l_key = len(key)
+    appended_data = data + '0'*(l_key - 1)
+    crc = mod2div(appended_data, key)
+    codeword = data + crc
+    return codeword, crc
+
+
+def check_received_data(received_data, key):
+    remainder = mod2div(received_data, key)
+    if "1" in remainder:
+        return False, remainder
+    return True, remainder
+
+
+# Example usage (kept under main guard)
+if __name__ == '__main__':
+    data = "11010011101100"  # Input binary string
+    key = "1011"            # Generator polynomial
+
+    # Sender side
+    codeword, crc = encode_data(data, key)
+    print("Data:", data)
+    print("CRC Checksum:", crc)
+    print("Encoded Data (Data + CRC):", codeword)
+
+    # Receiver side (correct data)
+    valid, rem = check_received_data(codeword, key)
+    print("Received valid?" if valid else "Error detected!", "| Remainder:", rem)
+
+    # Receiver side (simulate error)
+    received = codeword[:5] + '1' + codeword[6:]  # Flip a bit
+    valid, rem = check_received_data(received, key)
+    print("Received valid?" if valid else "Error detected!", "| Remainder:", rem)
 from typing import List, Tuple, Union
 import struct
 
 
 class CRCDetection:
-    """
-    CRC (Cyclic Redundancy Check) implementation for error detection.
+    # CRC (Cyclic Redundancy Check) implementation for error detection.
     
-    Supports various CRC polynomials and provides both bit-level and byte-level
-    CRC calculation methods.
-    """
-    
-    # Common CRC polynomials
+    # Common CRC polynomials (polynomial low-order part; width defined separately)
     CRC_POLYNOMIALS = {
-        'CRC-8': 0x07,           # x^8 + x^2 + x + 1
-        'CRC-16': 0x8005,        # x^16 + x^15 + x^2 + 1
-        'CRC-32': 0x04C11DB7,    # x^32 + x^26 + x^23 + x^22 + x^16 + x^12 + x^11 + x^10 + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1
-        'CRC-CCITT': 0x1021,     # x^16 + x^12 + x^5 + 1
-        'CRC-ANSI': 0x8005,      # x^16 + x^15 + x^2 + 1
-        'CRC-DNP': 0x3D65,       # x^16 + x^13 + x^12 + x^11 + x^10 + x^8 + x^6 + x^5 + x^2 + 1
+        'CRC-8': 0x07,
+        'CRC-16': 0x8005,
+        'CRC-32': 0x04C11DB7,
+        'CRC-CCITT': 0x1021,
+        'CRC-ANSI': 0x8005,
+        'CRC-DNP': 0x3D65,
+    }
+
+    # Widths for named polynomials
+    CRC_WIDTHS = {
+        'CRC-8': 8,
+        'CRC-16': 16,
+        'CRC-32': 32,
+        'CRC-CCITT': 16,
+        'CRC-ANSI': 16,
+        'CRC-DNP': 16,
     }
     
     def __init__(self, polynomial: Union[str, int], width: int = None):
-        """
-        Initialize CRC detector with specified polynomial.
-        
-        Args:
-            polynomial (Union[str, int]): CRC polynomial name or value
-            width (int): CRC width in bits (auto-detected if None)
-        """
         if isinstance(polynomial, str):
             if polynomial not in self.CRC_POLYNOMIALS:
                 raise ValueError(f"Unknown CRC polynomial: {polynomial}")
@@ -46,38 +95,26 @@ class CRCDetection:
         else:
             self.polynomial = polynomial
             self.polynomial_name = f"Custom-0x{polynomial:04X}"
-        
-        # Auto-detect width if not provided
-        if width is None:
-            self.width = self._detect_width(self.polynomial)
+
+        # Auto-detect width if not provided; for known names use CRC_WIDTHS
+        if isinstance(polynomial, str):
+            self.width = self.CRC_WIDTHS.get(polynomial) if width is None else width
         else:
-            self.width = width
-        
-        # Create lookup table for faster computation
-        self.lookup_table = self._create_lookup_table()
+            self.width = width if width is not None else self._detect_width(self.polynomial)
+
+        # precompute full polynomial with implicit leading 1 at degree 'width'
+        self.poly_full = (1 << self.width) | (self.polynomial & ((1 << self.width) - 1))
+        # lookup_table is intentionally omitted; we compute CRC via division to keep implementation simple
+        self.lookup_table = None
     
     def _detect_width(self, polynomial: int) -> int:
         """Detect CRC width from polynomial value."""
-        width = 0
-        temp = polynomial
-        while temp > 0:
-            width += 1
-            temp >>= 1
-        return width
+        # Fallback: use bit_length of polynomial + 1 for implicit top bit
+        return polynomial.bit_length()
     
     def _create_lookup_table(self) -> List[int]:
-        """Create lookup table for faster CRC computation."""
-        table = []
-        for i in range(256):
-            crc = i << (self.width - 8)
-            for _ in range(8):
-                if crc & (1 << (self.width - 1)):
-                    crc = (crc << 1) ^ self.polynomial
-                else:
-                    crc <<= 1
-                crc &= (1 << self.width) - 1
-            table.append(crc)
-        return table
+        # Not used in this simplified implementation
+        return []
     
     def calculate_crc_bitwise(self, data: str) -> str:
         """
@@ -91,22 +128,21 @@ class CRCDetection:
         """
         if not all(bit in '01' for bit in data):
             raise ValueError("Data must contain only binary digits (0 and 1)")
-        
-        # Initialize CRC register
-        crc = 0
-        
-        # Process each bit
-        for bit in data:
-            crc <<= 1
-            if bit == '1':
-                crc ^= 1
-            
-            # Check if MSB is set
-            if crc & (1 << self.width):
-                crc ^= self.polynomial
-        
-        # Return CRC as binary string
-        return format(crc, f'0{self.width}b')
+
+        # Polynomial long division: append width zeros to data and divide by poly_full
+        dividend = int(data, 2) << self.width
+        poly = self.poly_full
+        deg = self.width
+
+        # position of highest bit in dividend
+        top = dividend.bit_length() - 1
+        while top >= deg:
+            shift = top - deg
+            dividend ^= (poly << shift)
+            top = dividend.bit_length() - 1
+
+        remainder = dividend & ((1 << self.width) - 1)
+        return format(remainder, f'0{self.width}b')
     
     def calculate_crc_table(self, data: str) -> str:
         """
@@ -118,23 +154,8 @@ class CRCDetection:
         Returns:
             str: CRC value as binary string
         """
-        if not all(bit in '01' for bit in data):
-            raise ValueError("Data must contain only binary digits (0 and 1)")
-        
-        # Pad data to byte boundary
-        padded_data = data
-        while len(padded_data) % 8 != 0:
-            padded_data = '0' + padded_data
-        
-        # Initialize CRC register
-        crc = 0
-        
-        # Process data byte by byte
-        for i in range(0, len(padded_data), 8):
-            byte = int(padded_data[i:i+8], 2)
-            crc = ((crc << 8) ^ self.lookup_table[((crc >> (self.width - 8)) ^ byte) & 0xFF]) & ((1 << self.width) - 1)
-        
-        return format(crc, f'0{self.width}b')
+        # For simplicity ensure same result as bitwise method
+        return self.calculate_crc_bitwise(data)
     
     def calculate_crc_bytes(self, data: bytes) -> bytes:
         """
@@ -146,22 +167,20 @@ class CRCDetection:
         Returns:
             bytes: CRC value as bytes
         """
-        crc = 0
-        
-        for byte in data:
-            crc = ((crc << 8) ^ self.lookup_table[((crc >> (self.width - 8)) ^ byte) & 0xFF]) & ((1 << self.width) - 1)
-        
-        # Convert to bytes based on width
+        # Convert bytes to bitstring and calculate CRC via bitwise method
+        bitstr = ''.join(f"{b:08b}" for b in data)
+        crc_bits = self.calculate_crc_bitwise(bitstr)
+        crc_val = int(crc_bits, 2)
+
         if self.width <= 8:
-            return bytes([crc])
+            return bytes([crc_val])
         elif self.width <= 16:
-            return struct.pack('>H', crc)
+            return struct.pack('>H', crc_val)
         elif self.width <= 32:
-            return struct.pack('>I', crc)
+            return struct.pack('>I', crc_val)
         else:
-            # For wider CRCs, return as many bytes as needed
             num_bytes = (self.width + 7) // 8
-            return crc.to_bytes(num_bytes, 'big')
+            return crc_val.to_bytes(num_bytes, 'big')
     
     def add_crc(self, data: str) -> str:
         """
@@ -211,9 +230,27 @@ class CRCDetection:
         """
         is_valid, data = self.verify_crc(data_with_crc)
         expected_crc = self.calculate_crc_table(data)
-        
-        has_errors = not is_valid
-        return has_errors, data, expected_crc
+
+        if is_valid:
+            return False, data, expected_crc
+
+        # Try single-bit correction by flipping each bit in the entire message
+        n = len(data_with_crc)
+        for i in range(n):
+            flipped = list(data_with_crc)
+            flipped[i] = '1' if flipped[i] == '0' else '0'
+            candidate = ''.join(flipped)
+            try:
+                valid, cand_data = self.verify_crc(candidate)
+            except ValueError:
+                continue
+            if valid:
+                # Found a single-bit correction
+                expected = self.calculate_crc_table(cand_data)
+                return True, cand_data, expected
+
+        # Unable to correct; return detected status and extracted (uncorrected) data
+        return True, data, expected_crc
 
 
 class CRCErrorSimulator:
@@ -328,177 +365,6 @@ def demonstrate_crc_methods():
         
         # Verify CRC
         is_valid, original = crc_detector.verify_crc(data_with_crc)
-        print(f"CRC verification: {'Valid' if is_valid else 'Invalid'}")
-        print(f"Original data: {original}")
+    print(f"CRC verification: {'Valid' if is_valid else 'Invalid'}")
+    print(f"Original data: {original}")
 
-
-def demonstrate_error_detection():
-    """Demonstrate CRC error detection capabilities."""
-    print("\n" + "=" * 60)
-    print("CRC ERROR DETECTION DEMONSTRATION")
-    print("=" * 60)
-    
-    # Test data
-    test_data = "1011010110101101"
-    print(f"Original data: {test_data}")
-    
-    # Use CRC-16 for demonstration
-    crc_detector = CRCDetection('CRC-16')
-    data_with_crc = crc_detector.add_crc(test_data)
-    print(f"Data with CRC-16: {data_with_crc}")
-    
-    # Test different types of errors
-    error_simulator = CRCErrorSimulator()
-    
-    # Single bit error
-    print("\n--- Single Bit Error ---")
-    error_data = error_simulator.introduce_single_bit_error(data_with_crc, 5)
-    print(f"Data with error: {error_data}")
-    
-    has_errors, original, expected_crc = crc_detector.detect_errors(error_data)
-    print(f"Error detected: {'Yes' if has_errors else 'No'}")
-    if has_errors:
-        print(f"Expected CRC: {expected_crc}")
-        print(f"Received CRC: {error_data[-crc_detector.width:]}")
-    
-    # Burst error
-    print("\n--- Burst Error (3 bits) ---")
-    burst_error_data = error_simulator.introduce_burst_error(data_with_crc, 8, 3)
-    print(f"Data with burst error: {burst_error_data}")
-    
-    has_errors, original, expected_crc = crc_detector.detect_errors(burst_error_data)
-    print(f"Error detected: {'Yes' if has_errors else 'No'}")
-    
-    # Multiple random errors
-    print("\n--- Multiple Random Errors (2 bits) ---")
-    random_error_data = error_simulator.introduce_random_errors(data_with_crc, 2)
-    print(f"Data with random errors: {random_error_data}")
-    
-    has_errors, original, expected_crc = crc_detector.detect_errors(random_error_data)
-    print(f"Error detected: {'Yes' if has_errors else 'No'}")
-
-
-def demonstrate_byte_level_crc():
-    """Demonstrate CRC calculation for byte data."""
-    print("\n" + "=" * 60)
-    print("BYTE-LEVEL CRC DEMONSTRATION")
-    print("=" * 60)
-    
-    # Test with ASCII string
-    test_string = "Hello, World!"
-    test_bytes = test_string.encode('ascii')
-    print(f"Test string: {test_string}")
-    print(f"ASCII bytes: {test_bytes.hex()}")
-    
-    # Calculate CRC for different polynomials
-    for crc_type in ['CRC-8', 'CRC-16', 'CRC-32']:
-        crc_detector = CRCDetection(crc_type)
-        crc_bytes = crc_detector.calculate_crc_bytes(test_bytes)
-        print(f"{crc_type} checksum: {crc_bytes.hex()}")
-
-
-def main():
-    """Main function to demonstrate CRC error detection methods."""
-    print("CRC ERROR DETECTION METHODS IMPLEMENTATION")
-    print("==========================================")
-    
-    # Demonstrate CRC methods
-    demonstrate_crc_methods()
-    
-    # Demonstrate error detection
-    demonstrate_error_detection()
-    
-    # Demonstrate byte-level CRC
-    demonstrate_byte_level_crc()
-    
-    print("\n" + "=" * 60)
-    print("INTERACTIVE TESTING")
-    print("=" * 60)
-    
-    # Interactive testing
-    while True:
-        print("\nChoose an option:")
-        print("1. Test CRC calculation")
-        print("2. Test error detection")
-        print("3. Test byte-level CRC")
-        print("4. Compare CRC polynomials")
-        print("5. Exit")
-        
-        choice = input("Enter your choice (1-5): ").strip()
-        
-        if choice == '1':
-            data = input("Enter binary data: ").strip()
-            crc_type = input("Enter CRC type (CRC-8, CRC-16, CRC-32, CRC-CCITT): ").strip()
-            
-            try:
-                crc_detector = CRCDetection(crc_type)
-                crc = crc_detector.calculate_crc_table(data)
-                data_with_crc = crc_detector.add_crc(data)
-                
-                print(f"CRC ({crc_type}): {crc}")
-                print(f"Data with CRC: {data_with_crc}")
-            except ValueError as e:
-                print(f"Error: {e}")
-        
-        elif choice == '2':
-            data = input("Enter binary data: ").strip()
-            crc_type = input("Enter CRC type: ").strip()
-            
-            try:
-                crc_detector = CRCDetection(crc_type)
-                data_with_crc = crc_detector.add_crc(data)
-                
-                # Introduce error
-                error_pos = int(input("Enter position to introduce error (0-based): "))
-                error_data = CRCErrorSimulator.introduce_single_bit_error(data_with_crc, error_pos)
-                
-                print(f"Original data with CRC: {data_with_crc}")
-                print(f"Data with error: {error_data}")
-                
-                has_errors, original, expected_crc = crc_detector.detect_errors(error_data)
-                print(f"Error detected: {'Yes' if has_errors else 'No'}")
-                if has_errors:
-                    print(f"Expected CRC: {expected_crc}")
-                    print(f"Received CRC: {error_data[-crc_detector.width:]}")
-            except ValueError as e:
-                print(f"Error: {e}")
-        
-        elif choice == '3':
-            text = input("Enter text string: ").strip()
-            crc_type = input("Enter CRC type: ").strip()
-            
-            try:
-                crc_detector = CRCDetection(crc_type)
-                text_bytes = text.encode('ascii')
-                crc_bytes = crc_detector.calculate_crc_bytes(text_bytes)
-                
-                print(f"Text: {text}")
-                print(f"ASCII bytes: {text_bytes.hex()}")
-                print(f"{crc_type} checksum: {crc_bytes.hex()}")
-            except ValueError as e:
-                print(f"Error: {e}")
-        
-        elif choice == '4':
-            data = input("Enter binary data: ").strip()
-            
-            print(f"\nCRC comparison for data: {data}")
-            print("-" * 50)
-            
-            for crc_type in ['CRC-8', 'CRC-16', 'CRC-32', 'CRC-CCITT']:
-                try:
-                    crc_detector = CRCDetection(crc_type)
-                    crc = crc_detector.calculate_crc_table(data)
-                    print(f"{crc_type:10}: {crc}")
-                except ValueError as e:
-                    print(f"{crc_type:10}: Error - {e}")
-        
-        elif choice == '5':
-            print("Exiting...")
-            break
-        
-        else:
-            print("Invalid choice. Please try again.")
-
-
-if __name__ == "__main__":
-    main()
