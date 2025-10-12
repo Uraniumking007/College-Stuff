@@ -29,9 +29,9 @@ fi
 echo "Upgrading pip..."
 pip install --upgrade pip
 
-# Install dependencies
-echo "Installing dependencies..."
-pip install -r requirements.txt
+# Install dependencies from global requirements
+echo "Installing dependencies from global requirements..."
+pip install -r ../requirements.txt
 
 echo ""
 echo "Setup complete!"
