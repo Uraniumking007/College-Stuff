@@ -1,27 +1,29 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
-int linear_search(const int *array, int length, int key, int *out_comparisons)
+#define MAX_SIZE 10000
+
+typedef struct
 {
-    int comparisons = 0;
+    int index;
+    int comparisons;
+} LinearSearchResult;
+
+LinearSearchResult linear_search(const int array[], int length, int key)
+{
+    LinearSearchResult result = {.index = -1, .comparisons = 0};
+
     for (int i = 0; i < length; i++)
     {
-        comparisons++;
+        result.comparisons++;
         if (array[i] == key)
         {
-            if (out_comparisons)
-            {
-                *out_comparisons = comparisons;
-            }
-            return i;
+            result.index = i;
+            break;
         }
     }
-    if (out_comparisons)
-    {
-        *out_comparisons = comparisons;
-    }
-    return -1;
+
+    return result;
 }
 
 int main()
@@ -34,12 +36,13 @@ int main()
         return 1;
     }
 
-    int *array = (int *)malloc(sizeof(int) * (size_t)n);
-    if (!array)
+    if (n > MAX_SIZE)
     {
-        printf("Memory allocation failed.\n");
+        printf("Array size exceeds maximum supported (%d).\n", MAX_SIZE);
         return 1;
     }
+
+    int array[MAX_SIZE];
 
     printf("Enter %d elements:\n", n);
     for (int i = 0; i < n; i++)
@@ -47,7 +50,6 @@ int main()
         if (scanf("%d", &array[i]) != 1)
         {
             printf("Invalid input.\n");
-            free(array);
             return 1;
         }
     }
@@ -57,30 +59,26 @@ int main()
     if (scanf("%d", &key) != 1)
     {
         printf("Invalid key.\n");
-        free(array);
         return 1;
     }
 
-    int comparisons = 0;
     clock_t start_time = clock();
-    int index = linear_search(array, n, key, &comparisons);
+    LinearSearchResult search_result = linear_search(array, n, key);
     clock_t end_time = clock();
 
     double elapsed_seconds = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-    if (index >= 0)
+    if (search_result.index >= 0)
     {
-        printf("Key found at index %d.\n", index);
+        printf("Key found at index %d.\n", search_result.index);
     }
     else
     {
         printf("Key not found.\n");
     }
 
-    printf("Comparisons: %d\n", comparisons);
+    printf("Comparisons: %d\n", search_result.comparisons);
     printf("Time taken: %.9f seconds\n", elapsed_seconds);
-
-    free(array);
     return 0;
 }
 
