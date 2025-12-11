@@ -134,7 +134,11 @@
         </form>
 
         <?php
+<<<<<<< HEAD
         // PHP Functions for string conversion
+=======
+        
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         function toUpperCase($string) {
             return strtoupper($string);
         }
@@ -145,7 +149,11 @@
 
 
 
+<<<<<<< HEAD
         // Handle form submission
+=======
+        
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             $action = $_POST['action'];
             $inputText = $_POST['inputText'] ?? '';
@@ -183,7 +191,11 @@
     </div>
 
     <script>
+<<<<<<< HEAD
         // Clear button functionality
+=======
+        
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         document.querySelector('button[value="clear"]').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('inputText').value = '';

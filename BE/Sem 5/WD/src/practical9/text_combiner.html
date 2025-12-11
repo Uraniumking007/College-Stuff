@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Combiner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: Arial, sans-serif;
+        }
+        .button-group {
+            text-align: center;
+            margin: 30px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .clear-btn {
+            background-color: #f44336;
+        }
+        .clear-btn:hover {
+            background-color: #d32f2f;
+        }
+        .result {
+            background-color: #e8f5e8;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 100px;
+        }
+        .result h3 {
+            color: #2e7d32;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .result-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            word-wrap: break-word;
+        }
+        .options {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .options h4 {
+            margin-top: 0;
+            color: #555;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            color: #666;
+        }
+        .separator-input {
+            width: 50px !important;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Text Combiner</h2>
+        
+        
+        <div class="input-group">
+            <label for="textBox1">First Text Box:</label>
+            <input type="text" id="textBox1" placeholder="Enter your first text here...">
+        </div>
+        
+        <div class="input-group">
+            <label for="textBox2">Second Text Box:</label>
+            <input type="text" id="textBox2" placeholder="Enter your second text here...">
+        </div>
+        
+        <div class="options">
+            <h4>Combination Options:</h4>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="addSpace" checked>
+                    <label for="addSpace">Add space between texts</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="addNewLine">
+                    <label for="addNewLine">Add new line between texts</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="addComma">
+                    <label for="addComma">Add comma between texts</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="addCustom">
+                    <label for="addCustom">Add custom separator:</label>
+                    <input type="text" id="customSeparator" class="separator-input" placeholder=" - ">
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button onclick="combineText()">Combine Text</button>
+            <button class="clear-btn" onclick="clearAll()">Clear All</button>
+        </div>
+        
+        
+        <div class="result" id="result" style="display: none;">
+            <h3>Combined Result:</h3>
+            <div class="result-text" id="resultText"></div>
+        </div>
+    </div>
+
+    <script>
+        function combineText() {
+            const textBox1 = document.getElementById('textBox1');
+            const textBox2 = document.getElementById('textBox2');
+            const resultDiv = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+            
+            const text1 = textBox1.value.trim();
+            const text2 = textBox2.value.trim();
+            
+            
+            if (!text1 && !text2) {
+                alert('Please enter text in at least one text box!');
+                return;
+            }
+            
+            
+            if (!text1) {
+                resultText.textContent = text2;
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            if (!text2) {
+                resultText.textContent = text1;
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            
+            let separator = '';
+            
+            if (document.getElementById('addNewLine').checked) {
+                separator = '\n';
+            } else if (document.getElementById('addComma').checked) {
+                separator = ', ';
+            } else if (document.getElementById('addCustom').checked) {
+                separator = document.getElementById('customSeparator').value || ' - ';
+            } else if (document.getElementById('addSpace').checked) {
+                separator = ' ';
+            }
+            
+            
+            const combinedText = text1 + separator + text2;
+            
+            
+            resultText.textContent = combinedText;
+            resultDiv.style.display = 'block';
+            
+            
+            console.log('Text combination result:');
+            console.log('Text 1:', text1);
+            console.log('Text 2:', text2);
+            console.log('Separator:', separator);
+            console.log('Combined:', combinedText);
+        }
+                
+        function clearAll() {
+            document.getElementById('textBox1').value = '';
+            document.getElementById('textBox2').value = '';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('customSeparator').value = '';
+            
+            
+            document.getElementById('addSpace').checked = true;
+            document.getElementById('addNewLine').checked = false;
+            document.getElementById('addComma').checked = false;
+            document.getElementById('addCustom').checked = false;
+        }
+        
+        
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                combineText();
+            }
+        });
+        
+        
+        document.getElementById('textBox1').addEventListener('input', function() {
+            updateCharacterCount('textBox1', 'text1Count');
+        });
+        
+        document.getElementById('textBox2').addEventListener('input', function() {
+            updateCharacterCount('textBox2', 'text2Count');
+        });
+        
+        function updateCharacterCount(textBoxId, countElementId) {
+            const textBox = document.getElementById(textBoxId);
+            const count = textBox.value.length;
+            
+            
+            const label = textBox.previousElementSibling;
+            if (label && label.tagName === 'LABEL') {
+                const baseText = label.textContent.split(' (')[0];
+                label.textContent = `${baseText} (${count} characters)`;
+            }
+        }
+        
+        
+        window.onload = function() {
+            updateCharacterCount('textBox1', 'text1Count');
+            updateCharacterCount('textBox2', 'text2Count');
+            
+            console.log('Text Combiner loaded!');
+            console.log('Enter text in both boxes and click "Combine Text" to see the result.');
+        };
+        
+        
+        document.getElementById('addSpace').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('addNewLine').checked = false;
+                document.getElementById('addComma').checked = false;
+                document.getElementById('addCustom').checked = false;
+            }
+        });
+        
+        document.getElementById('addNewLine').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('addSpace').checked = false;
+                document.getElementById('addComma').checked = false;
+                document.getElementById('addCustom').checked = false;
+            }
+        });
+        
+        document.getElementById('addComma').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('addSpace').checked = false;
+                document.getElementById('addNewLine').checked = false;
+                document.getElementById('addCustom').checked = false;
+            }
+        });
+        
+        document.getElementById('addCustom').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('addSpace').checked = false;
+                document.getElementById('addNewLine').checked = false;
+                document.getElementById('addComma').checked = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="external_css.css" />
+    <style>
+      .container {
+        display: flex;
+        width: 80%;
+        height: 80%;
+        background-color: lightblue;
+        justify-content: center;
+        border-radius: 2rem;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.42);
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;   
+        color: black;
+        text-decoration-color: black;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2 class="pill">This is External Sheet</h2>
+        <p class="pill">This is Externally Styled P Tag.</p>
+        <hr />
+        <p
+        class="pill"
+          style="
+            color: #d32f2f;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+          "
+        >
+          This is a paragraph with inline CSS.
+        </p>
+        <a href="/index.php" class="pill">Link to Home</a>
+      </div>
+    </div>
+  </body>
+</html>

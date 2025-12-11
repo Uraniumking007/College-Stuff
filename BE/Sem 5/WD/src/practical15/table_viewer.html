@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Table Viewer - Practical 15</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        select, input {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .table-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .table-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .table-info h3 {
+            color: #1976d2;
+            margin: 0;
+        }
+
+        .table-info .record-count {
+            color: #666;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+
+        th.sortable::after {
+            content: ' ↕';
+            opacity: 0.5;
+        }
+
+        th.sort-asc::after {
+            content: ' ↑';
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ↓';
+            opacity: 1;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        tr:nth-child(even):hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            margin: 0 20px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .search-highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .control-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-group {
+                width: 100%;
+            }
+            
+            .table-container {
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AJAX Table Viewer</h1>
+            <p>Retrieve and display database table content using AJAX</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-row">
+                <div class="control-group">
+                    <label for="tableSelect">Select Table:</label>
+                    <select id="tableSelect">
+                        <option value="">Choose a table...</option>
+                        <option value="users">Users</option>
+                        <option value="products">Products</option>
+                        <option value="orders">Orders</option>
+                        <option value="departments">Departments</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="searchInput">Search:</label>
+                    <input type="text" id="searchInput" placeholder="Search in all columns...">
+                </div>
+
+                <div class="control-group">
+                    <label for="limitSelect">Records per page:</label>
+                    <select id="limitSelect">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn" id="loadBtn">Load Data</button>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn" id="refreshBtn">Refresh</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div id="tableInfo" class="table-info" style="display: none;">
+                <h3 id="tableName"></h3>
+                <div class="record-count" id="recordCount"></div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading table data...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div id="tableWrapper" style="display: none;">
+                <table id="dataTable">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="noData" class="no-data" style="display: none;">
+                <p>No data found. Please try a different search or select another table.</p>
+            </div>
+
+            <div id="pagination" class="pagination" style="display: none;">
+                <button id="firstBtn">First</button>
+                <button id="prevBtn">Previous</button>
+                <div class="page-info" id="pageInfo"></div>
+                <button id="nextBtn">Next</button>
+                <button id="lastBtn">Last</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let currentTable = '';
+            let currentPage = 1;
+            let currentLimit = 10;
+            let currentSearch = '';
+            let currentSort = '';
+            let currentOrder = 'ASC';
+            let totalPages = 1;
+
+            function loadTableData() {
+                if (!currentTable) {
+                    showError('Please select a table first.');
+                    return;
+                }
+
+                showLoading(true);
+                hideMessages();
+
+                const params = {
+                    table: currentTable,
+                    page: currentPage,
+                    limit: currentLimit,
+                    search: currentSearch,
+                    sort: currentSort,
+                    order: currentOrder
+                };
+
+                $.ajax({
+                    url: 'fetch_table_data.php',
+                    type: 'GET',
+                    data: params,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(response) {
+                        showLoading(false);
+                        if (response.success) {
+                            displayTableData(response);
+                        } else {
+                            showError('Error: ' + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        showLoading(false);
+                        let errorMessage = 'Failed to load data. ';
+                        
+                        if (status === 'timeout') {
+                            errorMessage += 'Request timed out.';
+                        } else if (xhr.status === 404) {
+                            errorMessage += 'Server not found.';
+                        } else if (xhr.status === 500) {
+                            errorMessage += 'Server error.';
+                        } else {
+                            errorMessage += 'Please try again.';
+                        }
+                        
+                        showError(errorMessage);
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+            function displayTableData(response) {
+                const data = response.data;
+                const tableInfo = response.table_info;
+                const pagination = response.pagination;
+
+                $('#tableName').text(currentTable.charAt(0).toUpperCase() + currentTable.slice(1) + ' Table');
+                $('#recordCount').text(`${response.total_records} records found`);
+                $('#tableInfo').show();
+
+                if (data.length === 0) {
+                    $('#tableWrapper').hide();
+                    $('#pagination').hide();
+                    $('#noData').show();
+                    return;
+                }
+
+                let headerHtml = '<tr>';
+                tableInfo.forEach(function(column) {
+                    const sortClass = currentSort === column.name ? 
+                        (currentOrder === 'ASC' ? 'sort-asc' : 'sort-desc') : 'sortable';
+                    headerHtml += `<th class="${sortClass}" data-column="${column.name}">${column.name}</th>`;
+                });
+                headerHtml += '</tr>';
+                $('#tableHead').html(headerHtml);
+
+                let bodyHtml = '';
+                data.forEach(function(row) {
+                    bodyHtml += '<tr>';
+                    tableInfo.forEach(function(column) {
+                        let value = row[column.name] || '';
+                        if (currentSearch && value.toString().toLowerCase().includes(currentSearch.toLowerCase())) {
+                            value = highlightSearch(value, currentSearch);
+                        }
+                        bodyHtml += `<td>${value}</td>`;
+                    });
+                    bodyHtml += '</tr>';
+                });
+                $('#tableBody').html(bodyHtml);
+
+                updatePagination(pagination);
+
+                $('#tableWrapper').show();
+                $('#pagination').show();
+                $('#noData').hide();
+            }
+
+            function highlightSearch(text, search) {
+                const regex = new RegExp(`(${search})`, 'gi');
+                return text.toString().replace(regex, '<span class="search-highlight">$1</span>');
+            }
+
+            function updatePagination(pagination) {
+                totalPages = pagination.total_pages;
+                
+                $('#firstBtn').prop('disabled', !pagination.has_prev);
+                $('#prevBtn').prop('disabled', !pagination.has_prev);
+                $('#nextBtn').prop('disabled', !pagination.has_next);
+                $('#lastBtn').prop('disabled', !pagination.has_next);
+                
+                $('#pageInfo').text(`Page ${pagination.current_page} of ${pagination.total_pages}`);
+            }
+
+            function showLoading(show) {
+                if (show) {
+                    $('#loading').show();
+                    $('#loadBtn').prop('disabled', true);
+                } else {
+                    $('#loading').hide();
+                    $('#loadBtn').prop('disabled', false);
+                }
+            }
+
+            function showError(message) {
+                $('#error').text(message).show();
+            }
+
+            function hideMessages() {
+                $('#error').hide();
+                $('#noData').hide();
+            }
+
+            $('#tableSelect').on('change', function() {
+                currentTable = $(this).val();
+                currentPage = 1;
+                if (currentTable) {
+                    loadTableData();
+                } else {
+                    $('#tableWrapper').hide();
+                    $('#tableInfo').hide();
+                    $('#pagination').hide();
+                    hideMessages();
+                }
+            });
+
+            $('#loadBtn').on('click', function() {
+                currentTable = $('#tableSelect').val();
+                currentPage = 1;
+                loadTableData();
+            });
+
+            $('#refreshBtn').on('click', function() {
+                if (currentTable) {
+                    loadTableData();
+                }
+            });
+
+            $('#searchInput').on('input', function() {
+                currentSearch = $(this).val();
+                currentPage = 1;
+                if (currentTable) {
+                    clearTimeout(this.searchTimeout);
+                    this.searchTimeout = setTimeout(function() {
+                        loadTableData();
+                    }, 500);
+                }
+            });
+
+            $('#limitSelect').on('change', function() {
+                currentLimit = parseInt($(this).val());
+                currentPage = 1;
+                if (currentTable) {
+                    loadTableData();
+                }
+            });
+
+            $('#firstBtn').on('click', function() {
+                if (currentPage > 1) {
+                    currentPage = 1;
+                    loadTableData();
+                }
+            });
+
+            $('#prevBtn').on('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadTableData();
+                }
+            });
+
+            $('#nextBtn').on('click', function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadTableData();
+                }
+            });
+
+            $('#lastBtn').on('click', function() {
+                if (currentPage < totalPages) {
+                    currentPage = totalPages;
+                    loadTableData();
+                }
+            });
+
+            $(document).on('click', 'th.sortable, th.sort-asc, th.sort-desc', function() {
+                const column = $(this).data('column');
+                
+                if (currentSort === column) {
+                    currentOrder = currentOrder === 'ASC' ? 'DESC' : 'ASC';
+                } else {
+                    currentSort = column;
+                    currentOrder = 'ASC';
+                }
+                
+                currentPage = 1;
+                loadTableData();
+            });
+
+            $(document).on('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'r':
+                            e.preventDefault();
+                            $('#refreshBtn').click();
+                            break;
+                        case 'f':
+                            e.preventDefault();
+                            $('#searchInput').focus();
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

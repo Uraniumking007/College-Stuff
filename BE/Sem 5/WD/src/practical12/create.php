@@ -20,7 +20,11 @@ $stmt = $pdo->prepare('INSERT INTO pr12_users (name, email) VALUES (?, ?)');
 try {
     $stmt->execute([$name, $email]);
 } catch (PDOException $e) {
+<<<<<<< HEAD
     // On duplicate email, just redirect back for simplicity
+=======
+    
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
     header('Location: /practical12/register.php');
     exit;
 }

@@ -1,2 +1,6 @@
 db/
 README.Docker.md
+<<<<<<< HEAD
+=======
+.env*
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a

@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Development Practicals</title>
     <style>
+<<<<<<< HEAD
         body { 
             font-family: Arial, sans-serif; 
             margin: 2rem; 
             background-color: #f5f5f5;
         }
+=======
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f5f5f5;
+        }
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background-color: white;
             padding: 2rem;
             border-radius: 10px;
+<<<<<<< HEAD
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
+=======
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         h1 {
             color: #2c3e50;
             text-align: center;
@@ -25,6 +44,10 @@
             border-bottom: 3px solid #3498db;
             padding-bottom: 1rem;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .practical-section {
             margin-bottom: 2rem;
             padding: 1.5rem;
@@ -32,18 +55,30 @@
             border-radius: 8px;
             background-color: #fafafa;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .practical-section h2 {
             color: #34495e;
             margin-top: 0;
             border-left: 4px solid #3498db;
             padding-left: 1rem;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .practical-links {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin-top: 1rem;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .practical-links a {
             display: inline-block;
             padding: 0.75rem 1.5rem;
@@ -54,10 +89,18 @@
             transition: background-color 0.3s, transform 0.2s;
             font-weight: 500;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .practical-links a:hover {
             background-color: #2980b9;
             transform: translateY(-2px);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         .description {
             color: #666;
             margin-bottom: 1rem;
@@ -65,10 +108,18 @@
         }
     </style>
 </head>
+<<<<<<< HEAD
 <body>
     <div class="container">
         <h1>Web Development Practicals</h1>
         
+=======
+
+<body>
+    <div class="container">
+        <h1>Web Development Practicals</h1>
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         <div class="practical-section">
             <h2>Practical 2: Timetable</h2>
             <div class="description">HTML table creation with timetable layout</div>
@@ -112,12 +163,52 @@
                 <a href="/practical6/floatingframes.html">Floating Frames</a>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+        <div class="practical-section">
+            <h2>Practical 7: Internal and External Stylesheets</h2>
+            <div class="description">Demonstration of internal and external CSS stylesheets</div>
+            <div class="practical-links">
+                <a href="/practical7/4Style_sheet.html">4Styles Sheet</a>
+            </div>
+        </div>
+        
+        <div class="practical-section">
+            <h2>Practical 8: JavaScript Programming</h2>
+            <div class="description">JavaScript exercises including calculator, date display, factorial, and key press detection</div>
+            <div class="practical-links">
+                <a href="/practical8/calculator.html">Simple Calculator</a>
+                <a href="/practical8/date_display.html">Date Display</a>
+                <a href="/practical8/factorial.html">Factorial Calculator</a>
+                <a href="/practical8/key_display.html">Key Press Display</a>
+            </div>
+        </div>
+
+        <div class="practical-section">
+            <h2>Practical 9: Text Combiner</h2>
+            <div class="description">JavaScript code to combine and display text from two different text boxes</div>
+            <div class="practical-links">
+                <a href="/practical9/text_combiner.html">Text Combiner</a>
+            </div>
+        </div>
+
+        <div class="practical-section">
+            <h2>Practical 10: Registration Form Validation</h2>
+            <div class="description">Apply validation using JavaScript in registration page</div>
+            <div class="practical-links">
+                <a href="/practical10/registration_validation.html">Registration Form with Validation</a>
+            </div>
+        </div>
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
 
         <div class="practical-section">
             <h2>Practical 11: PHP Programming Scripts</h2>
             <div class="description">PHP scripts for various programming concepts and algorithms</div>
             <div class="practical-links">
+<<<<<<< HEAD
                 <a href="/practical11/index.php">Main Index</a>
+=======
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
                 <a href="/practical11/odd_even.php">Odd/Even Checker</a>
                 <a href="/practical11/fibonacci.php">Fibonacci Series</a>
                 <a href="/practical11/prime_numbers.php">Prime Numbers</a>
@@ -137,6 +228,41 @@
                 <a href="/practical12/delete.php">Delete User</a>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
 </body>
+=======
+
+        <div class="practical-section">
+            <h2>Practical 13: Complete Registration & Authentication System</h2>
+            <div class="description">Registration page with MySQL storage, CRUD operations, and user authentication using sessions and cookies</div>
+            <div class="practical-links">
+                <a href="/practical13/register.php">Registration Form</a>
+                <a href="/practical13/users.php">View All Users</a>
+                <a href="/practical13/login.php">Login</a>
+                <a href="/practical13/dashboard.php">Dashboard</a>
+            </div>
+        </div>
+
+        <div class="practical-section">
+            <h2>Practical 14: jQuery AJAX with HTTP POST</h2>
+            <div class="description">Feedback form with jQuery AJAX implementation for asynchronous form submission using HTTP POST method</div>
+            <div class="practical-links">
+                <a href="/practical14/feedback_form.html">Feedback Form</a>
+                <a href="/practical14/demo.html">Demo & Documentation</a>
+            </div>
+        </div>
+
+        <div class="practical-section">
+            <h2>Practical 15: AJAX Database Table Viewer</h2>
+            <div class="description">Script to retrieve particular table content from database using AJAX with search, pagination, and sorting features</div>
+            <div class="practical-links">
+                <a href="/practical15/table_viewer.html">Table Viewer</a>
+                <a href="/practical15/database_setup.php">Setup Database</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
 </html>

@@ -17,7 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stmt->execute([$name, $email, $id]);
         } catch (PDOException $e) {
+<<<<<<< HEAD
             // ignore errors for simplicity
+=======
+            
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         }
         header('Location: /practical12/list.php');
         exit;

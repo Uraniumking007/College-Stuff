@@ -118,7 +118,11 @@
         <div class="examples">
             <h3>📚 Examples:</h3>
             <?php
+<<<<<<< HEAD
             // Direct PHP examples
+=======
+            
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
             $testNumbers = [2, 7, 10, 15, 22, 33, 100, 101];
             
             foreach ($testNumbers as $num) {

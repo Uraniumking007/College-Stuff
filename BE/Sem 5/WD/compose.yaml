@@ -14,6 +14,10 @@ services:
       - DB_USER=root
     volumes:
       - ./src:/var/www/html
+<<<<<<< HEAD
+=======
+      - ./src:/var/www/html:ro
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
   db:
     image: mariadb
     restart: always

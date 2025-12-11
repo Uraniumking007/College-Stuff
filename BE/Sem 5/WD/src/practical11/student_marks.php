@@ -142,7 +142,10 @@
 
 
 
+<<<<<<< HEAD
         <!-- Custom Student Input Form -->
+=======
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
         <div class="form-container">
             <h3>📝 Enter Your Own Student Data</h3>
             <form method="POST">
@@ -182,7 +185,11 @@
                     echo "<div class='result'>";
                     echo "<h3>Your Student Data Results:</h3>";
                     
+<<<<<<< HEAD
                     // Display custom student table
+=======
+                    
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
                     echo "<table class='student-table'>";
                     echo "<tr><th>Student Name</th><th>Marks</th></tr>";
                     
@@ -195,7 +202,11 @@
                     }
                     echo "</table>";
                     
+<<<<<<< HEAD
                     // Display winner
+=======
+                    
+>>>>>>> f7ea692be64aab11baa01cb5e55267ad5982c00a
                     echo "<div class='winner'>";
                     echo "🏆 <strong>" . htmlspecialchars($topStudent) . "</strong> has the highest marks: <strong>$highestMarks</strong> 🏆";
                     echo "</div>";

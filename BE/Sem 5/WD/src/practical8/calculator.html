@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      .calculator {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .input-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      input[type="number"]:focus {
+        outline: none;
+        border-color: #4caf50;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .add {
+        background-color: #4caf50;
+        color: white;
+      }
+      .subtract {
+        background-color: #f44336;
+        color: white;
+      }
+      .multiply {
+        background-color: #2196f3;
+        color: white;
+      }
+      .divide {
+        background-color: #ff9800;
+        color: white;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .result {
+        background-color: #e8f5e8;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #2e7d32;
+        border: 2px solid #4caf50;
+      }
+      .clear {
+        width: 100%;
+        background-color: #9e9e9e;
+        color: white;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h2>Simple Calculator</h2>
+
+      <div class="input-group">
+        <label for="num1">First Number:</label>
+        <input type="number" id="num1" placeholder="Enter first number" />
+      </div>
+
+      <div class="input-group">
+        <label for="num2">Second Number:</label>
+        <input type="number" id="num2" placeholder="Enter second number" />
+      </div>
+
+      <div class="buttons">
+        <button class="add" onclick="calculate('add')">+ Add</button>
+        <button class="subtract" onclick="calculate('subtract')">
+          - Subtract
+        </button>
+        <button class="multiply" onclick="calculate('multiply')">
+          × Multiply
+        </button>
+        <button class="divide" onclick="calculate('divide')">÷ Divide</button>
+      </div>
+
+      <button class="clear" onclick="clearInputs()">Clear</button>
+
+      <div id="result" class="result" style="display: none">
+        Result: <span id="resultValue"></span>
+      </div>
+    </div>
+
+    <script>
+      function calculate(operation) {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+        const resultDiv = document.getElementById("result");
+        const resultValue = document.getElementById("resultValue");
+
+        if (isNaN(num1) || isNaN(num2)) {
+          alert("Please enter valid numbers in both fields!");
+          return;
+        }
+
+        let result;
+        let operationSymbol;
+
+        switch (operation) {
+          case "add":
+            result = num1 + num2;
+            operationSymbol = "+";
+            break;
+          case "subtract":
+            result = num1 - num2;
+            operationSymbol = "-";
+            break;
+          case "multiply":
+            result = num1 * num2;
+            operationSymbol = "×";
+            break;
+          case "divide":
+            if (num2 === 0) {
+              alert("Cannot divide by zero!");
+              return;
+            }
+            result = num1 / num2;
+            operationSymbol = "÷";
+            break;
+          default:
+            alert("Invalid operation!");
+            return;
+        }
+
+        resultValue.textContent = `${num1} ${operationSymbol} ${num2} = ${result}`;
+        resultDiv.style.display = "block";
+      }
+
+      function clearInputs() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").style.display = "none";
+      }
+
+      document.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          const num1 = document.getElementById("num1").value;
+          const num2 = document.getElementById("num2").value;
+          if (num1 && num2) {
+            calculate("add");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
