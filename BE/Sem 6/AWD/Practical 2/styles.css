@@ -11,3 +11,7 @@ body {
 .p-8 {
   padding: 2rem;
 }
+
+li{
+  list-style-type: symbols();
+}
