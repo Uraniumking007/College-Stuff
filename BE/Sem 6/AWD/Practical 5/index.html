@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validation Form</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <script src="./validate.js" defer></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Validation Form</h1>
+      <form id="validationForm" novalidate>
+        <label for="name">Name:</label><br />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          minlength="3"
+          maxlength="15"
+        /><br />
+        <span id="nameError"></span><br /><br />
+
+        <label for="email">Email (required, valid email format):</label><br />
+        <input type="email" id="email" name="email" required /><br />
+        <span id="emailError"></span><br /><br />
+
+        <label for="phone">Phone (optional, valid phone number):</label><br />
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" /><br />
+        <span id="phoneError"></span><br /><br />
+
+        <label for="Gender">Gender:</label><br />
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label>
+        <span id="genderError"></span><br /><br />
+
+        <label for="password">Password (required, 8-20 characters):</label
+        ><br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          minlength="8"
+          maxlength="20"
+        /><br />
+        <span id="passwordError"></span><br /><br />
+
+        <label for="confirmPassword"
+          >Confirm Password (required, must match password):</label
+        ><br />
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          required
+          minlength="8"
+          maxlength="20"
+        /><br />
+        <span id="confirmPasswordError"></span><br /><br />
+
+        <label for="age"
+          >Age (optional, must be a number between 1 and 122):</label
+        ><br />
+        <input type="number" id="age" name="age" min="1" max="122" /><br />
+        <span id="ageError"></span><br /><br />
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>
