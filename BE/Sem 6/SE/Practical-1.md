@@ -12,7 +12,8 @@
 6. Agile Model
 
 ### 1. **Waterfall Model**
-Waterfall model is a SDLC model that follow linear and sequential approach. Once a phase is completed, it cannot be modified or backtracked, hence the name "Waterfall". 
+
+Waterfall model is a SDLC model that follow linear and sequential approach. Once a phase is completed, it cannot be modified or backtracked, hence the name "Waterfall".
 
 It has the following phases:
 
@@ -50,7 +51,6 @@ It has the following phases:
 
 Incremental model is a SDLC model that follow incremental approach. It is a combination of Waterfall and Spiral model. In this model phase can be repeated multiple times. It divides the project into small modules and develop them one by one. It is best suitable for projects where requirements are changing.
 
-
 It has the following phases:
 
 1. Requirement Analysis
@@ -79,13 +79,14 @@ It has the following phases:
 2. Projects where requirements are changing
 3. Project needs to be Delivered quickly.
 4. Project can have major update later.
-5. Developement Team is Small. 
+5. Developement Team is Small.
 
 ##### Diagram
 
 ![Incremental Model](https://www.guru99.com/images/6-2015/052615_1049_WhatisIncre2.png)
 
 ### 3. **Spiral Model**
+
 A Spiral model is a SDLC model that follow incremental approach. In this model phase can be repeated multiple times. It is best suitable for projects where requirements are changing.
 
 It has following phases:
