@@ -1,0 +1,145 @@
+% SE Practical LaTeX format (as per SE-FILE FORMAT.pdf)
+% - Paragraphs: 12pt, justified
+% - Subheading: 14pt
+% - Heading: 16pt
+% - Font: Times New Roman
+% - Header: Subject + Enrollment Number | Footer: page X of Y
+\documentclass[12pt,a4paper]{article}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{0.5\baselineskip}
+
+% Font: Times New Roman
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+
+% Justified paragraphs
+\usepackage{ragged2e}
+\justifying
+
+% Header and footer with enrollment number
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Keep subheadings with their content
+\newcommand{\sdlcsubsection}[1]{%
+  \needspace{7\baselineskip}%
+  \subsection*{\fontsize{14pt}{1.2}\selectfont #1}%
+  \nopagebreak
+}
+% Keep bold requirement heading and its itemize list on same page
+\newenvironment{reqblock}[1]{%
+  \needspace{12\baselineskip}%
+  \begin{samepage}%
+  \textbf{#1}%
+  \par\smallskip
+  \begin{itemize}
+}{%
+  \end{itemize}%
+  \end{samepage}%
+}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Engineering (3161605)}
+\fancyhead[R]{Enrollment Number: \enrollmentno}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ========== SET YOUR DETAILS HERE ==========
+\newcommand{\enrollmentno}{240093116002}  % Replace with your enrollment number
+\newcommand{\practicalno}{2}             % Practical number (1, 2, 3, ...)
+% ==========================================
+
+\title{\fontsize{16pt}{1.2}\selectfont Practical No.\ \practicalno}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\vspace{-5.5em}
+
+\section*{\fontsize{16pt}{1.2}\selectfont Aim: Write about functional and non-functional requirements,\\[0.5ex] identify functional and non-functional requirements for your\\[0.5ex] problem statement.}
+
+\fontsize{14pt}{1.2}\selectfont
+
+\sdlcsubsection{Functional Requirements}
+
+\fontsize{12pt}{1.2}\selectfont
+
+\begin{reqblock}{User Authentication}
+    \item User should be able to login.
+    \item User should be able to register.
+    \item User should be able to reset password.
+    \item User should be able to recover their account.
+    \item User should be able to edit their profile data.
+    \item User should be able to deactivate/reactivate their account.
+    \item User should be able to delete their account.
+\end{reqblock}
+
+\begin{reqblock}{User Profiles}
+    \item User should be able to create and manage multiple user profiles.
+    \item User should be able to protect profiles with password.
+\end{reqblock}
+
+\begin{reqblock}{Movie Database}
+    \item User should be able to search for movies.
+    \item User should be able to filter movies by genre, release date, rating, etc.
+    \item User should be able to view movie details (synopsis, cast, crew, etc.).
+    \item User should be able to view movie trailers.
+    \item User should be able to view movie reviews and ratings.
+    \item User should be able to add movies to their watchlist.
+    \item User should be able to rate and review movies.
+    \item User should be able to share movies on social media.
+\end{reqblock}
+
+\begin{reqblock}{Video Streaming}
+    \item User should be able to stream movies in different resolutions (SD, HD, 4K).
+    \item User should be able to pause, play, rewind, and fast-forward movies.
+    \item User should be able to change audio and subtitle settings.
+    \item User should be able to download movies for offline viewing.
+\end{reqblock}
+
+\begin{reqblock}{Subscription-Based Payment Gateway}
+    \item User should be able to make payment using UPI.
+    \item User should be able to cancel their subscription.
+    \item User should be able to renew their subscription.
+    \item User should be able to upgrade their subscription.
+\end{reqblock}
+
+\fontsize{14pt}{1.2}\selectfont
+
+\sdlcsubsection{Non-Functional Requirements}
+\fontsize{12pt}{1.2}\selectfont
+
+\begin{reqblock}{Performance}
+    \item Application should be performant.
+    \item Load time should be minimum, not more than 10 seconds.
+\end{reqblock}
+
+\begin{reqblock}{Minimum Downtime}
+    \item Downtime of server should be minimum.
+    \item There should be a backup server to pick up traffic if the primary server goes down.
+\end{reqblock}
+
+\begin{reqblock}{Maintainability}
+    \item Server should be able to go into maintenance without compromising service.
+    \item Backup servers should handle load when the primary server is in maintenance.
+\end{reqblock}
+
+\begin{reqblock}{Data Integrity}
+    \item There should be audit logs for all changes.
+    \item There should be backup of all data.
+\end{reqblock}
+
+\end{document}
