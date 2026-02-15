@@ -18,7 +18,7 @@ The product is a web application that provides movies and TV shows to users on a
 
 ### User Classes and Characteristics
 
-- Users: The primary users of the application will be individuals who are interested in watching movies and TV shows. They will have varying levels of technical expertise and will expect a user-friendly interface that allows them to easily find and watch content.
+- Users: The primary users of the application will be individuals who are interested in watching movies and TV shows. They will expect a user-friendly interface that allows them to easily find and watch content.
 - Administrators: The administrators will be responsible for managing the movie database, handling user accounts, and ensuring the smooth operation of the application. They will have access to a backend dashboard where they can perform these tasks.
 - Content Providers: The content providers will be responsible for providing the movies and TV shows that will be available on the platform. They will have access to a content management system where they can upload and manage their content.
 - Payment Processors: The payment processors will be responsible for handling the payment transactions for the subscriptions. They will have access to a payment gateway where they can process payments and manage subscriptions.
