@@ -1,0 +1,62 @@
+% SE Practical LaTeX format (as per SE-FILE FORMAT.pdf)
+% - Paragraphs: 12pt, justified
+% - Subheading: 14pt
+% - Heading: 16pt
+% - Font: Times New Roman
+% - Header: Subject + Enrollment Number | Footer: page X of Y
+\documentclass[12pt,a4paper]{article}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\onehalfspacing
+
+% Font: Times New Roman
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+
+% Justified paragraphs
+\usepackage{ragged2e}
+\justifying
+
+% Header and footer with enrollment number
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Engineering (3161605)}
+\fancyhead[R]{Enrollment Number: \enrollmentno}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ========== SET YOUR DETAILS HERE ==========
+\newcommand{\enrollmentno}{240093116002}  % Replace with your enrollment number
+\newcommand{\practicalno}{1}             % Practical number (1, 2, 3, ...)
+% ==========================================
+
+\title{\fontsize{16pt}{1.2}\selectfont Practical No.\ \practicalno}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{\fontsize{16pt}{1.2}\selectfont Aim: }
+% Write your aim here (16pt heading as per format)
+
+\section*{\fontsize{14pt}{1.2}\selectfont Subheading}
+% Subheading at 14pt
+
+\fontsize{12pt}{1.2}\selectfont
+% Body text: 12pt, justified (default from here)
+
+Your paragraphs go here. All body text should be in 12pt, Times New Roman, justified. The header shows the subject and your enrollment number; the footer shows the page number.
+
+Add more content as required for your practical.
+
+\end{document}
