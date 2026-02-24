@@ -1,0 +1,236 @@
+% SE Practical LaTeX format (as per SE-FILE FORMAT.pdf)
+% - Paragraphs: 12pt, justified
+% - Subheading: 14pt
+% - Heading: 16pt
+% - Font: Times New Roman
+% - Header: Subject + Enrollment Number | Footer: page X of Y
+\documentclass[12pt,a4paper]{article}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{0.5\baselineskip}
+
+% Font: Times New Roman
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+
+% Justified paragraphs
+\usepackage{ragged2e}
+\justifying
+
+% Header and footer with enrollment number
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% Keep subheadings with their content
+\newcommand{\sdlcsubsection}[1]{%
+  \needspace{7\baselineskip}%
+  \subsection*{\fontsize{14pt}{1.2}\selectfont #1}%
+  \nopagebreak
+}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Engineering (3161605)}
+\fancyhead[R]{Enrollment Number: \enrollmentno}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ========== SET YOUR DETAILS HERE ==========
+\newcommand{\enrollmentno}{240093116002}  % Replace with your enrollment number
+\newcommand{\practicalno}{3}             % Practical number (1, 2, 3, ...)
+% ==========================================
+
+\title{\fontsize{16pt}{1.2}\selectfont Practical No.\ \practicalno}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\vspace{-5.5em}
+
+\section*{\fontsize{16pt}{1.2}\selectfont Aim: Requirement Analysis and Specification: Prepare the Software Requirement Specification (SRS) document for your problem statement.}
+
+\fontsize{12pt}{1.2}\selectfont
+
+\sdlcsubsection{Introduction}
+
+\textbf{Purpose.} The system shall provide movies and TV shows to users on a subscription basis. Users can search for movies and TV shows, view details, add to watchlist, rate and review movies, and share on social media. Users can stream content in different resolutions, change audio and subtitle settings, and download for offline viewing. Users can make payment using UPI and manage subscriptions (cancel, renew, upgrade).
+
+\textbf{Product Scope.} The product is a web application that provides movies and TV shows on a subscription basis, with user authentication, movie database, video streaming, and subscription-based payment (UPI). Scope includes search, filters, watchlist, streaming (SD/HD/4K), offline download, and subscription management.
+
+\sdlcsubsection{Overall Description}
+
+\textbf{Product Perspective.} The product is a web application with a user-friendly interface and a robust backend for authentication, movie database, video streaming, and payment. It will be built using modern web technologies and optimized for performance and scalability.
+
+\textbf{User Classes and Characteristics.}
+\begin{itemize}
+  \item \textbf{Users:} Individuals watching movies and TV shows; expect an easy-to-use interface.
+  \item \textbf{Administrators:} Manage movie database, user accounts, and operations via a backend dashboard.
+  \item \textbf{Content Providers:} Upload and manage content via a content management system.
+  \item \textbf{Payment Processors:} Handle subscription payments via a payment gateway.
+\end{itemize}
+
+\textbf{Operating Environment.} Web-based; accessible from modern browsers. Backend hosted on a scalable cloud platform. Mobile apps for iOS and Android.
+
+\textbf{Design and Implementation Constraints.} Frontend and backend using modern technologies (e.g.\ React, Node.js); scalable database (e.g.\ MongoDB or PostgreSQL); payment gateway with UPI support; load time not more than 10 seconds; backup server for minimum downtime; maintenance possible without service compromise.
+
+\textbf{Assumptions and Dependencies.} Users have stable internet; the system depends on third-party payment and content delivery; backup server is available for failover; content providers update the catalog regularly.
+
+\sdlcsubsection{External Interface Requirements}
+
+\textbf{User Interfaces.} Home (featured and recommendations), Search (filters by genre, date, rating), Movie Details (synopsis, cast, trailers, reviews, watchlist, share), Watchlist, Streaming (playback controls, audio/subtitles, offline download), Subscription Management, User Profile, Admin Dashboard, Content Management System.
+
+\textbf{Hardware Interfaces.} Access from desktop, laptop, tablet, and smartphone; modern browser; stable internet; optional storage for offline viewing.
+
+\textbf{Software Interfaces.} Frontend (e.g.\ React), Backend (e.g.\ Node.js), Database (e.g.\ PostgreSQL), Payment Gateway (UPI), CDN for content delivery.
+
+\textbf{Communication Interfaces.} Authentication API, Movie Database API, Payment Gateway API, Content Delivery API, Analytics API.
+
+\sdlcsubsection{System Features}
+
+\textbf{User Authentication:} Register, login, password reset, account recovery, profile edit, deactivate/reactivate, delete account.
+
+\textbf{User Profiles:} Multiple profiles per account; optional profile password.
+
+\textbf{Movie Database:} Search, filter, view details/trailers/reviews, watchlist, rate and review, share; admin manages catalog; content providers upload and manage content.
+
+\textbf{Video Streaming:} Stream in SD/HD/4K; pause, play, rewind, fast-forward; audio and subtitle settings; offline download.
+
+\textbf{Subscription and Payment:} Pay via UPI; cancel, renew, upgrade subscription.
+
+\sdlcsubsection{Non-Functional Requirements}
+
+\textbf{Performance:} Load time not more than 10 seconds.
+
+\textbf{Minimum Downtime:} Backup server to handle traffic if primary fails.
+
+\textbf{Maintainability:} Maintenance mode without service loss; backup servers handle load.
+
+\textbf{Scalability:} Horizontal scaling for users and content.
+
+\textbf{Security:} Encryption, secure authentication, secure password storage, compliance with data protection regulations.
+
+\textbf{Usability:} Intuitive, user-friendly interface with clear feedback.
+
+\textbf{Reliability:} Minimal downtime, backup and disaster recovery.
+
+\section*{\fontsize{14pt}{1.2}\selectfont Cost Estimation (COCOMO Model)}
+
+\fontsize{12pt}{1.2}\selectfont
+
+COCOMO (Constructive Cost Model) estimates effort (person-months) and development time from estimated lines of source code (LOC). It supports three modes:
+
+\begin{table}[htbp]
+  \centering
+  \caption{COCOMO modes}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{Mode} & \textbf{Project type}             & \textbf{Characteristics}                                \\
+    \midrule
+    Organic       & Small, simple, in-house           & Small team, familiar environment, flexible requirements \\
+    Semi-detached & Medium, mixed complexity          & Medium team, mixed experience, moderate innovation      \\
+    Embedded      & Large, complex, tight constraints & Rigid requirements, real-time/safety-critical           \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+This project (subscription-based streaming with auth, streaming, payment, admin, CMS) is classified as \textbf{Semi-detached}: medium size, mixed team experience, moderate innovation.
+
+\textbf{Basic COCOMO formulas:}
+
+Effort (person-months): \( E = a \times (\text{KLOC})^b \)
+
+Development time (months): \( T = c \times E^d \)
+
+\begin{table}[htbp]
+  \centering
+  \caption{Coefficients (a, b, c, d)}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Mode} & \( a \) & \( b \) & \( c \) & \( d \) \\
+    \midrule
+    Organic       & 2.4     & 1.05    & 2.5     & 0.38    \\
+    Semi-detached & 3.0     & 1.12    & 2.5     & 0.35    \\
+    Embedded      & 3.6     & 1.20    & 2.5     & 0.32    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\sdlcsubsection{Size Estimate (KLOC)}
+
+Based on the SRS scope:
+
+\begin{table}[htbp]
+  \centering
+  \caption{Estimated lines of code}
+  \begin{tabular}{@{}lrp{5.5cm}@{}}
+    \toprule
+    \textbf{Component}      & \textbf{Estimated LOC} & \textbf{Notes}                                    \\
+    \midrule
+    Frontend (React)        & 18,000                 & UI, search, watchlist, streaming player, profiles \\
+    Backend (Node.js)       & 22,000                 & Auth, APIs, streaming logic, payment integration  \\
+    Admin \& CMS            & 8,000                  & Dashboard, content management                     \\
+    Shared / config / tests & 7,000                  & Utilities, config, test code                      \\
+    \midrule
+    \textbf{Total}          & \textbf{55,000}        & \textbf{KLOC = 55}                                \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\sdlcsubsection{Effort and Schedule (Semi-detached)}
+
+KLOC = 55; \( a = 3.0 \), \( b = 1.12 \); \( c = 2.5 \), \( d = 0.35 \).
+
+\textbf{Effort:}
+\[
+  E = 3.0 \times (55)^{1.12} \approx 3.0 \times 88.25 \approx 265 \text{ person-months}
+\]
+
+\textbf{Development time:}
+\[
+  T = 2.5 \times (265)^{0.35} \approx 2.5 \times 6.93 \approx 17.3 \text{ months}
+\]
+
+\textbf{Average team size:}
+\[
+  \text{Team size} = E / T = 265 / 17.3 \approx 15 \text{ persons}
+\]
+
+\sdlcsubsection{Cost Estimation}
+
+Assuming an average cost per person-month (salary + overhead) of Rs.\ 1,00,000:
+
+\[
+  \text{Total cost} = E \times \text{Cost per person-month} = 265 \times 1{,}00{,}000 = \text{Rs.\ 2.65 crores}
+\]
+
+\begin{table}[htbp]
+  \centering
+  \caption{Cost summary}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Item}               & \textbf{Value}          \\
+    \midrule
+    Effort                      & 265 person-months       \\
+    Development time            & \(\approx\) 17.3 months \\
+    Approx.\ team size          & \(\approx\) 15 persons  \\
+    Estimated cost (Rs.\ 1L/PM) & Rs.\ 2.65 crores        \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textit{Note:} Cost per person-month should be adjusted for your organization (location, role mix, overhead).
+
+\end{document}

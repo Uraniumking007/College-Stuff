@@ -1,0 +1,249 @@
+% SE Practical LaTeX format (as per SE-FILE FORMAT.pdf)
+% - Paragraphs: 12pt, justified
+% - Subheading: 14pt
+% - Heading: 16pt
+% - Font: Times New Roman
+% - Header: Subject + Enrollment Number | Footer: page X of Y
+\documentclass[12pt,a4paper]{article}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{0.5\baselineskip}
+
+% Font: Times New Roman
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+
+% Justified paragraphs
+\usepackage{ragged2e}
+\justifying
+
+% Header and footer with enrollment number
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Keep subheadings with their content (avoid page break between heading and body)
+\newcommand{\sdlcsubsection}[1]{%
+  \needspace{7\baselineskip}%
+  \subsection*{\fontsize{14pt}{1.2}\selectfont #1}%
+  \nopagebreak
+}
+% Keep bold labels (Advantages, Disadvantages, etc.) with their following list:
+% - needspace: do not start block unless ~12 lines fit (else break page first)
+% - samepage: do not break between label and list
+\newenvironment{labeledlist}[1]{%
+  \needspace{12\baselineskip}%
+  \begin{samepage}%
+  \textbf{#1}%
+  \par\smallskip
+  \begin{enumerate}
+}{%
+  \end{enumerate}%
+  \end{samepage}%
+}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Engineering (3161605)}
+\fancyhead[R]{Enrollment Number: \enrollmentno}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ========== SET YOUR DETAILS HERE ==========
+\newcommand{\enrollmentno}{240093116002}  % Replace with your enrollment number
+\newcommand{\practicalno}{1}             % Practical number (1, 2, 3, ...)
+% ==========================================
+
+\title{\fontsize{16pt}{1.2}\selectfont Practical No.\ \practicalno}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\vspace{-5.5em}
+\section*{\fontsize{16pt}{1.2}\selectfont Aim: Write a practical to list down all SDLC Models.}
+\begin{enumerate}
+    \item Write in brief about each model (along with diagram).
+    \item Analyze in which environment, which model is most suitable.
+    \item Identify which model will be used in your project and justify the same.
+\end{enumerate}
+% Write your aim here (16pt heading as per format)
+
+\section*{\fontsize{14pt}{1.2}\selectfont Analysis of SDLC Models}
+
+\fontsize{12pt}{1.2}\selectfont
+
+The following SDLC models are covered: Waterfall, Incremental, Spiral, Prototype, Rapid Application Development (RAD), and Agile.
+
+\sdlcsubsection{1. Waterfall Model}
+
+Waterfall model is a SDLC model that follow linear and sequential approach. Once a phase is completed, it cannot be modified or backtracked, hence the name ``Waterfall''.
+
+It has the following phases:
+\begin{enumerate}
+    \item Requirement Analysis
+    \item Design
+    \item Development
+    \item Testing
+    \item Deployment
+    \item Maintenance
+\end{enumerate}
+
+\begin{labeledlist}{Advantages}
+    \item Simple and easy to understand
+    \item Clear and well-defined phases
+    \item Easy to manage
+    \item Easy to control
+\end{labeledlist}
+
+\begin{labeledlist}{Disadvantages}
+    \item Not suitable for projects where requirements are not well defined
+    \item Not suitable for projects where requirements are changing
+    \item Not suitable for projects where requirements are not stable
+\end{labeledlist}
+
+\begin{labeledlist}{Best Suitable for Projects}
+    \item Projects where requirements are well defined
+    \item Projects where requirements are stable
+    \item Projects where requirements are not changing
+\end{labeledlist}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{waterfall.png}
+    \caption{Waterfall Model}
+\end{figure}
+
+\sdlcsubsection{2. Incremental Model}
+
+Incremental model is a SDLC model that follow incremental approach. It is a combination of Waterfall and Spiral model. In this model phase can be repeated multiple times. It divides the project into small modules and develop them one by one. It is best suitable for projects where requirements are changing.
+
+It has the following phases:
+\begin{enumerate}
+    \item Requirement Analysis
+    \item Design
+    \item Development
+    \item Testing
+    \item Deployment
+    \item Maintenance
+\end{enumerate}
+
+\begin{labeledlist}{Advantages}
+    \item Simple and easy to understand
+    \item Clear and well-defined phases
+    \item Easy to manage
+    \item Easy to control
+\end{labeledlist}
+
+\begin{labeledlist}{Disadvantages}
+    \item Not suitable for projects where requirements are not well defined
+    \item Not suitable for projects where requirements are changing
+    \item Not suitable for projects where requirements are not stable
+\end{labeledlist}
+
+\begin{labeledlist}{Best Suitable for Projects}
+    \item Projects where requirements are well defined
+    \item Projects where requirements are changing
+    \item Project needs to be Delivered quickly.
+    \item Project can have major update later.
+    \item Developement Team is Small.
+\end{labeledlist}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{incremental.png}
+    \caption{Incremental Model}
+\end{figure}
+
+\sdlcsubsection{3. Spiral Model}
+
+A Spiral model is a SDLC model that follow incremental approach. In this model phase can be repeated multiple times. It is best suitable for projects where requirements are changing.
+
+It has following phases:
+\begin{enumerate}
+    \item Planning
+    \item Risk Analysis
+    \item Engineering
+    \item Evaluation
+\end{enumerate}
+
+\begin{labeledlist}{Advantages}
+    \item Efficient risk management
+    \item Early identification of potential issues
+    \item Better resource allocation
+    \item Improved project planning
+\end{labeledlist}
+
+\begin{labeledlist}{Disadvantages}
+    \item High cost
+    \item High time
+    \item High complexity
+    \item High risk
+\end{labeledlist}
+
+\begin{labeledlist}{Best Suitable for Projects}
+    \item For large-scale and mission-critical projects.
+    \item When requirements are unclear or expected to evolve significantly.
+    \item When risk and cost evaluation is critical to success.
+    \item When frequent releases or continuous feedback is required.
+\end{labeledlist}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{spiral.png}
+    \caption{Spiral Model}
+\end{figure}
+
+\sdlcsubsection{4. Prototype Model}
+
+A Prototype model is a iterative SDLC model. In this model a priliminary version of the product is created before fullscale developement. This model is particularly Effective when product is user centric and end-users are involved in the development process.
+
+\begin{labeledlist}{Advantages}
+    \item Continuous feedback ensures the product meets actual user needs.
+    \item Early identification of potential issues
+    \item Easily accomodates changes and updates
+    \item Validates Technical Feasibility before full development
+\end{labeledlist}
+
+\begin{labeledlist}{Disadvantages}
+    \item Multiple iteration cycles can extend timelines and increase upfront costs.
+    \item Scope of project may exceed original requirements.
+    \item CLient may mistake prototype for final product.
+    \item A rushed prototype may not result in poor project architecture and design.
+\end{labeledlist}
+
+\begin{labeledlist}{Best Suitable for Projects}
+    \item When product is user centric and end-users are involved in the development process.
+    \item Where user UX is critical factor
+    \item Where End-User requirements are ambiguous or changing
+\end{labeledlist}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{prototype.png}
+    \caption{Prototype Model}
+\end{figure}
+
+\sdlcsubsection{5. Rapid Application Development (RAD) Model}
+
+Rapid Application Development (RAD) is a SDLC model which is used when multiple teams work on the same project. In this this modal Project is divided into modules and then different teams work on different modules. After Modules are completed then they are merged and tested before final release.
+
+\begin{labeledlist}{Phases}
+    \item Requirement Gathering
+    \item User Design
+    \item Rapid Construction in multiple Teams
+    \item Testing and Integration
+    \item Deployment
+\end{labeledlist}
+
+\end{document}

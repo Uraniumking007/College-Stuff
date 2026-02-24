@@ -18,7 +18,7 @@ The product is a web application that provides movies and TV shows to users on a
 
 ### User Classes and Characteristics
 
-- Users: The primary users of the application will be individuals who are interested in watching movies and TV shows. They will have varying levels of technical expertise and will expect a user-friendly interface that allows them to easily find and watch content.
+- Users: The primary users of the application will be individuals who are interested in watching movies and TV shows. They will expect a user-friendly interface that allows them to easily find and watch content.
 - Administrators: The administrators will be responsible for managing the movie database, handling user accounts, and ensuring the smooth operation of the application. They will have access to a backend dashboard where they can perform these tasks.
 - Content Providers: The content providers will be responsible for providing the movies and TV shows that will be available on the platform. They will have access to a content management system where they can upload and manage their content.
 - Payment Processors: The payment processors will be responsible for handling the payment transactions for the subscriptions. They will have access to a payment gateway where they can process payments and manage subscriptions.
@@ -151,3 +151,92 @@ The application will communicate with various external services and APIs to prov
 
 - The application should be reliable, with minimal downtime and a robust infrastructure to handle traffic and ensure continuous service availability.
 - The application should have a backup and disaster recovery plan in place to ensure data integrity and availability in case of unexpected events.
+
+## Cost Estimation (COCOMO Model)
+
+### Overview
+
+COCOMO (Constructive Cost Model) is a regression-based software cost estimation model that estimates effort (in person-months) and development time from an estimate of lines of source code (LOC). It supports three modes:
+
+| Mode            | Project type                    | Characteristics                                      |
+|-----------------|----------------------------------|------------------------------------------------------|
+| **Organic**     | Small, simple, in-house         | Small team, familiar environment, flexible requirements |
+| **Semi-detached** | Medium, mixed complexity       | Medium team, mixed experience, moderate innovation   |
+| **Embedded**    | Large, complex, tight constraints | Rigid requirements, real-time/safety-critical aspects |
+
+This project (subscription-based streaming platform with auth, streaming, payment, admin, and CMS) is classified as **Semi-detached**: medium size, mixed team experience, and moderate innovation.
+
+### Basic COCOMO Formulas
+
+**Effort (person-months):**
+
+```
+E = a × (KLOC)^b
+```
+
+**Development time (months):**
+
+```
+T = c × (E)^d
+```
+
+**Coefficients:**
+
+| Mode          | a    | b     | c    | d     |
+|---------------|------|-------|------|-------|
+| Organic       | 2.4  | 1.05  | 2.5  | 0.38  |
+| Semi-detached | 3.0  | 1.12  | 2.5  | 0.35  |
+| Embedded      | 3.6  | 1.20  | 2.5  | 0.32  |
+
+### Size Estimate (KLOC)
+
+Based on the SRS scope:
+
+| Component              | Estimated LOC | Notes                                                |
+|------------------------|---------------|------------------------------------------------------|
+| Frontend (React)       | 18,000        | UI, search, watchlist, streaming player, profiles   |
+| Backend (Node.js)      | 22,000        | Auth, APIs, streaming logic, payment integration    |
+| Admin & CMS            | 8,000         | Dashboard, content management                        |
+| Shared / config / tests| 7,000         | Utilities, config, test code                        |
+| **Total**              | **55,000**    | **KLOC = 55**                                       |
+
+### Effort and Schedule (Semi-detached)
+
+- **KLOC** = 55  
+- **a** = 3.0, **b** = 1.12  
+- **c** = 2.5, **d** = 0.35  
+
+**Effort:**
+
+```
+E = 3.0 × (55)^1.12 ≈ 3.0 × 88.25 ≈ 265 person-months
+```
+
+**Development time:**
+
+```
+T = 2.5 × (265)^0.35 ≈ 2.5 × 6.93 ≈ 17.3 months
+```
+
+**Average team size:**
+
+```
+Team size = E / T = 265 / 17.3 ≈ 15 persons
+```
+
+### Cost Estimation
+
+Assuming an average cost per person-month (salary + overhead) of **₹1,00,000**:
+
+```
+Total cost = E × Cost per person-month = 265 × 1,00,000 = ₹2.65 crores
+```
+
+| Item                    | Value              |
+|-------------------------|--------------------|
+| Effort                  | 265 person-months  |
+| Development time        | ~17.3 months       |
+| Approx. team size       | ~15 persons        |
+| Estimated cost (₹1L/PM) | ₹2.65 crores       |
+
+*Note: Cost per person-month should be adjusted to your organization (location, role mix, overhead).*
