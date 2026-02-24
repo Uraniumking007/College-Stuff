@@ -1,0 +1,25 @@
+{
+  "name": "angular-node-mongo-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "dev:frontend": "bun run --filter frontend dev",
+    "dev:backend": "bun run --filter backend dev",
+    "build": "bun run build:frontend && bun run build:backend",
+    "build:frontend": "bun run --filter frontend build",
+    "build:backend": "bun run --filter backend build",
+    "start": "bun run --filter backend start"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  }
+}

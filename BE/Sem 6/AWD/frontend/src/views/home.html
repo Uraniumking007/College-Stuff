@@ -1,0 +1,29 @@
+<div class="container" ng-controller="MainController">
+    <h1>🚀 AngularJS + Node + MongoDB</h1>
+    <p class="subtitle">Bun Workspace | AngularJS 1.8.2</p>
+
+    <div ng-if="error" class="error">{{ error }}</div>
+
+    <form ng-submit="addItem()">
+        <div class="form-group">
+            <label for="itemInput">Add New Item</label>
+            <input 
+                type="text" 
+                id="itemInput" 
+                ng-model="newItem" 
+                placeholder="Enter something..."
+                required
+            >
+        </div>
+        <button type="submit">Add Item</button>
+    </form>
+
+    <div class="item-list">
+        <h2>Items ({{ items.length }})</h2>
+        <p class="loading" ng-if="loading">Loading...</p>
+        <div ng-repeat="item in items" class="item">
+            <strong>{{ item.name }}</strong>
+            <button class="delete-btn" ng-click="deleteItem(item._id)">Delete</button>
+        </div>
+    </div>
+</div>
