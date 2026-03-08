@@ -1,0 +1,91 @@
+flowchart TB
+    subgraph Actors
+        A1((Anonymous User))
+        A2((Authenticated User))
+        A3((Organization Admin))
+        A4((External Recipient))
+        A5((API Client))
+    end
+
+    subgraph Authentication
+        UC1[Register]
+        UC2[Login]
+        UC3[Logout]
+        UC4[Reset Password]
+        UC5[Configure 2FA]
+        UC6[Manage API Tokens]
+    end
+
+    subgraph SecretManagement
+        UC7[Create Secret]
+        UC8[View Secret]
+        UC9[Edit Secret]
+        UC10[Delete Secret]
+        UC11[List Secrets]
+        UC12[Search Secrets]
+    end
+
+    subgraph SecretSharing
+        UC13[Generate Share Link]
+        UC14[Access Shared Secret]
+        UC15[Revoke Share Link]
+        UC16[Set Share Password]
+    end
+
+    subgraph OrgManagement
+        UC17[Create Organization]
+        UC18[Invite Members]
+        UC19[Assign Roles]
+        UC20[Manage Teams]
+        UC21[Configure SSO]
+        UC22[Configure IP Allowlist]
+    end
+
+    subgraph Audit
+        UC23[View Audit Logs]
+        UC24[Export Audit Logs]
+        UC25[Generate Compliance Report]
+    end
+
+    subgraph Billing
+        UC26[Subscribe to Plan]
+        UC27[Upgrade/Downgrade]
+        UC28[Manage Payment]
+        UC29[View Invoices]
+    end
+
+    A1 --> UC1
+    A1 --> UC2
+    A1 --> UC4
+    A1 --> UC14
+    A2 --> UC3
+    A2 --> UC5
+    A2 --> UC6
+    A2 --> UC7
+    A2 --> UC8
+    A2 --> UC9
+    A2 --> UC10
+    A2 --> UC11
+    A2 --> UC12
+    A2 --> UC13
+    A2 --> UC15
+    A2 --> UC16
+    A2 --> UC23
+    A3 --> UC17
+    A3 --> UC18
+    A3 --> UC19
+    A3 --> UC20
+    A3 --> UC21
+    A3 --> UC22
+    A3 --> UC24
+    A3 --> UC25
+    A3 --> UC26
+    A3 --> UC27
+    A3 --> UC28
+    A3 --> UC29
+    A4 --> UC14
+    A5 --> UC2
+    A5 --> UC6
+    A5 --> UC8
+    A5 --> UC11
+    A5 --> UC14
