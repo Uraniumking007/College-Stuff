@@ -1,0 +1,31 @@
+sequenceDiagram
+    actor Recipient
+    participant UI as Frontend UI
+    participant API as tRPC API
+    participant Encrypt as Encryption Service
+    participant DB as Database
+    participant Audit as Audit Logger
+
+    Recipient->>UI: Open share link
+    UI->>API: secrets.accessShare token
+    API->>DB: SELECT SecretShare
+    DB-->>API: share row
+    API->>API: validate token, expiration, views
+    alt Token invalid or expired
+        API-->>UI: error
+        UI-->>Recipient: Link invalid or expired
+    else Valid
+        alt Password protected
+            API-->>UI: prompt password
+            Recipient->>UI: enter password
+            UI->>API: password
+        end
+        API->>DB: SELECT Secret
+        DB-->>API: encrypted secret
+        API->>Encrypt: decrypt
+        Encrypt-->>API: plaintext
+        API->>DB: increment view count
+        API->>Audit: log view event
+        API-->>UI: secret content
+        UI-->>Recipient: Display secret
+    end
