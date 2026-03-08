@@ -1,0 +1,29 @@
+classDiagram
+    class Organization {
+        +id: uuid
+        +name: text
+        +slug: text
+        +tier: SubscriptionTier
+        +createdAt: timestamp
+    }
+
+    class OrganizationMember {
+        +id: uuid
+        +role: MemberRole
+        +joinedAt: timestamp
+    }
+
+    class Team {
+        +id: uuid
+        +name: text
+        +description: text
+    }
+
+    class TeamMember {
+        +id: uuid
+        +joinedAt: timestamp
+    }
+
+    Organization "1" -- "0..*" OrganizationMember : has
+    Organization "1" -- "0..*" Team : has
+    Team "1" -- "0..*" TeamMember : has
