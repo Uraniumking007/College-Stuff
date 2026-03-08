@@ -1,0 +1,26 @@
+flowchart TD
+    A0([Start])
+    A1[User selects secret to share]
+    A2{User authenticated?}
+    A3[Show login page]
+    A4[Check permissions on secret]
+    A5{Has access?}
+    A6[Show access denied]
+    A7[Configure share settings]
+    A8[Generate 64-char token]
+    A9[Store SecretShare in DB]
+    A10[Log share event]
+    A11([Share link ready])
+
+    A0 --> A1
+    A1 --> A2
+    A2 -- Yes --> A4
+    A2 -- No --> A3
+    A3 --> A2
+    A4 --> A5
+    A5 -- No --> A6
+    A5 -- Yes --> A7
+    A7 --> A8
+    A8 --> A9
+    A9 --> A10
+    A10 --> A11
