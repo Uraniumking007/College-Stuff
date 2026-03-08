@@ -1,0 +1,25 @@
+flowchart LR
+    A1["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>Anonymous User"]
+    A2["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>Authenticated User"]
+    A5["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>API Client"]
+
+    UC1([Register])
+    UC2([Log in])
+    UC3([Log out])
+    UC4([Reset Password])
+    UC5([Configure 2FA])
+    UC6([Manage API Tokens])
+    UC2a([Verify credentials])
+    UC2b([Display login error])
+
+    UC2 -.->|"<<include>>"| UC2a
+    UC2b -.->|"<<extend>>"| UC2
+
+    A1 --> UC1
+    A1 --> UC2
+    A1 --> UC4
+    A2 --> UC3
+    A2 --> UC5
+    A2 --> UC6
+    A5 --> UC2
+    A5 --> UC6
