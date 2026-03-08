@@ -1,0 +1,21 @@
+flowchart LR
+    subgraph Actor
+        A3["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>Organization Admin"]
+    end
+
+    subgraph System["Secret Drop - System Boundary"]
+        direction TB
+        UC17([Create Organization])
+        UC18([Invite Members])
+        UC19([Assign Roles])
+        UC20([Manage Teams])
+        UC21([Configure SSO])
+        UC22([Configure IP Allowlist])
+    end
+
+    A3 --> UC17
+    A3 --> UC18
+    A3 --> UC19
+    A3 --> UC20
+    A3 --> UC21
+    A3 --> UC22
