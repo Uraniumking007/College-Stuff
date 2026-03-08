@@ -1,0 +1,85 @@
+classDiagram
+    class User {
+        +id: text
+        +name: text
+        +email: text
+        +createdAt: timestamp
+        +updatedAt: timestamp
+    }
+
+    class Session {
+        +id: text
+        +expiresAt: timestamp
+        +token: text
+        +ipAddress: text
+        +userAgent: text
+    }
+
+    class Organization {
+        +id: uuid
+        +name: text
+        +slug: text
+        +tier: SubscriptionTier
+        +createdAt: timestamp
+    }
+
+    class Secret {
+        +id: uuid
+        +name: text
+        +encryptedData: text
+        +maxViews: int
+        +viewCount: int
+        +expiresAt: timestamp
+        +burnOnRead: bool
+    }
+
+    class SecretShare {
+        +id: uuid
+        +shareToken: text
+        +passwordHash: text
+        +expiresAt: timestamp
+        +maxViews: int
+        +viewCount: int
+    }
+
+    class SecretAccessLog {
+        +id: uuid
+        +action: AccessAction
+        +ipAddress: text
+        +userAgent: text
+        +accessedAt: timestamp
+    }
+
+    class OrganizationMember {
+        +id: uuid
+        +role: MemberRole
+        +joinedAt: timestamp
+    }
+
+    class Team {
+        +id: uuid
+        +name: text
+        +description: text
+    }
+
+    class TeamMember {
+        +id: uuid
+        +joinedAt: timestamp
+    }
+
+    %% Relationships
+    User "1" -- "0..*" Session : has
+    User "1" -- "0..*" Secret : creates
+    User "1" -- "0..*" OrganizationMember : belongs to
+    User "1" -- "0..*" TeamMember : in
+
+    Organization "1" -- "0..*" OrganizationMember : has
+    Organization "1" -- "0..*" Team : has
+    Organization "1" -- "0..*" Secret : contains
+
+    Team "1" -- "0..*" TeamMember : has
+    Team "1" -- "0..*" Secret : contains
+
+    Secret "1" -- "0..*" SecretShare : shares
+    Secret "1" -- "0..*" SecretAccessLog : logs
+
