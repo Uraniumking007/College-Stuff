@@ -1,0 +1,18 @@
+classDiagram
+    class User {
+        +id: text
+        +name: text
+        +email: text
+        +createdAt: timestamp
+        +updatedAt: timestamp
+    }
+
+    class Session {
+        +id: text
+        +expiresAt: timestamp
+        +token: text
+        +ipAddress: text
+        +userAgent: text
+    }
+
+    User "1" -- "0..*" Session : has
