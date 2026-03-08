@@ -1,2 +1,14 @@
 # Ignore macOS metadata files everywhere
 **/.DS_Store
+
+# LaTeX build artifacts and logs
+*.aux
+*.log
+*.pdf
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+indent.log
+texput.log
