@@ -1,0 +1,7 @@
+{
+  "securityLevel": "loose",
+  "flowchart": {
+    "htmlLabels": true,
+    "inheritDir": true
+  }
+}
