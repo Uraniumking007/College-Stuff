@@ -1,0 +1,16 @@
+sequenceDiagram
+    actor User
+    participant UI as Frontend UI
+    participant API as tRPC API
+    participant DB as Database
+    participant Audit as Audit Logger
+
+    User->>UI: Click Share on secret
+    UI->>API: secrets.generateShare
+    API->>DB: SELECT Secret
+    DB-->>API: secret row
+    API->>API: generate 64-char token
+    API->>DB: INSERT SecretShare
+    API->>Audit: log share event
+    API-->>UI: share URL
+    UI-->>User: Show copyable link
