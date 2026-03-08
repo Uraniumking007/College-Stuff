@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph Actors
+        A2["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>Authenticated User"]
+        A3["<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjgwIj4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjE0IiByPSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iMzIiIHkxPSIyNCIgeDI9IjMyIiB5Mj0iNDgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjMyIiB5MT0iNDgiIHgyPSIxNiIgeTI9IjcyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSIzMiIgeTE9IjQ4IiB4Mj0iNDgiIHkyPSI3MiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8bGluZSB4MT0iOCIgeTE9IjM2IiB4Mj0iNTYiIHkyPSIzNiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==' width='40' height='50'/><br/>Organization Admin"]
+    end
+
+    subgraph System["Secret Drop - System Boundary"]
+        subgraph Audit
+            UC23([View Audit Logs])
+            UC24([Export Audit Logs])
+            UC25([Generate Compliance Report])
+        end
+        subgraph Billing
+            UC26([Subscribe to Plan])
+            UC27([Upgrade or Downgrade])
+            UC28([Manage Payment])
+            UC29([View Invoices])
+        end
+    end
+
+    A2 --> UC23
+    A3 --> UC24
+    A3 --> UC25
+    A3 --> UC26
+    A3 --> UC27
+    A3 --> UC28
+    A3 --> UC29
