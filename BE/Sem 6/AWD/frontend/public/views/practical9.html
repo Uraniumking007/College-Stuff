@@ -1,0 +1,325 @@
+<div class="container mt-4" ng-controller="Practical9Controller">
+  <h4 class="mb-3">Practical 9 - Basic Node.js Programs</h4>
+  <p class="text-muted mb-4">Demonstrating basic Node.js programs and how to execute them</p>
+
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <!-- Introduction Section -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Introduction to Node.js</h5>
+        </div>
+        <div class="card-body">
+          <p>Node.js is a JavaScript runtime built on Chrome's V8 engine. It allows you to run JavaScript on the server side.</p>
+          <div class="alert alert-info">
+            <strong>To run Node.js programs:</strong>
+            <ol class="mb-0 mt-2">
+              <li>Install Node.js from <a href="https://nodejs.org" target="_blank">nodejs.org</a></li>
+              <li>Save code in a <code>.js</code> file (e.g., <code>app.js</code>)</li>
+              <li>Open terminal and run: <code>node filename.js</code></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend Examples Section -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Node.js Backend Examples</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-4">Comprehensive backend examples demonstrating Node.js server-side programming</p>
+          
+          <div class="alert alert-info">
+            <strong>📁 Location:</strong> All backend examples are in <code>backend/practical9/</code> directory
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="fw-bold">1. Basic HTTP Server</h6>
+                  <p class="small text-muted mb-2">01-basic-http-server.cjs</p>
+                  <p class="small">Simple HTTP server using Node's built-in http module with route handling</p>
+                  <ul class="small mb-0">
+                    <li>Route handling (/home, /about, /contact)</li>
+                    <li>Custom 404 pages</li>
+                    <li>Runs on port 3001</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="fw-bold">2. File Server</h6>
+                  <p class="small text-muted mb-2">02-file-server.cjs</p>
+                  <p class="small">Static file server with automatic MIME type detection</p>
+                  <ul class="small mb-0">
+                    <li>Serves HTML, CSS, JS files</li>
+                    <li>MIME type handling</li>
+                    <li>Runs on port 3002</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="fw-bold">3. REST API Server</h6>
+                  <p class="small text-muted mb-2">03-rest-api-server.cjs</p>
+                  <p class="small">Full RESTful API with CRUD operations</p>
+                  <ul class="small mb-0">
+                    <li>GET, POST, PUT, DELETE endpoints</li>
+                    <li>In-memory data store</li>
+                    <li>Runs on port 3003</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="fw-bold">4. Streams Example</h6>
+                  <p class="small text-muted mb-2">04-streams-example.cjs</p>
+                  <p class="small">Memory-efficient file operations using streams</p>
+                  <ul class="small mb-0">
+                    <li>Read/write streams</li>
+                    <li>Pipe operations</li>
+                    <li>Runs on port 3004</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="fw-bold">5. Event Emitter</h6>
+                  <p class="small text-muted mb-2">05-event-emitter.cjs</p>
+                  <p class="small">Event-driven programming with custom events and listeners</p>
+                  <ul class="small mb-0">
+                    <li>Custom events (login, logout, error)</li>
+                    <li>Event listeners and handlers</li>
+                    <li>Runs on port 3005</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h6 class="fw-bold">📋 How to Run Backend Examples</h6>
+            
+            <div class="alert alert-secondary">
+              <strong>📁 Location:</strong> <code>backend/practical9/</code>
+            </div>
+
+            <p class="fw-bold mt-3">Step-by-Step Instructions:</p>
+            <ol>
+              <li>Open terminal/command prompt</li>
+              <li>Navigate to the practical9 directory:
+                <pre class="bg-dark text-light p-2 rounded mt-2 mb-2"><code>cd backend/practical9</code></pre>
+              </li>
+              <li>Run any example:
+                <pre class="bg-dark text-light p-2 rounded mt-2 mb-2"><code>node 01-basic-http-server.cjs</code></pre>
+              </li>
+              <li>Open browser and visit the indicated port</li>
+              <li>Press <code>Ctrl+C</code> to stop the server</li>
+            </ol>
+
+            <hr class="my-4">
+
+            <h6 class="fw-bold">🚀 Quick Start Commands:</h6>
+
+            <div class="accordion" id="backendExamplesAccordion">
+              <!-- Example 1 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                    1. Basic HTTP Server (Port 3001)
+                  </button>
+                </h2>
+                <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#backendExamplesAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Run:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>cd backend/practical9
+node 01-basic-http-server.cjs</code></pre>
+                    <p><strong>Test in browser:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>http://localhost:3001/
+http://localhost:3001/about
+http://localhost:3001/api</code></pre>
+                    <p class="mb-0"><strong>Test with curl:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>curl http://localhost:3001/
+curl http://localhost:3001/api</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Example 2 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                    2. File Server (Port 3002)
+                  </button>
+                </h2>
+                <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#backendExamplesAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Run:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>cd backend/practical9
+node 02-file-server.cjs</code></pre>
+                    <p class="mb-0"><strong>Test:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>curl http://localhost:3002/index.html</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Example 3 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                    3. REST API Server (Port 3003)
+                  </button>
+                </h2>
+                <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#backendExamplesAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Run:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>cd backend/practical9
+node 03-rest-api-server.cjs</code></pre>
+                    <p><strong>Test endpoints:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code># Get all users
+curl http://localhost:3003/api/users
+
+# Get single user
+curl http://localhost:3003/api/users/1
+
+# Create user
+curl -X POST http://localhost:3003/api/users \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"Alice","email":"alice@example.com"}'
+
+# Update user
+curl -X PUT http://localhost:3003/api/users/1 \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"John Updated"}'
+
+# Delete user
+curl -X DELETE http://localhost:3003/api/users/1</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Example 4 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                    4. Streams Example (Port 3004)
+                  </button>
+                </h2>
+                <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#backendExamplesAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Run:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>cd backend/practical9
+node 04-streams-example.cjs</code></pre>
+                    <p class="mb-0"><strong>Test:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>curl http://localhost:3004/read-stream
+curl http://localhost:3004/write-stream
+curl http://localhost:3004/pipe-stream</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Example 5 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                    5. Event Emitter (Port 3005)
+                  </button>
+                </h2>
+                <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#backendExamplesAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Run:</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>cd backend/practical9
+node 05-event-emitter.cjs</code></pre>
+                    <p class="mb-0"><strong>Test (watch server console for events!):</strong></p>
+                    <pre class="bg-dark text-light p-2 rounded"><code>curl http://localhost:3005/login
+curl http://localhost:3005/logout
+curl http://localhost:3005/error</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <h6 class="fw-bold">💡 Tips:</h6>
+            <ul>
+              <li><strong>Multiple servers:</strong> You can run multiple examples simultaneously (different ports: 3001-3005)</li>
+              <li><strong>Stop server:</strong> Press <code>Ctrl+C</code> in the terminal</li>
+              <li><strong>Watch logs:</strong> Check terminal for request logs and event emissions</li>
+              <li><strong>Testing:</strong> Use browser, curl, or Postman to test endpoints</li>
+            </ul>
+
+            <h6 class="fw-bold mt-3">⚠️ Common Issues:</h6>
+            <div class="accordion" id="troubleshootingAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEADDRINUSE">
+                    Port already in use (EADDRINUSE)
+                  </button>
+                </h2>
+                <div id="collapseEADDRINUSE" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Error:</strong> <code>Error: listen EADDRINUSE: address already in use :::PORT</code></p>
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                      <li>Stop the other process using that port</li>
+                      <li>Or change the PORT variable in the code</li>
+                      <li>Find process: <code>lsof -i :3001</code> (Mac/Linux) or <code>netstat -ano | findstr :3001</code> (Windows)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseENOENT">
+                    File not found (ENOENT)
+                  </button>
+                </h2>
+                <div id="collapseENOENT" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Error:</strong> <code>ENOENT: no such file or directory</code></p>
+                    <p><strong>Solution:</strong> Make sure you're in the correct directory (<code>backend/practical9</code>)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <a href="#/" class="btn btn-outline-primary">
+                ← Back to Home
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <a href="https://github.com" target="_blank" class="btn btn-success me-2">
+              📖 View Full Documentation
+            </a>
+            <a href="#/" class="btn btn-outline-secondary">
+              ← Back to Home
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Back Button -->
+      <div class="mt-4">
+        <a href="#/" class="btn btn-outline-primary">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,50 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Practical</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#/">College Practical</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Practicals
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#/practical6">Practical 6 - Two-Way Binding</a></li>
+                            <li><a class="dropdown-item" href="#/practical7">Practical 7 - Modules & Controllers</a></li>
+                            <li><a class="dropdown-item" href="#/practical8">Practical 8 - Form Validation</a></li>
+                            <li><a class="dropdown-item" href="#/practical9">Practical 9 - Node.js Programs</a></li>
+                            <li><a class="dropdown-item" href="#/practical10">Practical 10 - File Operations</a></li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
     <div ng-view></div>
 
     <!-- AngularJS 1.8.2 -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
 
-    <!-- App Module (load first - defines the module) -->
+    <!-- App Module (defines the module) -->
     <script src="/src/app.js"></script>
 
+    <!-- Directives (load after app.js) -->
+    <script src="/src/directives/compareTo.directive.js"></script>
     <!-- Controllers (load after app.js) -->
     <script src="/src/controllers/home.controller.js"></script>
     <script src="/src/controllers/practical6.controller.js"></script>
     <script src="/src/controllers/practical7.controller.js"></script>
+    <script src="/src/controllers/practical8.controller.js"></script>
+    <script src="/src/controllers/practical9.controller.js"></script>
+    <script src="/src/controllers/practical10.controller.js"></script>
+
+    <!-- Bootstrap JS for navbar/dropdown functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // Debug: Check if Angular loaded properly

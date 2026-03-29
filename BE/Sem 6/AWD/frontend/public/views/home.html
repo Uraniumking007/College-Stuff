@@ -1,231 +1,47 @@
-<style>
-  :root {
-    /* Backgrounds — soft, muted pastels */
-    --clay-bg: #f0e6db;
-    --clay-bg-card: #e8ddd4;
-    --clay-bg-button: #d4c4b0;
-    --clay-accent: #c4a882;
-
-    /* Radius — large, rounded, puffy */
-    --clay-radius: 20px;
-    --clay-radius-lg: 32px;
-    --clay-radius-pill: 50px;
-
-    /* Shadows — dual inner + offset outer */
-    --clay-shadow:
-      8px 8px 16px rgba(0, 0, 0, 0.12),
-      inset -4px -4px 8px rgba(0, 0, 0, 0.08),
-      inset 4px 4px 8px rgba(255, 255, 255, 0.6);
-    --clay-shadow-elevated:
-      12px 12px 24px rgba(0, 0, 0, 0.15),
-      inset -6px -6px 12px rgba(0, 0, 0, 0.1),
-      inset 6px 6px 12px rgba(255, 255, 255, 0.7);
-    --clay-shadow-pressed:
-      2px 2px 6px rgba(0, 0, 0, 0.1),
-      inset -6px -6px 12px rgba(0, 0, 0, 0.12),
-      inset 6px 6px 12px rgba(255, 255, 255, 0.5);
-
-    /* Text */
-    --clay-text: #4a3f35;
-    --clay-text-muted: #8a7e72;
-  }
-
-  /* Dark mode */
-  [data-theme="dark"] {
-    --clay-bg: #2a2520;
-    --clay-bg-card: #352f28;
-    --clay-bg-button: #443c33;
-    --clay-accent: #6b5d4f;
-    --clay-shadow:
-      8px 8px 16px rgba(0, 0, 0, 0.35),
-      inset -4px -4px 8px rgba(0, 0, 0, 0.25),
-      inset 4px 4px 8px rgba(255, 255, 255, 0.05);
-    --clay-shadow-elevated:
-      12px 12px 24px rgba(0, 0, 0, 0.4),
-      inset -6px -6px 12px rgba(0, 0, 0, 0.3),
-      inset 6px 6px 12px rgba(255, 255, 255, 0.06);
-    --clay-shadow-pressed:
-      2px 2px 6px rgba(0, 0, 0, 0.3),
-      inset -6px -6px 12px rgba(0, 0, 0, 0.35),
-      inset 6px 6px 12px rgba(255, 255, 255, 0.04);
-    --clay-text: #d4c8bc;
-    --clay-text-muted: #8a7e72;
-  }
-
-  /* Claymorphism Styles */
-  .clay-container {
-    background: var(--clay-bg);
-    min-height: 100vh;
-    padding: 2rem;
-    transition: background 0.3s ease;
-  }
-
-  .clay-title {
-    color: var(--clay-text);
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .clay-card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .clay-card {
-    background: var(--clay-bg-card);
-    border-radius: var(--clay-radius-lg);
-    box-shadow: var(--clay-shadow);
-    padding: 2rem;
-    color: var(--clay-text);
-    flex: 1;
-    min-width: 280px;
-    max-width: 380px;
-    transition: all 0.3s ease;
-    border: none;
-  }
-
-  .clay-card:hover {
-    box-shadow: var(--clay-shadow-elevated);
-    transform: translateY(-4px);
-  }
-
-  .clay-card-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--clay-text);
-  }
-
-  .clay-card-text {
-    color: var(--clay-text-muted);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .clay-btn {
-    background: var(--clay-bg-button);
-    border: none;
-    border-radius: var(--clay-radius-pill);
-    box-shadow: var(--clay-shadow);
-    padding: 0.75rem 2rem;
-    color: var(--clay-text);
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1rem;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s ease;
-  }
-
-  .clay-btn:hover {
-    box-shadow: var(--clay-shadow-elevated);
-    transform: translateY(-2px);
-  }
-
-  .clay-btn:active {
-    box-shadow: var(--clay-shadow-pressed);
-    transform: translateY(0);
-  }
-
-  .clay-btn:focus {
-    outline: 2px solid var(--clay-accent);
-    outline-offset: 4px;
-  }
-
-  /* Theme Toggle */
-  .clay-theme-toggle {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    z-index: 100;
-  }
-
-  .clay-toggle {
-    width: 56px;
-    height: 30px;
-    background: var(--clay-bg-card);
-    border-radius: var(--clay-radius-pill);
-    box-shadow: var(--clay-shadow-pressed);
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .clay-toggle-knob {
-    width: 24px;
-    height: 24px;
-    background: var(--clay-bg-button);
-    border-radius: 50%;
-    box-shadow: var(--clay-shadow);
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    transition: transform 0.3s ease;
-  }
-
-  [data-theme="dark"] .clay-toggle-knob {
-    transform: translateX(26px);
-  }
-
-  /* Accessibility */
-  @media (prefers-contrast: more) {
-    .clay-card {
-      box-shadow: 0 0 0 2px var(--clay-text);
-    }
-    .clay-btn {
-      box-shadow: 0 0 0 2px var(--clay-text);
-    }
-  }
-</style>
-
-<div class="clay-container" ng-controller="MainController">
-  <!-- Theme Toggle -->
-  <div class="clay-theme-toggle" ng-click="toggleTheme()">
-    <span style="color: var(--clay-text); font-size: 0.9rem;">☀️ / 🌙</span>
+<div class="container py-5" ng-controller="MainController">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-3">Practicals</h1>
+    <p class="lead text-muted">Advanced Web Development Course</p>
   </div>
-
-  <h1 class="clay-title">✨ Practicals</h1>
   
-  <div class="clay-card-grid">
+  <div class="row g-4 justify-content-center">
     <!-- Practical 6 Card -->
-    <div class="clay-card">
-      <h5 class="clay-card-title">📘 Practical 6</h5>
-      <p class="clay-card-text">
-        To demonstrate two-way data binding in AngularJS
-      </p>
-      <a href="#/practical6" class="clay-btn">View Practical →</a>
+    <div class="col-md-6 col-lg-5">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold mb-3">Practical 6</h5>
+          <p class="card-text text-muted">
+            Demonstrate two-way data binding in AngularJS
+          </p>
+          <a href="#/practical6" class="btn btn-primary">View Practical</a>
+        </div>
+      </div>
     </div>
 
     <!-- Practical 7 Card -->
-    <div class="clay-card">
-      <h5 class="clay-card-title">📗 Practical 7</h5>
-      <p class="clay-card-text">To create AngularJS modules and controllers.</p>
-      <a href="#/practical7" class="clay-btn">View Practical →</a>
+    <div class="col-md-6 col-lg-5">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold mb-3">Practical 7</h5>
+          <p class="card-text text-muted">
+            Create AngularJS modules and controllers
+          </p>
+          <a href="#/practical7" class="btn btn-primary">View Practical</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practical 9 Card -->
+    <div class="col-md-6 col-lg-5">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold mb-3">Practical 9</h5>
+          <p class="card-text text-muted">
+            Write and execute basic Node.js programs
+          </p>
+          <a href="#/practical9" class="btn btn-primary">View Practical</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<script>
-  // Theme toggle functionality
-  angular.module('myApp').controller('MainController', ['$scope', function($scope) {
-    // Initialize theme from localStorage or default to light
-    $scope.theme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', $scope.theme);
-
-    $scope.toggleTheme = function() {
-      $scope.theme = $scope.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', $scope.theme);
-      localStorage.setItem('theme', $scope.theme);
-    };
-  }]);
-</script>

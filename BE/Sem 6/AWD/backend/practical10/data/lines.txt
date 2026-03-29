@@ -1,0 +1,4 @@
+Line 1: Node.js file system is powerful
+Line 2: You can read, write, and update files
+Line 3: File operations can be sync or async
+Line 4: Always handle errors properly

@@ -17,26 +17,26 @@ app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
 mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log('✅ Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err);
-  });
+   .connect(MONGO_URI)
+   .then(() => {
+      console.log('✅ Connected to MongoDB');
+   })
+   .catch((err) => {
+      console.error('❌ MongoDB connection error:', err);
+   });
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-    timestamp: new Date().toISOString()
-  });
+   res.json({
+      status: 'OK',
+      mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+      timestamp: new Date().toISOString()
+   });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
 
 export default app;

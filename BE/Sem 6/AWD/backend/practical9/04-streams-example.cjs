@@ -1,0 +1,106 @@
+// 04-streams-example.js
+// Working with Streams - Reading and writing large files efficiently
+
+const fs = require('fs');
+const http = require('http');
+const path = require('path');
+
+const PORT = 3004;
+
+const server = http.createServer((req, res) => {
+  console.log(`${req.method} ${req.url}`);
+
+  if (req.url === '/' || req.url === '/home') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(`
+      <h1>Node.js Streams Example</h1>
+      <p>Streams allow you to read/write data in chunks</p>
+      <h2>Available Endpoints:</h2>
+      <ul>
+        <li><a href="/read-stream">Read Stream Example</a></li>
+        <li><a href="/write-stream">Write Stream Example</a></li>
+        <li><a href="/pipe-stream">Pipe Stream Example</a></li>
+      </ul>
+    `);
+
+  } else if (req.url === '/read-stream') {
+    // Read stream - Reading a file in chunks
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    
+    const readStream = fs.createReadStream('./backend/practical9/04-streams-example.js', 'utf8');
+    
+    res.write('<h1>Read Stream Example</h1>');
+    res.write('<p>Reading this file using streams:</p>');
+    res.write('<pre style="background: #f4f4f4; padding: 10px; overflow: auto;">');
+    
+    readStream.on('data', (chunk) => {
+      res.write(chunk);
+    });
+
+    readStream.on('end', () => {
+      res.write('</pre>');
+      res.write('<p><a href="/">Back to Home</a></p>');
+      res.end();
+    });
+
+    readStream.on('error', (err) => {
+      res.write('</pre>');
+      res.write(`<p>Error reading file: ${err.message}</p>`);
+      res.end();
+    });
+
+  } else if (req.url === '/write-stream') {
+    // Write stream - Writing data to a file
+    const writeStream = fs.createWriteStream('./backend/practical9/output-stream.txt');
+    
+    writeStream.write('Line 1: Hello from write stream!\n');
+    writeStream.write('Line 2: Streams are efficient for large files\n');
+    writeStream.write('Line 3: This file was created using streams\n');
+    writeStream.end();
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(`
+      <h1>Write Stream Example</h1>
+      <p>Data has been written to <code>output-stream.txt</code> using write stream</p>
+      <p>Check the file in the practical9 directory</p>
+      <p><a href="/">Back to Home</a></p>
+    `);
+
+  } else if (req.url === '/pipe-stream') {
+    // Pipe stream - Connecting read stream to write stream
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    
+    const readStream = fs.createReadStream('./backend/practical9/04-streams-example.js');
+    const writeStream = fs.createWriteStream('./backend/practical9/copied-file.txt');
+
+    readStream.pipe(writeStream);
+
+    writeStream.on('finish', () => {
+      res.end(`
+        <h1>Pipe Stream Example</h1>
+        <p>File has been copied using pipe!</p>
+        <p>Source: 04-streams-example.js</p>
+        <p>Destination: copied-file.txt</p>
+        <p><a href="/">Back to Home</a></p>
+      `);
+    });
+
+    writeStream.on('error', (err) => {
+      res.end(`
+        <h1>Pipe Stream Example</h1>
+        <p>Error copying file: ${err.message}</p>
+        <p><a href="/">Back to Home</a></p>
+      `);
+    });
+
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.end('<h1>404 - Page Not Found</h1><p><a href="/">Back to Home</a></p>');
+  }
+});
+
+server.listen(PORT, () => {
+  console.log('Streams Example Server Started');
+  console.log(`Server running at: http://localhost:${PORT}/`);
+  console.log('\nPress Ctrl+C to stop the server\n');
+});
