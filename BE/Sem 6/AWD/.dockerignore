@@ -1,0 +1,32 @@
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+PRACTICAL12_README.md
+*.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
