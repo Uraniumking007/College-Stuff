@@ -1,0 +1,211 @@
+<div class="container practical12-container">
+   <div class="page-header">
+      <h1>{{title}}</h1>
+      <p class="subtitle">{{subtitle}}</p>
+   </div>
+
+   <!-- Docker Status -->
+   <div class="docker-status" ng-if="dockerStatus">
+      <h3>Docker Container Status</h3>
+      <div class="status-grid">
+         <div class="status-item">
+            <span class="status-label">Backend API:</span>
+            <span class="status-value" ng-class="dockerStatus.status">
+               {{dockerStatus.backend}}
+            </span>
+         </div>
+         <div class="status-item">
+            <span class="status-label">MongoDB:</span>
+            <span class="status-value" ng-class="dockerStatus.status">
+               {{dockerStatus.database}}
+            </span>
+         </div>
+      </div>
+   </div>
+
+   <!-- Success/Error Messages -->
+   <div class="alert alert-success" ng-if="successMessage">
+      {{successMessage}}
+   </div>
+
+   <div class="alert alert-danger" ng-if="error">
+      {{error}}
+      <button type="button" class="close" ng-click="error = null">&times;</button>
+   </div>
+
+   <!-- Student Form -->
+   <div class="form-section">
+      <h2>{{isEditing ? 'Edit Student' : 'Add New Student'}}</h2>
+      <form name="studentForm" ng-submit="saveStudent()" novalidate>
+         <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input
+               type="text"
+               id="name"
+               name="name"
+               class="form-control"
+               ng-model="currentStudent.name"
+               required
+               placeholder="Enter student name"
+            />
+            <span class="error" ng-show="studentForm.name.$touched && studentForm.name.$invalid">
+               Name is required
+            </span>
+         </div>
+
+         <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+               type="email"
+               id="email"
+               name="email"
+               class="form-control"
+               ng-model="currentStudent.email"
+               required
+               placeholder="Enter email address"
+            />
+            <span class="error" ng-show="studentForm.email.$touched && studentForm.email.$invalid">
+               Valid email is required
+            </span>
+         </div>
+
+         <div class="form-group">
+            <label for="age">Age *</label>
+            <input
+               type="number"
+               id="age"
+               name="age"
+               class="form-control"
+               ng-model="currentStudent.age"
+               required
+               min="1"
+               max="120"
+               placeholder="Enter age"
+            />
+            <span class="error" ng-show="studentForm.age.$touched && studentForm.age.$invalid">
+               Age must be between 1 and 120
+            </span>
+         </div>
+
+         <div class="form-group">
+            <label for="course">Course *</label>
+            <input
+               type="text"
+               id="course"
+               name="course"
+               class="form-control"
+               ng-model="currentStudent.course"
+               required
+               placeholder="Enter course name"
+            />
+            <span class="error" ng-show="studentForm.course.$touched && studentForm.course.$invalid">
+               Course is required
+            </span>
+         </div>
+
+         <div class="form-actions">
+            <button type="submit" class="btn btn-primary" ng-disabled="loading">
+               <span ng-if="loading">Saving...</span>
+               <span ng-if="!loading">{{isEditing ? 'Update' : 'Add'}} Student</span>
+            </button>
+            <button
+               type="button"
+               class="btn btn-secondary"
+               ng-click="clearForm()"
+               ng-if="isEditing || currentStudent.name"
+            >
+               Cancel
+            </button>
+         </div>
+      </form>
+   </div>
+
+   <!-- Students List -->
+   <div class="list-section">
+      <div class="list-header">
+         <h2>Students List ({{students.length}})</h2>
+         <button class="btn btn-refresh" ng-click="loadStudents()" ng-disabled="loading">
+            {{loading ? 'Loading...' : 'Refresh'}}
+         </button>
+      </div>
+
+      <div class="loading-spinner" ng-if="loading && students.length === 0">
+         <p>Loading students...</p>
+      </div>
+
+      <div class="empty-state" ng-if="!loading && students.length === 0">
+         <p>No students found. Add your first student above!</p>
+      </div>
+
+      <div class="students-grid" ng-if="students.length > 0">
+         <div class="student-card" ng-repeat="student in students">
+            <div class="card-header">
+               <h3>{{student.name}}</h3>
+               <span class="student-id">#{{$index + 1}}</span>
+            </div>
+            <div class="card-body">
+               <div class="info-row">
+                  <span class="label">Email:</span>
+                  <span class="value">{{student.email}}</span>
+               </div>
+               <div class="info-row">
+                  <span class="label">Age:</span>
+                  <span class="value">{{student.age}}</span>
+               </div>
+               <div class="info-row">
+                  <span class="label">Course:</span>
+                  <span class="value">{{student.course}}</span>
+               </div>
+               <div class="info-row">
+                  <span class="label">Created:</span>
+                  <span class="value">{{student.createdAt | date:'medium'}}</span>
+               </div>
+            </div>
+            <div class="card-actions">
+               <button class="btn btn-edit" ng-click="editStudent(student)">
+                  Edit
+               </button>
+               <button class="btn btn-delete" ng-click="deleteStudent(student._id)">
+                  Delete
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Docker Info Section -->
+   <div class="docker-info">
+      <h2>About Docker Integration</h2>
+      <div class="info-grid">
+         <div class="info-card">
+            <h3>🐳 Docker Compose Setup</h3>
+            <p>This application uses Docker Compose to orchestrate three containers:</p>
+            <ul>
+               <li><strong>MongoDB:</strong> Database container on port 27017</li>
+               <li><strong>Backend API:</strong> Express.js server on port 3000</li>
+               <li><strong>Frontend:</strong> AngularJS application on port 4200</li>
+            </ul>
+         </div>
+         <div class="info-card">
+            <h3>🔧 Architecture</h3>
+            <ul>
+               <li>Frontend communicates with Backend via REST API</li>
+               <li>Backend connects to MongoDB using Mongoose</li>
+               <li>All services are containerized and networked</li>
+               <li>Data persists in Docker volume for MongoDB</li>
+            </ul>
+         </div>
+         <div class="info-card">
+            <h3>🚀 Running with Docker</h3>
+            <pre><code># Build and start all services
+docker-compose up --build
+
+# Stop all services
+docker-compose down
+
+# View logs
+docker-compose logs -f</code></pre>
+         </div>
+      </div>
+   </div>
+</div>

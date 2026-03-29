@@ -32,6 +32,10 @@ angular
                templateUrl: "/views/practical10.html",
                controller: "Practical10Controller",
             })
+            .when("/practical12", {
+               templateUrl: "/views/practical12.html",
+               controller: "Practical12Controller",
+            })
             .otherwise({
                redirectTo: "/",
             });
