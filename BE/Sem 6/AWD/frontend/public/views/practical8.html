@@ -1,0 +1,267 @@
+<div class="container mt-4" ng-controller="Practical8Controller">
+  <h4 class="mb-3">Practical 8 - Form Validation</h4>
+  <p class="text-muted mb-4">Comprehensive form validation using AngularJS</p>
+
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Registration Form</h5>
+        </div>
+        <div class="card-body">
+          <form name="validationForm" ng-submit="submitForm()" novalidate>
+            <!-- Name Field -->
+            <div class="mb-3">
+              <label for="name" class="form-label fw-semibold">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                ng-model="user.name"
+                ng-minlength="3"
+                ng-maxlength="15"
+                required
+                placeholder="Enter your full name (3-15 characters)"
+              />
+              <div
+                ng-show="validationForm.name.$dirty && validationForm.name.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.name.$error.required"
+                  >Name is required</span
+                >
+                <span ng-show="validationForm.name.$error.minlength"
+                  >Name must be at least 3 characters</span
+                >
+                <span ng-show="validationForm.name.$error.maxlength"
+                  >Name cannot exceed 15 characters</span
+                >
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                ng-model="user.email"
+                ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+                required
+                placeholder="Enter your email address"
+              />
+              <div
+                ng-show="validationForm.email.$dirty && validationForm.email.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.email.$error.required"
+                  >Email is required</span
+                >
+                <span ng-show="validationForm.email.$error.pattern"
+                  >Please enter a valid email with complete domain (e.g., user@example.com)</span
+                >
+              </div>
+            </div>
+
+            <!-- Phone Field (Optional) -->
+            <div class="mb-3">
+              <label for="phone" class="form-label fw-semibold"
+                >Phone Number <small class="text-muted">(Optional)</small></label
+              >
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                name="phone"
+                ng-model="user.phone"
+                ng-pattern="/^[6-9][0-9]{9}$/"
+                placeholder="Enter Indian mobile number (starts with 6-9)"
+              />
+              <div
+                ng-show="validationForm.phone.$dirty && validationForm.phone.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.phone.$error.pattern"
+                  >Please enter a valid Indian mobile number (10 digits, starts with 6-9)</span
+              </div>
+            </div>
+
+            <!-- Gender Field -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Gender <span class="text-danger">*</span></label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="male"
+                    name="gender"
+                    ng-model="user.gender"
+                    value="male"
+                    required
+                  />
+                  <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="female"
+                    name="gender"
+                    ng-model="user.gender"
+                    value="female"
+                    required
+                  />
+                  <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="other"
+                    name="gender"
+                    ng-model="user.gender"
+                    value="other"
+                    required
+                  />
+                  <label class="form-check-label" for="other">Other</label>
+                </div>
+              </div>
+              <div
+                ng-show="validationForm.gender.$dirty && validationForm.gender.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.gender.$error.required"
+                  >Please select a gender</span
+                >
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+              <label for="password" class="form-label fw-semibold">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                ng-model="user.password"
+                ng-minlength="8"
+                ng-maxlength="20"
+                required
+                placeholder="Enter a strong password (8-20 characters)"
+              />
+              <small class="text-muted"
+                >Must be 8-20 characters long</small
+              >
+              <div
+                ng-show="validationForm.password.$dirty && validationForm.password.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.password.$error.required"
+                  >Password is required</span
+                >
+                <span ng-show="validationForm.password.$error.minlength"
+                  >Password must be at least 8 characters</span
+                >
+                <span ng-show="validationForm.password.$error.maxlength"
+                  >Password cannot exceed 20 characters</span
+                >
+              </div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label fw-semibold"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                name="confirmPassword"
+                ng-model="user.confirmPassword"
+                ng-minlength="8"
+                ng-maxlength="20"
+                compare-to="user.password"
+                required
+                placeholder="Confirm your password"
+              />
+              <div
+                ng-show="validationForm.confirmPassword.$dirty && validationForm.confirmPassword.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.confirmPassword.$error.required"
+                  >Please confirm your password</span
+                >
+                <span ng-show="validationForm.confirmPassword.$error.minlength"
+                  >Password must be at least 8 characters</span
+                >
+                <span ng-show="validationForm.confirmPassword.$error.maxlength"
+                  >Password cannot exceed 20 characters</span
+                >
+                <span ng-show="validationForm.confirmPassword.$error.compareTo"
+                  >Passwords do not match</span
+                >
+              </div>
+            </div>
+
+            <!-- Age Field (Optional) -->
+            <div class="mb-3">
+              <label for="age" class="form-label fw-semibold"
+                >Age <small class="text-muted">(Optional)</small></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="age"
+                name="age"
+                ng-model="user.age"
+                min="1"
+                max="122"
+                placeholder="Enter your age"
+              />
+              <small class="text-muted">Must be between 1 and 122</small>
+              <div
+                ng-show="validationForm.age.$dirty && validationForm.age.$invalid"
+                class="text-danger small mt-1"
+              >
+                <span ng-show="validationForm.age.$error.min"
+                  >Age must be at least 1</span
+                >
+                <span ng-show="validationForm.age.$error.max"
+                  >Age cannot exceed 122</span
+                >
+              </div>
+            </div>
+
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-2 flex-wrap">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                ng-disabled="validationForm.$invalid"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                ng-click="resetForm()"
+              >
+                Reset
+              </button>
+              <a href="#/" class="btn btn-link">← Back to Home</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

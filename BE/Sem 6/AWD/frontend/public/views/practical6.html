@@ -1,62 +1,127 @@
-<div class="container" ng-controller="Practical6Controller">
-  <h1 class="text-center mb-4">Practical 6: Two-Way Data Binding</h1>
+<div class="container mt-4" ng-controller="Practical6Controller">
+  <h4 class="mb-3">Practical 6 - Two-Way Data Binding</h4>
+  <p class="text-muted mb-4">Fill out the form and watch the preview update in real-time.</p>
 
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <div class="card">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">Two-Way Data Binding Demo</h5>
+  <div class="d-flex flex-column flex-lg-row gap-4">
+    <!-- Left Side - Form Input -->
+    <div class="flex-lg-fill" style="flex: 1;">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Form Input</h5>
         </div>
         <div class="card-body">
-          <form ng-submit="submitForm()">
+          <form name="myForm" ng-submit="submitForm()" novalidate>
             <div class="mb-3">
-              <label for="name" class="form-label">Name:</label>
+              <label for="name" class="form-label fw-semibold">Full Name</label>
               <input
                 type="text"
                 class="form-control"
                 id="name"
+                name="name"
                 ng-model="name"
-                placeholder="Enter your name"
+                ng-minlength="3"
+                ng-maxlength="50"
+                required
+                placeholder="John Doe"
               />
+              <small class="text-muted">Start typing to see live updates</small>
+              <div ng-show="myForm.name.$dirty && myForm.name.$invalid" class="text-danger small">
+                <span ng-show="myForm.name.$error.required">Name is required</span>
+                <span ng-show="myForm.name.$error.minlength">Name must be at least 3 characters</span>
+                <span ng-show="myForm.name.$error.maxlength">Name cannot exceed 50 characters</span>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="email" class="form-label">Email:</label>
+              <label for="email" class="form-label fw-semibold">Email Address</label>
+              <input
               <input
                 type="email"
                 class="form-control"
                 id="email"
+                name="email"
                 ng-model="email"
-                placeholder="Enter your email"
+                ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+                required
+                placeholder="john@example.com"
               />
+              <div ng-show="myForm.email.$dirty && myForm.email.$invalid" class="text-danger small">
+                <span ng-show="myForm.email.$error.required">Email is required</span>
+                <span ng-show="myForm.email.$error.pattern">Please enter a valid email with complete domain (e.g., user@example.com)</span>
+              </div>
+              />
+              <div ng-show="myForm.email.$dirty && myForm.email.$invalid" class="text-danger small">
+                <span ng-show="myForm.email.$error.required">Email is required</span>
+                <span ng-show="myForm.email.$error.email">Please enter a valid email address</span>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="message" class="form-label">Message:</label>
+              <label for="message" class="form-label fw-semibold">Message</label>
               <textarea
                 class="form-control"
                 id="message"
-                rows="3"
+                name="message"
                 ng-model="message"
-                placeholder="Enter your message"
+                ng-minlength="10"
+                ng-maxlength="500"
+                required
+                rows="5"
+                placeholder="Type your message here..."
               ></textarea>
+              <small class="text-muted">{{message.length}} / 500 characters</small>
+              <div ng-show="myForm.message.$dirty && myForm.message.$invalid" class="text-danger small">
+                <span ng-show="myForm.message.$error.required">Message is required</span>
+                <span ng-show="myForm.message.$error.minlength">Message must be at least 10 characters</span>
+                <span ng-show="myForm.message.$error.maxlength">Message cannot exceed 500 characters</span>
+              </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="#/" class="btn btn-secondary">Back to Home</a>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Submit Form</button>
+              <button type="button" class="btn btn-outline-secondary" ng-click="resetForm()">Clear</button>
+            </div>
+
+            <div ng-show="myForm.$submitted && myForm.$valid" class="alert alert-success mt-3 mb-0">
+              ✓ Form is valid and ready to submit!
+            </div>
           </form>
         </div>
       </div>
+    </div>
 
-      <!-- Live Preview - Shows two-way binding in action -->
-      <div class="card mt-4">
-        <div class="card-header bg-success text-white">
-          <h5 class="mb-0">Live Preview (Two-Way Binding)</h5>
+    <!-- Right Side - Live Preview -->
+    <div class="flex-lg-fill" style="flex: 1;">
+      <div class="card border-secondary h-100">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">Live Preview</h5>
         </div>
         <div class="card-body">
-          <p><strong>Name:</strong> {{name || '(Not entered)'}}</p>
-          <p><strong>Email:</strong> {{email || '(Not entered)'}}</p>
-          <p><strong>Message:</strong> {{message || '(Not entered)'}}</p>
+          <div class="mb-3">
+            <label class="text-muted small">NAME</label>
+            <div class="p-2 bg-light rounded" ng-class="{'fst-italic text-muted': !name}">
+              {{name || 'No data entered'}}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-muted small">EMAIL</label>
+            <div class="p-2 bg-light rounded" ng-class="{'fst-italic text-muted': !email}">
+              {{email || 'No data entered'}}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-muted small">MESSAGE</label>
+            <div class="p-2 bg-light rounded" style="min-height: 80px;" ng-class="{'fst-italic text-muted': !message}">
+              {{message || 'No data entered'}}
+            </div>
+          </div>
+
+          <hr>
+          <small class="text-muted">
+            <strong>💡 Two-way binding:</strong> Changes in the form automatically update this preview panel.
+          </small>
         </div>
       </div>
     </div>

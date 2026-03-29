@@ -1,9 +1,120 @@
-<div class="container" ng-controller="Practical7Controller">
-  <h1>Practical 7</h1>
-  <form ng-submit="submitForm()">
-    <input type="text" ng-model="name" placeholder="Name" />
-    <input type="email" ng-model="email" placeholder="Email" />
-    <input type="password" ng-model="password" placeholder="Password" />
-    <button type="submit">Submit</button>
-  </form>
+<div class="container mt-4" ng-controller="Practical7Controller">
+  <h4 class="mb-3">Practical 7 - Modules & Controllers</h4>
+  <p class="text-muted mb-4">AngularJS form with validation</p>
+
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Registration Form</h5>
+        </div>
+        <div class="card-body">
+          <form name="registerForm" ng-submit="submitForm()" novalidate>
+            <div class="mb-3">
+              <label for="name" class="form-label fw-semibold">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                ng-model="name"
+                ng-minlength="3"
+                ng-maxlength="30"
+                required
+                placeholder="Enter your full name"
+              />
+              <div ng-show="registerForm.name.$invalid && registerForm.name.$dirty" class="text-danger small">
+                <span ng-show="registerForm.name.$error.required">Name is required</span>
+                <span ng-show="registerForm.name.$error.minlength">Name must be at least 3 characters</span>
+                <span ng-show="registerForm.name.$error.maxlength">Name cannot exceed 30 characters</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                ng-model="email"
+                ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+                required
+                placeholder="Enter your email"
+              />
+              <div ng-show="registerForm.email.$invalid && registerForm.email.$dirty" class="text-danger small">
+                <span ng-show="registerForm.email.$error.required">Email is required</span>
+                <span ng-show="registerForm.email.$error.pattern">Please enter a valid email with complete domain (e.g., user@example.com)</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label fw-semibold">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                ng-model="password"
+                ng-minlength="8"
+                required
+                placeholder="Enter a strong password"
+              />
+              <small class="text-muted">Must be at least 8 characters</small>
+              <div ng-show="registerForm.password.$invalid && registerForm.password.$dirty" class="text-danger small">
+                <span ng-show="registerForm.password.$error.required">Password is required</span>
+                <span ng-show="registerForm.password.$error.minlength">Password must be at least 8 characters</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label fw-semibold">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                name="confirmPassword"
+                ng-model="confirmPassword"
+                ng-minlength="8"
+                compare-to="password"
+                required
+                placeholder="Confirm your password"
+              />
+              <div ng-show="registerForm.confirmPassword.$invalid && registerForm.confirmPassword.$dirty" class="text-danger small">
+                <span ng-show="registerForm.confirmPassword.$error.required">Please confirm your password</span>
+                <span ng-show="registerForm.confirmPassword.$error.minlength">Password must be at least 8 characters</span>
+                <span ng-show="registerForm.confirmPassword.$error.compareTo">Passwords do not match</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="message" class="form-label fw-semibold">Message (Optional)</label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                ng-model="message"
+                rows="3"
+                placeholder="Any additional message?"
+              ></textarea>
+              <small ng-class="{'text-danger fw-bold': message.length > 200, 'text-muted': message.length <= 200}">{{message.length}} / 200 characters</small>
+              <div ng-show="message.length > 200" class="text-danger small">
+                <span>Message exceeds 200 character limit</span>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Register</button>
+              <button type="button" class="btn btn-outline-secondary" ng-click="resetForm()">Clear</button>
+              <a href="#/" class="btn btn-link">← Back to Home</a>
+            </div>
+
+            <div ng-show="registerForm.$submitted && registerForm.$valid" class="alert alert-success mt-3 mb-0">
+              ✓ Form is valid! Click Register to submit.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
