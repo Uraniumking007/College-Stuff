@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import studentRoutes from './routes/studentRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -34,9 +35,11 @@ app.get('/api/health', (req, res) => {
    });
 });
 
+// API Routes
+app.use('/api/students', studentRoutes);
+
 // Start server
 app.listen(PORT, () => {
    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
-
 export default app;
