@@ -1,108 +1,27 @@
-interface RailFenceEncryptParameters {
-    plainText: string
-    rails: number
+function gcdS(a: number, b: number): number {
+  let dividend = a;
+  let divisor = b;
+
+  console.log(`Finding GCD(${a}, ${b})`);
+
+  while (divisor !== 0) {
+    const remainder = dividend % divisor;
+    console.log(`  ${dividend} % ${divisor} = ${remainder}`);
+    dividend = divisor;
+    divisor = remainder;
+  }
+
+  return dividend;
 }
 
-interface RailFenceDecryptParameters {
-    cipherText: string
-    rails: number
-}
+console.log("GCD(16, 12):");
+const result1 = gcdS(16, 12);
+console.log(`  GCD = ${result1}\n`);
 
-function railFenceEncrypt({ plainText, rails }: RailFenceEncryptParameters): string {
-    if (rails < 2) {
-        throw new Error("Number of rails must be at least 2")
-    }
+console.log("GCD(48, 18):");
+const result2 = gcdS(48, 18);
+console.log(`  GCD = ${result2}\n`);
 
-    const railStrings: string[] = Array.from({ length: rails }, () => "")
-
-    let currentRail = 0
-    let direction = 1
-
-    for (const char of plainText) {
-        railStrings[currentRail] += char
-
-        if (currentRail === 0) {
-            direction = 1
-        } else if (currentRail === rails - 1) {
-            direction = -1
-        }
-
-        currentRail += direction
-    }
-
-    return railStrings.join("")
-}
-
-function railFenceDecrypt({ cipherText, rails }: RailFenceDecryptParameters): string {
-    if (rails < 2) {
-        throw new Error("Number of rails must be at least 2")
-    }
-
-    const len = cipherText.length
-
-    const railLengths: number[] = new Array(rails).fill(0)
-    let currentRail = 0
-    let direction = 1
-
-    for (let i = 0; i < len; i++) {
-        railLengths[currentRail]++
-
-        if (currentRail === 0) {
-            direction = 1
-        } else if (currentRail === rails - 1) {
-            direction = -1
-        }
-
-        currentRail += direction
-    }
-
-    const railStrings: string[] = []
-    let index = 0
-
-    for (let r = 0; r < rails; r++) {
-        railStrings.push(cipherText.slice(index, index + railLengths[r]))
-        index += railLengths[r]
-    }
-
-    const railPositions: number[] = new Array(rails).fill(0)
-
-    let result = ""
-    currentRail = 0
-    direction = 1
-
-    for (let i = 0; i < len; i++) {
-        result += railStrings[currentRail][railPositions[currentRail]]
-        railPositions[currentRail]++
-
-        if (currentRail === 0) {
-            direction = 1
-        } else if (currentRail === rails - 1) {
-            direction = -1
-        }
-
-        currentRail += direction
-    }
-
-    return result
-}
-
-const plainText7 = "Meetme"
-const rails7 = 2
-
-console.log("RAIL FENCE CIPHER")
-console.log(`Plaintext: ${plainText7}`)
-console.log(`Rails: ${rails7}`)
-
-const encrypted7 = railFenceEncrypt({ plainText: plainText7, rails: rails7 })
-console.log(`Ciphertext: ${encrypted7}`)
-
-const decrypted7 = railFenceDecrypt({ cipherText: encrypted7, rails: rails7 })
-console.log(`Decrypted: ${decrypted7}`)
-
-if (encrypted7 === "MEMEET") {
-    console.log("\n✓ ENCRYPTION VERIFIED")
-}
-
-if (decrypted7 === plainText7) {
-    console.log("✓ DECRYPTION VERIFIED")
-}
+console.log("GCD(1071, 462):");
+const result3 = gcdS(1071, 462);
+console.log(`  GCD = ${result3}\n`);

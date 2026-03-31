@@ -1,64 +1,56 @@
-function gcd10(a: number, b: number): number {
+function gcd(a: number, b: number): number {
     while (b !== 0) {
-        ;[a, b] = [b, a % b]
+        const temp = b
+        b = a % b
+        a = temp
     }
-    return Math.abs(a)
+    return a
 }
 
-function totientNaive10(n: number): number {
-    if (n <= 0) return 0
+function isRelativelyPrime(a: number, b: number): boolean {
+    return gcd(a, b) === 1
+}
 
+function eulerTotient(n: number): number {
     let count = 0
-    for (let k = 1; k < n; k++) {
-        if (gcd10(n, k) === 1) count++
+    for (let i = 1; i < n; i++) {
+        if (isRelativelyPrime(i, n)) {
+            count++
+        }
     }
     return count
 }
 
-function totientEfficient10(n: number): number {
-    if (n <= 0) return 0
-
-    let result = n
-    let original = n
-
-    if (n % 2 === 0) {
-        result -= Math.floor(result / 2)
-        while (n % 2 === 0) {
-            n = Math.floor(n / 2)
+function displayTotientInfo(n: number): void {
+    const phi = eulerTotient(n)
+    const relativelyPrimes: number[] = []
+    
+    for (let i = 1; i < n; i++) {
+        if (isRelativelyPrime(i, n)) {
+            relativelyPrimes.push(i)
         }
     }
-
-    for (let p = 3; p * p <= n; p += 2) {
-        if (n % p === 0) {
-            result -= Math.floor(result / p)
-            while (n % p === 0) {
-                n = Math.floor(n / p)
-            }
-        }
-    }
-
-    if (n > 1) {
-        result -= Math.floor(result / n)
-    }
-
-    return result
+    
+    console.log(`φ(${n}) = ${phi}`)
+    console.log(`  Numbers relatively prime to ${n}: [${relativelyPrimes.join(", ")}]`)
 }
 
-const testNumbers = [35, 37]
+console.log("=== Euler's Totient Function ===\n")
 
-console.log("EULER'S TOTIENT FUNCTION φ(n)")
-console.log("φ(n) = count of integers k where 1 ≤ k < n and gcd(n, k) = 1\n")
+displayTotientInfo(35)
+console.log()
+displayTotientInfo(37)
 
-for (const n of testNumbers) {
-    console.log(`n = ${n}`)
-    const phiNaive = totientNaive10(n)
-    const phiEfficient = totientEfficient10(n)
-    console.log(`φ(${n}) = ${phiEfficient}`)
+console.log("\n=== Observations ===")
+console.log("For n = 35 (composite: 5 × 7):")
+console.log("  φ(35) = 24")
+console.log("  Formula: φ(35) = 35 × (1 - 1/5) × (1 - 1/7) = 35 × 4/5 × 6/7 = 24 ✓")
 
-    if (phiNaive === phiEfficient) {
-        console.log(`✓ Verified: Both methods give same result`)
-    } else {
-        console.log(`✗ Mismatch: Naive=${phiNaive}, Efficient=${phiEfficient}`)
-    }
-    console.log()
-}
+console.log("\nFor n = 37 (prime):")
+console.log("  φ(37) = 36")
+console.log("  Formula: φ(p) = p - 1 for prime p = 37 - 1 = 36 ✓")
+
+console.log("\n=== Key Behavior ===")
+console.log("1. For prime p: φ(p) = p - 1")
+console.log("2. For composite n: φ(n) < n - 1")
+console.log("3. Multiplicative: φ(ab) = φ(a) × φ(b) when gcd(a,b) = 1")
