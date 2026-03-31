@@ -1,116 +1,96 @@
-interface ColumnarEncryptParameters {
+interface RailFenceEncryptParameters {
     plainText: string
-    key: string
+    rails: number
 }
 
-interface ColumnarDecryptParameters {
+interface RailFenceDecryptParameters {
     cipherText: string
-    key: string
+    rails: number
 }
 
-function columnarParseKey(key: string): number[] {
-    const keyDigits = key.split('').map(Number)
-    const order = keyDigits.map((_, index) => index)
-    order.sort((a, b) => keyDigits[a] - keyDigits[b])
-    return order
+function railFenceEncrypt({ plainText, rails }: RailFenceEncryptParameters): string {
+    if (rails < 2) {
+        throw new Error("Rails must be at least 2")
+    }
+
+    const normalizedText = plainText.toUpperCase().replace(/\s+/g, '')
+    const fence: string[][] = Array.from({ length: rails }, () => [])
+
+    let rail = 0
+    let direction = 1
+
+    for (const char of normalizedText) {
+        fence[rail].push(char)
+
+        if (rail === 0) {
+            direction = 1
+        } else if (rail === rails - 1) {
+            direction = -1
+        }
+
+        rail += direction
+    }
+
+    return fence.map((r) => r.join('')).join('')
 }
 
-function columnarTranspositionEncrypt({
-    plainText,
-    key
-}: ColumnarEncryptParameters): string {
-    const keyLength = key.length
-
-    if (keyLength < 2) {
-        throw new Error("Key must have at least 2 digits")
+function railFenceDecrypt({ cipherText, rails }: RailFenceDecryptParameters): string {
+    if (rails < 2) {
+        throw new Error("Rails must be at least 2")
     }
 
-    if (!/^\d+$/.test(key)) {
-        throw new Error("Key must contain only digits")
+    const n = cipherText.length
+    const railLengths: number[] = Array(rails).fill(0)
+
+    let rail = 0
+    let direction = 1
+
+    for (let i = 0; i < n; i++) {
+        railLengths[rail]++
+
+        if (rail === 0) {
+            direction = 1
+        } else if (rail === rails - 1) {
+            direction = -1
+        }
+
+        rail += direction
     }
 
-    const numCols = keyLength
-    const numRows = Math.ceil(plainText.length / numCols)
+    const fence: string[][] = Array.from({ length: rails }, () => [])
 
-    const grid: string[][] = []
-    for (let row = 0; row < numRows; row++) {
-        grid.push([])
-        for (let col = 0; col < numCols; col++) {
-            const index = row * numCols + col
-            grid[row].push(index < plainText.length ? plainText[index] : '')
+    let index = 0
+    for (let i = 0; i < rails; i++) {
+        for (let j = 0; j < railLengths[i]; j++) {
+            fence[i].push(cipherText[index++])
         }
     }
 
-    const colOrder = columnarParseKey(key)
+    const result: string[] = []
+    rail = 0
+    direction = 1
+    const railIndices: number[] = Array(rails).fill(0)
 
-    let ciphertext = ''
-    for (const colIndex of colOrder) {
-        for (let row = 0; row < numRows; row++) {
-            if (grid[row][colIndex]) {
-                ciphertext += grid[row][colIndex]
-            }
+    for (let i = 0; i < n; i++) {
+        result.push(fence[rail][railIndices[rail]++])
+
+        if (rail === 0) {
+            direction = 1
+        } else if (rail === rails - 1) {
+            direction = -1
         }
+
+        rail += direction
     }
 
-    return ciphertext
+    return result.join('')
 }
 
-function columnarTranspositionDecrypt({
-    cipherText,
-    key
-}: ColumnarDecryptParameters): string {
-    const keyLength = key.length
+const plainText5 = "Meetme"
+const rails5 = 2
 
-    if (keyLength < 2) {
-        throw new Error("Key must have at least 2 digits")
-    }
+const encrypted5 = railFenceEncrypt({ plainText: plainText5, rails: rails5 })
+console.log(encrypted5)
 
-    if (!/^\d+$/.test(key)) {
-        throw new Error("Key must contain only digits")
-    }
-
-    const numCols = keyLength
-    const numRows = Math.ceil(cipherText.length / numCols)
-
-    const colLengths: number[] = []
-    for (let col = 0; col < numCols; col++) {
-        const fullRows = Math.floor(cipherText.length / numCols)
-        const extra = col < (cipherText.length % numCols) ? 1 : 0
-        colLengths.push(fullRows + extra)
-    }
-
-    const colOrder = columnarParseKey(key)
-
-    const grid: string[][] = Array.from({ length: numRows }, () =>
-        new Array(numCols).fill('')
-    )
-
-    let textIndex = 0
-    for (const colIndex of colOrder) {
-        for (let row = 0; row < colLengths[colIndex]; row++) {
-            grid[row][colIndex] = cipherText[textIndex++]
-        }
-    }
-
-    let plaintext = ''
-    for (let row = 0; row < numRows; row++) {
-        for (let col = 0; col < numCols; col++) {
-            if (grid[row][col]) {
-                plaintext += grid[row][col]
-            }
-        }
-    }
-
-    return plaintext
-}
-
-const plainText5 = "hello world"
-const key5 = "312"
-
-const encrypted5 = columnarTranspositionEncrypt({ plainText: plainText5, key: key5 })
-console.log("Plaintext:", plainText5)
-console.log("Key:", key5)
-console.log("Ciphertext:", encrypted5)
-
-const decrypted5 = columnarTranspositionDecrypt({ cipherText: encrypted5, key: key5 })
-console.log("Decrypted:", decrypted5)
+const decrypted5 = railFenceDecrypt({ cipherText: encrypted5, rails: rails5 })
+console.log(decrypted5)
