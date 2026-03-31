@@ -3,7 +3,6 @@
  * Test case: p=23, g=5, Alice private key=6, Bob private key=15, Expected shared secret=2
  */
 
-// ============ DIFFIE-HELLMAN IMPLEMENTATION ============
 
 function generatePrivateKey(p: number): number {
     // Generate random private key in range [2, p-2]
@@ -57,7 +56,6 @@ function diffieHellmanKeyExchange(): number {
 
 // Run the Diffie-Hellman key exchange
 console.log("Diffie-Hellman Key Exchange Demonstration");
-console.log("=========================================");
 const sharedSecret = diffieHellmanKeyExchange();
 console.log("\nResult:");
 console.log(`  Shared secret: S = ${sharedSecret}`);

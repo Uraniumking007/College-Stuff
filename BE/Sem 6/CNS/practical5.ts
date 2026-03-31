@@ -1,177 +1,116 @@
-/**
- * Rail Fence Cipher Implementation
- *
- * A transposition cipher that writes the message in a zigzag pattern
- * across multiple rails, then reads off each rail sequentially.
- */
-
-interface EncryptParameters {
-  plainText: string
-  rails: number
+interface ColumnarEncryptParameters {
+    plainText: string
+    key: string
 }
 
-interface DecryptParameters {
-  cipherText: string
-  rails: number
+interface ColumnarDecryptParameters {
+    cipherText: string
+    key: string
 }
 
-/**
- * Encrypt plaintext using Rail Fence cipher
- *
- * Algorithm:
- * 1. Create 'rails' number of empty strings
- * 2. Write each character in zigzag pattern across rails
- * 3. Read all rails sequentially to form ciphertext
- */
-function railFenceEncrypt({ plainText, rails }: EncryptParameters): string {
-  if (rails < 2) {
-    throw new Error("Number of rails must be at least 2")
-  }
+function columnarParseKey(key: string): number[] {
+    const keyDigits = key.split('').map(Number)
+    const order = keyDigits.map((_, index) => index)
+    order.sort((a, b) => keyDigits[a] - keyDigits[b])
+    return order
+}
 
-  // Create rails array
-  const railStrings: string[] = Array.from({ length: rails }, () => "")
+function columnarTranspositionEncrypt({
+    plainText,
+    key
+}: ColumnarEncryptParameters): string {
+    const keyLength = key.length
 
-  // Write characters in zigzag pattern
-  let currentRail = 0
-  let direction = 1 // going down
-
-  for (const char of plainText) {
-    railStrings[currentRail] += char
-
-    // Change direction at top or bottom rail
-    if (currentRail === 0) {
-      direction = 1
-    } else if (currentRail === rails - 1) {
-      direction = -1
+    if (keyLength < 2) {
+        throw new Error("Key must have at least 2 digits")
     }
 
-    currentRail += direction
-  }
-
-  // Read all rails sequentially
-  return railStrings.join("")
-}
-
-/**
- * Decrypt ciphertext using Rail Fence cipher
- *
- * Algorithm:
- * 1. Determine length of each rail
- * 2. Fill rails with ciphertext characters
- * 3. Read in zigzag pattern to recover plaintext
- */
-function railFenceDecrypt({ cipherText, rails }: DecryptParameters): string {
-  if (rails < 2) {
-    throw new Error("Number of rails must be at least 2")
-  }
-
-  const len = cipherText.length
-
-  // Step 1: Determine length of each rail
-  const railLengths: number[] = new Array(rails).fill(0)
-  let currentRail = 0
-  let direction = 1
-
-  for (let i = 0; i < len; i++) {
-    railLengths[currentRail]++
-
-    if (currentRail === 0) {
-      direction = 1
-    } else if (currentRail === rails - 1) {
-      direction = -1
+    if (!/^\d+$/.test(key)) {
+        throw new Error("Key must contain only digits")
     }
 
-    currentRail += direction
-  }
+    const numCols = keyLength
+    const numRows = Math.ceil(plainText.length / numCols)
 
-  // Step 2: Fill rails with ciphertext characters
-  const railStrings: string[] = []
-  let index = 0
-
-  for (let r = 0; r < rails; r++) {
-    railStrings.push(cipherText.slice(index, index + railLengths[r]))
-    index += railLengths[r]
-  }
-
-  // Step 3: Create position array to track indices in each rail
-  const railPositions: number[] = new Array(rails).fill(0)
-
-  // Step 4: Read in zigzag pattern
-  let result = ""
-  currentRail = 0
-  direction = 1
-
-  for (let i = 0; i < len; i++) {
-    result += railStrings[currentRail][railPositions[currentRail]]
-    railPositions[currentRail]++
-
-    if (currentRail === 0) {
-      direction = 1
-    } else if (currentRail === rails - 1) {
-      direction = -1
+    const grid: string[][] = []
+    for (let row = 0; row < numRows; row++) {
+        grid.push([])
+        for (let col = 0; col < numCols; col++) {
+            const index = row * numCols + col
+            grid[row].push(index < plainText.length ? plainText[index] : '')
+        }
     }
 
-    currentRail += direction
-  }
+    const colOrder = columnarParseKey(key)
 
-  return result
+    let ciphertext = ''
+    for (const colIndex of colOrder) {
+        for (let row = 0; row < numRows; row++) {
+            if (grid[row][colIndex]) {
+                ciphertext += grid[row][colIndex]
+            }
+        }
+    }
+
+    return ciphertext
 }
 
-// ============ TEST CASE ============
+function columnarTranspositionDecrypt({
+    cipherText,
+    key
+}: ColumnarDecryptParameters): string {
+    const keyLength = key.length
 
-console.log("=" .repeat(60))
-console.log("RAIL FENCE CIPHER - TEST CASE")
-console.log("=" .repeat(60))
+    if (keyLength < 2) {
+        throw new Error("Key must have at least 2 digits")
+    }
 
-const PLAINTEXT = "Meetme"
-const RAILS = 2
+    if (!/^\d+$/.test(key)) {
+        throw new Error("Key must contain only digits")
+    }
 
-console.log(`\nPlaintext: ${PLAINTEXT}`)
-console.log(`Number of rails: ${RAILS}`)
+    const numCols = keyLength
+    const numRows = Math.ceil(cipherText.length / numCols)
 
-// Show the rail pattern for 2 rails
-console.log("\nRail Pattern (2 rails):")
-console.log("  Rail 0: M . e . m . e  → 'Meme'")
-console.log("  Rail 1: . e . e . t .  → 'eet'")
+    const colLengths: number[] = []
+    for (let col = 0; col < numCols; col++) {
+        const fullRows = Math.floor(cipherText.length / numCols)
+        const extra = col < (cipherText.length % numCols) ? 1 : 0
+        colLengths.push(fullRows + extra)
+    }
 
-const encrypted = railFenceEncrypt({ plainText: PLAINTEXT, rails: RAILS })
-console.log(`\nCiphertext: ${encrypted}`)
+    const colOrder = columnarParseKey(key)
 
-const decrypted = railFenceDecrypt({ cipherText: encrypted, rails: RAILS })
-console.log(`Decrypted: ${decrypted}`)
+    const grid: string[][] = Array.from({ length: numRows }, () =>
+        new Array(numCols).fill('')
+    )
 
-// Verification
-if (encrypted === "MEMEET") {
-  console.log("\n✓ ENCRYPTION VERIFIED: 'Meetme' → 'MEMEET'")
-} else {
-  console.log(`\n✗ Expected 'MEMEET', got '${encrypted}'`)
+    let textIndex = 0
+    for (const colIndex of colOrder) {
+        for (let row = 0; row < colLengths[colIndex]; row++) {
+            grid[row][colIndex] = cipherText[textIndex++]
+        }
+    }
+
+    let plaintext = ''
+    for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
+            if (grid[row][col]) {
+                plaintext += grid[row][col]
+            }
+        }
+    }
+
+    return plaintext
 }
 
-if (decrypted === PLAINTEXT) {
-  console.log("✓ DECRYPTION VERIFIED: Successfully recovered original plaintext")
-} else {
-  console.log(`✗ Decryption failed: expected '${PLAINTEXT}', got '${decrypted}'`)
-}
+const plainText5 = "hello world"
+const key5 = "312"
 
-// Additional test with 3 rails
-console.log("\n" + "=".repeat(60))
-console.log("ADDITIONAL TEST: 3 Rails")
-console.log("=".repeat(60))
+const encrypted5 = columnarTranspositionEncrypt({ plainText: plainText5, key: key5 })
+console.log("Plaintext:", plainText5)
+console.log("Key:", key5)
+console.log("Ciphertext:", encrypted5)
 
-const plaintext3 = "WEAREDISCOVEREDFLEEATONCE"
-const rails3 = 3
-
-console.log(`\nPlaintext: ${plaintext3}`)
-console.log(`Number of rails: ${rails3}`)
-
-const encrypted3 = railFenceEncrypt({ plainText: plaintext3, rails: rails3 })
-console.log(`Ciphertext: ${encrypted3}`)
-
-const decrypted3 = railFenceDecrypt({ cipherText: encrypted3, rails: rails3 })
-console.log(`Decrypted: ${decrypted3}`)
-
-if (decrypted3 === plaintext3) {
-  console.log("\n✓ VERIFIED: 3-rail encryption/decryption works correctly")
-} else {
-  console.log(`\n✗ Failed: expected '${plaintext3}', got '${decrypted3}'`)
-}
+const decrypted5 = columnarTranspositionDecrypt({ cipherText: encrypted5, key: key5 })
+console.log("Decrypted:", decrypted5)
