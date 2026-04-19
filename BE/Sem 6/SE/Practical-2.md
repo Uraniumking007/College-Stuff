@@ -1,4 +1,4 @@
-# Netlify (Subscription Model)
+# Netflix (Subscription Model)
 
 ## Functional Requirement
 
