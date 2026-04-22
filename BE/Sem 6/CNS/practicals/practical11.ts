@@ -7,6 +7,25 @@ interface ShortcutOptions {
     shortcutPath: string
 }
 
+async function getDesktopPath(): Promise<string> {
+    const desktopResolver = "[Environment]::GetFolderPath('Desktop')"
+    const { stdout } = await execFileAsync("powershell.exe", [
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        desktopResolver
+    ])
+    const desktopPath = stdout.trim()
+
+    if (!desktopPath) {
+        throw new Error("Desktop path could not be resolved")
+    }
+
+    return desktopPath
+}
+
 async function createFileShortcut({ targetFilePath, shortcutPath }: ShortcutOptions): Promise<void> {
     const escapedTarget = targetFilePath.replace(/'/g, "''")
     const escapedShortcut = shortcutPath.replace(/'/g, "''")
@@ -30,9 +49,7 @@ async function createFileShortcut({ targetFilePath, shortcutPath }: ShortcutOpti
 
 async function main(): Promise<void> {
     const targetFilePath = "C:\\Users\\Public\\Documents\\sample.txt"
-    const desktopPath = process.env.USERPROFILE
-        ? `${process.env.USERPROFILE}\\Desktop`
-        : "C:\\Users\\Public\\Desktop"
+    const desktopPath = await getDesktopPath()
     const shortcutPath = `${desktopPath}\\sample-file-shortcut.lnk`
 
     await createFileShortcut({ targetFilePath, shortcutPath })
