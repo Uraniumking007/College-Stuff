@@ -1,5 +1,9 @@
-\documentclass[conference]{IEEEtran}
-% IEEE conference paper template (IEEEtran v1.8b)
+%% main.tex
+%% IEEE Journal Paper — Research and Evaluation
+%% Based on bare_jrnl.tex (IEEEtran.cls V1.8b) by Michael Shell
+%% See http://www.michaelshell.org/tex/ieeetran/
+
+\documentclass[journal]{IEEEtran}
 
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -12,19 +16,24 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
-\newcommand{\keywords}[1]{\par\addvspace\medskipamount\noindent\textbf{Keywords:} #1}
+\hyphenation{op-tical net-works semi-conduc-tor}
 
 \begin{document}
 
-\title{Performance Evaluation of the RSA Cryptosystem in\\Web Applications: Standard vs.\ Optimized Implementations}
+\title{Performance Evaluation of the RSA Cryptosystem in Web Applications: Standard vs.\ Optimized Implementations}
 
 \author{
-\IEEEauthorblockN{Bhavesh Patil, Devendra Patil, Sakti vala}
-\IEEEauthorblockA{Department of Information Technology\\
-C. K. Pithawala College of Engineering\\
-Surat, Gujarat, India\\
+Bhavesh~Patil,
+Devendra~Patil,
+and~Sakti~Vala% <-this % stops a space
+\thanks{All authors are with the Department of Information Technology,
+C.~K.~Pithawala College of Engineering, Surat, Gujarat, India.}%
 }
-}
+
+\markboth{IEEE Research and Evaluation: RSA Performance in Web Applications}%
+{Patil \MakeLowercase{\textit{et al.}}: RSA Performance Evaluation}
+
+\IEEEspecialpapernotice{(Research and Evaluation)}
 
 \maketitle
 
@@ -32,39 +41,45 @@ Surat, Gujarat, India\\
 Due to rapid technological growth, online applications now face serious security challenges in data transmission, reception, and user management. The Rivest--Shamir--Adleman (RSA) cryptosystem is still widely used for secure key exchange, digital signatures, and identity verification. However, traditional RSA is slow, consumes high computational power, and struggles with efficient key management in web environments. This study analyzes RSA's performance and security in web applications and highlights its weaknesses against complex mathematical and side-channel attacks. To improve efficiency, we explore optimization techniques such as the Chinese Remainder Theorem (CRT) for decryption, sliding-window modular exponentiation, Montgomery multiplication, key caching, and hybrid RSA+AES-256-GCM envelope encryption. Experimental results indicate that key caching provides the largest practical speedup (43--93$\times$), CRT-based decryption yields a measurable 1.23$\times$ improvement at 2048-bit keys, and hybrid encryption is 8.3--398$\times$ faster than pure RSA for bulk data. The study finds that hybrid RSA frameworks are necessary for modern web security, especially as quantum computing continues to develop and create new threats to data protection.
 \end{abstract}
 
-\keywords{RSA Algorithm, Web Application Security, Performance Optimization, Hybrid End-to-End Encryption, Chinese Remainder Theorem, Post-Quantum Cryptography}
+\begin{IEEEkeywords}
+RSA Algorithm, Web Application Security, Performance Optimization, Hybrid End-to-End Encryption, Chinese Remainder Theorem, Post-Quantum Cryptography.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
 
 \section{Introduction}
 \label{sec:intro}
+\IEEEPARstart{T}{he} rapid growth of information technology has made web applications an integral part of everyday life and work. This phenomenon has led to a demand for strong data protection in areas like e-commerce, social networks, and online finance. However, this growth also poses significant cybersecurity risks, particularly in terms of safeguarding users' privacy during data transmission and processing on the cloud. HTTPS and other classic transport layer encryption methods have been crucial for keeping data safe, but they often leave server-side data processing and storage open to attack. As a result, creating effective and reliable encryption systems has become a key focus for researchers.
 
-Because information technology is growing so quickly, web apps are now a part of everyday life and work. This phenomenon has led to a demand for strong data protection in areas like e-commerce, social networks, and online finance. However, this growth also poses significant cybersecurity risks, particularly in terms of safeguarding users' privacy during data transmission and processing on the cloud. HTTPS and other classic transport layer encryption methods have been crucial for keeping data safe, but they often leave server-side data processing and storage open to attack. As a result, creating effective and reliable encryption systems has become a key focus for researchers to address the high needs of today's web systems.
+The Rivest--Shamir--Adleman (RSA) cryptosystem~\cite{rivest1978} is a fundamental asymmetric encryption technique that protects information by making it difficult to factor massive numbers. It is widely used for secure key exchange, digital signatures, and identity verification. Even though many people use it, typical RSA encryption takes a lot of computing power, which makes processing slow and key management challenging. Due to these speed issues, RSA is not a viable way to encrypt large amounts of data directly. Instead, it is mostly used to protect key exchanges.
 
-The Rivest--Shamir--Adleman (RSA) cryptosystem~\cite{rivest1978} is a fundamental asymmetric encryption technique that protects information by making it difficult to factor massive numbers. It is widely used to keep personal information safe by allowing secure key exchange, digital signatures, and identity verification. Even though many people use it, typical RSA encryption takes a lot of computing power, which makes processing slow and key management challenging. Due to these speed issues, RSA is not a viable way to encrypt large amounts of data directly. Instead, it is mostly used to protect key exchanges.
-
-The RSA algorithm has more than just computational limits; it also has significant and evolving security problems. It is subject to attacks like modulus decomposition, co-modulus attacks, and small exponent assaults because of the way its internal math works~\cite{boneh1999}. Advanced cryptanalysis, especially lattice-based approaches developed by Coppersmith~\cite{coppersmith1997}, has shown that RSA variants can be attacked in polynomial time under certain conditions. What's even more concerning is that quantum computing could end RSA; Shor's algorithm~\cite{shor1997} can solve the integer factorization problem in polynomial time.
+The RSA algorithm has more than just computational limits; it also has significant and evolving security problems. It is subject to attacks like modulus decomposition, co-modulus attacks, and small exponent assaults~\cite{boneh1999}. Advanced cryptanalysis, especially lattice-based approaches developed by Coppersmith~\cite{coppersmith1997}, has shown that RSA variants can be attacked in polynomial time under certain conditions. What's even more concerning is that quantum computing could end RSA; Shor's algorithm~\cite{shor1997} can solve the integer factorization problem in polynomial time.
 
 Modern systems must use more than one encryption method because a single method generally doesn't meet both the high performance and strong security needs of sophisticated online applications. The hybrid end-to-end encryption (E2EE) architecture effectively balances the rapid processing of symmetric algorithms such as AES with the robust key management of asymmetric algorithms.
 
-This study offers an exhaustive assessment of the RSA algorithm's performance and security in contemporary online applications. We examine algorithm-level optimizations, including CRT-based decryption, sliding-window exponentiation, Montgomery multiplication~\cite{montgomery1985}, and key caching, alongside dynamic load-aware resource allocation designed to expedite encryption during peak user activity. We also examine the application-layer payload protection of RSA in hybrid E2EE architectures. Finally, the paper discusses the proactive shift to Post-Quantum Cryptography (PQC)~\cite{nist2024} to ensure that web application security remains future-proof.
+This study offers an exhaustive assessment of the RSA algorithm's performance and security in contemporary online applications. We examine algorithm-level optimizations, including CRT-based decryption~\cite{garner1959}, sliding-window exponentiation, Montgomery multiplication~\cite{montgomery1985}, and key caching, alongside dynamic load-aware resource allocation designed to expedite encryption during peak user activity. We also examine the application-layer payload protection of RSA in hybrid E2EE architectures. Finally, the paper discusses the proactive shift to Post-Quantum Cryptography (PQC)~\cite{nist2024} to ensure that web application security remains future-proof.
+
 
 \section{Literature Review}
 \label{sec:litreview}
 
-\subsection{Improving RSA Performance and Solving Speed Issues}
+\subsection{Improving RSA Performance}
 
-Although the RSA algorithm~\cite{rivest1978} is essential to digital security, its reliance on large integer factorization makes it computationally demanding. When it comes to large-scale data transmission and web applications with high traffic, RSA frequently degrades system performance. Recent research focuses on improving resource management and algorithm-level optimization to address this. Through the use of fast modular exponentiation methods and optimal parameter selection, the SMM-RSA technique and similar approaches enhance performance. These enhancements can lower memory usage and boost encryption efficiency by about 30\% when paired with dynamic, load-aware resource allocation. Using big data platforms like Hadoop for distributed RSA processing is another way to handle large-scale encryption tasks more effectively.
+Although the RSA algorithm~\cite{rivest1978} is essential to digital security, its reliance on large integer factorization makes it computationally demanding. When it comes to large-scale data transmission and web applications with high traffic, RSA frequently degrades system performance. Recent research focuses on improving resource management and algorithm-level optimization to address this. Through the use of fast modular exponentiation methods and optimal parameter selection, techniques like SMM-RSA enhance performance. These enhancements can lower memory usage and boost encryption efficiency by about 30\% when paired with dynamic, load-aware resource allocation.
 
 \subsection{Classical Cryptanalysis and Lattice-Based Attacks}
 
-While performance optimization is important, RSA's resistance to advanced cryptanalysis remains a major research area. Historically, RSA has faced attacks targeting its mathematical structure, such as Wiener's attack on small private exponents~\cite{wiener1990} and partial key exposure attacks. A major breakthrough in RSA cryptanalysis came from Coppersmith's lattice-based method~\cite{coppersmith1997}, which transforms the RSA-breaking problem into finding short vectors in a lattice. This approach is effective when partial key information is known. Boneh, DeMillo, and Lipton~\cite{boneh2001} demonstrated that even computational faults during RSA operations can leak key information, motivating the inclusion of fault-attack protection in our optimized implementation.
+While performance optimization is important, RSA's resistance to advanced cryptanalysis remains a major research area. Historically, RSA has faced attacks targeting its mathematical structure, such as Wiener's attack on small private exponents~\cite{wiener1990} and partial key exposure attacks. A major breakthrough in RSA cryptanalysis came from Coppersmith's lattice-based method~\cite{coppersmith1997}, which transforms the RSA-breaking problem into finding short vectors in a lattice. Boneh, DeMillo, and Lipton~\cite{boneh2001} demonstrated that even computational faults during RSA operations can leak key information, motivating fault-attack protection in optimized implementations.
 
-\subsection{Hybrid End-to-End Encryption Architectures}
+\subsection{Hybrid End-to-End Encryption}
 
-Modern research supports hybrid E2EE models because no single encryption method can provide both high speed and strong security. Hybrid systems combine symmetric encryption algorithms like AES-GCM, which are fast for encrypting large data, with asymmetric algorithms like RSA or ECC for secure key exchange and authentication~\cite{menezes2001}. This method protects data at both the application and network levels and addresses limitations of traditional transport protocols like HTTPS.
+Modern research supports hybrid E2EE models because no single encryption method can provide both high speed and strong security. Hybrid systems combine symmetric encryption algorithms like AES-GCM with asymmetric algorithms like RSA for secure key exchange~\cite{menezes2001}. This method protects data at both the application and network levels and addresses limitations of traditional transport protocols like HTTPS.
 
-\subsection{Quantum Computing Threat and Post-Quantum Cryptography}
+\subsection{Quantum Computing Threat}
 
 Quantum computing is considered the most serious future threat to RSA. Shor's algorithm~\cite{shor1997} proves that a sufficiently powerful quantum computer could break RSA-3072 in polynomial time. Because of this, there is global agreement on transitioning to Post-Quantum Cryptography (PQC). Lattice-based schemes such as CRYSTALS-Kyber~\cite{kyber2023} and CRYSTALS-Dilithium~\cite{dilithium2022} rely on the Learning With Errors problem, which is resistant to both classical and quantum attacks.
+
 
 \section{Methodology}
 \label{sec:methodology}
@@ -80,7 +95,7 @@ The project is organized into four modules totaling approximately 1,690 lines of
 \begin{itemize}
     \item \textbf{standard\_rsa/}: A baseline RSA implementation with no algorithmic optimizations. This module implements key generation using the Miller-Rabin primality test, textbook RSA encryption and decryption using $c = m^e \bmod n$ and $m = c^d \bmod n$, naive square-and-multiply modular exponentiation, and PKCS\#1 v1.5-style padding~\cite{pkcs1_2016}. Every function call generates fresh keys with no caching.
 
-    \item \textbf{optimized\_rsa/}: An enhanced RSA implementation incorporating eight optimizations: (1)~CRT for decryption~\cite{garner1959}, splitting full-size exponentiation into two half-size operations; (2)~sliding-window modular exponentiation with a 4-bit window; (3)~Montgomery multiplication~\cite{montgomery1985}; (4)~key caching via a \texttt{KeyCache} class; (5)~batch encrypt/decrypt functions; (6)~pre-computed CRT parameters ($d_p$, $d_q$, $q_{\mathrm{inv}}$); (7)~hybrid RSA+AES-256-GCM encryption; and (8)~fault-attack protection~\cite{boneh2001}.
+    \item \textbf{optimized\_rsa/}: An enhanced RSA implementation incorporating eight optimizations: (1)~CRT for decryption~\cite{garner1959}; (2)~sliding-window modular exponentiation with a 4-bit window; (3)~Montgomery multiplication~\cite{montgomery1985}; (4)~key caching via a \texttt{KeyCache} class; (5)~batch encrypt/decrypt functions; (6)~pre-computed CRT parameters ($d_p$, $d_q$, $q_{\mathrm{inv}}$); (7)~hybrid RSA+AES-256-GCM encryption; and (8)~fault-attack protection~\cite{boneh2001}.
 
     \item \textbf{tests/}: Six comprehensive test files evaluating both implementations across multiple performance dimensions.
 
@@ -116,11 +131,12 @@ The hybrid RSA+AES-GCM architecture follows the envelope encryption model. For e
 \begin{enumerate}
     \item A random 256-bit AES key is generated.
     \item The plaintext is encrypted using AES-256-GCM, providing authenticated encryption (AEAD).
-    \item The AES key (32~bytes) is encrypted using RSA with PKCS\#1 v1.5 padding~\cite{pkcs1_2016}, producing a wrapped key.
+    \item The AES key (32~bytes) is encrypted using RSA with PKCS\#1 v1.5 padding~\cite{pkcs1_2016}.
     \item The wrapped key, IV, ciphertext, and GCM tag are packaged into an envelope.
     \item Decryption reverses the process: RSA unwraps the AES key, which decrypts the ciphertext.
 \end{enumerate}
 This limits RSA to encrypting only 32~bytes regardless of data size, making throughput dominated by AES-GCM's hardware-accelerated performance.
+
 
 \section{Experimental Setup}
 \label{sec:setup}
@@ -128,17 +144,18 @@ This limits RSA to encrypting only 32~bytes regardless of data size, making thro
 \subsection{Test Environment}
 
 All experiments were conducted on the following configuration:
+
 \begin{itemize}
     \item \textbf{Processor:} Apple Silicon (ARM64), 10 performance cores
     \item \textbf{Memory:} 16~GB unified memory
     \item \textbf{Operating System:} macOS 26.4.1 (Darwin 25.4.0)
     \item \textbf{Python Version:} 3.14.4
     \item \textbf{Cryptography Library:} cryptography 46.0.7~\cite{cryptography_io}
-    \item \textbf{Memory Profiler:} tracemalloc (Python standard library)~\cite{python_tracemalloc}
+    \item \textbf{Memory Profiler:} tracemalloc~\cite{python_tracemalloc}
     \item \textbf{Concurrency:} threading + concurrent.futures~\cite{python_threading}
 \end{itemize}
 
-The Python cryptography library was used for AES-256-GCM operations in both implementations. All RSA operations (key generation, encryption, decryption, modular exponentiation) were implemented from scratch without relying on the library.
+The Python cryptography library was used for AES-256-GCM operations in both implementations. All RSA operations (key generation, encryption, decryption, modular exponentiation) were implemented from scratch.
 
 \subsection{Test Suite Design}
 
@@ -156,9 +173,6 @@ Six test suites were designed to evaluate both implementations:
 
 \textbf{Test~6---Concurrency and Throughput}: Simulates multi-user scenarios using \texttt{ThreadPoolExecutor} with 1--10 threads, measuring throughput, latency, and error rates.
 
-\subsection{Data Collection Methodology}
-
-Timing uses \texttt{time.perf\_counter()} (nanosecond precision). Memory uses \texttt{tracemalloc.start()} and \texttt{tracemalloc.get\_traced\_memory()}. Each benchmark runs 50~samples (speed) or 20~samples (memory) and reports mean, median, standard deviation, minimum, and maximum. The test runner executes each test as a separate subprocess for clean memory state.
 
 \section{Results and Analysis}
 \label{sec:results}
@@ -171,9 +185,10 @@ Both implementations passed all 40 correctness assertions. Modular exponentiatio
 
 Key generation showed the most dramatic improvement in the optimized implementation, as summarized in Table~\ref{tab:keygen}.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Key Generation Time Comparison}
-\begin{center}
+\label{tab:keygen}
+\centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Key Size} & \textbf{Standard (ms)} & \textbf{Optimized (ms)} & \textbf{Speedup} \\
@@ -185,8 +200,6 @@ Key generation showed the most dramatic improvement in the optimized implementat
 2048-bit & 1644.70 & 462.88 & 3.55$\times$ \\
 \hline
 \end{tabular}
-\label{tab:keygen}
-\end{center}
 \end{table}
 
 The optimized implementation achieves a consistent 2.2--3.6$\times$ speedup, primarily attributed to small-primes pre-filtering in the optimized Miller-Rabin test. At 2048-bit key sizes, the optimized implementation generates keys in approximately 463~ms compared to over 1.6~seconds for the standard implementation.
@@ -195,9 +208,10 @@ The optimized implementation achieves a consistent 2.2--3.6$\times$ speedup, pri
 
 Table~\ref{tab:encdec} presents the encryption and decryption performance results.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Encryption and Decryption Time Comparison}
-\begin{center}
+\label{tab:encdec}
+\centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Operation} & \textbf{Key Size} & \textbf{Std (ms)} & \textbf{Opt (ms)} & \textbf{Speedup} \\
@@ -215,19 +229,18 @@ Table~\ref{tab:encdec} presents the encryption and decryption performance result
  & 2048-bit & 23.096 & 18.703 & 1.23$\times$ \\
 \hline
 \end{tabular}
-\label{tab:encdec}
-\end{center}
 \end{table}
 
 For encryption, the standard implementation's naive square-and-multiply using Python's built-in arbitrary-precision integers is faster than the optimized implementation's Montgomery + sliding-window approach. This is because Python's \texttt{int} type uses highly optimized C-level arithmetic, and the overhead of Montgomery form conversion outweighs the theoretical benefit for the relatively small public exponent $e = 65537$ (only 17~bits).
 
 For decryption, the CRT advantage becomes visible at larger key sizes. At 2048-bit, the optimized implementation is 1.23$\times$ faster because CRT splits the 2048-bit decryption into two 1024-bit operations.
 
-The modular exponentiation benchmark in isolation (Table~\ref{tab:modexp}) shows this pattern clearly:
+The modular exponentiation benchmark in isolation (Table~\ref{tab:modexp}) shows this pattern clearly.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Modular Exponentiation Time (Isolated Benchmark)}
-\begin{center}
+\label{tab:modexp}
+\centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Operand Size} & \textbf{Standard (ms)} & \textbf{Optimized (ms)} & \textbf{Ratio} \\
@@ -239,8 +252,6 @@ The modular exponentiation benchmark in isolation (Table~\ref{tab:modexp}) shows
 2048-bit & 23.352 & 69.548 & 0.34$\times$ \\
 \hline
 \end{tabular}
-\label{tab:modexp}
-\end{center}
 \end{table}
 
 The Montgomery multiplication implementation in Python is approximately 3$\times$ slower than Python's native \texttt{pow()} because per-operation Python overhead (object creation, function calls, dictionary lookups) dominates the actual arithmetic.
@@ -253,9 +264,10 @@ The most impactful optimization in practical scenarios is key caching. With cold
 
 Table~\ref{tab:hybrid} confirms the overwhelming superiority of the hybrid approach.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Hybrid RSA+AES-GCM vs.\ Pure RSA Encryption Time}
-\begin{center}
+\label{tab:hybrid}
+\centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Data Size} & \textbf{Pure RSA (ms)} & \textbf{Hybrid (ms)} & \textbf{Speedup} \\
@@ -267,8 +279,6 @@ Table~\ref{tab:hybrid} confirms the overwhelming superiority of the hybrid appro
 50~KB & 126.702 & 0.318 & 398.0$\times$ \\
 \hline
 \end{tabular}
-\label{tab:hybrid}
-\end{center}
 \end{table}
 
 Pure RSA encrypts data in 117-byte chunks, requiring 9~RSA operations for 1~KB, 87 for 10~KB, and 435 for 50~KB. The hybrid approach performs exactly one RSA operation regardless of data size, with AES-GCM handling bulk encryption at near-constant time.
@@ -277,9 +287,10 @@ Pure RSA encrypts data in 117-byte chunks, requiring 9~RSA operations for 1~KB, 
 
 Table~\ref{tab:memory} presents memory allocation patterns.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Memory Usage Comparison (2048-bit unless noted)}
-\begin{center}
+\label{tab:memory}
+\centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Operation} & \textbf{Standard (KB)} & \textbf{Optimized (KB)} & \textbf{Change} \\
@@ -293,8 +304,6 @@ Decrypt (1024-bit) & 1.40 & 2.99 & +113.5\% \\
 mod\_exp (2048-bit) & 2.59 & 9.17 & +253.6\% \\
 \hline
 \end{tabular}
-\label{tab:memory}
-\end{center}
 \end{table}
 
 The optimized implementation allocates approximately 2--3$\times$ more memory per encryption/decryption operation due to Montgomery context storage and sliding-window pre-computation. However, in absolute terms, the overhead is small (5--9~KB per operation) and not a concern for modern server environments.
@@ -303,9 +312,10 @@ The optimized implementation allocates approximately 2--3$\times$ more memory pe
 
 Table~\ref{tab:scaling} shows how performance degrades with increasing key sizes.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Key Size Growth Factors (Standard Implementation)}
-\begin{center}
+\label{tab:scaling}
+\centering
 \begin{tabular}{|c|c|c|}
 \hline
 \textbf{Transition} & \textbf{Encrypt Growth} & \textbf{Decrypt Growth} \\
@@ -315,8 +325,6 @@ Table~\ref{tab:scaling} shows how performance degrades with increasing key sizes
 1024 $\rightarrow$ 2048 & 3.61$\times$ & 4.42$\times$ \\
 \hline
 \end{tabular}
-\label{tab:scaling}
-\end{center}
 \end{table}
 
 Encryption time grows sub-quadratically because the public exponent $e = 65537$ remains constant. Decryption time grows approximately 4--5$\times$ per doubling, consistent with $O(n^2)$ complexity of modular exponentiation.
@@ -325,9 +333,10 @@ Encryption time grows sub-quadratically because the public exponent $e = 65537$ 
 
 Table~\ref{tab:concurrency} presents concurrent session simulation results.
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \caption{Concurrent Session Throughput}
-\begin{center}
+\label{tab:concurrency}
+\centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Threads} & \textbf{Std (sess/s)} & \textbf{Opt (sess/s)} & \textbf{Std Lat. (ms)} & \textbf{Opt Lat. (ms)} \\
@@ -341,11 +350,10 @@ Table~\ref{tab:concurrency} presents concurrent session simulation results.
 10 & 280.0 & 218.0 & 6.42 & 4.57 \\
 \hline
 \end{tabular}
-\label{tab:concurrency}
-\end{center}
 \end{table}
 
 Both implementations exhibit linear throughput scaling with no significant degradation at higher concurrency. The high-volume test (200~sessions, 10~threads) confirmed reliability with zero errors for both implementations. The cached versus uncached comparison under concurrency showed 0.51~s (cached) versus 21.7~s (uncached) for 100~sessions---a 43$\times$ improvement.
+
 
 \section{Discussion}
 \label{sec:discussion}
@@ -372,7 +380,8 @@ These findings have direct implications for web application architects:
 
 \subsection{Limitations}
 
-This study has several limitations. First, the implementations are written in Python, an interpreted language where per-operation overhead is high. Results would differ significantly in compiled languages. Second, the concurrency tests use Python's GIL-affected threading, limiting true parallelism. Third, only three key sizes (512, 1024, 2048) were tested due to the time required for from-scratch key generation. Fourth, the study does not evaluate side-channel resistance beyond fault-attack verification.
+This study has several limitations. First, the implementations are written in Python, an interpreted language where per-operation overhead is high. Results would differ significantly in compiled languages. Second, the concurrency tests use Python's GIL-affected threading, limiting true parallelism. Third, only three key sizes (512, 1024, 2048) were tested. Fourth, the study does not evaluate side-channel resistance beyond fault-attack verification.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -383,32 +392,61 @@ The key findings are: (1)~Key caching provides the largest practical speedup (43
 
 These results support three recommendations for practitioners: adopt hybrid encryption for all data exceeding a few hundred bytes, implement key caching to eliminate the dominant key-generation bottleneck, and plan for post-quantum migration as RSA's security margin narrows. Future work should replicate these benchmarks in compiled languages, evaluate post-quantum alternatives (CRYSTALS-Kyber~\cite{kyber2023}, CRYSTALS-Dilithium~\cite{dilithium2022}) alongside RSA, and measure energy consumption for mobile and edge deployments.
 
+
+\appendices
+
+\section{Test Suite Details}
+\label{app:tests}
+
+The complete test suite consists of the following files, totaling approximately 1,070 lines of test code:
+
+\begin{itemize}
+    \item \texttt{test\_correctness.py} (216~lines): 40~assertions covering mod\_exp, encrypt/decrypt roundtrips, byte-level padding, KeyCache, cross-implementation, and hybrid RSA+AES.
+    \item \texttt{test\_speed.py} (200~lines): 50~samples per measurement for speed benchmarks.
+    \item \texttt{test\_memory.py} (162~lines): 20~samples using \texttt{tracemalloc}.
+    \item \texttt{test\_hybrid.py} (157~lines): Hybrid vs.\ pure RSA at 1/10/50~KB.
+    \item \texttt{test\_keysize.py} (163~lines): Key size scaling 512/1024/2048-bit.
+    \item \texttt{test\_concurrency.py} (169~lines): ThreadPoolExecutor with 1--10~threads.
+\end{itemize}
+
+All tests can be executed via \texttt{python3 run\_all\_tests.py}.
+
+
+\section*{Acknowledgment}
+
+The authors would like to thank the faculty of the Department of Information Technology, C.~K.~Pithawala College of Engineering, for their guidance and support throughout this research.
+
+
+\ifCLASSOPTIONcaptionsoff
+\newpage
+\fi
+
 \bibliographystyle{IEEEtran}
 \begin{thebibliography}{20}
 
 \bibitem{rivest1978}
-R.~L. Rivest, A.~Shamir, and L.~Adleman, ``A method for obtaining digital signatures and public-key cryptosystems,'' \textit{Communications of the ACM}, vol.~21, no.~2, pp.~120--126, 1978.
+R.~L. Rivest, A.~Shamir, and L.~Adleman, ``A method for obtaining digital signatures and public-key cryptosystems,'' \textit{Commun. ACM}, vol.~21, no.~2, pp.~120--126, 1978.
 
 \bibitem{boneh1999}
-D.~Boneh, ``Twenty years of attacks on the RSA cryptosystem,'' \textit{Notices of the American Mathematical Society}, vol.~46, no.~2, pp.~203--213, 1999.
+D.~Boneh, ``Twenty years of attacks on the RSA cryptosystem,'' \textit{Notices Amer. Math. Soc.}, vol.~46, no.~2, pp.~203--213, 1999.
 
 \bibitem{coppersmith1997}
-D.~Coppersmith, ``Small solutions to polynomial equations, and low exponent RSA vulnerabilities,'' \textit{Journal of Cryptology}, vol.~10, no.~4, pp.~233--260, 1997.
+D.~Coppersmith, ``Small solutions to polynomial equations, and low exponent RSA vulnerabilities,'' \textit{J. Cryptol.}, vol.~10, no.~4, pp.~233--260, 1997.
 
 \bibitem{shor1997}
-P.~W. Shor, ``Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer,'' \textit{SIAM Journal on Computing}, vol.~26, no.~5, pp.~1484--1509, 1997.
+P.~W. Shor, ``Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer,'' \textit{SIAM J. Comput.}, vol.~26, no.~5, pp.~1484--1509, 1997.
 
 \bibitem{wiener1990}
-M.~Wiener, ``Cryptanalysis of short RSA secret exponents,'' \textit{IEEE Trans. Inf. Theory}, vol.~36, no.~3, pp.~553--558, 1990.
+M.~Wiener, ``Cryptanalysis of short RSA secret exponents,'' \textit{IEEE Trans. Inf. Theory}, vol.~36, no.~3, pp.~553--558, May 1990.
 
 \bibitem{boneh2001}
-D.~Boneh, R.~A. DeMillo, and R.~J. Lipton, ``On the importance of eliminating errors in cryptographic computations,'' \textit{Journal of Cryptology}, vol.~14, no.~2, pp.~101--119, 2001.
+D.~Boneh, R.~A. DeMillo, and R.~J. Lipton, ``On the importance of eliminating errors in cryptographic computations,'' \textit{J. Cryptol.}, vol.~14, no.~2, pp.~101--119, 2001.
 
 \bibitem{garner1959}
-H.~L. Garner, ``The residue number system,'' \textit{IRE Trans. Electronic Computers}, vol.~EC-8, no.~2, pp.~140--147, 1959.
+H.~L. Garner, ``The residue number system,'' \textit{IRE Trans. Electron. Comput.}, vol.~EC-8, no.~2, pp.~140--147, Jun. 1959.
 
 \bibitem{montgomery1985}
-P.~L. Montgomery, ``Modular multiplication without trial division,'' \textit{Mathematics of Computation}, vol.~44, no.~170, pp.~519--521, 1985.
+P.~L. Montgomery, ``Modular multiplication without trial division,'' \textit{Math. Comput.}, vol.~44, no.~170, pp.~519--521, Apr. 1985.
 
 \bibitem{pkcs1_2016}
 RSA Laboratories, ``PKCS \#1: RSA cryptography specifications version 2.2,'' RFC 8017, IETF, 2016.
@@ -417,35 +455,48 @@ RSA Laboratories, ``PKCS \#1: RSA cryptography specifications version 2.2,'' RFC
 National Institute of Standards and Technology, ``Post-quantum cryptography standardization,'' NIST, 2024. [Online]. Available: \url{https://csrc.nist.gov/projects/post-quantum-cryptography}
 
 \bibitem{kyber2023}
-R.~Avanzi \textit{et al.}, ``CRYSTALS-Kyber: A CCA-secure module-lattice-based KEM,'' in \textit{Proc. IEEE Symp. Security and Privacy}, 2023.
+R.~Avanzi \textit{et~al.}, ``CRYSTALS-Kyber: A CCA-secure module-lattice-based KEM,'' in \textit{Proc. IEEE Symp. Secur. Privacy}, 2023.
 
 \bibitem{dilithium2022}
-S.~Bai \textit{et al.}, ``CRYSTALS-Dilithium: A lattice-based digital signature scheme,'' \textit{IACR Trans. Cryptographic Hardware and Embedded Systems}, vol.~2022, no.~1, pp.~218--244, 2022.
+S.~Bai \textit{et~al.}, ``CRYSTALS-Dilithium: A lattice-based digital signature scheme,'' \textit{IACR Trans. Cryptogr. Hardw. Embed. Syst.}, vol.~2022, no.~1, pp.~218--244, 2022.
 
 \bibitem{bellare1995}
-M.~Bellare and P.~Rogaway, ``Optimal asymmetric encryption padding,'' in \textit{Advances in Cryptology --- EUROCRYPT '94}, LNCS, vol.~950, Springer, pp.~92--111, 1995.
+M.~Bellare and P.~Rogaway, ``Optimal asymmetric encryption padding,'' in \textit{Advances in Cryptology---EUROCRYPT '94}, LNCS, vol.~950. Springer, 1995, pp.~92--111.
 
 \bibitem{bernstein2010}
-D.~J. Bernstein, ``Grover vs.\ McEliece,'' in \textit{Post-Quantum Cryptography}, LNCS, vol.~6061, Springer, pp.~89--98, 2010.
+D.~J. Bernstein, ``Grover vs.\ McEliece,'' in \textit{Post-Quantum Cryptography}, LNCS, vol.~6061. Springer, 2010, pp.~89--98.
 
 \bibitem{menezes2001}
-A.~J. Menezes, P.~C. van Oorschot, and S.~A. Vanstone, \textit{Handbook of Applied Cryptography}. CRC Press, 5th~ed., 2001.
+A.~J. Menezes, P.~C.~van Oorschot, and S.~A. Vanstone, \textit{Handbook of Applied Cryptography}, 5th~ed.\ Boca Raton, FL, USA: CRC Press, 2001.
 
 \bibitem{shoup2008}
-V.~Shoup, \textit{A Computational Introduction to Number Theory and Algebra}, Version~2.3.1, Cambridge Univ.\ Press, 2008. [Online]. Available: \url{https://shoup.net/ntb/}
+V.~Shoup, \textit{A Computational Introduction to Number Theory and Algebra}, Version~2.3.1. Cambridge, U.K.: Cambridge Univ.\ Press, 2008. [Online]. Available: \url{https://shoup.net/ntb/}
 
 \bibitem{python_tracemalloc}
-Python Software Foundation, ``The Python standard library --- tracemalloc: Trace memory allocations,'' Python~3 Documentation, 2025. [Online]. Available: \url{https://docs.python.org/3/library/tracemalloc.html}
+Python Software Foundation, ``The Python standard library---tracemalloc: Trace memory allocations,'' Python~3 Documentation, 2025. [Online]. Available: \url{https://docs.python.org/3/library/tracemalloc.html}
 
 \bibitem{python_threading}
-Python Software Foundation, ``The Python standard library --- threading: Thread-based parallelism,'' Python~3 Documentation, 2025. [Online]. Available: \url{https://docs.python.org/3/library/threading.html}
+Python Software Foundation, ``The Python standard library---threading: Thread-based parallelism,'' Python~3 Documentation, 2025. [Online]. Available: \url{https://docs.python.org/3/library/threading.html}
 
 \bibitem{cryptography_io}
-Cryptography Software Foundation, ``cryptography --- A Python library exposing cryptographic recipes and primitives,'' Version~46.0.7, 2025. [Online]. Available: \url{https://cryptography.io/}
+Cryptography Software Foundation, ``cryptography---A Python library exposing cryptographic recipes and primitives,'' Version~46.0.7, 2025. [Online]. Available: \url{https://cryptography.io/}
 
 \bibitem{kelsey1999}
-J.~A. Kelsey, B.~Schneier, and N.~Ferguson, ``Yarrow-160: Notes on the design and analysis of the Yarrow cryptographic pseudorandom number generator,'' in \textit{Proc. Sixth Annual Workshop on Selected Areas in Cryptography}, 1999.
+J.~A. Kelsey, B.~Schneier, and N.~Ferguson, ``Yarrow-160: Notes on the design and analysis of the Yarrow cryptographic pseudorandom number generator,'' in \textit{Proc. Sixth Annu. Workshop Sel. Areas Cryptogr.}, 1999.
 
 \end{thebibliography}
+
+
+\begin{IEEEbiographynophoto}{Bhavesh Patil}
+is an undergraduate student in the Department of Information Technology at C.~K.~Pithawala College of Engineering, Surat, Gujarat, India. His research interests include cryptography, network security, and web application performance.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Devendra Patil}
+is an undergraduate student in the Department of Information Technology at C.~K.~Pithawala College of Engineering, Surat, Gujarat, India. His research interests include cybersecurity and cryptographic algorithms.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Sakti Vala}
+is an undergraduate student in the Department of Information Technology at C.~K.~Pithawala College of Engineering, Surat, Gujarat, India. His research interests include information security and distributed systems.
+\end{IEEEbiographynophoto}
 
 \end{document}
