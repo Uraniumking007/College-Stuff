@@ -1,0 +1,13 @@
+{
+  "name": "cipat-rsa-bench",
+  "version": "1.0.0",
+  "description": "RSA optimization benchmarks — TypeScript/Node.js port",
+  "type": "module",
+  "scripts": {
+    "bench": "node --experimental-strip-types ../../tests/node/bench.ts",
+    "test": "node --experimental-strip-types ../../tests/node/test_correctness.ts"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
