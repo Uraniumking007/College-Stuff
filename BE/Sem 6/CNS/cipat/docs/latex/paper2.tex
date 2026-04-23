@@ -38,7 +38,7 @@ C.~K.~Pithawala College of Engineering, Surat, Gujarat, India.}%
 \maketitle
 
 \begin{abstract}
-The Rivest--Shamir--Adleman (RSA) cryptosystem remains a cornerstone of public-key infrastructure, yet its computational cost poses significant challenges for modern web applications requiring low-latency secure communication. This paper presents a comparative study of established RSA optimization techniques drawn from over four decades of cryptographic research, evaluating their practical impact on web application performance. We survey and compare algorithms including the Chinese Remainder Theorem (CRT) for accelerated decryption, Montgomery multiplication for efficient modular arithmetic, sliding-window and $k$-ary modular exponentiation, key caching strategies, batch processing, and hybrid RSA+AES envelope encryption. An experimental framework implementing both a standard (textbook) RSA baseline and an optimized variant incorporating all surveyed techniques is evaluated across six benchmark dimensions: correctness, speed, memory consumption, key-size scaling (1024--4096~bits), hybrid versus pure RSA encryption (1~KB--1~MB), and concurrent throughput (1--50 threads). Fresh experimental results demonstrate that key caching yields the greatest practical speedup ($2100\times$ for encryption, $75\times$ for decryption), hybrid RSA+AES-GCM outperforms pure RSA by $9\times$ to $763\times$ for bulk data, and CRT-based decryption provides measurable gains at larger key sizes. The comparative analysis synthesizes findings from 30~key references, identifies optimization trade-offs specific to interpreted language environments, and provides actionable recommendations for web application architects.
+The Rivest--Shamir--Adleman (RSA) cryptosystem remains a cornerstone of public-key infrastructure, yet its computational cost poses significant challenges for modern web applications requiring low-latency secure communication. This paper presents a comparative study of established RSA optimization techniques drawn from over four decades of cryptographic research, evaluating their practical impact on web application performance. We survey and compare algorithms including the Chinese Remainder Theorem (CRT) for accelerated decryption, Montgomery multiplication for efficient modular arithmetic, sliding-window and $k$-ary modular exponentiation, key caching strategies, batch processing, and hybrid RSA+AES envelope encryption. An experimental framework implementing both a standard (textbook) RSA baseline and an optimized variant incorporating all surveyed techniques is evaluated across six benchmark dimensions: correctness, speed, memory consumption, key-size scaling (1024--4096~bits), hybrid versus pure RSA encryption (1~KB--1~MB), and concurrent throughput (1--50 threads). Fresh experimental results demonstrate that key caching yields the greatest practical speedup ($1112\times$ for encryption, $123\times$ for decryption), hybrid RSA+AES-GCM outperforms pure RSA by $5\times$ to $3903\times$ for bulk data, and CRT-based decryption provides measurable gains at 2048-bit keys ($1.27\times$). The comparative analysis synthesizes findings from 30~key references, identifies optimization trade-offs specific to interpreted language environments, and provides actionable recommendations for web application architects.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -275,56 +275,56 @@ All RSA operations were implemented from scratch; AES-256-GCM operations use the
 Table~\ref{tab:std_vs_opt} presents the direct comparison between standard and optimized RSA implementations using 2048-bit keys.
 
 \begin{table}[!t]
-\caption{Standard vs.\ Optimized RSA Performance (2048-bit, 50 Samples)}
+\caption{Standard vs.\ Optimized RSA Performance (2048-bit, from-scratch)}
 \label{tab:std_vs_opt}
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Operation} & \textbf{Standard (ms)} & \textbf{Optimized (ms)} & \textbf{Speedup} \\
 \hline
-Encrypt & 55.556 & 0.026 & $2136\times$ \\
+Encrypt & 2910.4 & 2.6 & $1112\times$ \\
 \hline
-Decrypt & 57.636 & 0.771 & $75\times$ \\
+Decrypt & 3142.1 & 25.6 & $123\times$ \\
 \hline
-Enc Memory (KB) & 0.9 & 0.6 & $1.5\times$ \\
+Enc Memory (KB) & 5.4 & 5.4 & $1.0\times$ \\
 \hline
-Dec Memory (KB) & 0.9 & 0.8 & $1.1\times$ \\
+Dec Memory (KB) & 4.3 & 5.1 & $0.8\times$ \\
 \hline
 \end{tabular}
 \end{table}
 
-The dramatic speedup is primarily attributable to key caching in the optimized implementation. The standard implementation generates fresh keys per operation (cold start), while the optimized variant reuses cached keys. The encryption speedup of $2136\times$ reflects the elimination of the 2048-bit key generation bottleneck (which dominates the standard implementation's 55.5~ms encrypt time). Decryption benefits from both key caching and CRT-based computation, yielding a $75\times$ improvement.
+The dramatic speedup is primarily attributable to key caching in the optimized implementation. The standard implementation generates fresh keys per operation (cold start), while the optimized variant reuses cached keys. The encryption speedup of $1112\times$ reflects the elimination of the 2048-bit key generation bottleneck (which dominates the standard implementation's 2910~ms encrypt time, as pure Python Miller-Rabin primality testing is inherently slow). Decryption benefits from both key caching and CRT-based computation, yielding a $123\times$ improvement. Memory usage is comparable between implementations, with the optimized variant using slightly more for decryption due to CRT parameter storage.
 
 \subsection{Key-Size Scaling (1024--4096 bits)}
 
 Table~\ref{tab:keysize} shows how the optimized RSA implementation scales across four key sizes.
 
 \begin{table}[!t]
-\caption{Key-Size Scaling Performance (Optimized RSA, 30 Samples)}
+\caption{Key-Size Scaling Performance (Optimized RSA, from-scratch, 30 Samples)}
 \label{tab:keysize}
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \textbf{Key Size} & \textbf{Enc (ms)} & \textbf{Dec (ms)} & \textbf{Enc Mem (KB)} & \textbf{Dec Mem (KB)} \\
 \hline
-1024-bit & 0.014 & 0.131 & 0.49 & 0.41 \\
+1024-bit & 1.082 & 7.495 & 2.90 & 3.07 \\
 \hline
-2048-bit & 0.025 & 0.740 & 0.59 & 0.53 \\
+2048-bit & 2.605 & 25.735 & 5.27 & 5.21 \\
 \hline
-3072-bit & 0.043 & 1.820 & 0.72 & 0.66 \\
+3072-bit & 4.740 & 69.446 & 9.47 & 7.34 \\
 \hline
-4096-bit & 0.069 & 3.585 & 0.84 & 0.78 \\
+4096-bit & 7.134 & 153.323 & 12.36 & 9.20 \\
 \hline
 \end{tabular}
 \end{table}
 
-Encryption time grows modestly from 0.014~ms (1024-bit) to 0.069~ms (4096-bit), a $4.9\times$ increase for a $4\times$ key-size increase. This sub-quadratic growth occurs because the public exponent $e = 65537$ remains fixed at 17~bits regardless of key size. Decryption time grows more steeply from 0.131~ms to 3.585~ms, a $27.4\times$ increase, consistent with the $O(n^2 \log n)$ complexity of modular exponentiation.
+Encryption time grows from 1.082~ms (1024-bit) to 7.134~ms (4096-bit), a $6.6\times$ increase for a $4\times$ key-size increase. This sub-quadratic growth occurs because the public exponent $e = 65537$ remains fixed at 17~bits regardless of key size. Decryption time grows steeply from 7.495~ms to 153.323~ms, a $20.5\times$ increase, consistent with the $O(n^2 \log n)$ complexity of modular exponentiation in pure Python.
 
-The growth factors per doubling are:
+The growth factors per key-size increment are:
 \begin{itemize}
-    \item 1024 $\rightarrow$ 2048: encrypt $1.8\times$, decrypt $5.6\times$
-    \item 2048 $\rightarrow$ 3072: encrypt $1.7\times$, decrypt $2.5\times$
-    \item 3072 $\rightarrow$ 4096: encrypt $1.6\times$, decrypt $2.0\times$
+    \item 1024 $\rightarrow$ 2048: encrypt $2.4\times$, decrypt $3.4\times$
+    \item 2048 $\rightarrow$ 3072: encrypt $1.8\times$, decrypt $2.7\times$
+    \item 3072 $\rightarrow$ 4096: encrypt $1.5\times$, decrypt $2.2\times$
 \end{itemize}
 
 \subsection{Hybrid RSA+AES-GCM vs.\ Pure RSA}
@@ -332,83 +332,83 @@ The growth factors per doubling are:
 Table~\ref{tab:hybrid} confirms the overwhelming superiority of the hybrid approach for bulk data encryption.
 
 \begin{table}[!t]
-\caption{Hybrid RSA+AES-GCM vs.\ Pure RSA Encryption Time}
+\caption{Hybrid RSA+AES-GCM vs.\ Pure RSA Encryption Time (from-scratch)}
 \label{tab:hybrid}
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Data Size} & \textbf{Pure RSA (ms)} & \textbf{Hybrid (ms)} & \textbf{Speedup} \\
 \hline
-1~KB & 0.14 & 0.11 & $1.3\times$ \\
+1~KB & 13.95 & 3.06 & $5\times$ \\
 \hline
-10~KB & 1.30 & 0.04 & $33\times$ \\
+10~KB & 117.99 & 2.84 & $42\times$ \\
 \hline
-50~KB & 6.50 & 0.04 & $163\times$ \\
+50~KB & 587.67 & 2.86 & $206\times$ \\
 \hline
-100~KB & 12.97 & 0.05 & $260\times$ \\
+100~KB & 1174.63 & 2.88 & $408\times$ \\
 \hline
-500~KB & 64.88 & 0.10 & $649\times$ \\
+500~KB & 5867.58 & 2.91 & $2015\times$ \\
 \hline
-1000~KB & 129.18 & 0.17 & $760\times$ \\
+1000~KB & 11768.01 & 3.02 & $3903\times$ \\
 \hline
 \end{tabular}
 \end{table}
 
-Pure RSA encrypts data in 190-byte chunks, requiring multiple RSA operations proportional to data size. The hybrid approach performs exactly one RSA operation (to wrap the 32-byte AES key) regardless of data size, with AES-GCM handling bulk encryption at near-constant time. At 1~MB, the hybrid approach is $760\times$ faster. The hybrid encryption time grows from 0.04~ms at 10~KB to only 0.17~ms at 1~MB, confirming that AES-GCM throughput dominates.
+Pure RSA encrypts data in 245-byte chunks, requiring multiple RSA operations proportional to data size. The hybrid approach performs exactly one RSA operation (to wrap the 32-byte AES key) regardless of data size, with AES-GCM handling bulk encryption at near-constant time. At 1~MB, the hybrid approach is $3903\times$ faster. The hybrid encryption time remains nearly constant from 2.84~ms at 10~KB to 3.02~ms at 1~MB, confirming that AES-GCM throughput dominates.
 
 \subsection{Concurrent Throughput}
 
 Table~\ref{tab:concurrency} presents the dynamic load simulation results.
 
 \begin{table}[!t]
-\caption{Concurrent Session Throughput (Optimized RSA, 2048-bit)}
+\caption{Concurrent Session Throughput (Optimized RSA, 2048-bit, from-scratch)}
 \label{tab:concurrency}
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Threads} & \textbf{Throughput (sess/s)} & \textbf{Avg Latency (ms)} & \textbf{Peak Mem (MB)} \\
 \hline
-1 & 1294 & 0.77 & 0.11 \\
+1 & 34.9 & 28.6 & 0.11 \\
 \hline
-5 & 1249 & 1.61 & 0.03 \\
+5 & 34.5 & 136.7 & 0.12 \\
 \hline
-10 & 1249 & 0.78 & 0.02 \\
+10 & 34.1 & 250.3 & 0.15 \\
 \hline
-25 & 1249 & 0.78 & 0.00 \\
+25 & 34.2 & 254.7 & 0.21 \\
 \hline
-50 & 1236 & 0.79 & 0.00 \\
+50 & 34.2 & 355.6 & 0.22 \\
 \hline
 \end{tabular}
 \end{table}
 
-The optimized implementation maintains stable throughput of approximately 1236--1294~sessions/second across all concurrency levels, with no degradation or errors. Average latency remains under 2~ms even at 50~concurrent threads. The near-constant throughput confirms that the key caching strategy eliminates the primary bottleneck under concurrent load.
+The optimized implementation maintains a stable throughput of approximately 34--35~sessions/second across all concurrency levels. This near-constant throughput reflects Python's Global Interpreter Lock (GIL), which serializes CPU-bound work across threads. Average latency increases linearly with concurrency (from 28.6~ms at 1~thread to 355.6~ms at 50~threads) as threads queue for the GIL. Memory usage grows modestly from 0.11~MB to 0.22~MB. While the per-thread throughput is lower than compiled implementations would achieve, the key caching strategy ensures that each session completes in a consistent time without key-generation overhead.
 
 \subsection{Summary of Comparative Findings}
 
 Table~\ref{tab:summary} synthesizes the experimental results with the theoretical predictions from the literature.
 
 \begin{table}[!t]
-\caption{Summary: Theoretical vs.\ Experimental Speedup}
+\caption{Summary: Theoretical vs.\ Experimental Speedup (from-scratch, 2048-bit)}
 \label{tab:summary}
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
 \textbf{Optimization} & \textbf{Theory} & \textbf{Observed} \\
 \hline
-CRT Decryption & $3$--$4\times$ & $1.2\times$ (2048-bit) \\
+CRT Decryption & $3$--$4\times$ & $1.27\times$ (2048-bit) \\
 \hline
-Montgomery Mult. & $2$--$3\times$ & $0.3\times$ (Python) \\
+Montgomery Mult. & $2$--$3\times$ & $0.33\times$ (Python) \\
 \hline
-Sliding-Window & $30$--$40\%$ fewer mult. & Marginal in Python \\
+Sliding-Window & $30$--$40\%$ fewer mult. & $1.28\times$ (Python) \\
 \hline
-Key Caching & $N/A$ (deployment) & $75$--$2136\times$ \\
+Key Caching & $N/A$ (deployment) & $1112$--$2117\times$ \\
 \hline
-Hybrid RSA+AES & $8$--$400\times$ & $1.3$--$760\times$ \\
+Hybrid RSA+AES & $8$--$400\times$ & $5$--$3903\times$ \\
 \hline
 \end{tabular}
 \end{table}
 
-The discrepancy between theoretical and observed performance for Montgomery multiplication and sliding-window exponentiation is attributable to Python's interpreter overhead: per-operation costs (object creation, function dispatch, garbage collection) dominate the actual arithmetic for moderate key sizes. Key caching and hybrid encryption, which reduce the \textit{number} of expensive operations rather than per-operation cost, deliver the largest practical improvements.
+The discrepancy between theoretical and observed performance for Montgomery multiplication and sliding-window exponentiation is attributable to Python's interpreter overhead: per-operation costs (object creation, function dispatch, garbage collection) dominate the actual arithmetic for moderate key sizes. In particular, Montgomery multiplication is $3\times$ \textit{slower} than standard arithmetic in Python ($69.3$~ms vs.\ $22.9$~ms for 2048-bit modular exponentiation) because the conversion to/from Montgomery form and the REDC algorithm's additional integer operations incur Python interpreter overhead that outweighs the savings from eliminating trial division. Key caching and hybrid encryption, which reduce the \textit{number} of expensive operations rather than per-operation cost, deliver the largest practical improvements.
 
 
 \section{Conclusion}
@@ -419,17 +419,17 @@ This paper presented a comparative study of RSA optimization techniques for web 
 The principal findings are:
 
 \begin{enumerate}
-    \item \textbf{Key caching is the highest-impact optimization}, providing $75$--$2136\times$ speedup by eliminating repeated key generation. This validates the importance of key management infrastructure in web server deployments.
+    \item \textbf{Key caching is the highest-impact optimization}, providing $1112$--$2117\times$ speedup by eliminating repeated key generation. This validates the importance of key management infrastructure in web server deployments.
 
-    \item \textbf{Hybrid RSA+AES-GCM is essential for bulk data}, outperforming pure RSA by $1.3\times$ to $760\times$ across 1~KB to 1~MB data sizes. RSA should never be used alone for data exceeding a few hundred bytes.
+    \item \textbf{Hybrid RSA+AES-GCM is essential for bulk data}, outperforming pure RSA by $5\times$ to $3903\times$ across 1~KB to 1~MB data sizes. RSA should never be used alone for data exceeding a few hundred bytes.
 
-    \item \textbf{CRT provides measurable decryption improvement} ($1.2\times$ at 2048-bit), though the theoretical $4\times$ prediction assumes compiled-language execution. In interpreted environments, the gain is modest.
+    \item \textbf{CRT provides measurable decryption improvement} ($1.27\times$ at 2048-bit), though the theoretical $4\times$ prediction assumes compiled-language execution. In interpreted environments, the gain is modest.
 
-    \item \textbf{Montgomery multiplication and sliding-window exponentiation underperform in Python} due to interpreter overhead. These techniques are better suited to C, Rust, or hardware implementations.
+    \item \textbf{Montgomery multiplication and sliding-window exponentiation underperform in Python} due to interpreter overhead. Montgomery multiplication is actually $3\times$ slower in pure Python ($69.3$~ms vs.\ $22.9$~ms). These techniques are better suited to C, Rust, or hardware implementations.
 
-    \item \textbf{RSA scales approximately quadratically with key size}, making the transition to 3072-bit or 4096-bit keys (recommended by NIST~\cite{nist_sp80057}) a significant performance concern that must be mitigated through the optimizations surveyed.
+    \item \textbf{RSA scales approximately quadratically with key size}, with decryption growing from 7.5~ms (1024-bit) to 153.3~ms (4096-bit), a $20.5\times$ increase. This makes the transition to 3072-bit or 4096-bit keys (recommended by NIST~\cite{nist_sp80057}) a significant performance concern that must be mitigated through the optimizations surveyed.
 
-    \item \textbf{Concurrent throughput is stable}, with the optimized implementation maintaining $>1200$~sessions/second across 1--50 threads, confirming suitability for multi-user web application scenarios.
+    \item \textbf{Concurrent throughput is bounded by Python's GIL} at approximately 34~sessions/second regardless of thread count. While key caching eliminates the key-generation bottleneck, true parallelism requires compiled implementations or multiprocessing.
 \end{enumerate}
 
 These findings support three recommendations for web application architects: (1)~adopt hybrid encryption as the default for all data payloads, (2)~implement key caching with periodic rotation to eliminate the key-generation bottleneck, and (3)~begin planning for post-quantum migration to lattice-based schemes~\cite{kyber2023}, \cite{dilithium2022} as RSA's security margin narrows. Future work should replicate these benchmarks in compiled languages, evaluate energy consumption for edge deployments, and compare RSA directly against CRYSTALS-Kyber in hybrid configurations.

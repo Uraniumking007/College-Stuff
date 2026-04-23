@@ -12,7 +12,7 @@ import threading
 import random
 from concurrent.futures import ThreadPoolExecutor
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from standard_rsa.rsa import (
     generate_keypair as std_gen,

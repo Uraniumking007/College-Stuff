@@ -1,6 +1,12 @@
 __pycache__/
 *.pyc
 .venv/
+node_modules/
 *.aux
 *.log
 *.out
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+.playwright-mcp/
+.DS_Store

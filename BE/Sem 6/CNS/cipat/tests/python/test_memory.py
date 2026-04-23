@@ -9,7 +9,7 @@ import tracemalloc
 import statistics
 import random
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from standard_rsa.rsa import (
     generate_keypair as std_gen,

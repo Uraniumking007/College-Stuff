@@ -10,13 +10,14 @@ import time
 import subprocess
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(SCRIPT_DIR, "..")
 TESTS = {
-    1: ("Correctness Verification", "tests/test_correctness.py"),
-    2: ("Speed Benchmark", "tests/test_speed.py"),
-    3: ("Memory Usage", "tests/test_memory.py"),
-    4: ("Hybrid RSA+AES vs Pure RSA", "tests/test_hybrid.py"),
-    5: ("Key Size Scaling", "tests/test_keysize.py"),
-    6: ("Concurrency & Throughput", "tests/test_concurrency.py"),
+    1: ("Correctness Verification", "tests/python/test_correctness.py"),
+    2: ("Speed Benchmark", "tests/python/test_speed.py"),
+    3: ("Memory Usage", "tests/python/test_memory.py"),
+    4: ("Hybrid RSA+AES vs Pure RSA", "tests/python/test_hybrid.py"),
+    5: ("Key Size Scaling", "tests/python/test_keysize.py"),
+    6: ("Concurrency & Throughput", "tests/python/test_concurrency.py"),
 }
 
 SEP = "=" * 70
@@ -39,7 +40,7 @@ def main():
             continue
 
         name, script = TESTS[test_id]
-        script_path = os.path.join(SCRIPT_DIR, script)
+        script_path = os.path.join(PROJECT_ROOT, script)
         print(f"\n{'#' * 70}")
         print(f"### TEST {test_id}: {name}")
         print(f"{'#' * 70}\n")
@@ -47,8 +48,8 @@ def main():
         t0 = time.perf_counter()
         proc = subprocess.run(
             [sys.executable, script_path],
-            cwd=SCRIPT_DIR,
-            env={**os.environ, "PYTHONPATH": SCRIPT_DIR},
+            cwd=PROJECT_ROOT,
+            env={**os.environ, "PYTHONPATH": os.path.join(PROJECT_ROOT, "src")},
         )
         elapsed = time.perf_counter() - t0
         results[test_id] = {"name": name, "exit_code": proc.returncode, "time_s": elapsed}

@@ -101,8 +101,8 @@ class MontgomeryContext:
 # Sliding-window modular exponentiation (4-bit window)
 # ---------------------------------------------------------------------------
 
-def _sliding_window_no_mont(base: int, exp: int, mod: int) -> int:
-    """Sliding-window exponentiation without Montgomery (fallback for even moduli)."""
+def sliding_window_no_mont(base: int, exp: int, mod: int) -> int:
+    """Sliding-window exponentiation without Montgomery (public for benchmarking)."""
     w = 4 if exp.bit_length() > 64 else 2
 
     # Pre-compute odd powers
@@ -162,7 +162,7 @@ def mod_exp_sliding_window(base: int, exp: int, mod: int) -> int:
     # Montgomery requires gcd(R, n) == 1, i.e., n must be odd.
     # Fall back to sliding-window without Montgomery for even moduli.
     if mod % 2 == 0:
-        return _sliding_window_no_mont(base, exp, mod)
+        return sliding_window_no_mont(base, exp, mod)
 
     mont = MontgomeryContext(mod)
     table, w = _build_window_table(base, exp.bit_length(), mont)
