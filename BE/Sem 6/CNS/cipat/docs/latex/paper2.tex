@@ -14,6 +14,27 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{caption}
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\ttfamily\tiny,
+    keywordstyle=\bfseries\color{blue!70!black},
+    commentstyle=\itshape\color{green!50!black},
+    stringstyle=\color{red!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=4,
+    columns=fullflexible,
+    float=H,
+}
+\lstset{style=pythonstyle}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -23,11 +44,11 @@
 \title{A Comparative Study of RSA Optimization Techniques for Secure Web Applications}
 
 \author{
-Bhavesh~Patil,
-Devendra~Patil,
-and~Sakti~Vala%
-\thanks{All authors are with the Department of Information Technology,
-C.~K.~Pithawala College of Engineering, Surat, Gujarat, India.}%
+\begin{tabular}{ccc}
+Patil~Bhavesh~S. & Patil~Devendra~V. & Vala Shakti P. \\
+240093116002 & 230090116054 & 230090116065 \\
+CKPCET, Surat & CKPCET, Surat & CKPCET, Surat \\
+\end{tabular}
 }
 
 \markboth{IEEE Research and Evaluation: RSA Optimization for Web Security}%
@@ -270,11 +291,249 @@ All experiments were conducted on the following platform:
 
 All RSA operations were implemented from scratch; AES-256-GCM operations use the \texttt{cryptography} library's C-level implementation for realistic hybrid encryption benchmarks.
 
+\newpage
+
+\subsection{Implementation Details}
+
+The optimized RSA implementation comprises eight integrated modules. The key source code excerpts are presented below.
+
+\textbf{Primality Testing (Miller-Rabin).}
+Candidates are trial-divided against the first 27~primes before $k=20$ rounds of Miller-Rabin testing. The most-significant and least-significant bits are forced to~1 to ensure correct bit length and oddness.
+
+\begin{lstlisting}
+_SMALL_PRIMES = [2,3,5,7,11,13,17,19,23,29,31,37,
+                 41,43,47,53,59,61,67,71,73,79,
+                 83,89,97]
+
+def is_probable_prime(n: int, k: int = 20) -> bool:
+    if n < 2: return False
+    for p in _SMALL_PRIMES:
+        if n % p == 0: return n == p
+    r, d = 0, n - 1
+    while d % 2 == 0: d //= 2; r += 1
+    for _ in range(k):
+        a = random.randrange(2, n - 1)
+        x = pow(a, d, n)
+        if x == 1 or x == n - 1: continue
+        for _ in range(r - 1):
+            x = pow(x, 2, n)
+            if x == n - 1: break
+        else: return False
+    return True
+
+def generate_prime(bits: int) -> int:
+    while True:
+        candidate = random.getrandbits(bits)
+        candidate |= (1 << (bits - 1)) | 1
+        if is_probable_prime(candidate):
+            return candidate
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{Miller-Rabin primality test and prime generation}
+\label{lst:prime}
+
+\textbf{Key Generation with CRT Parameters.}
+The private key is extended with pre-computed CRT parameters $d_p$, $d_q$, and $q_{\mathrm{inv}}$ for accelerated decryption.
+
+\begin{lstlisting}
+def generate_keypair(key_size: int = 2048):
+    half = key_size // 2
+    p = generate_prime(half)
+    q = generate_prime(half)
+    while q == p:
+        q = generate_prime(half)
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    e = 65537
+    d = pow(e, -1, phi)
+    # CRT parameters
+    dp = d % (p - 1)
+    dq = d % (q - 1)
+    qinv = pow(q, -1, p)
+    pub = {"e": e, "n": n}
+    priv = {"d": d, "n": n, "p": p, "q": q,
+            "dp": dp, "dq": dq, "qinv": qinv}
+    return priv, pub
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{RSA keypair generation with CRT parameters}
+\label{lst:keygen}
+
+\textbf{Montgomery Multiplication.}
+The \texttt{MontgomeryContext} class implements the REDC algorithm, replacing expensive modular division with bitwise shifts.
+
+\begin{lstlisting}
+class MontgomeryContext:
+    def __init__(self, n: int):
+        self.n = n
+        self.r = 1 << (n.bit_length())
+        self.r_inv = pow(self.r, -1, n)
+        self.n_prime = (-pow(n,-1,self.r)) % self.r
+        self.r2 = (self.r * self.r) % n
+
+    def to_mont(self, x: int) -> int:
+        return (x * self.r) % self.n
+
+    def from_mont(self, x: int) -> int:
+        return (x * self.r_inv) % self.n
+
+    def reduce(self, t: int) -> int:
+        n, r, n_prime = self.n, self.r, self.n_prime
+        m = (t * n_prime) % r
+        t = (t + m * n) // r
+        if t >= n: t -= n
+        return t
+
+    def mul(self, a: int, b: int) -> int:
+        return self.reduce(a * b)
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{Montgomery multiplication (REDC)}
+\label{lst:montgomery}
+
+\textbf{Sliding-Window Exponentiation.}
+A variable window size ($w=4$ for large exponents, $w=2$ for small) with pre-computed odd power table reduces multiplications from $k/2$ to approximately $k/(w+1) + 2^{w-1}$.
+
+\begin{lstlisting}
+def mod_exp_sliding_window(base, exp, mod):
+    if exp == 0: return 1 % mod
+    if mod == 1: return 0
+    if mod % 2 == 0:
+        return sliding_window_no_mont(base, exp, mod)
+
+    mont = MontgomeryContext(mod)
+    w = 4 if exp.bit_length() > 64 else 2
+    g = mont.to_mont(base)
+    g2 = mont.mul(g, g)
+    table = {1: g}
+    for i in range(3, 1 << w, 2):
+        table[i] = mont.mul(table[i - 2], g2)
+
+    result = mont.to_mont(1)
+    i = exp.bit_length() - 1
+    while i >= 0:
+        if not (exp >> i) & 1:
+            result = mont.mul(result, result)
+            i -= 1
+        else:
+            best_j, best_val = i, 1
+            j = i
+            while j >= 0 and (i - j + 1) <= w:
+                val = (exp>>j) & ((1<<(i-j+1))-1)
+                if val & 1: best_j, best_val = j, val
+                j -= 1
+            for _ in range(i - best_j + 1):
+                result = mont.mul(result, result)
+            result = mont.mul(result, table[best_val])
+            i = best_j - 1
+    return mont.from_mont(result)
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{Sliding-window modular exponentiation with Montgomery form}
+\label{lst:sliding}
+
+\textbf{CRT-Based Decryption with Fault Verification.}
+Decomposes decryption into two half-size exponentiations via CRT and verifies the result against the Bellcore fault attack~\cite{boneh2001}.
+
+\begin{lstlisting}
+def decrypt(priv: dict, ciphertext: int) -> int:
+    p, q = priv["p"], priv["q"]
+    # CRT half-size exponentiations
+    m1 = mod_exp_sliding_window(ciphertext, priv["dp"], p)
+    m2 = mod_exp_sliding_window(ciphertext, priv["dq"], q)
+    # Garner's recombination
+    h = (priv["qinv"] * (m1 - m2)) % p
+    m = m2 + h * q
+    # Fault-attack check
+    if pow(m, 65537, priv["n"]) != ciphertext % priv["n"]:
+        raise RuntimeError("Fault detected in CRT decryption")
+    return m
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{CRT-based decryption with fault-attack protection}
+\label{lst:decrypt}
+
+\textbf{PKCS\#1 v1.5 Padding.}
+Implements PKCS\#1 v1.5-style padding, limiting the payload to 245~bytes for 2048-bit keys.
+
+\begin{lstlisting}
+def pkcs1_pad(data: bytes, n_bytes: int) -> int:
+    pad_len = n_bytes - len(data) - 3
+    if pad_len < 8:
+        raise ValueError("Data too long for key size")
+    padding = bytes(random.randint(1, 255)
+                    for _ in range(pad_len))
+    padded = b"\x00\x02" + padding + b"\x00" + data
+    return int.from_bytes(padded, "big")
+
+def pkcs1_unpad(padded_int: int) -> bytes:
+    data = padded_int.to_bytes(
+        (padded_int.bit_length()+7)//8, "big")
+    idx = data.index(b"\x00", 2)
+    return data[idx + 1:]
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{PKCS\#1 v1.5 padding and unpadding}
+\label{lst:padding}
+
+\textbf{Key Cache.}
+The \texttt{KeyCache} class lazily generates a keypair on first access and reuses it for all subsequent operations, eliminating the dominant key-generation bottleneck.
+
+\begin{lstlisting}
+class KeyCache:
+    def __init__(self, key_size: int = 2048):
+        self.key_size = key_size
+        self._priv = None
+        self._pub = None
+
+    def get(self):
+        if self._priv is None:
+            self._priv, self._pub = \
+                generate_keypair(self.key_size)
+        return self._priv, self._pub
+
+    def regenerate(self):
+        self._priv, self._pub = \
+            generate_keypair(self.key_size)
+        return self._priv, self._pub
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{Key cache for reuse across sessions}
+\label{lst:keycache}
+
+\textbf{Hybrid RSA+AES-256-GCM.}
+RSA wraps a random AES-256 key; AES-GCM encrypts bulk data. The envelope stores four fields: wrapped key, IV, ciphertext, and authentication tag.
+
+\begin{lstlisting}
+from cryptography.hazmat.primitives.ciphers \
+    import Cipher, algorithms, modes
+
+def hybrid_encrypt(pub: dict, data: bytes) -> dict:
+    aes_key = os.urandom(32)
+    iv = os.urandom(12)
+    enc = Cipher(algorithms.AES(aes_key),
+                 modes.GCM(iv)).encryptor()
+    ct = enc.update(data) + enc.finalize()
+    wrapped_key = encrypt_bytes(pub, aes_key)
+    return {"wrapped_key": wrapped_key, "iv": iv,
+            "ct": ct, "tag": enc.tag}
+
+def hybrid_decrypt(priv: dict, envelope: dict) -> bytes:
+    aes_key = decrypt_bytes(priv, envelope["wrapped_key"])
+    dec = Cipher(algorithms.AES(aes_key),
+        modes.GCM(envelope["iv"],
+                  envelope["tag"])).decryptor()
+    return dec.update(envelope["ct"]) + dec.finalize()
+\end{lstlisting}
+\vspace{-2mm}
+\captionof{lstlisting}{Hybrid RSA+AES-256-GCM envelope encryption}
+\label{lst:hybrid}
+
 \subsection{Standard vs.\ Optimized RSA (2048-bit)}
 
 Table~\ref{tab:std_vs_opt} presents the direct comparison between standard and optimized RSA implementations using 2048-bit keys.
 
-\begin{table}[!t]
+\begin{table}[H]
 \caption{Standard vs.\ Optimized RSA Performance (2048-bit, from-scratch)}
 \label{tab:std_vs_opt}
 \centering
@@ -299,7 +558,7 @@ The dramatic speedup is primarily attributable to key caching in the optimized i
 
 Table~\ref{tab:keysize} shows how the optimized RSA implementation scales across four key sizes.
 
-\begin{table}[!t]
+\begin{table}[H]
 \caption{Key-Size Scaling Performance (Optimized RSA, from-scratch, 30 Samples)}
 \label{tab:keysize}
 \centering
@@ -331,7 +590,7 @@ The growth factors per key-size increment are:
 
 Table~\ref{tab:hybrid} confirms the overwhelming superiority of the hybrid approach for bulk data encryption.
 
-\begin{table}[!t]
+\begin{table}[H]
 \caption{Hybrid RSA+AES-GCM vs.\ Pure RSA Encryption Time (from-scratch)}
 \label{tab:hybrid}
 \centering
@@ -360,7 +619,7 @@ Pure RSA encrypts data in 245-byte chunks, requiring multiple RSA operations pro
 
 Table~\ref{tab:concurrency} presents the dynamic load simulation results.
 
-\begin{table}[!t]
+\begin{table}[H]
 \caption{Concurrent Session Throughput (Optimized RSA, 2048-bit, from-scratch)}
 \label{tab:concurrency}
 \centering
@@ -387,7 +646,7 @@ The optimized implementation maintains a stable throughput of approximately 34--
 
 Table~\ref{tab:summary} synthesizes the experimental results with the theoretical predictions from the literature.
 
-\begin{table}[!t]
+\begin{table}[H]
 \caption{Summary: Theoretical vs.\ Experimental Speedup (from-scratch, 2048-bit)}
 \label{tab:summary}
 \centering
