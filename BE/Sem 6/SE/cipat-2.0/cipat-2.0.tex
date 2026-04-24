@@ -436,71 +436,13 @@ The Secret Drop project uses Agile development with Scrum, organized in 2-week s
 \subsubsection{Use Case Diagram}
 \addcontentsline{toc}{subsubsection}{Use Case Diagram}
 
-The use case diagrams follow UML conventions: system boundary (Secret Drop rectangle), actors outside the system, use cases as ovals inside, solid lines for actor--use case association, dashed arrows with \texttt{<<include>>} for mandatory sub-processes, and \texttt{<<extend>>} for optional behaviors. Divided into parts for clarity.
+The use case diagram follows UML conventions: system boundary (Secret Drop rectangle), actors outside the system, use cases as ovals inside, solid lines for actor--use case association, dashed arrows with \texttt{<<include>>} for mandatory sub-processes, and \texttt{<<extend>>} for optional behaviors.
 
-\textbf{Part A: Authentication}
-
-\IfFileExists{assets/use-case/use-case-auth.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-auth.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-auth.mmd -o assets/use-case/use-case-auth.png}}}}%
+\begin{center}
+  \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/Usecase Diagram.jpeg}
+\end{center}
 \blocksep
-\textit{Explanation:} Secret Drop authentication use cases. Anonymous User can register, login, and reset password. Authenticated User can logout, configure 2FA, and manage API tokens. API Client authenticates and uses tokens for programmatic access.
-
-\blocksep
-\textbf{Part B: Secret Management \& Sharing}
-
-The secret management and sharing use cases are divided by actor for clarity.
-
-\textbf{B1: Authenticated User}
-\IfFileExists{assets/use-case/use-case-secrets-authenticated.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-secrets-authenticated.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-secrets-authenticated.mmd -o assets/use-case/use-case-secrets-authenticated.png}}}}%
-\blocksep
-\textit{Explanation:} Authenticated User creates, views, edits, deletes, lists, and searches secrets. They generate share links, revoke them, and set optional passwords on shares.
-
-\textbf{B2: External Recipient}
-\IfFileExists{assets/use-case/use-case-secrets-external.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-secrets-external.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-secrets-external.mmd -o assets/use-case/use-case-secrets-external.png}}}}%
-\blocksep
-\textit{Explanation:} External Recipient accesses shared secrets via links without an account. No other secret operations are available.
-
-\textbf{B3: API Client}
-\IfFileExists{assets/use-case/use-case-secrets-api.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-secrets-api.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-secrets-api.mmd -o assets/use-case/use-case-secrets-api.png}}}}%
-\blocksep
-\textit{Explanation:} API Client uses tokens for programmatic access: view secrets, list secrets, and access shared secrets via API.
-
-\blocksep
-\textbf{Part C: Organization Management}
-
-\IfFileExists{assets/use-case/use-case-org.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-org.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-org.mmd -o assets/use-case/use-case-org.png}}}}%
-\blocksep
-\textit{Explanation:} Organization Admin creates organizations, invites members, assigns roles (Owner, Admin, Member), manages teams, configures SSO, and sets IP allowlist.
-
-\clearpage
-\textbf{Part D: Audit \& Billing}
-
-\IfFileExists{assets/use-case/use-case-audit-billing.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/use-case/use-case-audit-billing.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/use-case/use-case-audit-billing.mmd -o assets/use-case/use-case-audit-billing.png}}}}%
-\blocksep
-\textit{Explanation:} Authenticated users view audit logs. Admins export logs, generate compliance reports, subscribe to plans, upgrade/downgrade, manage payment methods, and view invoices.
+\textit{Explanation:} The use case diagram illustrates all system interactions across actors. Anonymous User can register, login, and reset password. Authenticated User creates, views, edits, deletes, lists, and searches secrets; generates and revokes share links; sets optional passwords on shares; manages API tokens; and configures 2FA. External Recipient accesses shared secrets via links without an account. Organization Admin creates organizations, invites members, assigns roles (Owner, Admin, Member), manages teams, configures SSO, and sets IP allowlist. API Client uses tokens for programmatic access to view and list secrets. Authenticated users view audit logs; admins export logs, generate compliance reports, subscribe to plans, upgrade/downgrade, manage payment methods, and view invoices.
 
 \subsubsection{Use Case Description}
 \addcontentsline{toc}{subsubsection}{Use Case Description}
@@ -583,102 +525,338 @@ The secret management and sharing use cases are divided by actor for clarity.
 \subsubsection{Class Diagram}
 \addcontentsline{toc}{subsubsection}{Class Diagram}
 
-The class diagram is divided into three parts for easier understanding.
-
+\begin{center}
+  \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/class.jpeg}
+\end{center}
 \blocksep
-\textbf{Part A: User \& Authentication}
-\IfFileExists{assets/class/class-user-auth.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/class/class-user-auth.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/class/class-user-auth.mmd -o assets/class/class-user-auth.png}}}}%
-\blocksep
-\textit{Explanation:} User holds identity (id, name, email). Session tracks active login with token, IP, and user agent. One user can have many sessions.
-
-\blocksep
-\textbf{Part B: Organization Structure}
-
-\IfFileExists{assets/class/class-org.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/class/class-org.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/class/class-org.mmd -o assets/class/class-org.png}}}}%
-\blocksep
-\textit{Explanation:} Organization has members (OrganizationMember with role) and teams. Teams have TeamMembers. Enables multi-tenant hierarchy and role-based access.
-
-\blocksep
-\textbf{Part C: Secret Domain}
-\IfFileExists{assets/class/class-secret.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/class/class-secret.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/class/class-secret.mmd -o assets/class/class-secret.png}}}}%
-\blocksep
-\textit{Explanation:} Secret stores encrypted data, expiration, view limits, burn-on-read. SecretShare holds share tokens and password protection. SecretAccessLog records all access for audit.
+\textit{Explanation:} The class diagram illustrates the complete domain model of Secret Drop. User holds identity (id, name, email) and has many Sessions. Organization aggregates OrganizationMembers (with role-based access) and Teams. Secret stores encrypted data with expiration, view limits, and burn-on-read settings. SecretShare holds share tokens and optional password protection. SecretAccessLog records all access for audit compliance.
 
 \subsubsection{Sequence Diagram}
 \addcontentsline{toc}{subsubsection}{Sequence Diagram}
 
-The sequence diagram is divided into three parts for easier understanding.
+The sequence diagram illustrates the key interactions for creating secrets, generating share links, and accessing shared secrets.
 
+\begin{center}
+  \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/Sequence Diagram.jpeg}
+\end{center}
 \blocksep
-\textbf{Part A: Create Secret}
-\IfFileExists{assets/sequence/sequence-create-secret.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/sequence/sequence-create-secret.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/sequence/sequence-create-secret.mmd -o assets/sequence/sequence-create-secret.png}}}}%
-\blocksep
-\textit{Explanation:} User opens form; UI validates session; user submits; API checks limit, encrypts content, stores in DB, logs to audit; success returned to user.
-
-\blocksep
-\textbf{Part B: Generate Share Link}
-
-\IfFileExists{assets/sequence/sequence-generate-share.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/sequence/sequence-generate-share.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/sequence/sequence-generate-share.mmd -o assets/sequence/sequence-generate-share.png}}}}%
-\blocksep
-\textit{Explanation:} User clicks Share; API fetches secret, generates 64-char token, stores SecretShare, logs event; share URL returned for copying.
-
-\blocksep
-\textbf{Part C: Access Shared Secret}
-
-\IfFileExists{assets/sequence/sequence-access-share.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/sequence/sequence-access-share.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/sequence/sequence-access-share.mmd -o assets/sequence/sequence-access-share.png}}}}%
-\blocksep
-\textit{Explanation:} Recipient opens link; API validates token, expiration, view count; if password protected, prompts and validates; fetches and decrypts secret; increments view count; logs access; displays content. Invalid or expired links show error.
+\textit{Explanation:} The sequence diagram shows three main flows. (1) Create Secret: User opens form; UI validates session; user submits; API checks limit, encrypts content, stores in DB, logs to audit; success returned to user. (2) Generate Share Link: User clicks Share; API fetches secret, generates 64-char token, stores SecretShare, logs event; share URL returned for copying. (3) Access Shared Secret: Recipient opens link; API validates token, expiration, view count; if password protected, prompts and validates; fetches and decrypts secret; increments view count; logs access; displays content. Invalid or expired links show error.
 
 \subsubsection{Activity Diagram}
 \addcontentsline{toc}{subsubsection}{Activity Diagram}
 
-The activity diagram is divided into two parts for easier understanding.
+The activity diagram illustrates the workflows for share link creation and recipient access.
 
+\begin{center}
+  \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/Activity Diagram.jpeg}
+\end{center}
 \blocksep
-\textbf{Part A: Share Link Creation}
-\IfFileExists{assets/activity/activity-share-creation.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/activity/activity-share-creation.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/activity/activity-share-creation.mmd -o assets/activity/activity-share-creation.png}}}}%
-\blocksep
-\textit{Explanation:} User selects secret; system checks authentication (redirect to login if needed); verifies permission; user configures expiration, max views, optional password; system generates token, stores share, logs event; link ready.
+\textit{Explanation:} The activity diagram covers two main workflows. (1) Share Link Creation: User selects secret; system checks authentication (redirect to login if needed); verifies permission; user configures expiration, max views, optional password; system generates token, stores share, logs event; link ready. (2) Recipient Access: Recipient opens link; system validates token; checks expiration and max views; if password protected, prompts (5 failed attempts revokes link); decrypts and displays secret; increments view count; if burn-on-read or max views reached, deletes or deactivates.
 
-\blocksep
-\textbf{Part B: Recipient Access}
-\IfFileExists{assets/activity/activity-recipient-access.png}{%
-  \begin{center}
-    \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{assets/activity/activity-recipient-access.png}
-  \end{center}}{%
-  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\raggedright\small Generate: \texttt{mmdc -i assets/activity/activity-recipient-access.mmd -o assets/activity/activity-recipient-access.png}}}}%
-\blocksep
-\textit{Explanation:} Recipient opens link; system validates token; checks expiration and max views; if password protected, prompts (5 failed attempts revokes link); decrypts and displays secret; increments view count; if burn-on-read or max views reached, deletes or deactivates.
+% ==================== 5. Testing ====================
+\section{Testing}
 
-% ==================== 5. References ====================
+\subsection{End-to-End (E2E) Test Suite}
+
+The project uses Playwright for end-to-end testing. All E2E test specifications reside in the \texttt{e2e/} directory. The following tables list functional test cases (input--action--assertion) for the four main modules. Tests that verify only static UI rendering are excluded.
+
+% --- 5.1 Authentication ---
+\subsubsection{Authentication}
+\addcontentsline{toc}{subsubsection}{Authentication}
+
+{\footnotesize
+\begin{longtable}{@{}p{1.4cm}p{2.6cm}p{3.3cm}p{3.8cm}p{1.4cm}p{0.8cm}@{}}
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endhead
+  \hline
+  \multicolumn{6}{r}{\textit{Continued on next page}} \\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+
+  TC-AUTH-01 &
+  Login fails with empty fields &
+  Click sign-in without entering credentials &
+  Form validation prevents submission; stays on login page &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-AUTH-02 &
+  Login fails with invalid credentials &
+  Enter wrong email and password; click sign-in &
+  Shows ``User not found'' or ``Invalid password'' error &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-AUTH-03 &
+  Successful login redirects to dashboard &
+  Enter valid test user email and password; click sign-in &
+  Redirects to \texttt{/dashboard} &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-AUTH-04 &
+  Signup rejects short password &
+  Enter name, email, password ``short'' (7 chars); click create &
+  Validation prevents submission &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-AUTH-05 &
+  Signup requires terms acceptance &
+  Fill valid data; skip terms checkbox; click create &
+  Form prevents submission without terms acceptance &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-AUTH-06 &
+  Successful signup redirects to dashboard &
+  Fill unique email, name, valid password ($\geq$8 chars); accept terms; submit &
+  Redirects to \texttt{/dashboard} &
+  As expected &
+  Pass \\
+\end{longtable}
+}
+
+% --- 5.2 Secret Management ---
+\subsubsection{Secret Management}
+\addcontentsline{toc}{subsubsection}{Secret Management}
+
+{\footnotesize
+\begin{longtable}{@{}p{1.4cm}p{2.6cm}p{3.3cm}p{3.8cm}p{1.4cm}p{0.8cm}@{}}
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endhead
+  \hline
+  \multicolumn{6}{r}{\textit{Continued on next page}} \\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+
+  TC-SCRT-01 &
+  Search filters secrets by name &
+  Type ``nonexistent-xyz'' in search field on secrets list &
+  Results filtered; no matching secret shown &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-02 &
+  Free tier restricts expiration options &
+  Open expiration selector on free tier account &
+  Shows 1\,h, 1\,d, 7\,d; hides 30\,d and Never &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-03 &
+  Burn-on-read disabled on free tier &
+  View burn-on-read toggle on free tier account &
+  Toggle disabled with ``Pro/Business only'' label &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-04 &
+  Create form rejects empty submission &
+  Click create without filling name or value &
+  Shows validation errors for required fields &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-05 &
+  Secret creation with valid inputs &
+  Fill name, value, password ($\geq$8 chars); select 1\,h expiration; submit &
+  Secret created; redirects to detail page &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-06 &
+  Decrypt with correct password &
+  Enter correct password; click ``View Secret'' &
+  Decrypted content displayed &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-07 &
+  Decrypt fails with wrong password &
+  Enter incorrect password; click ``View Secret'' &
+  Shows ``Failed to decrypt'' error &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-08 &
+  Delete requires confirmation &
+  Click delete on secret detail page &
+  Confirmation dialog appears before deletion &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-09 &
+  Public decrypt without login &
+  Navigate to share link while logged out; enter password; click Decrypt &
+  Secret decrypted without requiring login &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SCRT-10 &
+  Invalid share link shows error &
+  Navigate to invalid share link; enter password; click Decrypt &
+  Shows ``Failed'' or ``Not found'' error &
+  As expected &
+  Pass \\
+\end{longtable}
+}
+
+% --- 5.3 Dashboard ---
+\subsubsection{Dashboard}
+\addcontentsline{toc}{subsubsection}{Dashboard}
+
+{\footnotesize
+\begin{longtable}{@{}p{1.4cm}p{2.6cm}p{3.3cm}p{3.8cm}p{1.4cm}p{0.8cm}@{}}
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endhead
+  \hline
+  \multicolumn{6}{r}{\textit{Continued on next page}} \\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+
+  TC-DASH-01 &
+  Unauthenticated access blocked &
+  Clear cookies; navigate to \texttt{/dashboard} &
+  Redirects to landing page; shows sign-in link &
+  As expected &
+  Pass \\
+\end{longtable}
+}
+
+% --- 5.4 Settings ---
+\subsubsection{Settings}
+\addcontentsline{toc}{subsubsection}{Settings}
+
+{\footnotesize
+\begin{longtable}{@{}p{1.4cm}p{2.6cm}p{3.3cm}p{3.8cm}p{1.4cm}p{0.8cm}@{}}
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{TC ID} & \textbf{Description} & \textbf{Input} & \textbf{Expected Result} & \textbf{Actual} & \textbf{Status} \\
+  \midrule
+  \endhead
+  \hline
+  \multicolumn{6}{r}{\textit{Continued on next page}} \\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+
+  TC-SETT-01 &
+  Update profile display name &
+  Change name; click ``Save Changes'' &
+  Shows success toast ``Profile updated'' &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SETT-02 &
+  Billing period toggle changes prices &
+  Toggle from monthly to yearly on billing page &
+  Prices update; ``Save 20\%'' label appears &
+  As expected &
+  Pass \\
+  \hline
+
+  TC-SETT-03 &
+  Create and revoke API token &
+  Create token with name; then click revoke &
+  Token appears in list; removed after revocation &
+  As expected &
+  Pass \\
+\end{longtable}
+}
+
+\subsection{Test Coverage Summary}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{E2E Test Coverage by Main Module}
+  \begin{tabular}{@{}lccp{5.5cm}@{}}
+    \toprule
+    \textbf{Module} & \textbf{Test Cases} & \textbf{Test Files} & \textbf{Key Flows Covered} \\
+    \midrule
+    Authentication    & 6 & 2 & Login (valid/invalid/empty), signup (validation, terms, success) \\
+    \hline
+    Secret Management & 10 & 4 & CRUD, search, encrypt/decrypt, tier gating, public sharing \\
+    \hline
+    Dashboard         & 1 & 1 & Auth guard redirect \\
+    \hline
+    Settings          & 3 & 3 & Profile update, billing toggle, API token lifecycle \\
+    \hline
+    \textbf{Total}    & \textbf{20} & \textbf{10} & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ==================== 6. Git Version Control ====================
+\section{Git Version Control}
+
+\subsection{Repository Commit History}
+
+Version control was used throughout development to keep the project traceable and collaborative. The commit history shows iterative progress with focused updates for features, fixes, refactoring, testing, and deployment configuration. This made it easier to review work incrementally and identify when specific changes were introduced.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{assets/github1.png}
+  \caption{Main branch commit history showing feature, fix, and configuration updates}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{assets/github2.png}
+  \caption{Recent commits highlighting documentation, analytics, and deployment improvements}
+\end{figure}
+
+\subsection{Collaboration and Repository Structure}
+
+The project repository structure demonstrates organized collaboration between team members. Work is separated into clear directories (application code, migrations, tests, scripts, and docs), allowing parallel development without conflicts. Frequent commits from multiple contributors indicate active coordination and continuous integration of changes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{assets/collab.png}
+  \caption{Repository overview showing team collaboration and modular project structure}
+\end{figure}
+
+% ==================== 7. References ====================
 \section{References}
 
 \subsection{Technical Documentation}
