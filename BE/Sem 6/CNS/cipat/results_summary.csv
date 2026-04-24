@@ -1,0 +1,14 @@
+benchmark,label,key_size,encrypt_ms,decrypt_ms,encrypt_mem_kb,decrypt_mem_kb
+std_vs_opt,Standard RSA (from scratch),2048,2795.8656,2545.2292,5.42,4.3
+std_vs_opt,Optimized RSA (CRT + cached),2048,2.6037,25.7206,5.43,5.09
+keysize_sweep,RSA-1024,1024,1.0818,7.5118,2.92,3.09
+keysize_sweep,RSA-2048,2048,2.628,25.6898,5.27,5.09
+keysize_sweep,RSA-3072,3072,4.5561,69.2271,9.44,7.34
+keysize_sweep,RSA-4096,4096,7.1286,152.8715,12.39,9.46
+opt_breakdown,Binary sq-and-mult (standard),2048,22.8309,0.0,0.0,0.0
+opt_breakdown,Sliding-window only,2048,18.0158,0.0,0.0,0.0
+opt_breakdown,Sliding-window + Montgomery,2048,69.3323,0.0,0.0,0.0
+opt_breakdown,Decrypt without CRT,2048,23.1368,0.0,0.0,0.0
+opt_breakdown,Decrypt with CRT,2048,18.7266,0.0,0.0,0.0
+opt_breakdown,Cold start (keygen+enc),2048,2177.0515,0.0,0.0,0.0
+opt_breakdown,Cached key (enc only),2048,1.0894,0.0,0.0,0.0
