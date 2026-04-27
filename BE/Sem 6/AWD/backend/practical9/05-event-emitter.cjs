@@ -32,12 +32,11 @@ myEmitter.once('serverStart', () => {
 const server = http.createServer((req, res) => {
   console.log(`${req.method} ${req.url}`);
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-
   if (req.url === '/' || req.url === '/home') {
     // Emit serverStart event (only fires once due to .once())
     myEmitter.emit('serverStart');
 
+    res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(`
       <h1>Event Emitter Example</h1>
       <p>Event-driven programming with Node.js EventEmitter</p>
@@ -56,6 +55,7 @@ const server = http.createServer((req, res) => {
     // Emit userLogin event
     myEmitter.emit('userLogin', user);
 
+    res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(`
       <h1>User Login Event</h1>
       <p>Emitted 'userLogin' event with user data:</p>
@@ -70,6 +70,7 @@ const server = http.createServer((req, res) => {
     // Emit userLogout event
     myEmitter.emit('userLogout', user);
 
+    res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(`
       <h1>User Logout Event</h1>
       <p>Emitted 'userLogout' event with user data:</p>
@@ -84,6 +85,7 @@ const server = http.createServer((req, res) => {
     // Emit error event
     myEmitter.emit('error', error);
 
+    res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(`
       <h1>Error Event</h1>
       <p>Emitted 'error' event:</p>
@@ -91,6 +93,10 @@ const server = http.createServer((req, res) => {
       <p>Check server console for the error log!</p>
       <p><a href="/">Back to Home</a></p>
     `);
+
+  } else if (req.url === '/favicon.ico') {
+    res.writeHead(204);
+    res.end();
 
   } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });

@@ -1,0 +1,3 @@
+Line 1: Hello from write stream!
+Line 2: Streams are efficient for large files
+Line 3: This file was created using streams

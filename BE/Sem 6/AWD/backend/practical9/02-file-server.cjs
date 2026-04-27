@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 3002;
+const BASE_DIR = path.resolve(__dirname, '../../');
 
 const mimeTypes = {
   '.html': 'text/html',
@@ -22,9 +23,17 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
   console.log(`${req.method} ${req.url}`);
 
-  let filePath = '.' + req.url;
-  if (filePath === './') {
-    filePath = './backend/practical9/index.html';
+  const requestedPath = decodeURIComponent(req.url.split('?')[0]);
+
+  let filePath;
+  if (requestedPath === '/') {
+    filePath = path.join(
+      BASE_DIR,
+      'assets',
+      'a-minimalist-vector-logo-design-featurin_AwG4WkmDQnCYxphzErXgmQ_1TnwNI6rRRCX3Pg6upWYKA.png'
+    );
+  } else {
+    filePath = path.join(BASE_DIR, requestedPath.replace(/^\/+/, ''));
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();
@@ -41,7 +50,7 @@ const server = http.createServer((req, res) => {
       }
     } else {
       res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
+      res.end(content);
     }
   });
 });
