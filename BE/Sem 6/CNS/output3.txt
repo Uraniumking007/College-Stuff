@@ -1,0 +1,1 @@
+"e[1mKey: MONARCHYe[0mne[1mPlaintext: ar mu hs eae[0mne[1mCiphertext: RM CM BP IMe[0mne[1mDecrypted: ARMUHSEAe[0m"

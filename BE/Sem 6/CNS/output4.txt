@@ -1,0 +1,31 @@
+============================================================
+RAIL FENCE CIPHER - ENCRYPTION AND DECRYPTION
+============================================================
+
+Original Text: "HELLO WORLD"
+Number of Rails: 3
+
+Encrypted: "HOREL OLLWD"
+Decrypted: "HELLO WORLD"
+
+✓ Rail Fence cipher test completed successfully
+Encryption successful: true
+
+============================================================
+ADDITIONAL TEST CASES
+============================================================
+
+Test 1: "CRYPTOGRAPHY" (Rails: 4)
+  Encrypted: "CGRORYYTAHPP"
+  Decrypted: "CRYPTOGRAPHY"
+  Success: true
+
+Test 2: "NETWORK SECURITY" (Rails: 3)
+  Encrypted: "NOSREWR EUIYTKCT"
+  Decrypted: "NETWORK SECURITY"
+  Success: true
+
+Test 3: "RAIL FENCE CIPHER" (Rails: 2)
+  Encrypted: "RI EC IHRALFNECPE"
+  Decrypted: "RAIL FENCE CIPHER"
+  Success: true
