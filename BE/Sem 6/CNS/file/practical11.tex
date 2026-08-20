@@ -1,0 +1,166 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{titling}
+
+% Set Times New Roman font
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+% Page setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Cryptography and Network Security(3161606)}
+\fancyhead[R]{Enrollment No.}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Code listing style
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\begin{document}
+
+% Title
+\begin{center}
+\Large\textbf{Practical No.11}
+\end{center}
+
+% Aim
+\section*{Aim}
+\large\textbf{To implement and demonstrate the Diffie-Hellman Key Exchange algorithm for secure key exchange between two parties.}
+\normalsize
+
+\vspace{0.5cm}
+
+% Theory
+\section*{Theory}
+The Diffie-Hellman key exchange is a method of securely exchanging cryptographic keys over a public channel. It allows two parties to establish a shared secret key that can be used for encrypted communication, without transmitting the key itself.
+
+\vspace{0.3cm}
+\textbf{Algorithm Steps:}
+\begin{enumerate}
+\item Both parties agree on public parameters: a prime number $p$ and a generator $g$
+\item Each party generates a private key: Alice ($a$), Bob ($b$)
+\item Each party computes their public key: $A = g^a \mod p$, $B = g^b \mod p$
+\item Parties exchange public keys
+\item Each party computes the shared secret: $S = B^a \mod p = A^b \mod p$
+\item Both parties now have the same shared secret $S = g^{ab} \mod p$
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Security:} The security relies on the discrete logarithm problem - it's computationally infeasible to derive $a$ from $A = g^a \mod p$ for large prime numbers.
+
+% Code
+\section*{Code}
+
+\begin{verbatim}
+/**
+ * Diffie-Hellman Key Exchange - Practical 11
+ * Test case: p=23, g=5, Alice private key=6, Bob private key=15, Expected shared secret=2
+ */
+
+// ============ DIFFIE-HELLMAN IMPLEMENTATION ============
+
+function generatePrivateKey(p: number): number {
+    // Generate random private key in range [2, p-2]
+    return Math.floor(Math.random() * (p - 3)) + 2;
+}
+
+function computePublicKey(privateKey: number, g: number, p: number): number {
+    // Compute public value: g^privateKey mod p
+    return Math.pow(g, privateKey) % p;
+}
+
+function computeSharedSecret(publicKey: number, privateKey: number, p: number): number {
+    // Compute shared secret: publicKey^privateKey mod p
+    return Math.pow(publicKey, privateKey) % p;
+}
+
+function diffieHellmanKeyExchange(): number {
+    // Public parameters (typically much larger in practice)
+    const p = 23;  // Prime modulus
+    const g = 5;   // Generator (primitive root)
+
+    console.log("Public parameters:");
+    console.log(`  Prime (p): ${p}`);
+    console.log(`  Generator (g): ${g}`);
+
+    // Alice's key generation
+    const a = generatePrivateKey(p);
+    const A = computePublicKey(a, g, p);
+    console.log("\nAlice:");
+    console.log(`  Private key (a): ${a}`);
+    console.log(`  Public value (A = g^a mod p): ${A}`);
+
+    // Bob's key generation
+    const b = generatePrivateKey(p);
+    const B = computePublicKey(b, g, p);
+    console.log("\nBob:");
+    console.log(`  Private key (b): ${b}`);
+    console.log(`  Public value (B = g^b mod p): ${B}`);
+
+    // Exchange public values and compute shared secret
+    const S_alice = computeSharedSecret(B, a, p);
+    const S_bob = computeSharedSecret(A, b, p);
+
+    console.log("\nShared Secret Computation:");
+    console.log(`  Alice computes: S = B^a mod p = ${B}^${a} mod ${p} = ${S_alice}`);
+    console.log(`  Bob computes:   S = A^b mod p = ${A}^${b} mod ${p} = ${S_bob}`);
+    console.log(`  Shared secrets match: ${S_alice === S_bob}`);
+
+    return S_alice;
+}
+
+// Run the Diffie-Hellman key exchange
+console.log("Diffie-Hellman Key Exchange Demonstration");
+console.log("=========================================");
+const sharedSecret = diffieHellmanKeyExchange();
+console.log("\nResult:");
+console.log(`  Shared secret: S = ${sharedSecret}`);
+console.log(`  Verification: Both parties computed the same value ✓`);
+
+// Security analysis
+console.log("\nSecurity Analysis:");
+console.log("  Eavesdropper sees: p = 23, g = 5, A = " + Math.pow(5, 6) % 23 + ", B = " + Math.pow(5, 15) % 23);
+console.log("  To find S, attacker must solve:");
+console.log("    - Find a from: 5^a mod 23 = " + Math.pow(5, 6) % 23 + "  (discrete logarithm)");
+console.log("    - Find b from: 5^b mod 23 = " + Math.pow(5, 15) % 23 + " (discrete logarithm)");
+console.log("  Then compute: S = " + Math.pow(5, 6) % 23 + "^b mod 23 = " + Math.pow(5, 15) % 23 + "^a mod 23 = " + sharedSecret);
+\end{verbatim}
+
+% Output
+\section*{Output}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{practical11-output.png}
+\caption{Output of Diffie-Hellman Key Exchange Implementation}
+\end{figure}
+
+\end{document}

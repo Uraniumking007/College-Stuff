@@ -1,0 +1,152 @@
+\documentclass[12pt,a4paper]{article}
+
+% Package declarations
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+
+% Page geometry
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+
+% Code listing style
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinelanguage{TypeScript}{
+  keywords={const, let, var, function, return, if, else, for, while, do, switch, case, break, continue, new, this, typeof, instanceof, try, catch, finally, throw, class, extends, interface, import, export, default, from, async, await},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={string, number, boolean, any, void, never, unknown},
+  ndkeywordstyle=\color{codepurple}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{codegreen}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Cryptography and Network Security(3161606)}
+\fancyhead[R]{Enrollment No.}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+% Title
+\begin{center}
+\fontsize{16}{18}\selectfont \textbf{Practical No.3}
+\end{center}
+
+% Aim
+\section*{Aim}
+\fontsize{12}{14}\selectfont
+Implement Playfair Cipher encryption and decryption
+
+\section*{Theory}
+Playfair cipher is a substitution cipher that encrypts pairs of letters (digraphs) instead of single letters. It uses a 5x5 key matrix constructed from a keyword. In the Playfair cipher:
+\begin{itemize}
+    \item The plaintext is split into pairs of letters (digraphs)
+    \item I and J are combined into a single cell in the matrix
+    \item Three rules govern encryption:
+    \begin{enumerate}
+        \item If both letters are in the same row, replace each with the letter to its right (wrap around)
+        \item If both letters are in the same column, replace each with the letter below it (wrap around)
+        \item If letters form a rectangle, replace each with the letter in the same row but in the other corner
+    \end{enumerate}
+\end{itemize}
+
+% Code
+\section*{Code}
+\begin{verbatim}
+const ALPHABET = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+
+function buildMatrix(key: string): string[][] {
+  const k = key.toUpperCase().replace(/J/g, "I").replace(/[^A-Z]/g, "");
+  const used = new Set<string>();
+  const letters: string[] = [];
+  for (const c of k + ALPHABET) {
+    if (!used.has(c)) {
+      used.add(c);
+      letters.push(c);
+    }
+  }
+  const matrix: string[][] = [];
+  for (let r = 0; r < 5; r++) matrix.push(letters.slice(r * 5, r * 5 + 5));
+  return matrix;
+}
+
+function find(matrix: string[][], ch: string): [number, number] {
+  const c = ch === "J" ? "I" : ch;
+  for (let r = 0; r < 5; r++)
+    for (let col = 0; col < 5; col++)
+      if (matrix[r][col] === c) return [r, col];
+  return [0, 0];
+}
+
+function digraphs(text: string): string[] {
+  const s = text.toUpperCase().replace(/J/g, "I").replace(/[^A-Z]/g, "");
+  const out: string[] = [];
+  for (let i = 0; i < s.length; i += 2) {
+    const a = s[i];
+    const b = i + 1 < s.length ? s[i + 1] : "X";
+    out.push(a === b ? a + "X" : a + b);
+    if (a === b) i--;
+  }
+  return out;
+}
+
+function transform(matrix: string[][], a: string, b: string, step: number): string {
+  const [r1, c1] = find(matrix, a);
+  const [r2, c2] = find(matrix, b);
+  if (r1 === r2)
+    return matrix[r1][(c1 + step + 5) % 5] + matrix[r2][(c2 + step + 5) % 5];
+  if (c1 === c2)
+    return matrix[(r1 + step + 5) % 5][c1] + matrix[(r2 + step + 5) % 5][c2];
+  return matrix[r1][c2] + matrix[r2][c1];
+}
+
+function playfairEncrypt(plainText: string, key: string): string {
+  const m = buildMatrix(key);
+  return digraphs(plainText).map((dg) => transform(m, dg[0], dg[1], 1)).join(" ");
+}
+
+function playfairDecrypt(cipherText: string, key: string): string {
+  const m = buildMatrix(key);
+  const s = cipherText.toUpperCase().replace(/\s/g, "");
+  const out: string[] = [];
+  for (let i = 0; i < s.length; i += 2) out.push(s.slice(i, i + 2));
+  return out.map((dg) => transform(m, dg[0], dg[1], -1)).join("");
+}
+
+const KEY = "MONARCHY";
+const PLAINTEXT = "ar mu hs ea";
+console.log("Key:", KEY);
+console.log("Plaintext:", PLAINTEXT);
+console.log("Ciphertext:", playfairEncrypt(PLAINTEXT, KEY));
+console.log("Decrypted:", playfairDecrypt(playfairEncrypt(PLAINTEXT, KEY), KEY));
+\end{verbatim}
+
+% Output
+\section*{Output}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{practical3-output.png}
+    \caption{Output of Playfair Cipher Implementation}
+    \label{fig:output}
+\end{figure}
+
+\end{document}

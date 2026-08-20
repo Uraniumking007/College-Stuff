@@ -1,0 +1,131 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Times New Roman font
+\usepackage[scaled=0.90]{helvet}
+\usepackage{courier}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+% Page geometry
+\geometry{
+    a4paper,
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Cryptography and Network Security(3161606)}
+\fancyhead[R]{Enrollment No.}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% Title - Font size 16
+\begin{center}
+    \fontsize{16}{20}\selectfont \textbf{Practical No.1}
+\end{center}
+
+\vspace{0.5cm}
+
+% Aim - Font size 14
+\fontsize{14}{18}\selectfont \textbf{Aim:}
+\par
+
+% Paragraph - Font size 12, justified
+\fontsize{12}{14}\selectfont
+Implement Caesar Cipher encryption and decryption.
+
+\vspace{1cm}
+
+% Subheading - Font size 14
+\fontsize{14}{18}\selectfont \textbf{Code:}
+\par
+
+\vspace{0.3cm}
+
+% Code displayed with correct indentation (monospaced)
+\fontsize{12}{14}\selectfont
+\begin{verbatim}
+interface EncryptParameters {
+    plainText: string
+    key: number
+}
+
+interface DecryptParameters {
+    encryptedText: string
+    key: number
+}
+
+const LOWERCASE_A = 97
+const LOWERCASE_Z = 122
+const ALPHABET_SIZE = 26
+
+/** Wraps a char code into the lowercase a-z range (97-122). */
+function wrapLowercaseCode(code: number): number {
+    while (code > LOWERCASE_Z) code -= ALPHABET_SIZE
+    while (code < LOWERCASE_A) code += ALPHABET_SIZE
+    return code
+}
+
+/** Normalizes key to 0-25 so any integer key works. */
+function normalizeKey(key: number): number {
+    return ((key % ALPHABET_SIZE) + ALPHABET_SIZE) % ALPHABET_SIZE
+}
+
+function isLowercaseLetter(code: number): boolean {
+    return code >= LOWERCASE_A && code <= LOWERCASE_Z
+}
+
+function caesarEncrypt({ plainText, key }: EncryptParameters): string {
+    const k = normalizeKey(key)
+    const inputArr = plainText.split("")
+    inputArr.forEach((element, index) => {
+        const code = element.charCodeAt(0)
+        if (isLowercaseLetter(code)) {
+            inputArr[index] = String.fromCharCode(wrapLowercaseCode(code + k))
+        }
+    })
+    return inputArr.join("")
+}
+
+function caesarDecrypt({ encryptedText, key }: DecryptParameters): string {
+    const k = normalizeKey(key)
+    const inputArr = encryptedText.split("")
+    inputArr.forEach((element, index) => {
+        const code = element.charCodeAt(0)
+        if (isLowercaseLetter(code)) {
+            inputArr[index] = String.fromCharCode(wrapLowercaseCode(code - k))
+        }
+    })
+    return inputArr.join("")
+}
+
+const encryptedString = caesarEncrypt({ plainText: "tasty", key: 5 })
+console.log(encryptedString)
+const decryptedText = caesarDecrypt({ encryptedText: encryptedString, key: 5 })
+console.log(decryptedText)
+\end{verbatim}
+
+\vspace{1cm}
+
+% Output section - Font size 14
+\fontsize{14}{18}\selectfont \textbf{Output:}
+\par
+
+\vspace{0.3cm}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{practical1-output.png}
+    \caption{Output of Caesar Cipher Implementation}
+\end{figure}
+
+\end{document}

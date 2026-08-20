@@ -1,0 +1,227 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{times}
+
+% Page setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Cryptography and Network Security(3161606)}
+\fancyhead[R]{Enrollment No.}
+\fancyfoot[C]{\thepage}
+
+
+\begin{document}
+
+\begin{center}
+    \Large\textbf{Practical No.5}
+\end{center}
+
+\section*{Aim}
+\textbf{\Large}To implement Rail Fence Cipher, a transposition cipher that writes the message in a zigzag pattern across multiple rails and then reads off each rail sequentially.
+
+\section*{Theory}
+The Rail Fence Cipher is a transposition cipher that encrypts messages by arranging them in a zigzag pattern across multiple "rails" (rows). The encryption process involves:
+
+\begin{enumerate}
+    \item Creating a specified number of empty rails
+    \item Writing each character of the plaintext in a zigzag pattern (down and up) across the rails
+    \item Reading all rails sequentially from top to bottom to form the ciphertext
+\end{enumerate}
+
+Decryption reverses this process by:
+\begin{enumerate}
+    \item Determining the length of each rail
+    \item Filling rails with ciphertext characters
+    \item Reading in zigzag pattern to recover the original plaintext
+\end{enumerate}
+
+\section*{Code}
+\begin{verbatim}
+/**
+ * Rail Fence Cipher Implementation
+ *
+ * A transposition cipher that writes the message in a zigzag pattern
+ * across multiple rails, then reads off each rail sequentially.
+ */
+
+interface EncryptParameters {
+  plainText: string
+  rails: number
+}
+
+interface DecryptParameters {
+  cipherText: string
+  rails: number
+}
+
+/**
+ * Encrypt plaintext using Rail Fence cipher
+ *
+ * Algorithm:
+ * 1. Create 'rails' number of empty strings
+ * 2. Write each character in zigzag pattern across rails
+ * 3. Read all rails sequentially to form ciphertext
+ */
+function railFenceEncrypt({ plainText, rails }: EncryptParameters): string {
+  if (rails < 2) {
+    throw new Error("Number of rails must be at least 2")
+  }
+
+  // Create rails array
+  const railStrings: string[] = Array.from({ length: rails }, () => "")
+
+  // Write characters in zigzag pattern
+  let currentRail = 0
+  let direction = 1 // going down
+
+  for (const char of plainText) {
+    railStrings[currentRail] += char
+
+    // Change direction at top or bottom rail
+    if (currentRail === 0) {
+      direction = 1
+    } else if (currentRail === rails - 1) {
+      direction = -1
+    }
+
+    currentRail += direction
+  }
+
+  // Read all rails sequentially
+  return railStrings.join("")
+}
+
+/**
+ * Decrypt ciphertext using Rail Fence cipher
+ *
+ * Algorithm:
+ * 1. Determine length of each rail
+ * 2. Fill rails with ciphertext characters
+ * 3. Read in zigzag pattern to recover plaintext
+ */
+function railFenceDecrypt({ cipherText, rails }: DecryptParameters): string {
+  if (rails < 2) {
+    throw new Error("Number of rails must be at least 2")
+  }
+
+  const len = cipherText.length
+
+  // Step 1: Determine length of each rail
+  const railLengths: number[] = new Array(rails).fill(0)
+  let currentRail = 0
+  let direction = 1
+
+  for (let i = 0; i < len; i++) {
+    railLengths[currentRail]++
+
+    if (currentRail === 0) {
+      direction = 1
+    } else if (currentRail === rails - 1) {
+      direction = -1
+    }
+
+    currentRail += direction
+  }
+
+  // Step 2: Fill rails with ciphertext characters
+  const railStrings: string[] = []
+  let index = 0
+
+  for (let r = 0; r < rails; r++) {
+    railStrings.push(cipherText.slice(index, index + railLengths[r]))
+    index += railLengths[r]
+  }
+
+  // Step 3: Create position array to track indices in each rail
+  const railPositions: number[] = new Array(rails).fill(0)
+
+  // Step 4: Read in zigzag pattern
+  let result = ""
+  currentRail = 0
+  direction = 1
+
+  for (let i = 0; i < len; i++) {
+    result += railStrings[currentRail][railPositions[currentRail]]
+    railPositions[currentRail]++
+
+    if (currentRail === 0) {
+      direction = 1
+    } else if (currentRail === rails - 1) {
+      direction = -1
+    }
+
+    currentRail += direction
+  }
+
+  return result
+}
+
+// ============ TEST CASE ============
+
+console.log("=".repeat(60))
+console.log("RAIL FENCE CIPHER - TEST CASE")
+console.log("=".repeat(60))
+
+const PLAINTEXT = "Meetme"
+const RAILS = 2
+
+console.log(`\nPlaintext: ${PLAINTEXT}`)
+console.log(`Number of rails: ${RAILS}`)
+
+// Show the rail pattern for 2 rails
+console.log("\nRail Pattern (2 rails):")
+console.log("  Rail 0: M . e . m . e  → 'Meme'")
+console.log("  Rail 1: . e . e . t .  → 'eet'")
+
+const encrypted = railFenceEncrypt({ plainText: PLAINTEXT, rails: RAILS })
+console.log(`\nCiphertext: ${encrypted}`)
+
+const decrypted = railFenceDecrypt({ cipherText: encrypted, rails: RAILS })
+console.log(`Decrypted: ${decrypted}`)
+
+// Verification
+if (encrypted === "MEMEET") {
+  console.log("\n[OK] ENCRYPTION VERIFIED: 'Meetme' → 'MEMEET'")
+} else {
+  console.log(`\n[FAIL] Expected 'MEMEET', got '${encrypted}'`)
+}
+
+if (decrypted === PLAINTEXT) {
+  console.log("[OK] DECRYPTION VERIFIED: Successfully recovered original plaintext")
+} else {
+  console.log(`[FAIL] Decryption failed: expected '${PLAINTEXT}', got '${decrypted}'`)
+}
+
+// Additional test with 3 rails
+console.log("\n" + "=".repeat(60))
+console.log("ADDITIONAL TEST: 3 Rails")
+console.log("=".repeat(60))
+
+const plaintext3 = "WEAREDISCOVEREDFLEEATONCE"
+const rails3 = 3
+
+console.log(`\nPlaintext: ${plaintext3}`)
+console.log(`Number of rails: ${rails3}`)
+
+const encrypted3 = railFenceEncrypt({ plainText: plaintext3, rails: rails3 })
+console.log(`Ciphertext: ${encrypted3}`)
+
+const decrypted3 = railFenceDecrypt({ cipherText: encrypted3, rails: rails3 })
+console.log(`Decrypted: ${decrypted3}`)
+
+if (decrypted3 === plaintext3) {
+  console.log("\n[OK] VERIFIED: 3-rail encryption/decryption works correctly")
+} else {
+  console.log(`\n[FAIL] Failed: expected '${plaintext3}', got '${decrypted3}'`)
+}
+\end{verbatim}
+
+\section*{Output}
+\begin{center}
+    \includegraphics[width=\textwidth]{practical5-output.png}
+\end{center}
+
+\end{document}
