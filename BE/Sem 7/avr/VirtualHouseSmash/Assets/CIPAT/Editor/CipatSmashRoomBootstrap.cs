@@ -270,6 +270,14 @@ namespace Cipat.Editor
 
             var grab = body.GetComponent<XRGrabInteractable>();
             if (grab == null) grab = body.gameObject.AddComponent<XRGrabInteractable>();
+            grab.movementType = XRBaseInteractable.MovementType.Instantaneous;
+            grab.throwOnDetach = false;
+            var grabSo = new SerializedObject(grab);
+            var trackPos = grabSo.FindProperty("m_TrackPosition");
+            if (trackPos != null) trackPos.boolValue = false;
+            var trackRot = grabSo.FindProperty("m_TrackRotation");
+            if (trackRot != null) trackRot.boolValue = false;
+            grabSo.ApplyModifiedPropertiesWithoutUndo();
 
             var swing = body.GetComponent<Cipat.DoorSwingOnSelect>();
             if (swing == null) swing = body.gameObject.AddComponent<Cipat.DoorSwingOnSelect>();
