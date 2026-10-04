@@ -1023,27 +1023,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdeb57ff900e167419635eef4854627d, type: 3}
---- !u!65 &197785968838770832
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5772325201771028015}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.21626794, y: 0.17818788, z: 0.21390688}
-  m_Center: {x: -0.017534096, y: 0.08909391, z: -0.0060575567}
 --- !u!1 &229839653767828055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1034,6 @@ GameObject:
   - component: {fileID: 6182719765143399367}
   - component: {fileID: 1973232290753772597}
   - component: {fileID: 4904636736679116636}
-  - component: {fileID: 1823275181920201639}
   m_Layer: 0
   m_Name: launchTable_vase1
   m_TagString: Untagged
@@ -1194,7 +1172,7 @@ Transform:
   m_GameObject: {fileID: 919132147881999638}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.4, y: 0.95, z: -6.75}
+  m_LocalPosition: {x: -13.42, y: 0.4700001, z: -6.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1250,7 +1228,7 @@ Transform:
   m_GameObject: {fileID: 919132147591522345}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.9, y: 0.95, z: -6.35}
+  m_LocalPosition: {x: -12.92, y: 0.46999985, z: -6.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1266,7 +1244,7 @@ Transform:
   m_GameObject: {fileID: 919132147578131440}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.15, y: 0.95, z: -6.95}
+  m_LocalPosition: {x: -13.17, y: 0.4700001, z: -7.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1347,7 +1325,7 @@ Transform:
   m_GameObject: {fileID: 919132148019852716}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.75, y: 0.95, z: -6.5}
+  m_LocalPosition: {x: -12.77, y: 0.46999985, z: -6.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1468,7 +1446,7 @@ Transform:
   m_GameObject: {fileID: 919132149581776991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.7, y: 0.95, z: -6.85}
+  m_LocalPosition: {x: -12.72, y: 0.4700088, z: -7.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1524,7 +1502,7 @@ Transform:
   m_GameObject: {fileID: 919132149183437786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.35, y: 0.95, z: -6.5499997}
+  m_LocalPosition: {x: -13.370001, y: 0.4700002, z: -6.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2746,27 +2724,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cc7753ad8e096d4c8b059687625cdfa, type: 3}
---- !u!65 &1823275181920201639
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229839653767828055}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.32889685, y: 0.32329926, z: 0.32889685}
-  m_Center: {x: 0, y: 0.16164078, z: 0}
 --- !u!1 &1872344679177126007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,7 +2735,6 @@ GameObject:
   - component: {fileID: 6389244173698066317}
   - component: {fileID: 9117271360064772915}
   - component: {fileID: 5270531394430833935}
-  - component: {fileID: 2443142262336979543}
   m_Layer: 0
   m_Name: container1_body
   m_TagString: Untagged
@@ -2968,27 +2924,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2443142262336979543
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872344679177126007}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.13840362, y: 0.15813969, z: 0.13840361}
-  m_Center: {x: -0.000000011175871, y: 0.07906983, z: 0}
 --- !u!1 &2487322314251452179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,7 +2935,6 @@ GameObject:
   - component: {fileID: 7336197823639876294}
   - component: {fileID: 5702773786952240838}
   - component: {fileID: 899711687898610047}
-  - component: {fileID: 4899610232899896099}
   m_Layer: 0
   m_Name: coffeTable_plantBase
   m_TagString: Untagged
@@ -3694,27 +3628,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &4035126765884839669
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6411521183551986422}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.23942217, y: 0.26423082, z: 0.23942217}
-  m_Center: {x: -0.000000018626451, y: 0.13211559, z: -0.000000018626451}
 --- !u!1001 &4111280891554802300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4020,27 +3933,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97bc4339b3151c34799878d35be91e6f, type: 3}
---- !u!65 &4899610232899896099
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2487322314251452179}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.156263, y: 0.008464186, z: 0.15626298}
-  m_Center: {x: 0.00000010430813, y: 0.0042320793, z: 0}
 --- !u!23 &4904636736679116636
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4326,7 +4218,6 @@ GameObject:
   - component: {fileID: 8567250958639441523}
   - component: {fileID: 4966946628821523234}
   - component: {fileID: 2862150159716168691}
-  - component: {fileID: 197785968838770832}
   m_Layer: 0
   m_Name: coffeTable_plant
   m_TagString: Untagged
@@ -4357,27 +4248,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8023476437243957897}
   m_Mesh: {fileID: 5357124844544854606, guid: 7cb687ce850f4264283bd6319ea397e7, type: 3}
---- !u!65 &6230920201634367583
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130803476442684366}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.14243278, y: 0.25835726, z: 0.14243278}
-  m_Center: {x: -0.000000007450581, y: 0.12917863, z: -0.0000000037252903}
 --- !u!4 &6389244173698066317
 Transform:
   m_ObjectHideFlags: 0
@@ -4404,7 +4274,6 @@ GameObject:
   - component: {fileID: 9168652514274419498}
   - component: {fileID: 1415773128960857149}
   - component: {fileID: 3037289204360648992}
-  - component: {fileID: 4035126765884839669}
   m_Layer: 0
   m_Name: launchTable_vase3
   m_TagString: Untagged
@@ -5400,7 +5269,6 @@ GameObject:
   - component: {fileID: 2062933477327061003}
   - component: {fileID: 6197717771277467636}
   - component: {fileID: 2100436634504301434}
-  - component: {fileID: 9222658574781106696}
   m_Layer: 0
   m_Name: container2
   m_TagString: Untagged
@@ -5916,7 +5784,6 @@ GameObject:
   - component: {fileID: 8623098626128888044}
   - component: {fileID: 6545773095433856757}
   - component: {fileID: 2409339128918130820}
-  - component: {fileID: 6230920201634367583}
   m_Layer: 0
   m_Name: launchTable_vase2
   m_TagString: Untagged
@@ -6008,27 +5875,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e5c0945f7a8b0439135711f7f02840, type: 3}
---- !u!65 &9222658574781106696
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023476437243957897}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.12000005, y: 0.20000003, z: 0.12000001}
-  m_Center: {x: -0.0006906912, y: 0.09999994, z: 0.0010488294}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

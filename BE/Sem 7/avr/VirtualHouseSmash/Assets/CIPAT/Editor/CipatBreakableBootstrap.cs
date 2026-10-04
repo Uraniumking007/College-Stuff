@@ -150,6 +150,14 @@ namespace Cipat.Editor
 
             EnsureNonTriggerCollider(go);
 
+            // Strip duplicate child BoxColliders so root collider bounds stay clean.
+            foreach (var c in go.GetComponentsInChildren<Collider>(true))
+            {
+                if (c.gameObject == go) continue;
+                if (c is BoxCollider)
+                    UnityEngine.Object.DestroyImmediate(c);
+            }
+
             if (!string.IsNullOrEmpty(BreakableTag) && Array.IndexOf(InternalEditorUtility.tags, BreakableTag) >= 0)
                 go.tag = BreakableTag;
 

@@ -9,7 +9,8 @@ namespace Cipat.Editor
     public static class CipatMoveBreakablesBootstrap
     {
         const string ScenePath = "Assets/Scenes/CIPAT_SmashHouse.unity";
-        static readonly Vector3 Anchor = new Vector3(-13.0f, 0.95f, -6.7f);
+        static readonly Vector3 Anchor = new Vector3(-13.02f, 0.72f, -6.89f);
+        const float TableTopY = 0.70f;
 
         // Offsets around the bat/coffee table so props are reachable in demo.
         static readonly Vector3[] Offsets =
@@ -42,9 +43,22 @@ namespace Cipat.Editor
                 {
                     var go = list[i].gameObject;
                     var offset = Offsets[i % Offsets.Length];
-                    var pos = Anchor + offset;
-                    go.transform.position = pos;
-                    Debug.Log($"[CIPAT] Moved {go.name} -> {pos}");
+                    go.transform.position = Anchor + offset;
+
+                    // Drop duplicate child BoxColliders before seating so bounds are correct.
+                    foreach (var c in go.GetComponentsInChildren<Collider>(true))
+                    {
+                        if (c.gameObject == go) continue;
+                        if (c is BoxCollider)
+                            UnityEngine.Object.DestroyImmediate(c);
+                    }
+
+                    var col = go.GetComponent<Collider>();
+                    float bottom = col != null ? col.bounds.min.y : go.transform.position.y;
+                    float delta = TableTopY - bottom;
+                    go.transform.position += new Vector3(0f, delta, 0f);
+
+                    Debug.Log($"[CIPAT] Moved {go.name} -> {go.transform.position}");
                 }
 
                 EditorSceneManager.MarkSceneDirty(scene);
