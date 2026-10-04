@@ -6,7 +6,10 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace Cipat.Editor
 {
@@ -53,6 +56,8 @@ namespace Cipat.Editor
                 var scene = EditorSceneManager.OpenScene(SmashScene, OpenSceneMode.Single);
                 var origin = EnsurePrefabInstance(XrOriginPrefab, "XR Origin (XR Rig)", XrOriginPosition, XrOriginRotation);
                 EnsurePrefabInstance(DeviceSimPrefab, "XR Device Simulator", Vector3.zero, Quaternion.identity);
+                EnsureXrInteractionManager();
+                EnsureEventSystem();
                 DisableConflictingCameras(origin);
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene);
@@ -80,6 +85,36 @@ namespace Cipat.Editor
             if (!AssetDatabase.CopyAsset(SourceScene, SmashScene))
                 throw new Exception($"Failed to copy {SourceScene} -> {SmashScene}");
             Debug.Log($"{LogPrefix} copied smash scene -> {SmashScene}");
+        }
+
+
+        static void EnsureXrInteractionManager()
+        {
+            if (UnityEngine.Object.FindFirstObjectByType<XRInteractionManager>() != null)
+            {
+                Debug.Log($"{LogPrefix} already present: XR Interaction Manager");
+                return;
+            }
+
+            var go = new GameObject("XR Interaction Manager");
+            go.AddComponent<XRInteractionManager>();
+            Undo.RegisterCreatedObjectUndo(go, "CIPAT add XR Interaction Manager");
+            Debug.Log($"{LogPrefix} created XR Interaction Manager");
+        }
+
+        static void EnsureEventSystem()
+        {
+            if (UnityEngine.Object.FindFirstObjectByType<EventSystem>() != null)
+            {
+                Debug.Log($"{LogPrefix} already present: EventSystem");
+                return;
+            }
+
+            var go = new GameObject("EventSystem");
+            go.AddComponent<EventSystem>();
+            go.AddComponent<XRUIInputModule>();
+            Undo.RegisterCreatedObjectUndo(go, "CIPAT add EventSystem");
+            Debug.Log($"{LogPrefix} created EventSystem with XRUIInputModule");
         }
 
         static GameObject EnsurePrefabInstance(string prefabPath, string objectName, Vector3 position, Quaternion rotation)
