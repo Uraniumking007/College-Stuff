@@ -10,7 +10,8 @@ namespace Cipat.Editor
 {
     /// <summary>
     /// Delete House Interior, scaffold a ~6x6 JC_LP smash-room shell,
-    /// and place door / sofa / MediaConsole + breakable TV screen.
+    /// place door / sofa / MediaConsole + TV, reseat table/smashables/bat,
+    /// and spawn XR Origin outside the south door facing into the room.
     /// </summary>
     public static class CipatSmashRoomBootstrap
     {
@@ -33,6 +34,25 @@ namespace Cipat.Editor
         const float WallHeight = 3f;
         const float DoorGap = 1.2f;
 
+        // Interior layout targets (world).
+        static readonly Vector3 RoomCenter = new Vector3(-10f, 0f, -5f);
+        static readonly Vector3 TableXz = new Vector3(-10f, 0f, -5f);
+        static readonly Vector3 XrSpawnPos = new Vector3(-10f, 0.02f, -10.5f);
+        static readonly Quaternion BatRotation = Quaternion.Euler(0f, 25f, 90f);
+        const float BatClearance = 0.04f;
+
+        // Scatter offsets around table center (same pattern as CipatMoveBreakablesBootstrap).
+        static readonly Vector3[] SmashOffsets =
+        {
+            new Vector3(-0.35f, 0.00f,  0.15f),
+            new Vector3( 0.25f, 0.00f,  0.20f),
+            new Vector3(-0.15f, 0.00f, -0.25f),
+            new Vector3( 0.30f, 0.00f, -0.15f),
+            new Vector3(-0.40f, 0.00f, -0.05f),
+            new Vector3( 0.10f, 0.00f,  0.35f),
+            new Vector3( 0.45f, 0.00f,  0.05f),
+        };
+
         public static void Run()
         {
             try
@@ -54,6 +74,9 @@ namespace Cipat.Editor
                 PlaceDoor(room);
                 PlaceSofa(room);
                 PlaceMediaConsoleAndTv(room);
+
+                PlaceTableCluster(room, preserved);
+                PlaceXrOriginSpawn();
 
                 foreach (var go in preserved)
                 {
@@ -97,7 +120,16 @@ namespace Cipat.Editor
                          FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
                 if (t == null) continue;
-                if (t.name != "(Prb)CoffeTable") continue;
+                if (t.name != "(Prb)CoffeTable" && t.name != "Bat") continue;
+                // Bat: only the hierarchy root named Bat (skip nested meshes if any).
+                if (t.name == "Bat")
+                {
+                    var root = SmashableRoot(t);
+                    if (root.name != "Bat") continue;
+                    if (!list.Contains(root))
+                        list.Add(root);
+                    continue;
+                }
                 if (!list.Contains(t.gameObject))
                     list.Add(t.gameObject);
             }
@@ -237,6 +269,153 @@ namespace Cipat.Editor
             var room = new GameObject(RoomRootName);
             room.transform.position = RoomOrigin;
             return room;
+        }
+
+        static void PlaceTableCluster(GameObject room, List<GameObject> preserved)
+        {
+            GameObject table = null;
+            GameObject bat = null;
+            var smashables = new List<GameObject>();
+
+            foreach (var go in preserved)
+            {
+                if (go == null) continue;
+                if (go.name == "(Prb)CoffeTable")
+                {
+                    table = go;
+                    continue;
+                }
+                if (go.name == "Bat")
+                {
+                    bat = go;
+                    continue;
+                }
+                if (go.GetComponentInChildren<Cipat.BreakableObject>(true) != null
+                    && go.name != "TvScreen")
+                    smashables.Add(go);
+            }
+
+            // Also hunt loose Bat if not preserved (fresh scene / renamed parent).
+            if (bat == null)
+            {
+                foreach (var t in UnityEngine.Object.FindObjectsByType<Transform>(
+                             FindObjectsInactive.Include, FindObjectsSortMode.None))
+                {
+                    if (t != null && t.name == "Bat" && (t.parent == null || t.parent.name == RoomRootName))
+                    {
+                        bat = t.gameObject;
+                        break;
+                    }
+                }
+            }
+
+            if (table == null)
+                throw new Exception("(Prb)CoffeTable not found — cannot reseat smashables");
+
+            // 1) Table to room center, upright, seated on floor.
+            table.transform.SetParent(null, true);
+            table.transform.rotation = Quaternion.identity;
+            table.transform.position = new Vector3(TableXz.x, table.transform.position.y, TableXz.z);
+            Physics.SyncTransforms();
+            var tableCol = table.GetComponentInChildren<Collider>();
+            if (tableCol == null) throw new Exception("No collider on (Prb)CoffeTable");
+            float floorY = RoomOrigin.y;
+            float deltaY = floorY - tableCol.bounds.min.y;
+            table.transform.position += new Vector3(0f, deltaY, 0f);
+            Physics.SyncTransforms();
+            float tableTopY = tableCol.bounds.max.y;
+            Debug.Log($"{LogPrefix} Table @ {table.transform.position} topY={tableTopY:F3}");
+
+            // 2) Smashables on tabletop.
+            smashables.Sort((a, b) => string.CompareOrdinal(a.name, b.name));
+            for (int i = 0; i < smashables.Count; i++)
+            {
+                var go = smashables[i];
+                go.transform.SetParent(null, true);
+                var offset = SmashOffsets[i % SmashOffsets.Length];
+                go.transform.position = new Vector3(
+                    TableXz.x + offset.x,
+                    go.transform.position.y,
+                    TableXz.z + offset.z);
+
+                foreach (var c in go.GetComponentsInChildren<Collider>(true))
+                {
+                    if (c.gameObject == go) continue;
+                    if (c is BoxCollider)
+                        UnityEngine.Object.DestroyImmediate(c);
+                }
+
+                Physics.SyncTransforms();
+                var col = go.GetComponent<Collider>() ?? go.GetComponentInChildren<Collider>();
+                float bottom = col != null ? col.bounds.min.y : go.transform.position.y;
+                go.transform.position += new Vector3(0f, tableTopY - bottom, 0f);
+                Physics.SyncTransforms();
+                float seated = col != null ? col.bounds.min.y : go.transform.position.y;
+                Debug.Log($"{LogPrefix} Smashable {go.name} @ {go.transform.position} bottom={seated:F3} topY={tableTopY:F3}");
+            }
+
+            // 3) Bat on table with clearance.
+            if (bat != null)
+            {
+                bat.transform.SetParent(null, true);
+                bat.transform.SetPositionAndRotation(
+                    new Vector3(TableXz.x + 0.05f, bat.transform.position.y, TableXz.z - 0.05f),
+                    BatRotation);
+                Physics.SyncTransforms();
+                var batCol = bat.GetComponent<Collider>() ?? bat.GetComponentInChildren<Collider>();
+                if (batCol != null)
+                {
+                    float bottom = batCol.bounds.min.y;
+                    bat.transform.position += new Vector3(0f, (tableTopY + BatClearance) - bottom, 0f);
+                    Physics.SyncTransforms();
+                    Debug.Log($"{LogPrefix} Bat @ {bat.transform.position} bottom={batCol.bounds.min.y:F3} target={tableTopY + BatClearance:F3}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{LogPrefix} Bat has no collider — left at {bat.transform.position}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"{LogPrefix} Bat not found — skip bat reseat");
+            }
+
+            // 4) Reparent under room (world-position preserve).
+            table.transform.SetParent(room.transform, true);
+            foreach (var go in smashables)
+            {
+                if (go != null) go.transform.SetParent(room.transform, true);
+            }
+            if (bat != null) bat.transform.SetParent(room.transform, true);
+
+            Debug.Log($"{LogPrefix} Table cluster reparented under {RoomRootName} (smashables={smashables.Count})");
+        }
+
+        static void PlaceXrOriginSpawn()
+        {
+            GameObject xr = null;
+            foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (root != null && root.name.StartsWith("XR Origin", StringComparison.Ordinal))
+                {
+                    xr = root;
+                    break;
+                }
+            }
+
+            if (xr == null)
+            {
+                Debug.LogWarning($"{LogPrefix} XR Origin not found — skip spawn placement");
+                return;
+            }
+
+            // Face into the room (+Z toward RoomCenter from south of the door).
+            var look = RoomCenter - new Vector3(XrSpawnPos.x, RoomCenter.y, XrSpawnPos.z);
+            if (look.sqrMagnitude < 1e-6f) look = Vector3.forward;
+            var rot = Quaternion.LookRotation(look.normalized, Vector3.up);
+
+            xr.transform.SetPositionAndRotation(XrSpawnPos, rot);
+            Debug.Log($"{LogPrefix} XR Origin @ {xr.transform.position} yaw={xr.transform.eulerAngles.y:F1}");
         }
 
         static void PlaceDoor(GameObject room)
