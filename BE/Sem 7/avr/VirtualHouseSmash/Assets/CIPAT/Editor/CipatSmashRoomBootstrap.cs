@@ -4,12 +4,13 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 namespace Cipat.Editor
 {
     /// <summary>
-    /// Task 2: delete House Interior and scaffold a ~6x6 JC_LP smash-room shell.
-    /// Door / sofa / console / TV placement is Task 3+.
+    /// Delete House Interior, scaffold a ~6x6 JC_LP smash-room shell,
+    /// and place door / sofa / MediaConsole + breakable TV screen.
     /// </summary>
     public static class CipatSmashRoomBootstrap
     {
@@ -17,10 +18,10 @@ namespace Cipat.Editor
         const string ScenePath = "Assets/Scenes/CIPAT_SmashHouse.unity";
         const string FloorPrefabPath = "Assets/JC_LP_House_Lite/Prefabs/SM_Buildings_Floor_01.prefab";
         const string WallPrefabPath = "Assets/JC_LP_House_Lite/Prefabs/SM_Buildings_Wall_Interior_15_T1.prefab";
-        // Reserved for Task 3.
         const string DoorPrefabPath = "Assets/nappin/HouseInteriorPack/Prefabs/(Prb)Door.prefab";
         const string SofaPrefabPath = "Assets/nappin/HouseInteriorPack/Prefabs/(Prb)Sofa.prefab";
         const string ConsolePrefabPath = "Assets/nappin/HouseInteriorPack/Prefabs/(Prb)MediaConsole.prefab";
+        const string GlassBreakPath = "Assets/CIPAT/Audio/glass_break.wav";
 
         const string RoomRootName = "CIPAT_SmashRoom";
 
@@ -37,19 +38,22 @@ namespace Cipat.Editor
             try
             {
                 Debug.Log($"{LogPrefix} Starting");
-                // Keep Task-3 path constants referenced.
-                Debug.Log($"{LogPrefix} Task3 paths reserved: door={DoorPrefabPath} sofa={SofaPrefabPath} console={ConsolePrefabPath}");
 
                 var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
 
                 var preserved = CollectAndDetachPreserved();
                 DeleteHouseInterior();
                 DeleteOrphanHouseLights();
+                DeleteOrphanTask3Props();
 
                 var room = RebuildRoomRoot();
                 BuildFloor(room);
                 BuildWalls(room);
                 BuildRoof(room);
+
+                PlaceDoor(room);
+                PlaceSofa(room);
+                PlaceMediaConsoleAndTv(room);
 
                 foreach (var go in preserved)
                 {
@@ -80,7 +84,11 @@ namespace Cipat.Editor
                          FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
                 if (b == null) continue;
+                // TvScreen is recreated each bootstrap — do not preserve orphans.
+                if (b.gameObject.name == "TvScreen" || b.transform.root.name == "TvScreen")
+                    continue;
                 var go = SmashableRoot(b.transform);
+                if (go.name == "TvScreen") continue;
                 if (!list.Contains(go))
                     list.Add(go);
             }
@@ -159,6 +167,28 @@ namespace Cipat.Editor
             }
         }
 
+        static void DeleteOrphanTask3Props()
+        {
+            var names = new HashSet<string> { "(Prb)Door", "(Prb)Sofa", "(Prb)MediaConsole", "TvScreen" };
+            var doomed = new List<GameObject>();
+            foreach (var t in UnityEngine.Object.FindObjectsByType<Transform>(
+                         FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                if (t == null) continue;
+                if (!names.Contains(t.name)) continue;
+                if (t.parent != null && t.parent.name == RoomRootName) continue;
+                if (t.root != null && t.root.name == RoomRootName) continue;
+                doomed.Add(t.gameObject);
+            }
+
+            foreach (var go in doomed)
+            {
+                if (go == null) continue;
+                Debug.Log($"{LogPrefix} Destroying orphan Task3 prop {go.name}");
+                UnityEngine.Object.DestroyImmediate(go);
+            }
+        }
+
         static void DisableConflictingCameras()
         {
             GameObject xrOrigin = null;
@@ -207,6 +237,122 @@ namespace Cipat.Editor
             var room = new GameObject(RoomRootName);
             room.transform.position = RoomOrigin;
             return room;
+        }
+
+        static void PlaceDoor(GameObject room)
+        {
+            var prefab = LoadPrefab(DoorPrefabPath);
+            var door = PrefabUtility.InstantiatePrefab(prefab, room.transform) as GameObject;
+            if (door == null) throw new Exception("Instantiate door failed");
+            door.name = "(Prb)Door";
+
+            // South-wall gap center; face into room (+Z). Prefab width is local Z → yaw 90 so it spans X.
+            door.transform.SetPositionAndRotation(
+                new Vector3(-10f, RoomOrigin.y, RoomOrigin.z),
+                Quaternion.Euler(0f, 90f, 0f));
+            Physics.SyncTransforms();
+            var b = EncapsulateColliders(door);
+            door.transform.position += new Vector3(
+                -10f - b.center.x,
+                RoomOrigin.y - b.min.y,
+                RoomOrigin.z - b.center.z);
+            Physics.SyncTransforms();
+            b = EncapsulateColliders(door);
+            Debug.Log($"{LogPrefix} Door AABB min={b.min} max={b.max}");
+
+            var body = FindDeep(door.transform, "door_body");
+            if (body == null) throw new Exception("door_body missing on (Prb)Door");
+
+            var rb = body.GetComponent<Rigidbody>();
+            if (rb == null) rb = body.gameObject.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.useGravity = false;
+
+            var grab = body.GetComponent<XRGrabInteractable>();
+            if (grab == null) grab = body.gameObject.AddComponent<XRGrabInteractable>();
+
+            var swing = body.GetComponent<Cipat.DoorSwingOnSelect>();
+            if (swing == null) swing = body.gameObject.AddComponent<Cipat.DoorSwingOnSelect>();
+            var so = new SerializedObject(swing);
+            so.FindProperty("hinge").objectReferenceValue = body;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorUtility.SetDirty(door);
+            Debug.Log($"{LogPrefix} Placed door @ {door.transform.position} rotY={door.transform.eulerAngles.y}");
+        }
+
+        static void PlaceSofa(GameObject room)
+        {
+            var prefab = LoadPrefab(SofaPrefabPath);
+            var sofa = PrefabUtility.InstantiatePrefab(prefab, room.transform) as GameObject;
+            if (sofa == null) throw new Exception("Instantiate sofa failed");
+            sofa.name = "(Prb)Sofa";
+
+            // West wall, near table cluster, leave walk path from south door.
+            // Long axis local Z (~3 m) along room depth; identity yaw faces +X into room.
+            sofa.transform.SetPositionAndRotation(
+                new Vector3(-12.2f, RoomOrigin.y, -5.2f),
+                Quaternion.identity);
+            SnapAabbMin(sofa, new Vector3(-12.2f, RoomOrigin.y, -5.2f), snapX: false, snapY: true, snapZ: false);
+
+            EditorUtility.SetDirty(sofa);
+            Debug.Log($"{LogPrefix} Placed sofa @ {sofa.transform.position}");
+        }
+
+        static void PlaceMediaConsoleAndTv(GameObject room)
+        {
+            var prefab = LoadPrefab(ConsolePrefabPath);
+            var console = PrefabUtility.InstantiatePrefab(prefab, room.transform) as GameObject;
+            if (console == null) throw new Exception("Instantiate MediaConsole failed");
+            console.name = "(Prb)MediaConsole";
+
+            // North wall (z≈-2). Long axis local Z → yaw -90 spans X; -localX (TV side) faces into room (-Z).
+            console.transform.SetPositionAndRotation(
+                new Vector3(-10f, RoomOrigin.y, -2.35f),
+                Quaternion.Euler(0f, -90f, 0f));
+            SnapAabbMin(console, new Vector3(-10f, RoomOrigin.y, -2.35f), snapX: false, snapY: true, snapZ: false);
+
+            var bakedTv = FindDeep(console.transform, "mediaConsole_TV");
+            if (bakedTv != null)
+                bakedTv.gameObject.SetActive(false);
+
+            var screen = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            screen.name = "TvScreen";
+            screen.transform.SetParent(console.transform, false);
+            screen.transform.localPosition = new Vector3(0f, 1.1f, -0.05f);
+            screen.transform.localScale = new Vector3(1.2f, 0.7f, 0.05f);
+
+            var br = screen.AddComponent<Cipat.BreakableObject>();
+            var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(GlassBreakPath);
+            if (clip == null) throw new Exception($"Missing audio: {GlassBreakPath}");
+            var so = new SerializedObject(br);
+            so.FindProperty("breakSound").objectReferenceValue = clip;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorUtility.SetDirty(console);
+            Debug.Log($"{LogPrefix} Placed MediaConsole @ {console.transform.position} + TvScreen");
+        }
+
+        static Bounds EncapsulateColliders(GameObject go)
+        {
+            var cols = go.GetComponentsInChildren<Collider>(true);
+            if (cols == null || cols.Length == 0)
+                throw new Exception($"No collider on {go.name}");
+            var b = cols[0].bounds;
+            for (int i = 1; i < cols.Length; i++)
+                b.Encapsulate(cols[i].bounds);
+            return b;
+        }
+
+        static Transform FindDeep(Transform root, string name)
+        {
+            if (root.name == name) return root;
+            for (int i = 0; i < root.childCount; i++)
+            {
+                var found = FindDeep(root.GetChild(i), name);
+                if (found != null) return found;
+            }
+            return null;
         }
 
         static void BuildFloor(GameObject room)
