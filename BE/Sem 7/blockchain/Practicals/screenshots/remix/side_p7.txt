@@ -1,0 +1,65 @@
+DEPLOY & RUN TRANSACTIONS
+Environment
+ Fork Reset
+Remix VM
+Osaka
+Account 1
+0x5B3...eddC4
+99.999 ETH
+Deploy
+Deployed contracts1
+Transactions history1
+Deployed Contracts
+1
+Add Contract
+
+Interact with a deployed contract
+
+DataTypesDemo
+0xd91...39138
+Remix VM
+2s ago
+
+Functions
+
+updateValues
+(bool, int256, uint256, string)
+Calldata
+Params
+Auto-Fill with AI Samples
+Transact
+fixedBytes
+Call
+flag
+Call
+name
+Call
+owner
+Call
+readAll
+Call
+0:
+bool: true
+1:
+int256: -10
+2:
+uint256: 10
+3:
+address: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+4:
+string: Blockchain Lab
+5:
+bytes32: 0x52b620837b64c9b535c1cd01abc8faa5fe42c7e9470c582ff8b716fd0aa007df
+signedNum
+Call
+unsignedNum
+Call
+
+Low level interaction
+
+Value
+wei
+Gas limit
+auto
+Balance
+0 ETH

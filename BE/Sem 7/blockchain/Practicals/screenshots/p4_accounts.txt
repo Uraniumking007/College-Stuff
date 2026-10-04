@@ -1,0 +1,2 @@
+$ geth attach --exec 'eth.accounts'
+["0x4911eafa8c8391252b89ce78f38506ebf1328784", "0xfbde62ca3b4c1085c53e3b9e59b351007ede144e"]

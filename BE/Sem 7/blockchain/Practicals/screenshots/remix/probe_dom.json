@@ -1,0 +1,5613 @@
+{
+  "url": "https://app.remix.live/#lang=en&optimize&runs=200&evmVersion&version=soljson-v0.8.34+commit.80d5c536.js",
+  "title": "Remix IDE - Smart Contract Development",
+  "items": [
+    {
+      "tag": "DIV",
+      "id": "originBanner-migration-new",
+      "title": null,
+      "aria": null,
+      "t": "Welcome to the new home of Remix. Bookmark app.remix.live so you always land here. Still n"
+    },
+    {
+      "tag": "A",
+      "id": "originBannerAction-migration-new",
+      "title": null,
+      "aria": null,
+      "t": "Still need your files from remix.ethereum.org?"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": "Dismiss",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "nudgeBanner-regional-pricing-offer",
+      "title": null,
+      "aria": null,
+      "t": "Paid plans start at ₹199.60/month with the current launch offer, billed in INR. See Plans"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "nudgeBannerAction-regional-pricing-offer",
+      "title": null,
+      "aria": null,
+      "t": "See Plans"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": "Dismiss",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX 2.6.4 default_workspace AI Code Sign In 1"
+    },
+    {
+      "tag": "DIV",
+      "id": "top-bar-container",
+      "title": null,
+      "aria": null,
+      "t": "REMIX 2.6.4 default_workspace AI Code Sign In 1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX 2.6.4 default_workspace AI Code Sign In 1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX 2.6.4"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsHomeIcon",
+      "title": null,
+      "aria": null,
+      "t": "REMIX"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsHomeIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "svg",
+      "id": "verticalIconsHomeIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "2.6.4"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "default_workspace AI Code"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "default_workspace AI Code"
+    },
+    {
+      "tag": "DIV",
+      "id": "workspacesSelect",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "workspacesMenuDropdown",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "DIV",
+      "id": "dropdown-content",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "DIV",
+      "id": "workspacesSelect-togglerText",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI Code"
+    },
+    {
+      "tag": "DIV",
+      "id": "aiReviewModeBtn",
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "DIV",
+      "id": "codeModeBtn",
+      "title": null,
+      "aria": null,
+      "t": "Code"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Code"
+    },
+    {
+      "tag": "DIV",
+      "id": "panel-control",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "toggleLeftSidePanelIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "toggleBottomPanelIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "toggleRightSidePanelIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sign In"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "login-button",
+      "title": null,
+      "aria": null,
+      "t": "Sign In"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sign In"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sign In"
+    },
+    {
+      "tag": "DIV",
+      "id": "notification-bell-container",
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "SPAN",
+      "id": "notification-bell",
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "SPAN",
+      "id": "notification-badge",
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "SPAN",
+      "id": "topbar-settingsIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SPAN",
+      "id": "remixai-assistant-icon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "svg",
+      "id": null,
+      "title": null,
+      "aria": "remixaiassistant",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remixIDE",
+      "title": null,
+      "aria": null,
+      "t": "AI Files Search Compile Deploy Frontend Plugins FILE EXPLORER Create default_workspace con"
+    },
+    {
+      "tag": "DIV",
+      "id": "remixIdeIconPanel",
+      "title": null,
+      "aria": null,
+      "t": "AI Files Search Compile Deploy Frontend Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI Files Search Compile Deploy Frontend Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI Files Search Compile Deploy Frontend Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI Files Search Compile Deploy Frontend"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindremixaiassistant",
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "remixaiassistant",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindfilePanel",
+      "title": null,
+      "aria": null,
+      "t": "Files"
+    },
+    {
+      "tag": "svg",
+      "id": "selected",
+      "title": null,
+      "aria": "filePanel",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Search"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindsearch",
+      "title": null,
+      "aria": null,
+      "t": "Search"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "search",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Search"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindsolidity",
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "solidity",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindudapp",
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "udapp",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Frontend"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindquick-dapp-v2",
+      "title": null,
+      "aria": null,
+      "t": "Frontend"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "quick-dapp-v2",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Frontend"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindpluginManager",
+      "title": null,
+      "aria": null,
+      "t": "Plugins"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "pluginManager",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugins"
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKinddgit",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindplanManager",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "planManager",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "verticalIconsKindhelpPlugin",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "title": null,
+      "aria": "helpPlugin",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "helpMenuButton",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remixIdeSidePanel",
+      "title": null,
+      "aria": null,
+      "t": "FILE EXPLORER Create default_workspace contracts scripts tests .prettierrc.json README.txt"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "FILE EXPLORER"
+    },
+    {
+      "tag": "H6",
+      "id": "sidePanelSwapitTitle",
+      "title": null,
+      "aria": null,
+      "t": "FILE EXPLORER"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugin detailsMaintained by RemixDescriptionRemix IDE file explorer"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugin detailsMaintained by RemixDescriptionRemix IDE file explorer"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugin details"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "DescriptionRemix IDE file explorer"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix IDE file explorer"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentPluginManager",
+      "title": null,
+      "aria": null,
+      "t": "Connect to an external pluginFiltersOnly maintained by RemixAll plugins 24Active 0Inactive"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Connect to an external plugin"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "pluginManagerComponentPluginSearchButton",
+      "title": null,
+      "aria": null,
+      "t": "Connect to an external plugin"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Filters"
+    },
+    {
+      "tag": "INPUT",
+      "id": "pluginManagerComponentSearchInput",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "pluginManagerComponentFilterButton",
+      "title": null,
+      "aria": null,
+      "t": "Filters"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Filters"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Only maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": "filter-by-remix-switch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "filter-by-remix-switchSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SECTION",
+      "id": "pluginManagerComponentPluginManagerSection",
+      "title": null,
+      "aria": null,
+      "t": "All plugins 24Active 0Inactive 24BuildBearMaintained by BuildBear TeamCreate a Private San"
+    },
+    {
+      "tag": "A",
+      "id": "pluginManagerAllTab",
+      "title": null,
+      "aria": null,
+      "t": "All plugins 24"
+    },
+    {
+      "tag": "SPAN",
+      "id": "pluginManagerAllCount",
+      "title": null,
+      "aria": null,
+      "t": "24"
+    },
+    {
+      "tag": "A",
+      "id": "pluginManagerActiveTab",
+      "title": null,
+      "aria": null,
+      "t": "Active 0"
+    },
+    {
+      "tag": "SPAN",
+      "id": "pluginManagerComponentActiveTilesCount",
+      "title": null,
+      "aria": null,
+      "t": "0"
+    },
+    {
+      "tag": "A",
+      "id": "pluginManagerInactiveTab",
+      "title": null,
+      "aria": null,
+      "t": "Inactive 24"
+    },
+    {
+      "tag": "SPAN",
+      "id": "pluginManagerComponentInactiveTilesCount",
+      "title": null,
+      "aria": null,
+      "t": "24"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "BuildBearMaintained by BuildBear TeamCreate a Private Sandbox for various EVM and EVM-comp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "BuildBear"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "BuildBear"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "BuildBear"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonbuildbear",
+      "title": null,
+      "aria": "Activate BuildBear",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-buildbearSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by BuildBear Team"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Circom ZKP compilerMaintained by RemixEnables circuit compilation and computing a witness "
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Circom ZKP compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Circom ZKP compiler"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Circom ZKP compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtoncircuit-compiler",
+      "title": null,
+      "aria": "Activate Circom ZKP compiler",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-circuit-compilerSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enables circuit compilation and computing a witness for ZK proofs"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "CODE BY WELLDONE STUDIOMaintained by DSRVDeploy and run Sui Move contractsOpen documentati"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "CODE BY WELLDONE STUDIO"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "CODE BY WELLDONE STUDIO"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "CODE BY WELLDONE STUDIO"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonwds-code-remix",
+      "title": null,
+      "aria": "Activate CODE BY WELLDONE STUDIO",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-wds-code-remixSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by DSRVDeploy and run Sui Move contractsOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by DSRVDeploy and run Sui Move contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by DSRV"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deploy and run Sui Move contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Contract VerificationMaintained by RemixVerify contract code on Sourcify, Etherscan and Bl"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract Verification"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract Verification"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract Verification"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtoncontract-verification",
+      "title": null,
+      "aria": "Activate Contract Verification",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-contract-verificationSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "COTIMaintained by COTI teamDeploy and interact with contracts on the COTI privacy-preservi"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "COTI"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "COTI"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "COTI"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtoncoti-remix-plugin",
+      "title": null,
+      "aria": "Activate COTI",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-coti-remix-pluginSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by COTI team"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "DebuggerMaintained by RemixDebug transactionsOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Debugger"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Debugger"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Debugger"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtondebugger",
+      "title": null,
+      "aria": "Activate Debugger",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-debuggerSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixDebug transactionsOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixDebug transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Debug transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Docgen - Documentation GeneratorMaintained by CommunityGenerate Solidity documentation (as"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Docgen - Documentation Generator"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Docgen - Documentation Generator"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Docgen - Documentation Generator"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtondoc-gen",
+      "title": null,
+      "aria": "Activate Docgen - Documentation Generator",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-doc-genSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by CommunityGenerate Solidity documentation (as md)"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by CommunityGenerate Solidity documentation (as md)"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Community"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Generate Solidity documentation (as md)"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "KaiaMaintained by Ozys Co., LtdDeploy and Run Transactions with Kaia.Open documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Kaia"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Kaia"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Kaia"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonklaytn-remix-plugin",
+      "title": null,
+      "aria": "Activate Kaia",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-klaytn-remix-pluginSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Ozys Co., LtdDeploy and Run Transactions with Kaia."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Ozys Co., Ltd"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deploy and Run Transactions with Kaia."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "LearnEthMaintained by RemixLearn Ethereum with Remix!Open documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LearnEth"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LearnEth"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LearnEth"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonLearnEth",
+      "title": null,
+      "aria": "Activate LearnEth",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-LearnEthSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixLearn Ethereum with Remix!Open documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixLearn Ethereum with Remix!"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Learn Ethereum with Remix!"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Nahmii CompilerMaintained by CommunityCompiler for Nahmii 2.0."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Nahmii Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Nahmii Compiler"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Nahmii Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonnahmii-compiler",
+      "title": null,
+      "aria": "Activate Nahmii Compiler",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-nahmii-compilerSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by CommunityCompiler for Nahmii 2.0."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by CommunityCompiler for Nahmii 2.0."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Community"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compiler for Nahmii 2.0."
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Noir CompilerMaintained by RemixEnables support for noir circuit compilation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Noir Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Noir Compiler"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Noir Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonnoir-compiler",
+      "title": null,
+      "aria": "Activate Noir Compiler",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-noir-compilerSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixEnables support for noir circuit compilation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixEnables support for noir circuit compilation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enables support for noir circuit compilation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "QuickDAppMaintained by RemixEdit & deploy a Dapp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "QuickDApp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "QuickDApp"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "QuickDApp"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonquick-dapp-v2",
+      "title": null,
+      "aria": "Activate QuickDApp",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-quick-dapp-v2Switch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixEdit & deploy a Dapp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixEdit & deploy a Dapp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Edit & deploy a Dapp"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Remix GuideMaintained by RemixLearn Web3 development using Remix with videos."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix Guide"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix Guide"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix Guide"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonremixGuide",
+      "title": null,
+      "aria": "Activate Remix Guide",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-remixGuideSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixLearn Web3 development using Remix with videos."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixLearn Web3 development using Remix with videos."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Learn Web3 development using Remix with videos."
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "RemixDMaintained by RemixUsing Remixd daemon, allow to access file systemOpen documentatio"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "RemixD"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "RemixD"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "RemixD"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonremixd",
+      "title": null,
+      "aria": "Activate RemixD",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-remixdSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixUsing Remixd daemon, allow to access file system"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Using Remixd daemon, allow to access file system"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Script configurationMaintained by RemixConfigure the dependencies for running scripts."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Script configuration"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Script configuration"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Script configuration"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonUIScriptRunner",
+      "title": null,
+      "aria": "Activate Script configuration",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-UIScriptRunnerSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixConfigure the dependencies for running scripts."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixConfigure the dependencies for running scripts."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Configure the dependencies for running scripts."
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "SentioMaintained by sentio teamSearch and view function related transactions directly in R"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sentio"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sentio"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Sentio"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonsentio-remix-plugin",
+      "title": null,
+      "aria": "Activate Sentio",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-sentio-remix-pluginSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by sentio team"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Solidity AnalyzersMaintained by RemixAnalyze your code using Remix, Solhint and Slither.Op"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity Analyzers"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity Analyzers"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity Analyzers"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonsolidityStaticAnalysis",
+      "title": null,
+      "aria": "Activate Solidity Analyzers",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-solidityStaticAnalysisSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixAnalyze your code using Remix, Solhint and Slither."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Analyze your code using Remix, Solhint and Slither."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Solidity unit testingMaintained by RemixWrite and run unit tests for your contracts in Sol"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity unit testing"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity unit testing"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Solidity unit testing"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonsolidityUnitTesting",
+      "title": null,
+      "aria": "Activate Solidity unit testing",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-solidityUnitTestingSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Write and run unit tests for your contracts in Solidity"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "SolidityScanMaintained by CredshieldsAn automated smart contract auditing & vulnerability "
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "SolidityScan"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "SolidityScan"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "SolidityScan"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonsolidityScan",
+      "title": null,
+      "aria": "Activate SolidityScan",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-solidityScanSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Credshields"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "StarknetMaintained by NethermindCompile and deploy contracts with Cairo, a native smart co"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Starknet"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Starknet"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Starknet"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonStarknet",
+      "title": null,
+      "aria": "Activate Starknet",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-StarknetSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Nethermind"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "TenderlyMaintained by CommunityRemix & Tenderly Project Integration. Verify Contracts. Imp"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Tenderly"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Tenderly"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Tenderly"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtontenderly",
+      "title": null,
+      "aria": "Activate Tenderly",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-tenderlySwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Community"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "Vyper CompilerMaintained by RemixCompile vyper contractsOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Vyper Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Vyper Compiler"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Vyper Compiler"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonvyper",
+      "title": null,
+      "aria": "Activate Vyper Compiler",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-vyperSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixCompile vyper contractsOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by RemixCompile vyper contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile vyper contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "ZKsyncMaintained by Matter LabsCompile and deploy smart contracts for ZKsync chains.Open d"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZKsync"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZKsync"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZKsync"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonZKsync",
+      "title": null,
+      "aria": "Activate ZKsync",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-ZKsyncSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Matter Labs"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile and deploy smart contracts for ZKsync chains."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "pluginManagerComponentActiveTile",
+      "title": null,
+      "aria": null,
+      "t": "ZoKratesMaintained by CommunityZoKrates toolbox for zkSNARKs on EthereumOpen documentation"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZoKrates"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZoKrates"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZoKrates"
+    },
+    {
+      "tag": "DIV",
+      "id": "pluginManagerComponentActivateButtonZoKrates",
+      "title": null,
+      "aria": "Activate ZoKrates",
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggleSwitch-ZoKratesSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by CommunityZoKrates toolbox for zkSNARKs on Ethereum"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Community"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ZoKrates toolbox for zkSNARKs on Ethereum"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open documentation"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "pluginManagerPermissionsButton",
+      "title": null,
+      "aria": null,
+      "t": "Permissions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "INPUT",
+      "id": "fileExplorerLocalFileSystemUpload",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "INPUT",
+      "id": "fileExplorerUploadFolder",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SPAN",
+      "id": "spanContaining",
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "fileExplorerCreateButton",
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create"
+    },
+    {
+      "tag": "DIV",
+      "id": "remixUIWorkspaceExplorer",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "filePanelFileExplorerTree",
+      "title": null,
+      "aria": null,
+      "t": "default_workspace contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewLiMenu",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivMenu",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "default_workspace"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewUltreeViewMenu",
+      "title": null,
+      "aria": null,
+      "t": "contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "contracts scripts tests .prettierrc.json README.txt remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "contracts"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItemcontracts",
+      "title": null,
+      "aria": null,
+      "t": "contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItemcontracts",
+      "title": null,
+      "aria": null,
+      "t": "contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItemcontracts",
+      "title": null,
+      "aria": null,
+      "t": "contracts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "scripts"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItemscripts",
+      "title": null,
+      "aria": null,
+      "t": "scripts"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItemscripts",
+      "title": null,
+      "aria": null,
+      "t": "scripts"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItemscripts",
+      "title": null,
+      "aria": null,
+      "t": "scripts"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "tests"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItemtests",
+      "title": null,
+      "aria": null,
+      "t": "tests"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItemtests",
+      "title": null,
+      "aria": null,
+      "t": "tests"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItemtests",
+      "title": null,
+      "aria": null,
+      "t": "tests"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": ".prettierrc.json"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItem.prettierrc.json",
+      "title": null,
+      "aria": null,
+      "t": ".prettierrc.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItem.prettierrc.json",
+      "title": null,
+      "aria": null,
+      "t": ".prettierrc.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItem.prettierrc.json",
+      "title": null,
+      "aria": null,
+      "t": ".prettierrc.json"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "README.txt"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItemREADME.txt",
+      "title": null,
+      "aria": null,
+      "t": "README.txt"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItemREADME.txt",
+      "title": null,
+      "aria": null,
+      "t": "README.txt"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItemREADME.txt",
+      "title": null,
+      "aria": null,
+      "t": "README.txt"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "remix.config.json"
+    },
+    {
+      "tag": "LI",
+      "id": "treeViewLitreeViewItemremix.config.json",
+      "title": null,
+      "aria": null,
+      "t": "remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivtreeViewItemremix.config.json",
+      "title": null,
+      "aria": null,
+      "t": "remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": "treeViewDivDraggableItemremix.config.json",
+      "title": null,
+      "aria": null,
+      "t": "remix.config.json"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files to includeFiles to exclude"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files to includeFiles to exclude"
+    },
+    {
+      "tag": "DIV",
+      "id": "toggle_replace",
+      "title": null,
+      "aria": "Toggle Replace",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "search_case_sensitive",
+      "title": null,
+      "aria": "Match Case",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "search_whole_word",
+      "title": null,
+      "aria": "Match Whole Word",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "search_use_regex",
+      "title": null,
+      "aria": "Use Regular Expression",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files to include"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Files to exclude"
+    },
+    {
+      "tag": "DIV",
+      "id": "search_results",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.3 MB used (0.01 %)"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.3 MB used (0.01 %)"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.3 MB used (0.01 %)"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.3 MB used (0.01 %)"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.3 MB used (0.01 %)"
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "configure a username and email OR connect to GitHub."
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Setup git"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "INITIALIZEInitialize repository"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "INITIALIZEInitialize repository"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "initgit-btn",
+      "title": null,
+      "aria": null,
+      "t": "Initialize repository"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "CLONE"
+    },
+    {
+      "tag": "SPAN",
+      "id": "clone-panel",
+      "title": null,
+      "aria": null,
+      "t": "CLONE"
+    },
+    {
+      "tag": "DIV",
+      "id": "clone-panel-content",
+      "title": null,
+      "aria": null,
+      "t": "Clone from GitHubLoad from GitHubGenerate and add a Git token or connect with GitHub. Toke"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "fetch-repositories",
+      "title": null,
+      "aria": null,
+      "t": "Load from GitHub"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "settings."
+    },
+    {
+      "tag": "INPUT",
+      "id": "clone-url",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "INPUT",
+      "id": "clone-branch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "clone-btn",
+      "title": null,
+      "aria": null,
+      "t": "clone"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "--depth"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "--depth"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Clone all branches"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "GITHUB SETUP"
+    },
+    {
+      "tag": "SPAN",
+      "id": "github-panel",
+      "title": null,
+      "aria": null,
+      "t": "GITHUB SETUP"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "connect with GitHub"
+    },
+    {
+      "tag": "INPUT",
+      "id": "gitubUsername",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "INPUT",
+      "id": "githubEmail",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "INPUT",
+      "id": "githubToken",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "I",
+      "id": "copyToClipboardCopyIcon",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Save"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "saveGitHubCredentials",
+      "title": null,
+      "aria": null,
+      "t": "Save"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LOG1"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LOG1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "[ERROR] Please check your GitHub token in the GitHub settings."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "[ERROR] Please check your GitHub token in the GitHub settings."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "[ERROR] Please check your GitHub token in the GitHub settings."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "[ERROR] Please check your GitHub token in the GitHub settings."
+    },
+    {
+      "tag": "BUTTON",
+      "id": "planManagerStubOpenButton",
+      "title": null,
+      "aria": null,
+      "t": "Manage Plan & Credits"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "DIV",
+      "id": "versionSelector",
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "SPAN",
+      "id": "selectedVersion",
+      "title": null,
+      "aria": null,
+      "t": "0.8.34+commit.80d5c536"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Include nightly builds"
+    },
+    {
+      "tag": "LABEL",
+      "id": "compilerNightliesBuild",
+      "title": null,
+      "aria": null,
+      "t": "Include nightly builds"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Auto compile"
+    },
+    {
+      "tag": "INPUT",
+      "id": "compilerContainerAutoCompile",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Hide warnings"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Advanced Configurations"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Advanced Configurations"
+    },
+    {
+      "tag": "SPAN",
+      "id": "scConfigExpander",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compiler configuration"
+    },
+    {
+      "tag": "LABEL",
+      "id": "scManualConfiguration",
+      "title": null,
+      "aria": null,
+      "t": "Compiler configuration"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "LanguageSolidityYul"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "SolidityYul"
+    },
+    {
+      "tag": "OPTION",
+      "id": "selected",
+      "title": null,
+      "aria": null,
+      "t": "Solidity"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "Yul"
+    },
+    {
+      "tag": "OPTION",
+      "id": "selected",
+      "title": null,
+      "aria": null,
+      "t": "default (osaka)"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "osaka"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "prague"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "cancun"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "shanghai"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "paris"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "london"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "berlin"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "istanbul"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "petersburg"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "constantinople"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "byzantium"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "spuriousDragon"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "tangerineWhistle"
+    },
+    {
+      "tag": "OPTION",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "homestead"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Optimization"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Optimization"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Optimization"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Use configuration file"
+    },
+    {
+      "tag": "LABEL",
+      "id": "scFileConfiguration",
+      "title": null,
+      "aria": null,
+      "t": "Use configuration file"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compilerContainerLoadAISkillsBtn",
+      "title": null,
+      "aria": null,
+      "t": "Load AI Skills"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compilerContainerCompileBtn",
+      "title": null,
+      "aria": null,
+      "t": "Compile<no file selected>"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile<no file selected>"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile<no file selected>"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "<no file selected>"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Security AuditGas Audit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compilerContainerStartAIAuditBtn",
+      "title": null,
+      "aria": null,
+      "t": "Security Audit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compilerContainerStartGasAuditBtn",
+      "title": null,
+      "aria": null,
+      "t": "Gas Audit"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile and Run script"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compilerContainerCompileAndRunBtn",
+      "title": null,
+      "aria": null,
+      "t": "Compile and Run script"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile and Run script"
+    },
+    {
+      "tag": "DIV",
+      "id": "compiledErrors",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SPAN",
+      "id": "compilationFinishedWith_soljson-v0.8.34+commit.80d5c536.js",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Environment Fork Reset Remix VMOsakaAccount 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Environment Fork Reset Remix VMOsakaAccount 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Environment Fork Reset"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Environment"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Fork Reset"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "fork-state-icon",
+      "title": null,
+      "aria": null,
+      "t": "Fork"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "delete-state-icon",
+      "title": null,
+      "aria": null,
+      "t": "Reset"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VMOsaka"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": "settingsSelectEnvOptions",
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "SPAN",
+      "id": "selected-provider-vm-osaka",
+      "title": null,
+      "aria": null,
+      "t": "Remix VM"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "settingsSelectEnvCategoryOptions",
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": "dropdown-content",
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "SPAN",
+      "id": "selectedVersion",
+      "title": null,
+      "aria": null,
+      "t": "Osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "runTabSelectAccount",
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4100.000 ETH"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 10x5B3...eddC4"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 1"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Account 1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0x5B3...eddC4"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0x5B3...eddC4"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "100.000 ETH"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "100.000 ETH"
+    },
+    {
+      "tag": "I",
+      "id": "selected-account-kebab-menu",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "udappDeployTab",
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "udappDeployedContractsTab",
+      "title": null,
+      "aria": null,
+      "t": "Deployed contracts"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "udappTransactionsHistoryTab",
+      "title": null,
+      "aria": null,
+      "t": "Transactions history"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "DeployRemix VM osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": "deploy-widget-header",
+      "title": null,
+      "aria": null,
+      "t": "DeployRemix VM osaka"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Remix VM osaka"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selectedValueweiGas limitautoDeploy"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "contractDropdownToggle",
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ContractNo contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No contract selected"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No contract selected"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ValueweiGas limitautoDeploy"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Valuewei"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "wei"
+    },
+    {
+      "tag": "INPUT",
+      "id": "udapp_value",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "wei"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "wei"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "wei"
+    },
+    {
+      "tag": "DIV",
+      "id": "dropdown-content",
+      "title": null,
+      "aria": null,
+      "t": "wei"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Gas limitauto"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "auto"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "auto"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "deployButton",
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "DIV",
+      "id": "deployedContractsContainer",
+      "title": null,
+      "aria": null,
+      "t": "Deployed Contracts0Add ContractNo contracts deployed yet.Go to the Deploy tab to deploy yo"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deployed Contracts0Add Contract"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Deployed Contracts0"
+    },
+    {
+      "tag": "SPAN",
+      "id": "deployedContractsBadge",
+      "title": null,
+      "aria": null,
+      "t": "0"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Add Contract"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "addDeployedContract",
+      "title": null,
+      "aria": null,
+      "t": "Add Contract"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Add Contract"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No contracts deployed yet."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Go to the Deploy tab to deploy your first contract."
+    },
+    {
+      "tag": "DIV",
+      "id": "transaction-recorder-header",
+      "title": null,
+      "aria": null,
+      "t": "Transactions recorder 0 Save"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Transactions recorder 0"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Save"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Save"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "save-transactions",
+      "title": null,
+      "aria": null,
+      "t": "Save"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "clearAllTransactions",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract callTransaction listNewest"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Contract call"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Transaction list"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Newest"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Newest"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Newest"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Newest"
+    },
+    {
+      "tag": "DIV",
+      "id": "dropdown-content",
+      "title": null,
+      "aria": null,
+      "t": "Newest"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "There is no deployment to show."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Initiate your first transaction by deploying a contract."
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Initiate your first transaction by deploying a contract."
+    },
+    {
+      "tag": "DIV",
+      "id": "sidepanel-dragbar-overlay",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "sidepanel-dragbar-draggable",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remixIdeMainPanel",
+      "title": null,
+      "aria": null,
+      "t": "Compile Home REMIX Learn. Explore. Create. START Create a new workspace Start from a templ"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile Home"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile Home"
+    },
+    {
+      "tag": "DIV",
+      "id": "tabs-component",
+      "title": null,
+      "aria": null,
+      "t": "Compile Home"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile Home"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "DIV",
+      "id": "compile_group",
+      "title": null,
+      "aria": "compile group",
+      "t": "Compile"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "compile-action",
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Compile"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "empty-dropdown-trigger",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "empty-dropdown-panel",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SPAN",
+      "id": "tabProxyZoomOut",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "SPAN",
+      "id": "tabProxyZoomIn",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Home"
+    },
+    {
+      "tag": "LI",
+      "id": "home",
+      "title": null,
+      "aria": null,
+      "t": "Home"
+    },
+    {
+      "tag": "DIV",
+      "id": "tab-active",
+      "title": null,
+      "aria": null,
+      "t": "Home"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Home"
+    },
+    {
+      "tag": "SPAN",
+      "id": "close_home",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "LI",
+      "id": "settings",
+      "title": null,
+      "aria": null,
+      "t": "Settings"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "title": null,
+      "aria": null,
+      "t": "Settings"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Settings"
+    },
+    {
+      "tag": "SPAN",
+      "id": "close_settings",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes111"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes111"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes111"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes11"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "No Changes"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "1"
+    },
+    {
+      "tag": "TEXTAREA",
+      "id": null,
+      "title": null,
+      "aria": "Editor content;Press Alt+F1 for Accessibility Options.",
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "mainPanelPluginsContainer",
+      "title": null,
+      "aria": null,
+      "t": "REMIX Learn. Explore. Create. START Create a new workspace Start from a template Start Cod"
+    },
+    {
+      "tag": "DIV",
+      "id": "landingPageHomeContainer",
+      "title": null,
+      "aria": null,
+      "t": "REMIX Learn. Explore. Create. START Create a new workspace Start from a template Start Cod"
+    },
+    {
+      "tag": "DIV",
+      "id": "remixUIHTAll",
+      "title": null,
+      "aria": null,
+      "t": "REMIX Learn. Explore. Create. START Create a new workspace Start from a template Start Cod"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX Learn. Explore. Create."
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX Learn. Explore. Create."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIX"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Learn. Explore. Create."
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create."
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "START"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "START"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageImportFromTemplate",
+      "title": null,
+      "aria": null,
+      "t": "Create a new workspace Start from a template"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Create a new workspace Start from a template"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "homeTabStartCoding",
+      "title": null,
+      "aria": null,
+      "t": "Start Coding Open a Playground workspace"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Start Coding Open a Playground workspace"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open a Playground workspace"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Start Learning Interactive Solidity tutorial"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Start Learning Interactive Solidity tutorial"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Interactive Solidity tutorial"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "OPEN Open Folder Clone Gist"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "OPEN"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "OPEN"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Open Folder Clone Gist"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageImportFromGitHubButton",
+      "title": null,
+      "aria": null,
+      "t": "Clone"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageImportFromGistButton",
+      "title": null,
+      "aria": null,
+      "t": "Gist"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "DESKTOP APP"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "DESKTOP APP"
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Download Remix Desktop Available for Windows, macOS and Linux"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Download Remix Desktop Available for Windows, macOS and Linux"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Available for Windows, macOS and Linux"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageLoadSkills",
+      "title": null,
+      "aria": null,
+      "t": "Load Skills AI skill modules"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Load Skills AI skill modules"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageLoadAudits",
+      "title": null,
+      "aria": null,
+      "t": "Load Audit Checklist Security audit checklists"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Load Audit Checklist Security audit checklists"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "landingPageGasOptimization",
+      "title": null,
+      "aria": null,
+      "t": "Gas Optimisation Audit Optimize gas usage"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Gas Optimisation Audit Optimize gas usage"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Terms & Conditions"
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Terms & Conditions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Settings"
+    },
+    {
+      "tag": "DIV",
+      "id": "settings-sidebar-header",
+      "title": null,
+      "aria": null,
+      "t": "Settings"
+    },
+    {
+      "tag": "DIV",
+      "id": "settings-sidebar-nav",
+      "title": null,
+      "aria": null,
+      "t": "General SettingsAnalyticsRemixAI AssistantConnected Services"
+    },
+    {
+      "tag": "UL",
+      "id": "settings-sidebar-nav-ul",
+      "title": null,
+      "aria": null,
+      "t": "General SettingsAnalyticsRemixAI AssistantConnected Services"
+    },
+    {
+      "tag": "LI",
+      "id": "settings-sidebar-general-li",
+      "title": null,
+      "aria": null,
+      "t": "General Settings"
+    },
+    {
+      "tag": "A",
+      "id": "settings-sidebar-general",
+      "title": null,
+      "aria": null,
+      "t": "General Settings"
+    },
+    {
+      "tag": "H5",
+      "id": "settings-sidebar-general-h5",
+      "title": null,
+      "aria": null,
+      "t": "General Settings"
+    },
+    {
+      "tag": "LI",
+      "id": "settings-sidebar-analytics-li",
+      "title": null,
+      "aria": null,
+      "t": "Analytics"
+    },
+    {
+      "tag": "A",
+      "id": "settings-sidebar-analytics",
+      "title": null,
+      "aria": null,
+      "t": "Analytics"
+    },
+    {
+      "tag": "H5",
+      "id": "settings-sidebar-analytics-h5",
+      "title": null,
+      "aria": null,
+      "t": "Analytics"
+    },
+    {
+      "tag": "LI",
+      "id": "settings-sidebar-ai-li",
+      "title": null,
+      "aria": null,
+      "t": "RemixAI Assistant"
+    },
+    {
+      "tag": "A",
+      "id": "settings-sidebar-ai",
+      "title": null,
+      "aria": null,
+      "t": "RemixAI Assistant"
+    },
+    {
+      "tag": "H5",
+      "id": "settings-sidebar-ai-h5",
+      "title": null,
+      "aria": null,
+      "t": "RemixAI Assistant"
+    },
+    {
+      "tag": "LI",
+      "id": "settings-sidebar-services-li",
+      "title": null,
+      "aria": null,
+      "t": "Connected Services"
+    },
+    {
+      "tag": "A",
+      "id": "settings-sidebar-services",
+      "title": null,
+      "aria": null,
+      "t": "Connected Services"
+    },
+    {
+      "tag": "H5",
+      "id": "settings-sidebar-services-h5",
+      "title": null,
+      "aria": null,
+      "t": "Connected Services"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AppearanceThemeDark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ThemeDark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ThemeDark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ThemeDark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ThemeDark"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabthemeLabel",
+      "title": null,
+      "aria": null,
+      "t": "Theme"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "BUTTON",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": "dropdown-content",
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": "settingsTabDropdownToggletheme",
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "SPAN",
+      "id": "selectedVersion",
+      "title": null,
+      "aria": null,
+      "t": "Dark"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Generate contract metadata"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabgenerate-contract-metadataLabel",
+      "title": null,
+      "aria": null,
+      "t": "Generate contract metadata"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "generate-contract-metadataSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enable code completion in editor"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enable code completion in editor"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabauto-completionLabel",
+      "title": null,
+      "aria": null,
+      "t": "Enable code completion in editor"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "auto-completionSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Display gas estimates in editor"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Display gas estimates in editor"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabshow-gasLabel",
+      "title": null,
+      "aria": null,
+      "t": "Display gas estimates in editor"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "show-gasSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Display errors in editor while typing"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Display errors in editor while typing"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabdisplay-errorsLabel",
+      "title": null,
+      "aria": null,
+      "t": "Display errors in editor while typing"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "display-errorsSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Word wrap in editor"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Word wrap in editor"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabtext-wrapLabel",
+      "title": null,
+      "aria": null,
+      "t": "Word wrap in editor"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "text-wrapSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enable Personal Mode for web3 provider"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Enable Personal Mode for web3 provider"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabpersonal-modeLabel",
+      "title": null,
+      "aria": null,
+      "t": "Enable Personal Mode for web3 provider"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "personal-modeSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Save environment state"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Save environment state"
+    },
+    {
+      "tag": "H6",
+      "id": "settingsTabsave-evm-stateLabel",
+      "title": null,
+      "aria": null,
+      "t": "Save environment state"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "save-evm-stateSwitch",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "bottomBarPanelView",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalContainer-view",
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions Welcome to Remix 2.6.4 Your files are stored in indexedDB, 28"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalToggleMenu",
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0Listen on all transactions"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "0"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Listen on all transactions"
+    },
+    {
+      "tag": "LABEL",
+      "id": "listenNetworkCheckInput",
+      "title": null,
+      "aria": null,
+      "t": "Listen on all transactions"
+    },
+    {
+      "tag": "INPUT",
+      "id": "terminalInputSearchTerminal",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalClearConsole",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "maximizeBottomPanel",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "I",
+      "id": "hideBottomPanel",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalContainer",
+      "title": null,
+      "aria": null,
+      "t": "Welcome to Remix 2.6.4 Your files are stored in indexedDB, 288 KB / 3 GB usedYou can use t"
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalJournal",
+      "title": null,
+      "aria": null,
+      "t": "Welcome to Remix 2.6.4 Your files are stored in indexedDB, 288 KB / 3 GB usedYou can use t"
+    },
+    {
+      "tag": "DIV",
+      "id": "block_null",
+      "title": null,
+      "aria": null,
+      "t": "Welcome to Remix 2.6.4 Your files are stored in indexedDB, 288 KB / 3 GB usedYou can use t"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Welcome to Remix 2.6.4"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Your files are stored in indexedDB, 288 KB / 3 GB used"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "You can use this terminal to:"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "The following libraries are accessible:"
+    },
+    {
+      "tag": "A",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "ethers.js"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Type the library name to see available commands."
+    },
+    {
+      "tag": "DIV",
+      "id": "terminalCli",
+      "title": null,
+      "aria": null,
+      "t": ">"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": ">"
+    },
+    {
+      "tag": "INPUT",
+      "id": "terminalCliInput",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remixIdePinnedPanel",
+      "title": null,
+      "aria": null,
+      "t": "REMIXAI ASSISTANT  New chat What do you want to build today? Code Explain Learn Deploy Au"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "REMIXAI ASSISTANT "
+    },
+    {
+      "tag": "H6",
+      "id": "sidePanelSwapitTitle",
+      "title": null,
+      "aria": null,
+      "t": "REMIXAI ASSISTANT"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "movePluginToLeft",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "maximizeRightSidePanel",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "hideRightSidePanel",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Plugin details"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Maintained by Remix"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "DescriptionAI code assistant for Remix IDE"
+    },
+    {
+      "tag": "SPAN",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "AI code assistant for Remix IDE"
+    },
+    {
+      "tag": "DIV",
+      "id": "remix-ai-assistant",
+      "title": null,
+      "aria": null,
+      "t": "New chat What do you want to build today? Code Explain Learn Deploy Audit Skills Select Mo"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "New chat What do you want to build today?"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "New chat What do you want to build today?"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "New chat"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "new-chat-btn new-conversation-btn",
+      "title": null,
+      "aria": null,
+      "t": "New chat"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "toggle-history-btn",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "BUTTON",
+      "id": "archive-chat-btn",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remix-ai-assistant-ready",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "remix-ai-streaming",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "What do you want to build today?"
+    },
+    {
+      "tag": "DIV",
+      "id": "ai-assistant-landing",
+      "title": null,
+      "aria": null,
+      "t": "What do you want to build today?"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Code Explain Learn Deploy Audit Skills"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-code",
+      "title": null,
+      "aria": null,
+      "t": "Code"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-explain",
+      "title": null,
+      "aria": null,
+      "t": "Explain"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-learn",
+      "title": null,
+      "aria": null,
+      "t": "Learn"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-deploy",
+      "title": null,
+      "aria": null,
+      "t": "Deploy"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-audit",
+      "title": null,
+      "aria": null,
+      "t": "Audit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shortcut-btn-skills",
+      "title": null,
+      "aria": null,
+      "t": "Skills"
+    },
+    {
+      "tag": "DIV",
+      "id": "remix-ai-prompt-area",
+      "title": null,
+      "aria": null,
+      "t": "Select Model low-cost AI Sign in"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Select Model low-cost AI Sign in"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Select Model low-cost AI Sign in"
+    },
+    {
+      "tag": "TEXTAREA",
+      "id": "remix-ai-prompt-input",
+      "title": null,
+      "aria": null,
+      "t": ""
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Select Model low-cost AI Sign in"
+    },
+    {
+      "tag": "DIV",
+      "id": null,
+      "title": null,
+      "aria": null,
+      "t": "Select Model low-cost AI"
+    }
+  ]
+}

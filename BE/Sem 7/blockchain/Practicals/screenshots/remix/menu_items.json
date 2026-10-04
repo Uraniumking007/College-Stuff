@@ -1,0 +1,132 @@
+[
+  {
+    "id": "workspacesSelect-togglerText",
+    "t": "default_workspace",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "default_workspace",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "default_workspace",
+    "tag": "DIV"
+  },
+  {
+    "id": "dropdown-item-default_workspace",
+    "t": "default_workspace",
+    "tag": "A"
+  },
+  {
+    "id": null,
+    "t": "default_workspace",
+    "tag": "SPAN"
+  },
+  {
+    "id": "workspacecreate",
+    "t": "New workspace",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "New workspace",
+    "tag": "SPAN"
+  },
+  {
+    "id": "workspaceCloneRepository",
+    "t": "Clone repository",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "Clone repository",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Download Remix Desktop macOS v1.3.0",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "Download Remix Desktop macOS v1.3.0",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "Download Remix Desktop macOS v1.3.0",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "Download Remix Desktop macOS v1.3.0",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Download Remix Desktop macOS v1.3.0",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Backup",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "Backup",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Restore",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "Restore",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Connect to Localhost",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "Connect to Localhost",
+    "tag": "SPAN"
+  },
+  {
+    "id": null,
+    "t": "Delete all workspaces",
+    "tag": "BUTTON"
+  },
+  {
+    "id": null,
+    "t": "Delete all workspaces",
+    "tag": "SPAN"
+  },
+  {
+    "id": "selectedVersion",
+    "t": "Osaka",
+    "tag": "SPAN"
+  },
+  {
+    "id": "settingsTabDropdownToggletheme",
+    "t": "Dark",
+    "tag": "DIV"
+  },
+  {
+    "id": null,
+    "t": "Dark",
+    "tag": "DIV"
+  },
+  {
+    "id": "selectedVersion",
+    "t": "Dark",
+    "tag": "SPAN"
+  }
+]

@@ -1,0 +1,2 @@
+$ geth attach --exec 'admin.nodeInfo.id'
+"bce7c4e9f4596355b9cf54f1e0ebd172bef3278415266a834a9128c89b617153"

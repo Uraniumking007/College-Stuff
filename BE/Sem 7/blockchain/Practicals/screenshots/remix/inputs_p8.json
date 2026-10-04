@@ -1,0 +1,156 @@
+[
+  {
+    "id": "",
+    "ph": "Search",
+    "did": "pluginManagerComponentSearchInput",
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "localFileSystemUpload",
+    "ph": "",
+    "did": "fileExplorerLocalFileSystemUpload",
+    "val": "",
+    "type": "file"
+  },
+  {
+    "id": "uploadFolderInput",
+    "ph": "",
+    "did": "fileExplorerUploadFolder",
+    "val": "",
+    "type": "file"
+  },
+  {
+    "id": "search_input",
+    "ph": "Type to search",
+    "did": null,
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "search_include",
+    "ph": "Include ie *.sol ( Enter to include )",
+    "did": null,
+    "val": "*.sol, *.js",
+    "type": "text"
+  },
+  {
+    "id": "search_exclude",
+    "ph": "Exclude ie .git/**/* ( Enter to exclude )",
+    "did": null,
+    "val": ".*/**/*",
+    "type": "text"
+  },
+  {
+    "id": "cloneulr",
+    "ph": "url",
+    "did": "clone-url",
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "clonebranch",
+    "ph": "Checkout",
+    "did": "clone-branch",
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "clonedepth",
+    "ph": "",
+    "did": null,
+    "val": "1",
+    "type": "number"
+  },
+  {
+    "id": "cloneAllBranches",
+    "ph": "",
+    "did": null,
+    "val": "on",
+    "type": "checkbox"
+  },
+  {
+    "id": "githubUsername",
+    "ph": "* Git username",
+    "did": "gitubUsername",
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "githubEmail",
+    "ph": "* Git email",
+    "did": "githubEmail",
+    "val": "",
+    "type": "text"
+  },
+  {
+    "id": "",
+    "ph": "GitHub token",
+    "did": "githubToken",
+    "val": "",
+    "type": "password"
+  },
+  {
+    "id": "nightlies",
+    "ph": "",
+    "did": null,
+    "val": "on",
+    "type": "checkbox"
+  },
+  {
+    "id": "autoCompile",
+    "ph": "",
+    "did": "compilerContainerAutoCompile",
+    "val": "on",
+    "type": "checkbox"
+  },
+  {
+    "id": "hideWarningsBox",
+    "ph": "",
+    "did": null,
+    "val": "on",
+    "type": "checkbox"
+  },
+  {
+    "id": "scManualConfig",
+    "ph": "",
+    "did": null,
+    "val": "manual",
+    "type": "radio"
+  },
+  {
+    "id": "optimize",
+    "ph": "",
+    "did": null,
+    "val": "on",
+    "type": "checkbox"
+  },
+  {
+    "id": "runs",
+    "ph": "200",
+    "did": null,
+    "val": "200",
+    "type": "number"
+  },
+  {
+    "id": "scFileConfig",
+    "ph": "",
+    "did": null,
+    "val": "file",
+    "type": "radio"
+  },
+  {
+    "id": "value",
+    "ph": "0",
+    "did": "udapp_value",
+    "val": "0",
+    "type": "number"
+  },
+  {
+    "id": "",
+    "ph": "0000000",
+    "did": null,
+    "val": "0",
+    "type": "number"
+  }
+]

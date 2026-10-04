@@ -1,0 +1,73 @@
+DEPLOY & RUN TRANSACTIONS
+Environment
+ Fork Reset
+Remix VM
+Osaka
+Account 1
+0x5B3...eddC4
+99.999 ETH
+Deploy
+Deployed contracts1
+Transactions history3
+Deployed Contracts
+1
+Add Contract
+
+Interact with a deployed contract
+
+StudentRecordSystem
+0xd91...39138
+Remix VM
+4s ago
+
+Functions
+
+registerStudent
+(string, string)
+Calldata
+Params
+Auto-Fill with AI Samples
+Transact
+updateMarks
+(uint256, uint256)
+Calldata
+Params
+Auto-Fill with AI Samples
+Transact
+withdrawFees
+Transact
+admin
+Call
+contractBalance
+Call
+getStudent
+(uint256)
+Call
+Calldata
+Params
+Auto-Fill with AI Samples
+registrationFee
+Call
+studentCount
+Call
+students
+(uint256)
+Call
+Calldata
+Params
+Auto-Fill with AI Samples
+walletToStudentId
+(address)
+Call
+Calldata
+Params
+Auto-Fill with AI Samples
+
+Low level interaction
+
+Value
+wei
+Gas limit
+auto
+Balance
+0 ETH

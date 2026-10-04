@@ -1,0 +1,18 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remix-project/remixd": "^0.6.65",
+    "playwright-core": "^1.63.0",
+    "solc": "^0.8.37"
+  }
+}

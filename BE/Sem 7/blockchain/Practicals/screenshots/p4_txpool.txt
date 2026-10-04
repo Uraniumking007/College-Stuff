@@ -1,0 +1,5 @@
+$ geth attach --exec 'txpool.status'
+{
+  pending: 0,
+  queued: 0
+}

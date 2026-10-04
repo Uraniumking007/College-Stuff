@@ -1,0 +1,2 @@
+$ geth attach --exec 'clique.getSigners()'
+["0x4911eafa8c8391252b89ce78f38506ebf1328784"]

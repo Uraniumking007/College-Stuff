@@ -1,0 +1,92 @@
+Welcome to the new home of Remix. Bookmark app.remix.live so you always land here.
+Still need your files from remix.ethereum.org?
+Paid plans start at ₹199.60/month with the current launch offer, billed in INR.
+See Plans
+REMIX
+2.6.4
+default_workspace
+AI
+Code
+Sign In
+1
+AI
+Files
+Search
+Compile
+Deploy
+Frontend
+Plugins
+FILE EXPLORER
+Create
+default_workspace
+contracts
+scripts
+tests
+.prettierrc.json
+README.txt
+remix.config.json
+Compile
+Home
+REMIX
+Learn. Explore. Create.
+START
+Create a new workspace
+Start from a template
+Start Coding
+Open a Playground workspace
+Start Learning
+Interactive Solidity tutorial
+OPEN
+Open Folder
+Clone
+Gist
+DESKTOP APP
+Download Remix Desktop
+Available for Windows, macOS and Linux
+AI
+Load Skills
+AI skill modules
+Load Audit Checklist
+Security audit checklists
+Gas Optimisation Audit
+Optimize gas usage
+Terms & Conditions
+REMIXAI ASSISTANT
+
+New chat
+
+What do you want to build today?
+
+Code
+Explain
+Learn
+Deploy
+Audit
+Skills
+Select Model
+low-cost AI
+Sign in
+RemixAI can make mistakes. Always check important info.
+Scam Alert
+Initialize as git repo
+Did you know?
+You can use 'Generate documentation' in the right-click menu to get AI-generated documentation.
+RemixAI Copilot (enabled)
+Manage Preferences
+Matomo Anonymous Analytics (Necessary)
+
+Our use of anonymous analytics data helps us improve your experience by identifying bugs and important UX improvements. This data can also be used in overall statistics on Remix use in the wider Web3 ecosystem
+
+Matomo Performance Analytics
+
+Remix believes your privacy is of primary importance. Your help in making Remix the best possible open source public good toolset is also very important. Approval of performance analytics tracking greatly helps us refine and improve the toolset. Rest assured, we will never share this data with any third parties.
+
+Learn more about analytics
+
+RemixAI
+
+RemixAI helps by offering code suggestions and improvements
+
+Learn more about RemixAI Copilot
+
+Save Preferences
