@@ -20,7 +20,8 @@ namespace Cipat.Editor
         const string WeaponTag = "Weapon";
 
         // Coffee table ~ (-13.02, 0.33, -6.89); thick bright bat so Device Simulator demos can see it
-        static readonly Vector3 BatPosition = new Vector3(-13.0f, 0.76f, -6.7f);
+        const float TableTopY = 0.70f;
+        static readonly Vector3 BatPosition = new Vector3(-13.0f, 1.0f, -6.7f);
         static readonly Quaternion BatRotation = Quaternion.Euler(0f, 25f, 90f);
         // Unit cylinder radius 0.5 → world radius 0.06; length ~0.9m
         static readonly Vector3 BatScale = new Vector3(0.12f, 0.45f, 0.12f);
@@ -150,11 +151,29 @@ namespace Cipat.Editor
             instance.name = "Bat";
             instance.tag = WeaponTag;
             instance.transform.SetPositionAndRotation(BatPosition, BatRotation);
+            SeatOnTable(instance);
             Undo.RegisterCreatedObjectUndo(instance, "CIPAT add Bat");
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
-            Debug.Log($"{LogPrefix} Placed Bat instance at {BatPosition}");
+            Debug.Log($"{LogPrefix} Placed Bat instance at {instance.transform.position}");
+        }
+
+        static void SeatOnTable(GameObject bat)
+        {
+            Physics.SyncTransforms();
+            var col = bat.GetComponent<Collider>();
+            if (col == null)
+                return;
+
+            // Rest collider bottom on tabletop + small clearance so the thick mesh stays above.
+            const float clearance = 0.04f;
+            float bottom = col.bounds.min.y;
+            float delta = (TableTopY + clearance) - bottom;
+            bat.transform.position += new Vector3(0f, delta, 0f);
+            Physics.SyncTransforms();
+            Debug.Log(
+                $"{LogPrefix} Seated bat -> {bat.transform.position} (bottom={col.bounds.min.y:F3}, target={TableTopY + clearance:F2})");
         }
 
         static void EnsureWeaponTag()
