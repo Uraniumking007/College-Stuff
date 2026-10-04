@@ -11,3 +11,7 @@
 *.slnx
 *.pidb
 *.suo
+
+# Nested vendor packages (already unpacked under Assets)
+*.unitypackage
+*.unitypackage.meta
