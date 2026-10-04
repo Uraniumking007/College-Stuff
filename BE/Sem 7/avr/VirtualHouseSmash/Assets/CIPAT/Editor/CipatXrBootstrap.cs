@@ -4,13 +4,24 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Cipat.Editor
 {
     public static class CipatXrBootstrap
     {
         const string LogPrefix = "[CIPAT XR]";
+        const string SourceScene = "Assets/nappin/HouseInteriorPack/HouseInteriorPack.unity";
+        const string SmashScene = "Assets/Scenes/CIPAT_SmashHouse.unity";
+        const string XrOriginPrefab =
+            "Assets/Samples/XR Interaction Toolkit/3.6.1/Starter Assets/Prefabs/XR Origin (XR Rig).prefab";
+        const string DeviceSimPrefab =
+            "Assets/Samples/XR Interaction Toolkit/3.6.1/XR Device Simulator/XR Device Simulator.prefab";
+        // Living room near CoffeTable (-13.02, 0.33, -6.89) / CornerSofa
+        static readonly Vector3 XrOriginPosition = new Vector3(-12.5f, 0.02f, -5.0f);
+        static readonly Quaternion XrOriginRotation = Quaternion.Euler(0f, 200f, 0f);
 
         public static void Run()
         {
@@ -29,6 +40,98 @@ namespace Cipat.Editor
                 Debug.LogError($"{LogPrefix} FAILED: {ex}");
                 EditorApplication.Exit(1);
             }
+        }
+
+        public static void SetupSmashHouseScene()
+        {
+            try
+            {
+                Debug.Log($"{LogPrefix} SetupSmashHouseScene start");
+                EnsureSmashSceneCopy();
+                AssetDatabase.Refresh();
+
+                var scene = EditorSceneManager.OpenScene(SmashScene, OpenSceneMode.Single);
+                var origin = EnsurePrefabInstance(XrOriginPrefab, "XR Origin (XR Rig)", XrOriginPosition, XrOriginRotation);
+                EnsurePrefabInstance(DeviceSimPrefab, "XR Device Simulator", Vector3.zero, Quaternion.identity);
+                DisableConflictingCameras(origin);
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorSceneManager.SaveScene(scene);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"{LogPrefix} SetupSmashHouseScene complete at {XrOriginPosition}");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"{LogPrefix} SetupSmashHouseScene FAILED: {ex}");
+                EditorApplication.Exit(1);
+            }
+        }
+
+        static void EnsureSmashSceneCopy()
+        {
+            EnsureFolder("Assets/Scenes");
+            if (File.Exists(SmashScene))
+            {
+                Debug.Log($"{LogPrefix} smash scene already exists");
+                return;
+            }
+            if (!File.Exists(SourceScene))
+                throw new Exception($"Source scene missing: {SourceScene}");
+            if (!AssetDatabase.CopyAsset(SourceScene, SmashScene))
+                throw new Exception($"Failed to copy {SourceScene} -> {SmashScene}");
+            Debug.Log($"{LogPrefix} copied smash scene -> {SmashScene}");
+        }
+
+        static GameObject EnsurePrefabInstance(string prefabPath, string objectName, Vector3 position, Quaternion rotation)
+        {
+            var existing = FindRootByName(objectName);
+            if (existing != null)
+            {
+                Debug.Log($"{LogPrefix} already present: {objectName}");
+                return existing;
+            }
+
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            if (prefab == null)
+                throw new Exception($"Prefab missing: {prefabPath}");
+
+            var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+            instance.name = objectName;
+            instance.transform.SetPositionAndRotation(position, rotation);
+            Undo.RegisterCreatedObjectUndo(instance, $"CIPAT add {objectName}");
+            Debug.Log($"{LogPrefix} instantiated {objectName} at {position}");
+            return instance;
+        }
+
+        static GameObject FindRootByName(string objectName)
+        {
+            foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (root.name == objectName || root.name.StartsWith(objectName, StringComparison.Ordinal))
+                    return root;
+            }
+            return null;
+        }
+
+        static void DisableConflictingCameras(GameObject xrOrigin)
+        {
+            var cameras = UnityEngine.Object.FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            int disabled = 0;
+            foreach (var cam in cameras)
+            {
+                if (xrOrigin != null && cam.transform.IsChildOf(xrOrigin.transform))
+                    continue;
+                if (cam.CompareTag("MainCamera") || cam.gameObject.name is "Main Camera" or "Camera")
+                {
+                    if (cam.gameObject.activeSelf)
+                    {
+                        cam.gameObject.SetActive(false);
+                        disabled++;
+                        Debug.Log($"{LogPrefix} disabled camera {cam.gameObject.name}");
+                    }
+                }
+            }
+            Debug.Log($"{LogPrefix} disabled {disabled} conflicting cameras");
         }
 
         static void EnableOpenXrStandalone()
@@ -51,14 +154,10 @@ namespace Cipat.Editor
             var general = LoadOrCreateAsset(generalSettingsRuntimeType, "Assets/XR/Settings/Standalone XR General Settings.asset");
             var loader = LoadOrCreateAsset(openXrLoaderType, "Assets/XR/Loaders/Open XR Loader.asset");
 
-            // Wire general.Manager = manager
             SetMember(general, "m_LoaderManagerInstance", manager);
             SetMember(general, "Manager", manager);
-
-            // Assign Standalone build target (1 = Standalone)
             AssignBuildTarget(perBuildTarget, BuildTargetGroup.Standalone, general);
 
-            // Try XRPackageMetadataStore.AssignLoader if available
             var metadataStore = FindType("UnityEditor.XR.Management.Metadata.XRPackageMetadataStore, Unity.XR.Management.Editor");
             bool assigned = false;
             if (metadataStore != null)
@@ -66,7 +165,6 @@ namespace Cipat.Editor
                 var assign = metadataStore.GetMethod("AssignLoader", BindingFlags.Public | BindingFlags.Static);
                 if (assign != null)
                 {
-                    // AssignLoader(XRManagerSettings, string loaderTypeName, BuildTargetGroup)
                     try
                     {
                         assigned = (bool)assign.Invoke(null, new object[] { manager, openXrLoaderType.FullName, BuildTargetGroup.Standalone });
@@ -81,7 +179,6 @@ namespace Cipat.Editor
 
             if (!assigned)
             {
-                // Fallback: set loaders list directly
                 var loaders = new List<UnityEngine.Object> { loader };
                 SetMember(manager, "m_Loaders", loaders);
                 TryCall(manager, "TrySetLoaders", new object[] { loaders });
@@ -92,7 +189,6 @@ namespace Cipat.Editor
             EditorUtility.SetDirty(general);
             EditorUtility.SetDirty(perBuildTarget);
             EditorUtility.SetDirty(loader);
-            // Register per-build-target settings in EditorBuildSettings
             EditorBuildSettings.AddConfigObject("com.unity.xr.management.loader_settings", perBuildTarget, true);
 
             AssetDatabase.SaveAssets();
@@ -167,7 +263,6 @@ namespace Cipat.Editor
 
         static void AssignBuildTarget(UnityEngine.Object perBuildTarget, BuildTargetGroup group, UnityEngine.Object general)
         {
-            // Prefer TryGet / set via SerializedObject dictionary fields
             var so = new SerializedObject(perBuildTarget);
             var keys = so.FindProperty("m_Keys");
             var values = so.FindProperty("m_Values");
@@ -192,13 +287,6 @@ namespace Cipat.Editor
                 values.GetArrayElementAtIndex(idx).objectReferenceValue = general;
                 so.ApplyModifiedPropertiesWithoutUndo();
                 return;
-            }
-
-            // Newer Unity may use Settings list
-            var settings = so.FindProperty("m_Settings");
-            if (settings != null)
-            {
-                // Best-effort: call SetSettingsForBuildTarget via reflection
             }
 
             var method = perBuildTarget.GetType().GetMethod("SetSettingsForBuildTarget", BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
