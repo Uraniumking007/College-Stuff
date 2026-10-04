@@ -26,6 +26,8 @@ namespace Cipat
             // Door should not fly into hand — kinematic + no movement tracking.
             grab.movementType = XRBaseInteractable.MovementType.Instantaneous;
             grab.throwOnDetach = false;
+            grab.trackPosition = false;
+            grab.trackRotation = false;
             var rb = GetComponent<Rigidbody>();
             if (rb != null)
             {

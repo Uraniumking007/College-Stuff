@@ -509,11 +509,20 @@ namespace Cipat.Editor
             screen.transform.localPosition = new Vector3(0f, 1.1f, -0.05f);
             screen.transform.localScale = new Vector3(1.2f, 0.7f, 0.05f);
 
+            // Kinematic RB so mounted screen still participates in bat collision messages.
+            var screenRb = screen.GetComponent<Rigidbody>();
+            if (screenRb == null) screenRb = screen.AddComponent<Rigidbody>();
+            screenRb.isKinematic = true;
+            screenRb.useGravity = false;
+            screenRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+
             var br = screen.AddComponent<Cipat.BreakableObject>();
             var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(GlassBreakPath);
             if (clip == null) throw new Exception($"Missing audio: {GlassBreakPath}");
             var so = new SerializedObject(br);
-            so.FindProperty("breakSound").objectReferenceValue = clip;
+            var breakProp = so.FindProperty("breakSound");
+            if (breakProp == null) throw new Exception("BreakableObject.breakSound missing");
+            breakProp.objectReferenceValue = clip;
             so.ApplyModifiedPropertiesWithoutUndo();
 
             EditorUtility.SetDirty(console);
