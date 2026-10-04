@@ -53,12 +53,18 @@ namespace Cipat.Editor
                             UnityEngine.Object.DestroyImmediate(c);
                     }
 
+                    // Bounds stay stale after transform/collider edits until physics syncs.
+                    Physics.SyncTransforms();
+
                     var col = go.GetComponent<Collider>();
                     float bottom = col != null ? col.bounds.min.y : go.transform.position.y;
                     float delta = TableTopY - bottom;
                     go.transform.position += new Vector3(0f, delta, 0f);
+                    Physics.SyncTransforms();
 
-                    Debug.Log($"[CIPAT] Moved {go.name} -> {go.transform.position}");
+                    var seatedBottom = col != null ? col.bounds.min.y : go.transform.position.y;
+                    Debug.Log(
+                        $"[CIPAT] Moved {go.name} -> {go.transform.position} (bottom={seatedBottom:F3}, target={TableTopY:F2})");
                 }
 
                 EditorSceneManager.MarkSceneDirty(scene);
