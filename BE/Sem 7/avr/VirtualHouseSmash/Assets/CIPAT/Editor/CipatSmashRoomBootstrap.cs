@@ -57,6 +57,8 @@ namespace Cipat.Editor
                         Debug.Log($"{LogPrefix} Preserved: {go.name} @ {go.transform.position}");
                 }
 
+                DisableConflictingCameras();
+
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene);
                 AssetDatabase.SaveAssets();
@@ -155,6 +157,40 @@ namespace Cipat.Editor
                 Debug.Log($"{LogPrefix} Destroying orphan light {go.name}");
                 UnityEngine.Object.DestroyImmediate(go);
             }
+        }
+
+        static void DisableConflictingCameras()
+        {
+            GameObject xrOrigin = null;
+            foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (root != null && root.name.StartsWith("XR Origin", StringComparison.Ordinal))
+                {
+                    xrOrigin = root;
+                    break;
+                }
+            }
+
+            var cameras = UnityEngine.Object.FindObjectsByType<Camera>(
+                FindObjectsInactive.Include, FindObjectsSortMode.None);
+            int disabled = 0;
+            foreach (var cam in cameras)
+            {
+                if (cam == null) continue;
+                if (xrOrigin != null && cam.transform.IsChildOf(xrOrigin.transform))
+                    continue;
+                if (cam.CompareTag("MainCamera") || cam.gameObject.name is "Main Camera" or "Camera")
+                {
+                    if (cam.gameObject.activeSelf)
+                    {
+                        cam.gameObject.SetActive(false);
+                        disabled++;
+                        Debug.Log($"{LogPrefix} disabled camera {cam.gameObject.name}");
+                    }
+                }
+            }
+
+            Debug.Log($"{LogPrefix} disabled {disabled} conflicting cameras");
         }
 
         static GameObject RebuildRoomRoot()
