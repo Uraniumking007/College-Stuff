@@ -45,8 +45,10 @@ namespace Cipat
             t = 0f;
             animating = true;
             // Drop select so the hand doesn't keep owning the door.
+            var mgr = grab.interactionManager;
+            if (mgr == null) return;
             for (int i = grab.interactorsSelecting.Count - 1; i >= 0; i--)
-                grab.interactionManager.SelectExit(grab.interactorsSelecting[i], grab);
+                mgr.SelectExit(grab.interactorsSelecting[i], grab);
         }
 
         void Update()
