@@ -49,20 +49,23 @@ First open can take several minutes (package resolve / import).
    - house / furniture
    - **XR Origin (XR Rig)**
    - **XR Device Simulator**
-   - **Bat**
-   - smashables near coffee table (vases, plant, containers)
+   - **XR Interaction Manager**
+   - **EventSystem**
+   - **Bat** on the coffee table (not already in hand — grab it)
+   - smashables seated on the coffee table (vases, plant, containers)
 
 ---
 
 ## 4. Play Mode test
 
 1. Press **Play** (▶)
-2. Click the **Game** view so input goes there
+2. Click the **Game** view so Device Simulator keys/mouse go there (required)
 3. Use **XR Device Simulator** (keyboard/mouse — see Game view overlay / docs):
-   - move headset / hands
-   - **grip** to grab the **Bat** on the table
+   - move headset / hands to the coffee table
+   - **grip** to grab the **Bat** (starts on the table, not in-hand)
    - swing into a **vase / plant / container**
 4. Expected:
+   - props stay intact until you swing the **grabbed** bat
    - prop disappears / disables
    - break **sound** plays
    - small **debris** cubes spawn briefly
@@ -81,8 +84,9 @@ Code path exists (`HapticUtil` → `SendHapticImpulse`) for real headset builds.
 | Problem | Fix |
 |--------|-----|
 | Pink materials | Stay on URP; let Unity finish importing; don’t open HDRP nested packages |
-| Can’t grab bat | Click Game view; check Device Simulator is in the scene and enabled |
-| No break | Hit a nearby smashable (around coffee table / bat), not the sofa/fridge |
+| Can’t grab bat | Click **Game** view; confirm Device Simulator + XR Interaction Manager + EventSystem are in the scene |
+| Items break on Play / freefall smash | Should be fixed (grab-only break + seated props). If props still fall through table, re-run move bootstrap / raise `TableTopY` |
+| No break | Grab the bat first, then hit a nearby smashable (coffee table), not the sofa/fridge |
 | Scripts missing / compile errors | Wait for import; Console → clear; reopen project with Unity 6 |
 | Scene empty / wrong scene | Open `CIPAT_SmashHouse`, not `SampleScene` |
 
