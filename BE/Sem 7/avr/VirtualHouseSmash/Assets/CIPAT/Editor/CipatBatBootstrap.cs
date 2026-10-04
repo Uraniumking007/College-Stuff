@@ -15,12 +15,16 @@ namespace Cipat.Editor
         const string SmashScene = "Assets/Scenes/CIPAT_SmashHouse.unity";
         const string PrefabDir = "Assets/CIPAT/Prefabs";
         const string PrefabPath = PrefabDir + "/Bat.prefab";
+        const string MaterialDir = "Assets/CIPAT/Materials";
+        const string MaterialPath = MaterialDir + "/BatHighlight.mat";
         const string WeaponTag = "Weapon";
 
-        // Coffee table ~ (-13.02, 0.33, -6.89); place bat on tabletop
-        static readonly Vector3 BatPosition = new Vector3(-13.0f, 0.85f, -6.7f);
+        // Coffee table ~ (-13.02, 0.33, -6.89); thick bright bat so Device Simulator demos can see it
+        static readonly Vector3 BatPosition = new Vector3(-13.0f, 0.76f, -6.7f);
         static readonly Quaternion BatRotation = Quaternion.Euler(0f, 25f, 90f);
-        static readonly Vector3 BatScale = new Vector3(0.04f, 0.35f, 0.04f);
+        // Unit cylinder radius 0.5 → world radius 0.06; length ~0.9m
+        static readonly Vector3 BatScale = new Vector3(0.12f, 0.45f, 0.12f);
+        static readonly Color BatColor = new Color(1f, 0.35f, 0.05f, 1f);
 
         public static void Run()
         {
@@ -29,6 +33,7 @@ namespace Cipat.Editor
                 Debug.Log($"{LogPrefix} Starting");
                 EnsureWeaponTag();
                 EnsureFolder(PrefabDir);
+                EnsureFolder(MaterialDir);
 
                 var prefab = BuildOrUpdateBatPrefab();
                 PlaceBatInScene(prefab);
@@ -51,6 +56,10 @@ namespace Cipat.Editor
             root.name = "Bat";
             root.tag = WeaponTag;
             root.transform.localScale = BatScale;
+
+            var renderer = root.GetComponent<MeshRenderer>();
+            if (renderer != null)
+                renderer.sharedMaterial = EnsureBatMaterial();
 
             // CreatePrimitive already adds CapsuleCollider matching the cylinder
             var capsule = root.GetComponent<CapsuleCollider>();
@@ -87,6 +96,34 @@ namespace Cipat.Editor
 
             Debug.Log($"{LogPrefix} Saved prefab {PrefabPath}");
             return prefab;
+        }
+
+        static Material EnsureBatMaterial()
+        {
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(MaterialPath);
+            if (mat == null)
+            {
+                var shader = Shader.Find("Universal Render Pipeline/Lit")
+                             ?? Shader.Find("HDRP/Lit")
+                             ?? Shader.Find("Standard");
+                if (shader == null)
+                    throw new Exception("No Lit/Standard shader found for bat material");
+                mat = new Material(shader) { name = "BatHighlight" };
+                AssetDatabase.CreateAsset(mat, MaterialPath);
+            }
+
+            if (mat.HasProperty("_BaseColor"))
+                mat.SetColor("_BaseColor", BatColor);
+            if (mat.HasProperty("_Color"))
+                mat.SetColor("_Color", BatColor);
+            if (mat.HasProperty("_EmissionColor"))
+            {
+                mat.EnableKeyword("_EMISSION");
+                mat.SetColor("_EmissionColor", BatColor * 0.35f);
+            }
+
+            EditorUtility.SetDirty(mat);
+            return mat;
         }
 
         static void PlaceBatInScene(GameObject prefab)
