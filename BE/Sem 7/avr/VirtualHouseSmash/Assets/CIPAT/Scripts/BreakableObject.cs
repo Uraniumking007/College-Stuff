@@ -22,31 +22,28 @@ namespace Cipat
             if (broken) return;
             if (collision.collider == null) return;
             if (!collision.collider.CompareTag("Weapon")) return;
+
+            var grab = collision.collider.GetComponentInParent<XRGrabInteractable>();
+            if (grab == null) return;
+            if (grab.interactorsSelecting == null || grab.interactorsSelecting.Count == 0)
+                return; // loose / falling bat — ignore
+
             if (collision.relativeVelocity.magnitude < breakSpeedThreshold) return;
 
             broken = true;
-
             ContactPoint contact = collision.GetContact(0);
             if (breakSound != null)
                 AudioSource.PlayClipAtPoint(breakSound, contact.point);
 
-            TryHapticFromBat(collision.collider);
+            for (int i = 0; i < grab.interactorsSelecting.Count; i++)
+                HapticUtil.PulseFromInteractor(grab.interactorsSelecting[i], hapticAmplitude, hapticDuration);
+
             SpawnDebris(contact.point, collision.relativeVelocity);
 
             if (disableInsteadOfDestroy)
                 gameObject.SetActive(false);
             else
                 Destroy(gameObject);
-        }
-
-        void TryHapticFromBat(Collider batCollider)
-        {
-            var grab = batCollider.GetComponentInParent<XRGrabInteractable>();
-            if (grab == null) return;
-
-            var interactors = grab.interactorsSelecting;
-            for (int i = 0; i < interactors.Count; i++)
-                HapticUtil.PulseFromInteractor(interactors[i], hapticAmplitude, hapticDuration);
         }
 
         void SpawnDebris(Vector3 point, Vector3 hitVelocity)
