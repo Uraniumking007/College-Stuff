@@ -12,3 +12,5 @@
 *.toc
 indent.log
 texput.log
+**/node_modules/
+**/node/
