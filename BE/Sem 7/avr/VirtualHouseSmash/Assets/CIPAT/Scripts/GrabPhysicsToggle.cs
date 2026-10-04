@@ -45,10 +45,11 @@ namespace Cipat
 
         void SetIdle()
         {
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            // Zero velocities while still dynamic — Unity 6 rejects velocity writes on kinematic bodies.
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
     }
 }

@@ -68,6 +68,7 @@ namespace Cipat.Editor
 
                 var room = RebuildRoomRoot();
                 BuildFloor(room);
+                BuildOutsidePad(room);
                 BuildWalls(room);
                 BuildRoof(room);
 
@@ -562,6 +563,19 @@ namespace Cipat.Editor
             }
         }
 
+        // XR Origin spawns south of the door (z ≈ -10.5) with gravity on CharacterController.
+        // Room floor AABB only covers z ∈ [RoomOrigin.z, RoomOrigin.z+6] — pad the entry apron.
+        static void BuildOutsidePad(GameObject room)
+        {
+            var prefab = LoadPrefab(FloorPrefabPath);
+            // Two tiles: cover x ∈ [-13,-7] (room width), z ∈ [-11,-8] (south of door).
+            for (int ix = 0; ix < 2; ix++)
+            {
+                var min = new Vector3(RoomOrigin.x + ix * TileSize, RoomOrigin.y, RoomOrigin.z - TileSize);
+                PlaceFloorTile(prefab, room.transform, $"OutsidePad_{ix}", min, RoomOrigin.y);
+            }
+        }
+
         static void BuildRoof(GameObject room)
         {
             var prefab = LoadPrefab(FloorPrefabPath);
@@ -582,6 +596,26 @@ namespace Cipat.Editor
             go.transform.rotation = Quaternion.identity;
             SnapAabbMin(go, new Vector3(xzMin.x, yMin, xzMin.z), snapX: true, snapY: true, snapZ: true);
             EnsureSolidCollider(go);
+            ThickenFloorCollider(go);
+        }
+
+        // JC_LP floor BoxCollider Y size is ~1e-7 — CharacterController falls through.
+        // Keep top face at yMin; expand downward so CC (skinWidth 0.08) has a real volume.
+        const float FloorColliderThickness = 0.2f;
+
+        static void ThickenFloorCollider(GameObject go)
+        {
+            foreach (var box in go.GetComponentsInChildren<BoxCollider>(true))
+            {
+                var size = box.size;
+                if (size.y >= 0.05f) continue;
+                var center = box.center;
+                float topLocal = center.y + size.y * 0.5f;
+                size.y = FloorColliderThickness;
+                center.y = topLocal - FloorColliderThickness * 0.5f;
+                box.size = size;
+                box.center = center;
+            }
         }
 
         static void BuildWalls(GameObject room)
