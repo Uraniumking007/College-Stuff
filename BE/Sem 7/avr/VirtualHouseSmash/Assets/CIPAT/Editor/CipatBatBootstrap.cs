@@ -64,8 +64,8 @@ namespace Cipat.Editor
             var rb = root.GetComponent<Rigidbody>();
             if (rb == null)
                 rb = root.AddComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.isKinematic = true;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.mass = 1.2f;
@@ -75,6 +75,9 @@ namespace Cipat.Editor
                 grab = root.AddComponent<XRGrabInteractable>();
             grab.movementType = XRBaseInteractable.MovementType.VelocityTracking;
             grab.throwOnDetach = true;
+
+            if (root.GetComponent<Cipat.GrabPhysicsToggle>() == null)
+                root.AddComponent<Cipat.GrabPhysicsToggle>();
 
             EnsureFolder(PrefabDir);
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
