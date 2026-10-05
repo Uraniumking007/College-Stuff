@@ -266,6 +266,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "",
+                    "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard X Translate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis",
                     "id": "cb7c4679-31f4-4170-885a-e7d78c049443",
                     "path": "1DAxis",
@@ -297,6 +308,17 @@
                     "action": "Keyboard Z Translate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+                    "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard Z Translate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "1D Axis",
